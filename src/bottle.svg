@@ -1,0 +1,127 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 400" width="160" height="400">
+  <defs>
+    <!-- Bottle body gradient: warm amber glass -->
+    <linearGradient id="bodyGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%"   stop-color="#3A1E0A" stop-opacity="0.92"/>
+      <stop offset="18%"  stop-color="#7A4818" stop-opacity="0.85"/>
+      <stop offset="38%"  stop-color="#C8962A" stop-opacity="0.78"/>
+      <stop offset="55%"  stop-color="#E8C87A" stop-opacity="0.90"/>
+      <stop offset="70%"  stop-color="#C8962A" stop-opacity="0.80"/>
+      <stop offset="88%"  stop-color="#7A4818" stop-opacity="0.88"/>
+      <stop offset="100%" stop-color="#3A1E0A" stop-opacity="0.94"/>
+    </linearGradient>
+
+    <!-- Shoulder / neck gradient -->
+    <linearGradient id="neckGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%"   stop-color="#2A1508" stop-opacity="0.95"/>
+      <stop offset="30%"  stop-color="#C8962A" stop-opacity="0.80"/>
+      <stop offset="55%"  stop-color="#F0D890" stop-opacity="0.88"/>
+      <stop offset="80%"  stop-color="#C8962A" stop-opacity="0.78"/>
+      <stop offset="100%" stop-color="#2A1508" stop-opacity="0.95"/>
+    </linearGradient>
+
+    <!-- Cap gradient -->
+    <linearGradient id="capGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%"   stop-color="#1C1510"/>
+      <stop offset="40%"  stop-color="#3A2A1A"/>
+      <stop offset="70%"  stop-color="#C8962A" stop-opacity="0.7"/>
+      <stop offset="100%" stop-color="#1C1510"/>
+    </linearGradient>
+
+    <!-- Gold collar gradient -->
+    <linearGradient id="collarGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%"   stop-color="#7A4818"/>
+      <stop offset="25%"  stop-color="#E8B84B"/>
+      <stop offset="50%"  stop-color="#FAF0C8"/>
+      <stop offset="75%"  stop-color="#E8B84B"/>
+      <stop offset="100%" stop-color="#7A4818"/>
+    </linearGradient>
+
+    <!-- Shimmer highlight -->
+    <linearGradient id="shimmer" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%"   stop-color="#FAF6EF" stop-opacity="0.18"/>
+      <stop offset="50%"  stop-color="#FAF6EF" stop-opacity="0.06"/>
+      <stop offset="100%" stop-color="#FAF6EF" stop-opacity="0.0"/>
+    </linearGradient>
+
+    <!-- Liquid fill inside bottle -->
+    <linearGradient id="liquidGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%"   stop-color="#3A1E0A" stop-opacity="0.6"/>
+      <stop offset="30%"  stop-color="#C8962A" stop-opacity="0.55"/>
+      <stop offset="60%"  stop-color="#E8B84B" stop-opacity="0.45"/>
+      <stop offset="100%" stop-color="#3A1E0A" stop-opacity="0.6"/>
+    </linearGradient>
+
+    <clipPath id="bodyClip">
+      <rect x="24" y="120" width="112" height="258" rx="8"/>
+    </clipPath>
+  </defs>
+
+  <!-- ── BOTTLE BODY ── -->
+  <!-- Shadow -->
+  <ellipse cx="80" cy="382" rx="46" ry="8" fill="#1C1510" opacity="0.28"/>
+
+  <!-- Rounded body -->
+  <rect x="24" y="120" width="112" height="258" rx="12" fill="url(#bodyGrad)"/>
+
+  <!-- Liquid fill (bottom ~65% of body) -->
+  <rect x="26" y="210" width="108" height="166" rx="0" fill="url(#liquidGrad)" clip-path="url(#bodyClip)"/>
+
+  <!-- Liquid surface line -->
+  <line x1="26" y1="212" x2="134" y2="212" stroke="#E8B84B" stroke-width="0.6" stroke-opacity="0.5"/>
+
+  <!-- Body highlight (left-edge bright reflection) -->
+  <rect x="29" y="124" width="14" height="250" rx="7" fill="url(#shimmer)" opacity="0.9"/>
+
+  <!-- Body edge lines for depth -->
+  <rect x="24" y="120" width="112" height="258" rx="12" fill="none" stroke="#C8962A" stroke-width="0.5" stroke-opacity="0.35"/>
+
+  <!-- ── BRAND LABEL AREA ── -->
+  <!-- Label background -->
+  <rect x="36" y="175" width="88" height="90" rx="2" fill="#1C1510" fill-opacity="0.55"/>
+  <rect x="36" y="175" width="88" height="90" rx="2" fill="none" stroke="#C8962A" stroke-width="0.6" stroke-opacity="0.5"/>
+
+  <!-- Label top rule -->
+  <line x1="44" y1="185" x2="116" y2="185" stroke="#C8962A" stroke-width="0.5" stroke-opacity="0.6"/>
+  <!-- Label bottom rule -->
+  <line x1="44" y1="256" x2="116" y2="256" stroke="#C8962A" stroke-width="0.5" stroke-opacity="0.6"/>
+
+  <!-- "ELARA" text -->
+  <text x="80" y="218" text-anchor="middle" font-family="'Playfair Display', Georgia, serif" font-size="18" font-weight="300" letter-spacing="8" fill="#FAF6EF" fill-opacity="0.92">ELARA</text>
+
+  <!-- Italic "Reine" -->
+  <text x="80" y="240" text-anchor="middle" font-family="'Playfair Display', Georgia, serif" font-size="13" font-weight="300" font-style="italic" letter-spacing="4" fill="#C8962A" fill-opacity="0.9">Reine</text>
+
+  <!-- Subtitle rule -->
+  <line x1="58" y1="248" x2="102" y2="248" stroke="#C8962A" stroke-width="0.5" stroke-opacity="0.4"/>
+
+  <!-- ── SHOULDER (tapered transition to neck) ── -->
+  <path d="M24,120 Q28,90 52,80 L52,120 Z" fill="url(#neckGrad)" opacity="0.9"/>
+  <path d="M136,120 Q132,90 108,80 L108,120 Z" fill="url(#neckGrad)" opacity="0.9"/>
+
+  <!-- ── NECK ── -->
+  <rect x="52" y="52" width="56" height="70" rx="4" fill="url(#neckGrad)"/>
+  <!-- Neck highlight -->
+  <rect x="56" y="54" width="10" height="66" rx="5" fill="#FAF6EF" fill-opacity="0.12"/>
+  <!-- Neck edge -->
+  <rect x="52" y="52" width="56" height="70" rx="4" fill="none" stroke="#C8962A" stroke-width="0.5" stroke-opacity="0.4"/>
+
+  <!-- ── GOLD COLLAR ── -->
+  <rect x="48" y="114" width="64" height="12" rx="2" fill="url(#collarGrad)"/>
+  <rect x="48" y="114" width="64" height="12" rx="2" fill="none" stroke="#E8B84B" stroke-width="0.4" stroke-opacity="0.5"/>
+
+  <!-- ── CAP ── -->
+  <!-- Cap body -->
+  <rect x="46" y="8" width="68" height="46" rx="4" fill="url(#capGrad)"/>
+  <!-- Cap highlight strip -->
+  <rect x="50" y="10" width="12" height="42" rx="6" fill="#FAF6EF" fill-opacity="0.08"/>
+  <!-- Cap top bevel -->
+  <rect x="46" y="8" width="68" height="6" rx="4" fill="#C8962A" fill-opacity="0.22"/>
+  <!-- Cap bottom gold trim -->
+  <rect x="46" y="50" width="68" height="4" rx="1" fill="url(#collarGrad)"/>
+  <!-- Cap edge -->
+  <rect x="46" y="8" width="68" height="46" rx="4" fill="none" stroke="#C8962A" stroke-width="0.6" stroke-opacity="0.5"/>
+
+  <!-- Neck-to-cap transition ring -->
+  <rect x="50" y="50" width="60" height="5" rx="1" fill="#C8962A" fill-opacity="0.5"/>
+</svg>

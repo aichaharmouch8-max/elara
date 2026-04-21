@@ -1,0 +1,575 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Playfair+Display:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500&family=Raleway:wght@200;300;400;500;600&display=swap');
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
+  max-width: 100%;
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  font-family: 'Raleway', sans-serif;
+  background: #FAF6EF;
+  color: #1C1510;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  max-width: 100%;
+  width: 100%;
+  height: 100%;
+}
+
+/* Snap sections */
+.snap-section {
+  scroll-snap-align: start;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+.snap-section-auto {
+  scroll-snap-align: start;
+  min-height: 100vh;
+}
+
+section, div, header, footer, nav {
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+section {
+  width: 100%;
+}
+
+a { text-decoration: none; color: inherit; }
+button { font-family: inherit; }
+
+/* Hamburger — hidden on desktop, shown on mobile */
+.hamburger { display: none !important; }
+
+/* Collection carousel — hide on desktop, show on mobile */
+.collection-mobile-carousel { display: none; }
+.collection-desktop-pyramid { display: block; }
+
+/* Hide carousel scrollbar cross-browser */
+.carousel-track::-webkit-scrollbar { display: none; }
+
+::selection { background: rgba(200, 150, 42, 0.22); }
+
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-track { background: #1C1510; }
+::-webkit-scrollbar-thumb { background: #C8962A; border-radius: 2px; }
+
+/* ── Keyframes ── */
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-20px); }
+}
+
+.perfume {
+  animation: float 4s ease-in-out infinite;
+}
+
+@keyframes pulseGlow {
+  0%, 100% { opacity: 0.6; transform: translate(-50%, -50%) scale(1); }
+  50%       { opacity: 1;   transform: translate(-50%, -50%) scale(1.18); }
+}
+
+@keyframes particleRise {
+  0%   { opacity: 0; transform: translateY(0) scale(1); }
+  20%  { opacity: 0.9; }
+  80%  { opacity: 0.7; }
+  100% { opacity: 0; transform: translateY(-40px) scale(0.6); }
+}
+
+@keyframes shimmerSlide {
+  0%   { transform: translateX(-150%) skewX(-15deg); }
+  100% { transform: translateX(350%)  skewX(-15deg); }
+}
+
+@keyframes fadeSlideUp {
+  from { opacity: 0; transform: translateY(48px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes lineDraw {
+  from { width: 0; }
+  to   { width: 100%; }
+}
+
+@keyframes bottleShimmer {
+  0%, 100% { opacity: 0.15; }
+  50%       { opacity: 0.45; }
+}
+
+@keyframes dropletFloat {
+  0%, 100% { transform: translateY(0px); }
+  45%       { transform: translateY(-10px); }
+}
+
+@keyframes dropletDrift {
+  0%   { opacity: 0;    transform: translateY(0px)   scale(1);    }
+  12%  { opacity: 0.65;                                           }
+  80%  { opacity: 0.28;                                           }
+  100% { opacity: 0;    transform: translateY(-58px) scale(0.48); }
+}
+
+@keyframes dropletPulse {
+  0%, 100% { filter: drop-shadow(0 0 1px rgba(201,169,110,0.2));  }
+  50%       { filter: drop-shadow(0 0 5px rgba(232,220,200,0.62)); }
+}
+
+@keyframes smokeRise {
+  0%  {
+    opacity: 0;
+    transform: translateY(0px) translateX(0px) scale(1);
+  }
+  10% {
+    opacity: var(--peak, 0.6);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-230px) translateX(var(--drift, 0px)) scale(4.5);
+  }
+}
+
+@keyframes sparkleRise {
+  0%   { opacity: 0;                transform: translateY(0px)    translateX(0px)              scale(0.4); }
+  18%  { opacity: var(--peak, 0.85); transform: translateY(-14px) translateX(calc(var(--drift, 0px) * 0.15)) scale(1.15); }
+  100% { opacity: 0;                transform: translateY(-130px) translateX(var(--drift, 0px)) scale(0.2); }
+}
+
+/* ── Glass shine sweep (every 4 s) ── */
+@keyframes glassShine {
+  0%, 74.9% { transform: translateX(-120%); opacity: 0; }
+  75%        { opacity: 0; }
+  77%        { opacity: 1; }
+  85%        { transform: translateX(120%); opacity: 0; }
+  100%       { transform: translateX(-120%); opacity: 0; }
+}
+
+
+
+/* Floating gold particles in hero */
+@keyframes heroParticle {
+  0%   { opacity: 0;    transform: translateY(0px)   scale(0.5); }
+  22%  { opacity: 0.65; }
+  78%  { opacity: 0.32; }
+  100% { opacity: 0;    transform: translateY(-58px) scale(1.8); }
+}
+
+/* ── Hero responsive layout ── */
+.hero-inner {
+  max-width: 1280px;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  position: relative;
+  z-index: 2;
+}
+
+
+/* ── Mobile global fixes ── */
+@media (max-width: 768px) {
+
+  /* Navbar */
+  nav {
+    padding: 0 20px !important;
+  }
+  .nav-links {
+    display: none !important;
+  }
+
+  /* ── Hero mobile ── */
+
+  .hero-section {
+    height: 100vh !important;
+    min-height: 100vh !important;
+    max-height: 100vh !important;
+    padding: 0 !important;
+    display: block !important;
+    position: relative !important;
+    overflow: hidden !important;
+  }
+
+  .hero-bg-img {
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center 20% !important;
+  }
+
+  .hero-overlay-left {
+    position: absolute !important;
+    inset: 0 !important;
+    background: linear-gradient(
+      to top,
+      rgba(0,0,0,0.95) 0%,
+      rgba(0,0,0,0.5)  45%,
+      transparent      100%
+    ) !important;
+    z-index: 1 !important;
+  }
+
+  /* Text block — absolute, pinned to bottom */
+  .hero-inner {
+    position: absolute !important;
+    bottom: 80px !important;
+    left: 24px !important;
+    right: 24px !important;
+    top: auto !important;
+    width: auto !important;
+    padding: 0 !important;
+    z-index: 2 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 8px !important;
+  }
+
+  .hero-text-col {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 0 !important;
+    padding-top: 0 !important;
+    position: static !important;
+    box-sizing: border-box !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 8px !important;
+  }
+
+  /* Eyebrow — MAISON DE PARFUM */
+  .hero-text-col > div:first-child {
+    margin-bottom: 16px !important;
+  }
+  .hero-text-col > div:first-child span {
+    font-size: 10px !important;
+    letter-spacing: 5px !important;
+    color: rgba(200,160,60,0.8) !important;
+  }
+
+  /* Heading */
+  .hero-text-col h1 { margin-bottom: 0 !important; }
+  .hero-text-col h1 span:first-child { font-size: 2.2rem !important; }
+  .hero-text-col h1 span:last-child  { font-size: 2.8rem !important; }
+
+  /* Subtitle */
+  .hero-text-col p {
+    font-size: 15px !important;
+    color: rgba(255,255,255,0.7) !important;
+    margin-top: 8px !important;
+    margin-bottom: 0 !important;
+    max-width: 100% !important;
+    line-height: 1.7 !important;
+  }
+
+
+  /* Hide desktop scroll cue, show mobile one */
+  .hero-scroll-cue { display: none !important; }
+  .hero-scroll-cue-mobile { display: flex !important; }
+
+  /* Hero bottom separator */
+  .hero-bottom-line { display: block !important; }
+
+  /* Shop grid — single column */
+  .shop-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+
+  /* Shop header */
+  .shop-header {
+    padding: 140px 24px 60px !important;
+  }
+
+  /* Shop product grid wrapper */
+  .shop-products {
+    padding: 60px 20px 80px !important;
+  }
+
+  /* Shop cards — compact on mobile */
+  .shop-card-img-active {
+    height: 200px !important;
+    min-height: 200px !important;
+    max-height: 200px !important;
+  }
+  .shop-card-img-locked {
+    height: 160px !important;
+    min-height: 160px !important;
+    max-height: 160px !important;
+  }
+  .shop-card-info {
+    padding: 16px 20px 20px !important;
+  }
+
+  /* Collection carousel — remove forced tall height */
+  .carousel-card-slot {
+    min-height: auto !important;
+    height: auto !important;
+  }
+  .carousel-card-slot > * {
+    min-height: auto !important;
+    height: auto !important;
+  }
+
+  /* Collection card images on mobile */
+  .collection-card-img-active {
+    height: 220px !important;
+    min-height: 220px !important;
+    max-height: 220px !important;
+  }
+  .collection-card-img-locked {
+    height: 160px !important;
+    min-height: 160px !important;
+    max-height: 160px !important;
+  }
+
+  /* Collection — show carousel, hide pyramid */
+  .collection-mobile-carousel { display: block !important; }
+  .collection-desktop-pyramid { display: none !important; }
+
+  /* Strip section side-padding so track goes edge-to-edge */
+  .collection-section {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    padding-top: 80px !important;
+    padding-bottom: 80px !important;
+  }
+  /* Re-add padding only for the heading */
+  .collection-section > div:first-child {
+    padding-left: 24px !important;
+    padding-right: 24px !important;
+  }
+
+  /* ── Carousel track ── */
+  .carousel-track {
+    display: flex !important;
+    flex-direction: row !important;
+    overflow-x: scroll !important;
+    -webkit-overflow-scrolling: touch !important;
+    scroll-snap-type: x mandatory !important;
+    width: 100% !important;
+    gap: 16px !important;
+    padding: 0 12vw !important;
+    box-sizing: border-box !important;
+    scrollbar-width: none !important;
+  }
+
+  /* ── Carousel card slot — 76vw so first card is centered with ~12% peek ── */
+  .carousel-card-slot {
+    scroll-snap-align: center !important;
+    width: 76vw !important;
+    min-width: 76vw !important;
+    max-width: 76vw !important;
+    height: auto !important;
+    min-height: 85vh !important;
+    flex-shrink: 0 !important;
+    flex-grow: 0 !important;
+    flex-basis: 76vw !important;
+    overflow: visible !important;
+  }
+
+  /* Card inner (motion.div) must fill the slot exactly */
+  .carousel-card-slot > * {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    height: auto !important;
+    min-height: 85vh !important;
+  }
+
+  /* Card image height in carousel */
+  .collection-mobile-carousel .collection-card-img-wrap {
+    height: 320px !important;
+    min-height: 320px !important;
+    max-height: 320px !important;
+    flex-shrink: 0 !important;
+    padding-top: 20px !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Tighten card body on mobile */
+  .collection-mobile-carousel .collection-card-body {
+    padding: 14px 20px 18px !important;
+  }
+
+
+  /* Cart page */
+  .cart-wrapper {
+    padding: 40px 20px 80px !important;
+  }
+  .cart-grid {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+  .cart-grid-header {
+    display: none !important;
+  }
+  .cart-summary {
+    width: 100% !important;
+  }
+
+  /* Footer grid */
+  .footer-links {
+    gap: 20px !important;
+  }
+
+  /* Hamburger — show on mobile */
+  .hamburger { display: flex !important; }
+
+
+  /* Contact form — 90% width, 20px padding */
+  .hc-form-wrap {
+    width: 90% !important;
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+    max-width: 100% !important;
+  }
+
+  /* Footer — tighter mobile padding */
+  footer > div:first-child {
+    padding: 40px 20px 30px !important;
+  }
+  footer div[style*="gap: '40px'"],
+  footer div[class*="footer-nav"] {
+    gap: 20px !important;
+    flex-direction: column !important;
+  }
+}
+
+/* ── Shop tablet — 2 columns ── */
+@media (max-width: 900px) and (min-width: 769px) {
+  .shop-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+
+/* ── Responsive grids ── */
+@media (max-width: 900px) {
+  .collection-grid  { grid-template-columns: 1fr !important; }
+  .ingredients-grid { grid-template-columns: 1fr !important; }
+  .notes-grid       { grid-template-columns: 1fr !important; border-left: none !important; }
+  .mystery-grid     { grid-template-columns: 1fr !important; }
+  .story-split      { grid-template-columns: 1fr !important; }
+  .story-visual     { display: none !important; }
+}
+
+@keyframes scrollLinePulse {
+  0%   { opacity: 0;   transform: scaleY(0); transform-origin: top; }
+  40%  { opacity: 1;   transform: scaleY(1); transform-origin: top; }
+  100% { opacity: 0;   transform: scaleY(1); transform-origin: top; }
+}
+
+/* ── Hero background float ── */
+@keyframes heroBgFloat {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-5px); }
+}
+
+
+/* ── Announcement bar marquee ── */
+@keyframes announcementScroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* ── Discover button shimmer ── */
+@keyframes discoverShimmer {
+  from { transform: translateX(-200%) skewX(-18deg); }
+  to   { transform: translateX(400%)  skewX(-18deg); }
+}
+
+.discover-shimmer {
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+.discover-shimmer::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 55%;
+  height: 100%;
+  background: linear-gradient(
+    105deg,
+    transparent 5%,
+    rgba(255, 228, 120, 0.38) 50%,
+    transparent 95%
+  );
+  transform: translateX(-200%) skewX(-18deg);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.discover-shimmer:hover::after {
+  animation: discoverShimmer 0.72s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* ── Side nav dots ── */
+.side-nav-dots {
+  position: fixed;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 100;
+  pointer-events: auto;
+}
+
+.side-nav-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(200, 150, 42, 0.28);
+  border: 1px solid rgba(200, 150, 42, 0.35);
+  cursor: pointer;
+  transition: all 0.4s ease;
+  padding: 0;
+  display: block;
+}
+
+.side-nav-dot.active {
+  background: #C8962A;
+  border-color: #C8962A;
+  box-shadow: 0 0 6px rgba(200, 150, 42, 0.45);
+  transform: scale(1.3);
+}
+
+@media (max-width: 768px) {
+  .side-nav-dots {
+    display: none !important;
+  }
+}
+
+/* Footer snap */
+footer {
+  scroll-snap-align: start;
+}
+
+/* ── Respect prefers-reduced-motion ── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration:        0.01ms !important;
+    animation-iteration-count: 1      !important;
+    transition-duration:       0.01ms !important;
+    scroll-behavior:           auto   !important;
+  }
+}
