@@ -396,6 +396,11 @@ const PaymentModal = ({ product, selectedSize = '100ml', selectedPrice, onClose 
               ))}
             </div>
 
+            <p style={LABEL_STYLE}>Your Details</p>
+            {sharedFields}
+
+            <div style={{ height: '1px', background: 'linear-gradient(to right, transparent, rgba(201,169,110,0.18), transparent)', margin: '24px 0' }}/>
+
             <p style={LABEL_STYLE}>Choose Payment Method</p>
             <div style={{ display: 'flex', gap: '12px', marginBottom: '28px' }}>
               <MethodCard selected={method === 'wish'} onClick={() => setMethod('wish')} icon={<WishMoneyIcon />} title="Wish Money"       subtitle="Digital transfer" />
@@ -403,17 +408,8 @@ const PaymentModal = ({ product, selectedSize = '100ml', selectedPrice, onClose 
             </div>
 
             {method === 'wish' && (
-              <div>
+              <div style={{ marginBottom: '8px' }}>
                 <WishMoneyInfo price={price} />
-                <p style={LABEL_STYLE}>Your Details</p>
-                {sharedFields}
-              </div>
-            )}
-
-            {method === 'cod' && (
-              <div>
-                <p style={LABEL_STYLE}>Delivery Details</p>
-                {sharedFields}
               </div>
             )}
 
