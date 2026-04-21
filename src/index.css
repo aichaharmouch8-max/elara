@@ -460,6 +460,17 @@ button { font-family: inherit; }
   }
 }
 
+/* ── Brand story ── */
+@media (max-width: 768px) {
+  .brand-story-grid {
+    grid-template-columns: 1fr !important;
+    gap: 40px !important;
+  }
+  .brand-story-grid > div:last-child {
+    display: none !important;
+  }
+}
+
 /* ── Responsive grids ── */
 @media (max-width: 900px) {
   .collection-grid  { grid-template-columns: 1fr !important; }
@@ -562,6 +573,20 @@ button { font-family: inherit; }
 /* Footer snap */
 footer {
   scroll-snap-align: start;
+}
+
+/* ── Mobile bottom nav — hidden on desktop ── */
+.mobile-bottom-nav { display: none !important; }
+
+@media (max-width: 768px) {
+  .mobile-bottom-nav { display: flex !important; }
+
+  /* Push page content above the nav bar */
+  #root > * > footer,
+  footer { margin-bottom: 60px; }
+
+  /* WhatsApp float sits above the bottom nav on mobile */
+  .wa-float { bottom: 74px !important; }
 }
 
 /* ── Respect prefers-reduced-motion ── */

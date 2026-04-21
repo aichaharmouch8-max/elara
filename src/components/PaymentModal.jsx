@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 
 const inputStyle = (focused) => ({
@@ -66,9 +66,12 @@ const LocationField = ({ location, setLocation, focused, onFocus, onBlur, locLoa
       <label style={{
         fontFamily: 'Raleway, sans-serif', fontSize: '9px',
         letterSpacing: '3px', color: 'rgba(201,169,110,0.5)', textTransform: 'uppercase',
-      }}>Delivery Address</label>
+      }}>
+        Delivery Address{' '}
+        <span style={{ opacity: 0.45, fontWeight: 300, letterSpacing: '1px', textTransform: 'none', fontSize: '9px' }}>(optional)</span>
+      </label>
       {locSuccess && (
-        <span style={{ color: 'rgba(200,160,60,1)', fontSize: '13px', lineHeight: 1 }}>✓</span>
+        <span style={{ color: 'rgba(100,210,120,0.9)', fontSize: '13px', lineHeight: 1 }}>✓</span>
       )}
     </div>
     <textarea value={location} onChange={e => { setLocation(e.target.value); }}
@@ -109,6 +112,57 @@ const LocationField = ({ location, setLocation, focused, onFocus, onBlur, locLoa
     )}
   </div>
 );
+
+const WishMoneyInfo = ({ price }) => {
+  const [tip, setTip] = useState(false);
+  const tipRef = useRef(null);
+  useEffect(() => {
+    if (!tip) return;
+    const fn = (e) => { if (tipRef.current && !tipRef.current.contains(e.target)) setTip(false); };
+    document.addEventListener('mousedown', fn);
+    return () => document.removeEventListener('mousedown', fn);
+  }, [tip]);
+  return (
+    <div style={{ background: 'rgba(201,169,110,0.06)', border: '1px solid rgba(201,169,110,0.2)', borderRadius: '6px', padding: '16px', marginBottom: '24px' }}>
+      <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: '10px' }}>
+        <div style={{ flex: 1 }}>
+          <p style={{ fontFamily: 'Raleway, sans-serif', fontSize: '9px', letterSpacing: '3px', color: 'rgba(201,169,110,0.6)', textTransform: 'uppercase', marginBottom: '6px' }}>Wish Money</p>
+          <p style={{ fontFamily: 'Raleway, sans-serif', fontSize: '13px', fontWeight: 300, color: 'rgba(250,246,239,0.6)', lineHeight: 1.7 }}>
+            Send via Wish Money app — we'll confirm your order and share payment details via WhatsApp.
+          </p>
+          <p style={{ fontFamily: 'Raleway, sans-serif', fontSize: '11px', color: 'rgba(201,169,110,0.55)', marginTop: '8px' }}>Amount due: ${price}</p>
+        </div>
+        {/* ? tooltip trigger */}
+        <div ref={tipRef} style={{ position: 'relative', flexShrink: 0 }}>
+          <button type="button" onClick={() => setTip(t => !t)} style={{
+            width: '22px', height: '22px', borderRadius: '50%',
+            border: '1px solid rgba(201,169,110,0.35)', background: 'rgba(201,169,110,0.08)',
+            color: 'rgba(201,169,110,0.7)', fontFamily: 'Raleway, sans-serif',
+            fontSize: '11px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center',
+            WebkitTapHighlightColor: 'transparent',
+          }}>?</button>
+          {tip && (
+            <div style={{
+              position: 'absolute', top: '28px', right: 0, zIndex: 10,
+              background: '#261500', border: '1px solid rgba(201,169,110,0.3)',
+              borderRadius: '6px', padding: '14px 16px', width: '220px',
+              boxShadow: '0 8px 32px rgba(0,0,0,0.5)',
+            }}>
+              {[
+                '1. Confirm your order below',
+                '2. We send you payment details on WhatsApp',
+                '3. Transfer the amount via Wish Money',
+                '4. Your order ships once payment is confirmed',
+              ].map((step, i) => (
+                <p key={i} style={{ fontFamily: 'Raleway, sans-serif', fontSize: '11px', fontWeight: 300, color: 'rgba(250,246,239,0.65)', lineHeight: 1.7, marginBottom: i < 3 ? '6px' : 0 }}>{step}</p>
+              ))}
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+};
 
 const LABEL_STYLE = {
   fontFamily: 'Raleway, sans-serif', fontSize: '9px', letterSpacing: '4px',
@@ -158,8 +212,8 @@ const PaymentModal = ({ product, selectedSize = '100ml', selectedPrice, onClose 
             const data = await res.json();
             const addr = data.address || {};
             const parts = [
-              addr.house_number,
-              addr.road,
+              addr.road || addr.pedestrian,
+              addr.suburb || addr.neighbourhood || addr.quarter,
               addr.city || addr.town || addr.village,
               addr.country,
             ].filter(Boolean);
@@ -174,9 +228,11 @@ const PaymentModal = ({ product, selectedSize = '100ml', selectedPrice, onClose 
         (error) => {
           setLocLoading(false);
           if (error.code === 1) {
-            setLocError('Please allow location access when your phone asks');
+            setLocError('Location access denied. Please type your address below.');
+          } else if (error.code === 2) {
+            setLocError('GPS unavailable. Please type your address.');
           } else {
-            setLocError('Could not detect location, please type manually');
+            setLocError('Could not detect location. Please type your address.');
           }
         },
         { enableHighAccuracy: false, timeout: 10000, maximumAge: 60000 }
@@ -286,15 +342,30 @@ const PaymentModal = ({ product, selectedSize = '100ml', selectedPrice, onClose 
 
         {submitted ? (
           <div style={{ textAlign: 'center', padding: '20px 0 8px' }}>
-            <div style={{ width: '56px', height: '56px', borderRadius: '50%', border: '1px solid rgba(201,169,110,0.4)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 24px', color: '#C9A96E', fontSize: '24px' }}>✓</div>
-            <h3 style={{ fontFamily: "'Playfair Display', serif", fontWeight: 300, fontSize: '28px', fontStyle: 'italic', color: '#FAF6EF', marginBottom: '16px', lineHeight: 1.25 }}>Order Placed</h3>
+            <div style={{ width: '56px', height: '56px', borderRadius: '50%', border: '1px solid rgba(100,210,120,0.5)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 20px', color: 'rgba(100,210,120,0.9)', fontSize: '22px' }}>✓</div>
+            <h3 style={{ fontFamily: "'Playfair Display', serif", fontWeight: 300, fontSize: '26px', fontStyle: 'italic', color: '#FAF6EF', marginBottom: '6px', lineHeight: 1.25 }}>Order Placed</h3>
+            <p style={{ fontFamily: 'Raleway, sans-serif', fontSize: '11px', color: 'rgba(100,210,120,0.7)', letterSpacing: '2px', marginBottom: '20px' }}>CONFIRMED</p>
             <div style={{ height: '1px', background: 'linear-gradient(to right, transparent, rgba(201,169,110,0.22), transparent)', marginBottom: '20px' }}/>
-            <p style={{ fontFamily: 'Raleway, sans-serif', fontSize: '14px', fontWeight: 300, color: 'rgba(250,246,239,0.5)', lineHeight: 2, marginBottom: '12px' }}>
-              Your order has been received!<br/>
+            {/* Order summary */}
+            <div style={{ background: 'rgba(201,169,110,0.05)', border: '1px solid rgba(201,169,110,0.15)', borderRadius: '6px', padding: '16px 20px', marginBottom: '20px', textAlign: 'left' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px' }}>
+                <span style={{ fontFamily: 'Raleway, sans-serif', fontSize: '11px', color: 'rgba(250,246,239,0.45)', letterSpacing: '1px' }}>ITEM</span>
+                <span style={{ fontFamily: 'Raleway, sans-serif', fontSize: '11px', color: 'rgba(201,169,110,0.8)' }}>{product.name} · {selectedSize}</span>
+              </div>
+              <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px' }}>
+                <span style={{ fontFamily: 'Raleway, sans-serif', fontSize: '11px', color: 'rgba(250,246,239,0.45)', letterSpacing: '1px' }}>TOTAL</span>
+                <span style={{ fontFamily: "'Playfair Display', serif", fontSize: '16px', color: '#C9A96E' }}>${price}</span>
+              </div>
+              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                <span style={{ fontFamily: 'Raleway, sans-serif', fontSize: '11px', color: 'rgba(250,246,239,0.45)', letterSpacing: '1px' }}>PAYMENT</span>
+                <span style={{ fontFamily: 'Raleway, sans-serif', fontSize: '11px', color: 'rgba(250,246,239,0.7)' }}>{method === 'wish' ? 'Wish Money' : 'Cash on Delivery'}</span>
+              </div>
+            </div>
+            <p style={{ fontFamily: 'Raleway, sans-serif', fontSize: '13px', fontWeight: 300, color: 'rgba(250,246,239,0.45)', lineHeight: 2, marginBottom: '8px' }}>
               We will contact you shortly to{' '}
               <span style={{ color: '#C9A96E', fontStyle: 'italic' }}>confirm delivery</span>.
             </p>
-            <p style={{ fontFamily: 'Raleway, sans-serif', fontSize: '11px', color: 'rgba(201,169,110,0.4)' }}>Closing automatically…</p>
+            <p style={{ fontFamily: 'Raleway, sans-serif', fontSize: '11px', color: 'rgba(201,169,110,0.35)' }}>Closing automatically…</p>
           </div>
         ) : (
           <form onSubmit={handleSubmit}>
@@ -305,6 +376,26 @@ const PaymentModal = ({ product, selectedSize = '100ml', selectedPrice, onClose 
 
             <div style={{ height: '1px', background: 'linear-gradient(to right, transparent, rgba(201,169,110,0.25), transparent)', marginBottom: '24px' }}/>
 
+            {/* Delivery policy */}
+            <div style={{
+              display: 'flex', gap: '16px', marginBottom: '24px',
+              padding: '14px 16px',
+              background: 'rgba(201,169,110,0.04)',
+              border: '1px solid rgba(201,169,110,0.12)',
+              borderRadius: '6px',
+            }}>
+              {[
+                { icon: '🚚', text: 'Free delivery across Lebanon' },
+                { icon: '⏱', text: '24–48 hrs delivery' },
+                { icon: '↩', text: 'Easy returns' },
+              ].map(({ icon, text }) => (
+                <div key={text} style={{ flex: 1, textAlign: 'center' }}>
+                  <div style={{ fontSize: '16px', marginBottom: '4px' }}>{icon}</div>
+                  <p style={{ fontFamily: 'Raleway, sans-serif', fontSize: '8px', letterSpacing: '0.5px', color: 'rgba(250,246,239,0.4)', lineHeight: 1.5 }}>{text}</p>
+                </div>
+              ))}
+            </div>
+
             <p style={LABEL_STYLE}>Choose Payment Method</p>
             <div style={{ display: 'flex', gap: '12px', marginBottom: '28px' }}>
               <MethodCard selected={method === 'wish'} onClick={() => setMethod('wish')} icon={<WishMoneyIcon />} title="Wish Money"       subtitle="Digital transfer" />
@@ -313,14 +404,8 @@ const PaymentModal = ({ product, selectedSize = '100ml', selectedPrice, onClose 
 
             {method === 'wish' && (
               <div>
-                <p style={LABEL_STYLE}>Step 01 — Send Payment</p>
-                <div style={{ background: 'rgba(201,169,110,0.06)', border: '1px solid rgba(201,169,110,0.2)', borderRadius: '6px', padding: '16px', marginBottom: '24px' }}>
-                  <p style={{ fontFamily: 'Raleway, sans-serif', fontSize: '13px', fontWeight: 300, color: 'rgba(250,246,239,0.6)', lineHeight: 1.7 }}>
-                    Send payment via <span style={{ color: '#C9A96E', fontStyle: 'italic' }}>Wish Money</span> — we will send you the details after you confirm your order.
-                  </p>
-                  <p style={{ fontFamily: 'Raleway, sans-serif', fontSize: '11px', fontWeight: 300, color: 'rgba(250,246,239,0.35)', marginTop: '8px' }}>Amount: ${price}</p>
-                </div>
-                <p style={LABEL_STYLE}>Step 02 — Your Details</p>
+                <WishMoneyInfo price={price} />
+                <p style={LABEL_STYLE}>Your Details</p>
                 {sharedFields}
               </div>
             )}
@@ -350,6 +435,15 @@ const PaymentModal = ({ product, selectedSize = '100ml', selectedPrice, onClose 
                     fontWeight: 500, WebkitTapHighlightColor: 'transparent',
                   }}
                 >Confirm Order</button>
+                {/* Trust badge */}
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px', marginTop: '12px' }}>
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="rgba(201,169,110,0.45)" strokeWidth="1.5" strokeLinecap="round">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                  </svg>
+                  <span style={{ fontFamily: 'Raleway, sans-serif', fontSize: '9px', letterSpacing: '2px', color: 'rgba(201,169,110,0.45)', textTransform: 'uppercase' }}>
+                    Order protected · Secure checkout
+                  </span>
+                </div>
               </>
             )}
           </form>

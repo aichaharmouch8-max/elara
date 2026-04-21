@@ -12,8 +12,17 @@ const PRODUCTS = [
     price: 39,
     size: '100ml Eau de Parfum',
     notes: ['Saffron', 'Bulgarian Rose', 'Amber', 'White Musk'],
+    topNotes:   ['Saffron', 'Pink Pepper'],
+    heartNotes: ['Bulgarian Rose', 'Jasmine'],
+    baseNotes:  ['Amber', 'White Musk', 'Sandalwood'],
     description: 'A regal composition that opens with saffron warmth, blooms into Bulgarian rose, and settles into rich amber-musk.',
     locked: false,
+    bestseller: true,
+    reviews: [
+      { name: 'Lara M.',  rating: 5, text: 'Absolutely stunning. The saffron opening is warm and unique — it dries down beautifully into something I can only describe as skin-like.' },
+      { name: 'Dani K.',  rating: 5, text: 'I get compliments every single time I wear this. The longevity is incredible. Worth every penny.' },
+      { name: 'Sarah B.', rating: 5, text: 'Elegant and long-lasting. The rose heart is exquisite — not too sweet, perfectly balanced with the amber base.' },
+    ],
   },
   {
     id: 'oro',
@@ -22,8 +31,11 @@ const PRODUCTS = [
     price: 79,
     size: '100ml Eau de Parfum',
     notes: ['?', '?', '?', '?'],
+    topNotes: null, heartNotes: null, baseNotes: null,
     description: 'A golden mystery veiled in the rarest of ingredients. Its secret will be revealed in 2026.',
     locked: true,
+    bestseller: false,
+    reviews: [],
   },
   {
     id: 'nova',
@@ -32,8 +44,11 @@ const PRODUCTS = [
     price: 79,
     size: '100ml Eau de Parfum',
     notes: ['?', '?', '?', '?'],
+    topNotes: null, heartNotes: null, baseNotes: null,
     description: 'Born from stardust and midnight blooms. An olfactory voyage unlike any other.',
     locked: true,
+    bestseller: false,
+    reviews: [],
   },
 ];
 
@@ -84,6 +99,8 @@ const Shop = () => {
           ))}
         </div>
       </div>
+
+      <ReviewsSection />
     </div>
   );
 };
@@ -136,6 +153,16 @@ const ProductCard = ({ product, inView, delay }) => {
           transition: 'transform 0.5s cubic-bezier(0.16,1,0.3,1), box-shadow 0.5s ease, border-color 0.4s ease',
           overflow: 'hidden',
         }}>
+          {/* Bestseller badge */}
+          {product.bestseller && (
+            <div style={{
+              position: 'absolute', top: '14px', left: '14px', zIndex: 2,
+              fontFamily: 'Raleway', fontSize: '7px', letterSpacing: '3px',
+              textTransform: 'uppercase', padding: '5px 10px',
+              background: 'rgba(200,150,42,1)', color: '#0a0600',
+            }}>Fan Favourite</div>
+          )}
+
           {/* Image area */}
           <div className={`shop-card-img-area ${product.locked ? 'shop-card-img-locked' : 'shop-card-img-active'}`} style={{
             height: '260px',
@@ -304,20 +331,47 @@ const ProductCard = ({ product, inView, delay }) => {
               {product.description}
             </p>
 
-            {/* Notes */}
-            <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap', marginBottom: '32px' }}>
-              {product.notes.map((note, i) => (
-                <span key={i} style={{
-                  fontFamily: 'Raleway', fontSize: '9px', letterSpacing: '1px',
-                  padding: '4px 10px',
-                  color: product.locked ? 'rgba(200,150,42,0.35)' : 'rgba(200,150,42,0.85)',
-                  border: `1px solid ${product.locked ? 'rgba(200,150,42,0.1)' : 'rgba(200,150,42,0.25)'}`,
-                  background: 'transparent',
-                }}>
-                  {note}
-                </span>
-              ))}
-            </div>
+            {/* Fragrance Notes */}
+            {product.topNotes ? (
+              <div style={{ marginBottom: '28px' }}>
+                {[
+                  { tier: 'Top Notes',   notes: product.topNotes   },
+                  { tier: 'Heart Notes', notes: product.heartNotes  },
+                  { tier: 'Base Notes',  notes: product.baseNotes   },
+                ].map(({ tier, notes }) => (
+                  <div key={tier} style={{ display: 'flex', alignItems: 'baseline', gap: '10px', marginBottom: '8px', flexWrap: 'wrap' }}>
+                    <span style={{
+                      fontFamily: 'Raleway', fontSize: '7px', letterSpacing: '3px',
+                      color: 'rgba(200,150,42,0.45)', textTransform: 'uppercase',
+                      minWidth: '72px', flexShrink: 0,
+                    }}>{tier}</span>
+                    <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' }}>
+                      {notes.map((n, i) => (
+                        <span key={i} style={{
+                          fontFamily: 'Raleway', fontSize: '9px', letterSpacing: '0.8px',
+                          padding: '3px 10px',
+                          color: 'rgba(200,150,42,0.85)',
+                          border: '1px solid rgba(200,150,42,0.2)',
+                          background: 'rgba(200,150,42,0.04)',
+                        }}>{n}</span>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap', marginBottom: '28px' }}>
+                {product.notes.map((note, i) => (
+                  <span key={i} style={{
+                    fontFamily: 'Raleway', fontSize: '9px', letterSpacing: '1px',
+                    padding: '4px 10px',
+                    color: 'rgba(200,150,42,0.3)',
+                    border: '1px solid rgba(200,150,42,0.1)',
+                    background: 'transparent',
+                  }}>{note}</span>
+                ))}
+              </div>
+            )}
 
             {/* Price + CTA */}
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
@@ -369,6 +423,71 @@ const BuyNowBtn = ({ onClick, price }) => {
     >
       Buy Now{price ? ` — $${price}` : ''}
     </button>
+  );
+};
+
+const StarRating = ({ rating }) => (
+  <div style={{ display: 'flex', gap: '2px' }}>
+    {[1, 2, 3, 4, 5].map(n => (
+      <span key={n} style={{ color: n <= rating ? 'rgba(200,150,42,1)' : 'rgba(200,150,42,0.2)', fontSize: '12px' }}>★</span>
+    ))}
+  </div>
+);
+
+const ReviewsSection = () => {
+  const reviews = PRODUCTS.flatMap(p =>
+    p.reviews.map(r => ({ ...r, product: p.name }))
+  );
+  if (!reviews.length) return null;
+
+  return (
+    <div style={{
+      borderTop: '1px solid rgba(200,150,42,0.1)',
+      padding: '80px clamp(20px, 6vw, 80px) 100px',
+      maxWidth: '1100px', margin: '0 auto',
+    }}>
+      <p style={{
+        fontFamily: 'Raleway', fontSize: '9px', letterSpacing: '6px',
+        color: 'rgba(200,150,42,0.55)', textTransform: 'uppercase', marginBottom: '16px', textAlign: 'center',
+      }}>What They Say</p>
+      <h2 style={{
+        fontFamily: "'Cormorant Garamond', serif", fontWeight: 300,
+        fontSize: 'clamp(1.8rem, 3.5vw, 2.8rem)', color: '#FAF6EF',
+        textAlign: 'center', marginBottom: '56px', lineHeight: 1.2,
+      }}>
+        Customer <span style={{ fontStyle: 'italic', color: 'rgba(200,150,42,1)' }}>Reviews</span>
+      </h2>
+      <div style={{
+        display: 'grid',
+        gridTemplateColumns: 'repeat(auto-fill, minmax(min(300px,100%), 1fr))',
+        gap: '24px',
+      }}>
+        {reviews.map((r, i) => (
+          <div key={i} style={{
+            background: 'linear-gradient(160deg, #1A1108 0%, #1e1308 100%)',
+            border: '1px solid rgba(200,150,42,0.1)',
+            padding: '28px 28px 24px',
+          }}>
+            <StarRating rating={r.rating} />
+            <p style={{
+              fontFamily: "'Cormorant Garamond', serif", fontStyle: 'italic',
+              fontSize: '15px', fontWeight: 300, color: 'rgba(250,246,239,0.7)',
+              lineHeight: 1.85, margin: '14px 0 18px',
+            }}>"{r.text}"</p>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <span style={{
+                fontFamily: 'Raleway', fontSize: '9px', letterSpacing: '2px',
+                color: 'rgba(250,246,239,0.45)', textTransform: 'uppercase',
+              }}>{r.name}</span>
+              <span style={{
+                fontFamily: 'Raleway', fontSize: '8px', letterSpacing: '2px',
+                color: 'rgba(200,150,42,0.45)', textTransform: 'uppercase',
+              }}>{r.product}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
   );
 };
 

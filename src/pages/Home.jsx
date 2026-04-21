@@ -1,6 +1,30 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
+import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import PaymentModal from '../components/PaymentModal';
+
+const ShopNowBtn = () => {
+  const [hov, setHov] = useState(false);
+  return (
+    <Link to="/shop"
+      onMouseEnter={() => setHov(true)}
+      onMouseLeave={() => setHov(false)}
+      style={{
+        display: 'inline-block',
+        fontFamily: 'Raleway, sans-serif', fontSize: '9px',
+        letterSpacing: '5px', textTransform: 'uppercase',
+        padding: '16px 40px',
+        background: hov ? 'rgba(200,160,60,1)' : 'transparent',
+        color: hov ? '#0a0600' : 'rgba(200,160,60,1)',
+        border: '1px solid rgba(200,160,60,0.7)',
+        transition: 'all 0.35s ease',
+        textDecoration: 'none',
+        WebkitTapHighlightColor: 'transparent',
+        boxShadow: hov ? '0 4px 24px rgba(200,160,60,0.2)' : 'none',
+      }}
+    >Shop Now</Link>
+  );
+};
 
 /* ── Shared animation variants ── */
 const staggerContainer = {
@@ -413,6 +437,90 @@ const useReveal = (threshold = 0.15) => {
     return () => obs.disconnect();
   }, [threshold]);
   return [ref, visible];
+};
+
+/* ── Brand story ── */
+const BrandStorySection = () => {
+  const [ref, visible] = useReveal(0.1);
+  return (
+    <section ref={ref} style={{
+      background: 'linear-gradient(160deg, #0e0800 0%, #1a0f00 100%)',
+      padding: 'clamp(72px, 9vw, 110px) clamp(24px, 6vw, 80px)',
+      borderTop: '1px solid rgba(200,160,60,0.08)',
+    }}>
+      <div style={{
+        maxWidth: '860px', margin: '0 auto',
+        display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '72px', alignItems: 'center',
+      }} className="brand-story-grid">
+        {/* Left — text */}
+        <div style={{
+          opacity: visible ? 1 : 0,
+          transform: visible ? 'translateY(0)' : 'translateY(28px)',
+          transition: 'opacity 1s ease, transform 1s cubic-bezier(0.16,1,0.3,1)',
+        }}>
+          <p style={{
+            fontFamily: 'Raleway, sans-serif', fontSize: '9px', letterSpacing: '7px',
+            color: 'rgba(200,160,60,0.6)', textTransform: 'uppercase', marginBottom: '22px',
+          }}>Our Story</p>
+          <h2 style={{
+            fontFamily: "'Cormorant Garamond', serif", fontWeight: 300,
+            fontSize: 'clamp(2rem, 4vw, 3rem)', lineHeight: 1.15, marginBottom: '28px', color: '#FAF6EF',
+          }}>
+            Born from a <span style={{ fontStyle: 'italic', color: 'rgba(200,160,60,1)' }}>lifelong obsession</span>
+          </h2>
+          <p style={{
+            fontFamily: 'Raleway, sans-serif', fontSize: '14px', fontWeight: 300,
+            color: 'rgba(250,246,239,0.55)', lineHeight: 2.1, marginBottom: '20px',
+            letterSpacing: '0.3px',
+          }}>
+            ELARA was founded with a single conviction — that truly great fragrance should never be ordinary. Every bottle begins with rare, ethically sourced ingredients: saffron from Iran, Bulgarian rose at peak harvest, woods aged for decades.
+          </p>
+          <p style={{
+            fontFamily: 'Raleway, sans-serif', fontSize: '14px', fontWeight: 300,
+            color: 'rgba(250,246,239,0.45)', lineHeight: 2.1, marginBottom: '32px',
+            letterSpacing: '0.3px',
+          }}>
+            Each composition is crafted in small batches, tested over months, and released only when it reaches the standard we have set for ourselves — the kind of scent that becomes a memory.
+          </p>
+          <div style={{ display: 'flex', gap: '40px' }}>
+            {[['100%', 'Natural ingredients'], ['3', 'Compositions'], ['Lebanon', 'Crafted with love']].map(([val, label]) => (
+              <div key={label}>
+                <p style={{
+                  fontFamily: "'Cormorant Garamond', serif", fontStyle: 'italic',
+                  fontSize: '22px', color: 'rgba(200,160,60,1)', marginBottom: '4px',
+                }}>{val}</p>
+                <p style={{
+                  fontFamily: 'Raleway, sans-serif', fontSize: '8px',
+                  letterSpacing: '2px', color: 'rgba(250,246,239,0.3)', textTransform: 'uppercase',
+                }}>{label}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Right — decorative element */}
+        <div style={{
+          opacity: visible ? 1 : 0,
+          transition: 'opacity 1.2s ease 0.2s',
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
+        }}>
+          <div style={{
+            width: '100%', maxWidth: '320px', aspectRatio: '3/4',
+            background: 'linear-gradient(145deg, rgba(200,160,60,0.06) 0%, rgba(200,160,60,0.02) 100%)',
+            border: '1px solid rgba(200,160,60,0.12)',
+            display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
+            gap: '20px', padding: '40px',
+          }}>
+            <img src="/ELARAREINE.png" alt="ELARA Reine" style={{ width: '80%', objectFit: 'contain', opacity: 0.9 }} />
+            <p style={{
+              fontFamily: "'Cormorant Garamond', serif", fontStyle: 'italic',
+              fontSize: '13px', color: 'rgba(200,160,60,0.5)', textAlign: 'center', letterSpacing: '0.3px',
+            }}>Reine — Our debut composition</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
 };
 
 const fieldStyleFn = (focused) => ({
@@ -886,12 +994,35 @@ const Home = () => {
               style={{
                 fontFamily: 'Raleway, sans-serif', fontSize: '14px', fontWeight: 300,
                 color: 'rgba(250,246,239,0.62)', letterSpacing: '0.6px', lineHeight: 2.1,
-                maxWidth: '370px', marginBottom: '54px',
+                maxWidth: '370px', marginBottom: '12px',
               }}
             >
               Born from the rarest ingredients on earth.<br/>
               Worn by those who need no introduction.
             </motion.p>
+
+            {/* Delivery subtitle */}
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.9, ease: 'easeOut', delay: 0.6 }}
+              style={{
+                fontFamily: 'Raleway, sans-serif', fontSize: '10px', fontWeight: 300,
+                color: 'rgba(200,160,60,0.55)', letterSpacing: '3px',
+                textTransform: 'uppercase', marginBottom: '40px',
+              }}
+            >
+              Handcrafted luxury · Delivered across Lebanon
+            </motion.p>
+
+            {/* Shop Now CTA */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.9, ease: 'easeOut', delay: 0.75 }}
+            >
+              <ShopNowBtn />
+            </motion.div>
 
           </div>
         </div>
@@ -1015,6 +1146,9 @@ const Home = () => {
 
       </section>
 
+
+      {/* ══════════════════ BRAND STORY ══════════════════ */}
+      <BrandStorySection />
 
       {/* ══════════════════ CONNECT + CONTACT ══════════════════ */}
       <CombinedConnectSection />
