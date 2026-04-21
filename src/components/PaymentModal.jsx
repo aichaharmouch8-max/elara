@@ -179,7 +179,7 @@ const PaymentModal = ({ product, selectedSize = '100ml', selectedPrice, onClose 
             setLocError('Could not detect location, please type manually');
           }
         },
-        { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
+        { enableHighAccuracy: false, timeout: 10000, maximumAge: 60000 }
       );
     } catch {
       setLocLoading(false);
