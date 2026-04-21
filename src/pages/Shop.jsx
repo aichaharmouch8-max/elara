@@ -93,7 +93,6 @@ const ProductCard = ({ product, inView, delay }) => {
   const [modal, setModal] = useState(false);
   const [selectedSize, setSelectedSize] = useState('100ml');
   const [displayPrice, setDisplayPrice] = useState(39);
-  const [tooltip, setTooltip] = useState(null);
   const [hoveredSize, setHoveredSize] = useState(null);
   const timerRef = useRef(null);
 

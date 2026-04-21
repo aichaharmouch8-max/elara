@@ -1,16 +1,8 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
-import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import PaymentModal from '../components/PaymentModal';
 
 /* ── Shared animation variants ── */
-const fadeUp = (delay = 0) => ({
-  initial:    { opacity: 0, y: 48 },
-  whileInView: { opacity: 1, y: 0 },
-  viewport:   { once: true, margin: '-80px' },
-  transition: { duration: 0.95, ease: [0.16, 1, 0.3, 1], delay },
-});
-
 const staggerContainer = {
   hidden:  {},
   visible: { transition: { staggerChildren: 0.15 } },
@@ -20,38 +12,6 @@ const cardVariant = {
   hidden:  { opacity: 0, y: 40 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.4, 0, 0.2, 1] } },
 };
-
-/* ─────────────────────────────────────────
-   SHARED BUTTON
-───────────────────────────────────────── */
-const GoldBtn = ({ children, onClick, solid = true, style = {}, className = '' }) => {
-  const [hovered, setHovered] = useState(false);
-  const base = solid
-    ? { background: '#C8962A', color: '#FAF6EF', border: '1px solid #C8962A' }
-    : { background: 'transparent', color: '#FAF6EF', border: '1px solid rgba(200,150,42,0.5)' };
-  const hover = solid
-    ? { background: 'transparent', color: '#E8B84B', border: '1px solid #C8962A' }
-    : { background: 'transparent', color: '#E8B84B', border: '1px solid #C8962A' };
-  return (
-    <button
-      onClick={onClick}
-      className={className}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-      style={{
-        fontFamily: 'Raleway, sans-serif', fontSize: '10px',
-        letterSpacing: '5px', textTransform: 'uppercase',
-        padding: '17px 56px', cursor: 'pointer',
-        transition: 'all 0.4s ease',
-        ...(hovered ? hover : base),
-        ...style,
-      }}
-    >
-      {children}
-    </button>
-  );
-};
-
 
 /* ─────────────────────────────────────────
    COLLECTION SECTION
