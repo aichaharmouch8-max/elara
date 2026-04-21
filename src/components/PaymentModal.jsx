@@ -387,7 +387,6 @@ const PaymentModal = ({ product, selectedSize = '100ml', selectedPrice, onClose 
               {[
                 { icon: '🚚', text: 'Free delivery across Lebanon' },
                 { icon: '⏱', text: '24–48 hrs delivery' },
-                { icon: '↩', text: 'Easy returns' },
               ].map(({ icon, text }) => (
                 <div key={text} style={{ flex: 1, textAlign: 'center' }}>
                   <div style={{ fontSize: '16px', marginBottom: '4px' }}>{icon}</div>

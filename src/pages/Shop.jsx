@@ -421,7 +421,7 @@ const BuyNowBtn = ({ onClick, price }) => {
         whiteSpace: 'nowrap',
       }}
     >
-      Buy Now{price ? ` — $${price}` : ''}
+      Buy Now{price ? ` $${price}` : ''}
     </button>
   );
 };

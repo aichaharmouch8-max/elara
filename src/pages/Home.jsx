@@ -327,7 +327,7 @@ const CollectionCard = ({ product }) => {
                 transition: 'all 0.35s ease',
                 whiteSpace: 'nowrap',
               }}
-            >Buy Now — ${displayPrice}</button>
+            >Buy Now ${displayPrice}</button>
           ) : (
             <div style={{
               width: '100%', textAlign: 'center',
@@ -515,7 +515,7 @@ const BrandStorySection = () => {
             <p style={{
               fontFamily: "'Cormorant Garamond', serif", fontStyle: 'italic',
               fontSize: '13px', color: 'rgba(200,160,60,0.5)', textAlign: 'center', letterSpacing: '0.3px',
-            }}>Reine — Our debut composition</p>
+            }}>Reine · Our debut composition</p>
           </div>
         </div>
       </div>
