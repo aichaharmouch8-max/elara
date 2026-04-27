@@ -15,7 +15,8 @@ const PRODUCTS = [
     topNotes:   ['Saffron', 'Pink Pepper'],
     heartNotes: ['Bulgarian Rose', 'Jasmine'],
     baseNotes:  ['Amber', 'White Musk', 'Sandalwood'],
-    description: 'A regal composition that opens with saffron warmth, blooms into Bulgarian rose, and settles into rich amber-musk.',
+    description: 'She opens with a thread of Iranian saffron — warm, ceremonial, impossibly rare. She surrenders into the deepest Bulgarian rose, harvested at the exact hour of bloom. She closes in amber and white musk: skin-close, irreplaceable. Reine is not just worn. She is inhabited.',
+    perfectFor: 'Date nights. Formal occasions. Mornings you want to never forget.',
     locked: false,
     bestseller: true,
     reviews: [
@@ -32,7 +33,7 @@ const PRODUCTS = [
     size: '100ml Eau de Parfum',
     notes: ['?', '?', '?', '?'],
     topNotes: null, heartNotes: null, baseNotes: null,
-    description: 'A golden mystery veiled in the rarest of ingredients. Its secret will be revealed in 2026.',
+    description: 'Gold does not beg to be noticed. Oro opens like afternoon light on ancient stone — rare golden woods, a citrus brightness, then an amber heart that lingers long after you have left the room. Unveiled 2026.',
     locked: true,
     bestseller: false,
     reviews: [],
@@ -45,7 +46,7 @@ const PRODUCTS = [
     size: '100ml Eau de Parfum',
     notes: ['?', '?', '?', '?'],
     topNotes: null, heartNotes: null, baseNotes: null,
-    description: 'Born from stardust and midnight blooms. An olfactory voyage unlike any other.',
+    description: 'Born from the silence after a storm. Midnight jasmine in full bloom, clean vetiver rooted deep in dark earth, and stardust that drifts long after the music ends. For the woman who is most herself after dark.',
     locked: true,
     bestseller: false,
     reviews: [],
@@ -326,10 +327,25 @@ const ProductCard = ({ product, inView, delay }) => {
               fontFamily: "'Cormorant Garamond', serif",
               fontStyle: 'italic', fontWeight: 300,
               fontSize: '14px', color: 'rgba(250,246,239,0.38)',
-              lineHeight: 2.05, marginBottom: '24px', letterSpacing: '0.2px',
+              lineHeight: 2.05, marginBottom: product.perfectFor ? '16px' : '24px', letterSpacing: '0.2px',
             }}>
               {product.description}
             </p>
+
+            {product.perfectFor && (
+              <div style={{ marginBottom: '24px' }}>
+                <span style={{
+                  fontFamily: 'Raleway, sans-serif', fontSize: '8px', letterSpacing: '3px',
+                  textTransform: 'uppercase', color: 'rgba(200,160,60,0.4)',
+                  display: 'block', marginBottom: '5px',
+                }}>Perfect for</span>
+                <p style={{
+                  fontFamily: "'Cormorant Garamond', serif", fontStyle: 'italic', fontWeight: 300,
+                  fontSize: '13px', color: 'rgba(200,160,60,0.65)',
+                  lineHeight: 1.8, letterSpacing: '0.3px', margin: 0,
+                }}>{product.perfectFor}</p>
+              </div>
+            )}
 
             {/* Fragrance Notes */}
             {product.topNotes ? (

@@ -582,6 +582,20 @@ button { font-family: inherit; }
   }
 }
 
+/* ── Trust pillars ── */
+@media (max-width: 768px) {
+  .trust-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 32px 24px !important;
+  }
+}
+@media (max-width: 480px) {
+  .trust-grid {
+    grid-template-columns: 1fr !important;
+    gap: 28px !important;
+  }
+}
+
 /* ── Responsive grids ── */
 @media (max-width: 900px) {
   .collection-grid  { grid-template-columns: 1fr !important; }

@@ -45,7 +45,7 @@ const PRODUCTS = [
     id: 'reine',
     name: 'Reine',
     image: '/ELARAREINE.png',
-    tagline: 'A regal warmth that opens with saffron and blooms into Bulgarian rose.',
+    tagline: 'She does not ask to be noticed. She insists. Saffron, Bulgarian rose, amber — the holy trinity of desire.',
     price: 39,
     available: true,
   },
@@ -53,7 +53,7 @@ const PRODUCTS = [
     id: 'oro',
     name: 'Oro',
     image: '/ELARAOROO.png',
-    tagline: 'Liquid sunlight — rare golden woods, bright citrus, a luminous amber heart.',
+    tagline: 'Rare golden woods. Luminous amber. A secret worn close to the skin, never told.',
     price: 79,
     available: false,
   },
@@ -61,7 +61,7 @@ const PRODUCTS = [
     id: 'nova',
     name: 'Rawan Noir',
     image: '/ELARAREINE.png',
-    tagline: 'Born from darkness — midnight jasmine, clean vetiver and drifting stardust.',
+    tagline: 'Born after midnight. For the woman who lives her most interesting life after dark.',
     price: 79,
     available: false,
   },
@@ -442,6 +442,90 @@ const useReveal = (threshold = 0.15) => {
   return [ref, visible];
 };
 
+/* ── Trust pillars ── */
+const TRUST_PILLARS = [
+  {
+    title: 'Authenticity Guaranteed',
+    body: 'Every bottle is sealed and authenticated before it reaches you.',
+    icon: (
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+        <polyline points="9 12 11 14 15 10"/>
+      </svg>
+    ),
+  },
+  {
+    title: 'Lebanese Craftsmanship',
+    body: 'Small batches. Handcrafted in Beirut. Never compromised.',
+    icon: (
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/>
+      </svg>
+    ),
+  },
+  {
+    title: 'Rare Ingredients',
+    body: 'Saffron from Iran. Rose from Bulgaria. Sourced at peak, never substituted.',
+    icon: (
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
+        <circle cx="12" cy="12" r="10"/>
+        <path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/>
+      </svg>
+    ),
+  },
+  {
+    title: 'Free Nationwide Delivery',
+    body: 'Complimentary shipping on every order, delivered across Lebanon.',
+    icon: (
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
+        <rect x="1" y="3" width="15" height="13" rx="1"/>
+        <path d="M16 8h4l3 4v3h-7V8z"/>
+        <circle cx="5.5" cy="18.5" r="2.5"/>
+        <circle cx="18.5" cy="18.5" r="2.5"/>
+      </svg>
+    ),
+  },
+];
+
+const TrustSection = () => {
+  const [ref, visible] = useReveal(0.1);
+  return (
+    <section ref={ref} style={{
+      background: '#0a0600',
+      borderTop: '1px solid rgba(200,160,60,0.07)',
+      borderBottom: '1px solid rgba(200,160,60,0.07)',
+      padding: 'clamp(52px, 7vw, 72px) clamp(24px, 6vw, 80px)',
+    }}>
+      <div className="trust-grid" style={{
+        maxWidth: '900px', margin: '0 auto',
+        display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '40px',
+      }}>
+        {TRUST_PILLARS.map(({ icon, title, body }, i) => (
+          <div key={title} style={{
+            display: 'flex', flexDirection: 'column', alignItems: 'center',
+            textAlign: 'center', gap: '14px',
+            opacity: visible ? 1 : 0,
+            transform: visible ? 'translateY(0)' : 'translateY(20px)',
+            transition: `opacity 0.9s ease ${i * 0.1}s, transform 0.9s cubic-bezier(0.16,1,0.3,1) ${i * 0.1}s`,
+          }}>
+            <div style={{ color: 'rgba(200,160,60,0.6)' }}>{icon}</div>
+            <h4 style={{
+              fontFamily: "'Cormorant Garamond', serif", fontWeight: 300,
+              fontSize: '16px', color: '#FAF6EF', letterSpacing: '0.3px',
+              lineHeight: 1.3, margin: 0,
+            }}>{title}</h4>
+            <p style={{
+              fontFamily: 'Raleway, sans-serif', fontSize: '11px', fontWeight: 300,
+              color: 'rgba(250,246,239,0.35)', lineHeight: 1.9, letterSpacing: '0.3px',
+              margin: 0,
+            }}>{body}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+};
+
 /* ── Brand story ── */
 const BrandStorySection = () => {
   const [ref, visible] = useReveal(0.1);
@@ -469,21 +553,21 @@ const BrandStorySection = () => {
             fontFamily: "'Cormorant Garamond', serif", fontWeight: 300,
             fontSize: 'clamp(2rem, 4vw, 3rem)', lineHeight: 1.15, marginBottom: '28px', color: '#FAF6EF',
           }}>
-            Born from a <span style={{ fontStyle: 'italic', color: 'rgba(200,160,60,1)' }}>lifelong obsession</span>
+            Born in <span style={{ fontStyle: 'italic', color: 'rgba(200,160,60,1)' }}>Beirut.</span> Made for eternity.
           </h2>
           <p style={{
             fontFamily: 'Raleway, sans-serif', fontSize: '14px', fontWeight: 300,
             color: 'rgba(250,246,239,0.55)', lineHeight: 2.1, marginBottom: '20px',
             letterSpacing: '0.3px',
           }}>
-            ELARA was founded with a single conviction — that truly great fragrance should never be ordinary. Every bottle begins with rare, ethically sourced ingredients: saffron from Iran, Bulgarian rose at peak harvest, woods aged for decades.
+            ELARA began not in a laboratory, but in a memory. A mother's perfume cabinet — French bottles wrapped in tissue, saved for occasions that never quite arrived. I broke the rule at fifteen. I wore every single one. I have been chasing that feeling ever since.
           </p>
           <p style={{
             fontFamily: 'Raleway, sans-serif', fontSize: '14px', fontWeight: 300,
             color: 'rgba(250,246,239,0.45)', lineHeight: 2.1, marginBottom: '32px',
             letterSpacing: '0.3px',
           }}>
-            Each composition is crafted in small batches, tested over months, and released only when it reaches the standard we have set for ourselves — the kind of scent that becomes a memory.
+            Every fragrance begins with one question: what does it feel like to be unforgettable? The answer leads us to saffron fields in Iran, rose valleys in Bulgaria at the exact hour of harvest, and amber routes older than modern trade. We source slowly. We craft in small batches. We release only when the answer is yes.
           </p>
           <div style={{ display: 'flex', gap: '40px' }}>
             {[['100%', 'Natural ingredients'], ['3', 'Compositions'], ['Lebanon', 'Crafted with love']].map(([val, label]) => (
@@ -1000,10 +1084,11 @@ const Home = () => {
                 maxWidth: '370px', marginBottom: '40px',
               }}
             >
-              Born from the rarest ingredients on earth.<br/>
-              Worn by those who need no introduction.<br/>
+              A scent so rare, silence speaks first.<br/>
+              For the woman who enters a room before she does.
+              <br/>
               <span style={{ fontSize: '11px', color: 'rgba(200,160,60,0.55)', letterSpacing: '1px' }}>
-                Handcrafted luxury · Delivered across Lebanon
+                Crafted in Lebanon · Delivered to your door
               </span>
             </motion.p>
 
@@ -1104,6 +1189,9 @@ const Home = () => {
 
       {/* ══════════════════ BRAND STORY ══════════════════ */}
       <BrandStorySection />
+
+      {/* ══════════════════ TRUST PILLARS ══════════════════ */}
+      <TrustSection />
 
       {/* ══════════════════ CONNECT + CONTACT ══════════════════ */}
       <CombinedConnectSection />
