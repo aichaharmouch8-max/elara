@@ -258,28 +258,29 @@ button { font-family: inherit; }
     display: none !important;
   }
 
-  /* ── Hero mobile — bottle top 55% / text bottom 45% ── */
+  /* ── Hero mobile — bottle top / text bottom ── */
 
   .hero-section {
     display: flex !important;
     flex-direction: column !important;
-    height: 100vh !important;
     min-height: 100vh !important;
-    max-height: 100vh !important;
+    height: auto !important;
+    max-height: none !important;
     padding: 0 !important;
     position: relative !important;
-    overflow: hidden !important;
+    overflow: visible !important;
   }
 
-  /* Bottle image: top zone */
+  /* Bottle image: top zone — contain so full bottle is always visible */
   .hero-bg-img {
     position: relative !important;
     inset: auto !important;
     width: 100% !important;
-    height: 55% !important;
+    height: 50vh !important;
+    min-height: 50vh !important;
     flex-shrink: 0 !important;
-    object-fit: cover !important;
-    object-position: center 25% !important;
+    object-fit: contain !important;
+    object-position: center !important;
     animation: none !important;
     z-index: 0 !important;
     top: auto !important;
