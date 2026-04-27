@@ -273,6 +273,7 @@ const CollectionCard = ({ product }) => {
                         onClick={() => handleSizeChange(size)}
                         onMouseEnter={() => setSizeTooltip(size)}
                         onMouseLeave={() => setSizeTooltip(null)}
+                        className="collection-size-btn"
                         style={{
                           width: '100%',
                           fontFamily: 'Raleway, sans-serif', fontSize: '10px', letterSpacing: '1.5px',
@@ -282,6 +283,7 @@ const CollectionCard = ({ product }) => {
                           color: active ? 'rgba(200,160,60,1)' : 'rgba(200,160,60,0.6)',
                           borderRadius: '2px', cursor: 'pointer',
                           transition: 'all 0.3s ease',
+                          boxSizing: 'border-box',
                         }}
                       >
                         {size} · ${REINE_PRICES[size]}
@@ -317,6 +319,7 @@ const CollectionCard = ({ product }) => {
               onClick={() => setModal(true)}
               onMouseEnter={() => setBtnHov(true)}
               onMouseLeave={() => setBtnHov(false)}
+              className="collection-buy-btn"
               style={{
                 width: '100%', cursor: 'pointer',
                 fontFamily: 'Raleway, sans-serif', fontSize: '9px', letterSpacing: '3px',
@@ -362,7 +365,7 @@ const CollectionCarousel = () => {
   const handleScroll = () => {
     const el = trackRef.current;
     if (!el) return;
-    const step = window.innerWidth * 0.76 + 16;
+    const step = window.innerWidth * 0.90 + 8;
     const idx = Math.round(el.scrollLeft / step);
     setActiveIdx(Math.min(Math.max(idx, 0), PRODUCTS.length - 1));
   };
