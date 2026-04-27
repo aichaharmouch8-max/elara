@@ -143,7 +143,7 @@ const ProductCard = ({ product, inView, delay }) => {
           ...(product.id === 'reine' && { maxWidth: '360px', margin: '0 auto' }),
         }}
       >
-        <div style={{
+        <div className="shop-card" style={{
           background: 'linear-gradient(160deg, #1A1108 0%, #221710 100%)',
           border: `1px solid ${hov ? 'rgba(200,150,42,0.35)' : 'rgba(200,150,42,0.1)'}`,
           transform: hov ? 'translateY(-10px)' : 'translateY(0)',

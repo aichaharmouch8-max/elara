@@ -35,11 +35,11 @@ const Navbar = () => {
           height: '76px',
           display: 'flex', alignItems: 'center', justifyContent: 'space-between',
           padding: '0 56px',
-          background: navBg,
+          background: 'rgba(8,4,1,0.4)',
           backdropFilter: 'blur(24px)',
           WebkitBackdropFilter: 'blur(24px)',
-          borderBottom: `1px solid ${navBorder}`,
-          transition: 'background 0.5s ease, border-color 0.5s ease',
+          borderBottom: '1px solid rgba(201,168,76,0.15)',
+          transition: 'background 0.5s ease',
           boxSizing: 'border-box',
         }}
       >

@@ -377,6 +377,10 @@ button { font-family: inherit; }
   }
 
   /* Shop cards — compact on mobile, no excessive height */
+  .shop-card {
+    max-height: 520px !important;
+    overflow: hidden !important;
+  }
   .shop-card-img-active {
     height: 200px !important;
     min-height: 200px !important;
@@ -390,7 +394,7 @@ button { font-family: inherit; }
   .shop-card-info {
     padding: 16px 20px 20px !important;
   }
-  /* Cap total card height and prevent card from stretching */
+  /* Cap outer wrapper */
   .shop-grid > * {
     max-width: 100% !important;
     margin: 0 !important;
