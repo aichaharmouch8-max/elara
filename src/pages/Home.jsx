@@ -442,82 +442,82 @@ const useReveal = (threshold = 0.15) => {
   return [ref, visible];
 };
 
-/* ── Trust pillars ── */
-const TRUST_PILLARS = [
+/* ── ELARA Promise ── */
+const PROMISE_PILLARS = [
   {
-    title: 'Authenticity Guaranteed',
-    body: 'Every bottle is sealed and authenticated before it reaches you.',
+    title: 'Authenticity',
+    body: 'Every bottle is sealed and authenticated before it leaves our hands.',
     icon: (
-      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
         <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
         <polyline points="9 12 11 14 15 10"/>
       </svg>
     ),
   },
   {
-    title: 'Lebanese Craftsmanship',
-    body: 'Small batches. Handcrafted in Beirut. Never compromised.',
+    title: 'Craftsmanship',
+    body: 'Small batches, handcrafted in Beirut with ingredients sourced at peak.',
     icon: (
-      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
         <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/>
       </svg>
     ),
   },
   {
-    title: 'Rare Ingredients',
-    body: 'Saffron from Iran. Rose from Bulgaria. Sourced at peak, never substituted.',
+    title: 'Luxury',
+    body: 'Because you deserve the rarest ingredients on your skin, always.',
     icon: (
-      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
-        <circle cx="12" cy="12" r="10"/>
-        <path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/>
-      </svg>
-    ),
-  },
-  {
-    title: 'Free Nationwide Delivery',
-    body: 'Complimentary shipping on every order, delivered across Lebanon.',
-    icon: (
-      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
-        <rect x="1" y="3" width="15" height="13" rx="1"/>
-        <path d="M16 8h4l3 4v3h-7V8z"/>
-        <circle cx="5.5" cy="18.5" r="2.5"/>
-        <circle cx="18.5" cy="18.5" r="2.5"/>
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
+        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
       </svg>
     ),
   },
 ];
 
-const TrustSection = () => {
+const ElaraPromise = () => {
   const [ref, visible] = useReveal(0.1);
   return (
     <section ref={ref} style={{
       background: '#0a0600',
       borderTop: '1px solid rgba(200,160,60,0.07)',
       borderBottom: '1px solid rgba(200,160,60,0.07)',
-      padding: 'clamp(52px, 7vw, 72px) clamp(24px, 6vw, 80px)',
+      padding: 'clamp(72px, 9vw, 110px) clamp(24px, 6vw, 80px)',
+      textAlign: 'center',
     }}>
-      <div className="trust-grid" style={{
-        maxWidth: '900px', margin: '0 auto',
-        display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '40px',
+      <p style={{
+        fontFamily: 'Raleway, sans-serif', fontSize: '9px', letterSpacing: '7px',
+        color: 'rgba(200,160,60,0.6)', textTransform: 'uppercase', marginBottom: '20px',
+        opacity: visible ? 1 : 0, transition: 'opacity 0.8s ease',
+      }}>Our Commitment</p>
+      <h2 style={{
+        fontFamily: "'Cormorant Garamond', serif", fontWeight: 300,
+        fontSize: 'clamp(1.8rem, 3.5vw, 2.8rem)', color: '#FAF6EF',
+        marginBottom: '60px',
+        opacity: visible ? 1 : 0, transition: 'opacity 0.9s ease 0.1s',
       }}>
-        {TRUST_PILLARS.map(({ icon, title, body }, i) => (
+        The ELARA <span style={{ fontStyle: 'italic', color: 'rgba(200,160,60,1)' }}>Promise</span>
+      </h2>
+      <div className="promise-grid" style={{
+        maxWidth: '860px', margin: '0 auto',
+        display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '48px',
+      }}>
+        {PROMISE_PILLARS.map(({ icon, title, body }, i) => (
           <div key={title} style={{
             display: 'flex', flexDirection: 'column', alignItems: 'center',
-            textAlign: 'center', gap: '14px',
+            textAlign: 'center', gap: '18px',
             opacity: visible ? 1 : 0,
             transform: visible ? 'translateY(0)' : 'translateY(20px)',
-            transition: `opacity 0.9s ease ${i * 0.1}s, transform 0.9s cubic-bezier(0.16,1,0.3,1) ${i * 0.1}s`,
+            transition: `opacity 0.9s ease ${i * 0.12}s, transform 0.9s cubic-bezier(0.16,1,0.3,1) ${i * 0.12}s`,
           }}>
-            <div style={{ color: 'rgba(200,160,60,0.6)' }}>{icon}</div>
+            <div style={{ color: 'rgba(200,160,60,0.7)' }}>{icon}</div>
             <h4 style={{
               fontFamily: "'Cormorant Garamond', serif", fontWeight: 300,
-              fontSize: '16px', color: '#FAF6EF', letterSpacing: '0.3px',
-              lineHeight: 1.3, margin: 0,
+              fontSize: '20px', color: '#FAF6EF', letterSpacing: '1px', margin: 0,
             }}>{title}</h4>
             <p style={{
-              fontFamily: 'Raleway, sans-serif', fontSize: '11px', fontWeight: 300,
-              color: 'rgba(250,246,239,0.35)', lineHeight: 1.9, letterSpacing: '0.3px',
-              margin: 0,
+              fontFamily: 'Raleway, sans-serif', fontSize: '12px', fontWeight: 300,
+              color: 'rgba(250,246,239,0.38)', lineHeight: 2, letterSpacing: '0.3px',
+              margin: 0, maxWidth: '220px',
             }}>{body}</p>
           </div>
         ))}
@@ -525,6 +525,102 @@ const TrustSection = () => {
     </section>
   );
 };
+
+/* ── Founder Story ── */
+const FounderStory = () => {
+  const [ref, visible] = useReveal(0.1);
+  return (
+    <section ref={ref} style={{
+      background: '#0d0700',
+      padding: 'clamp(80px, 10vw, 120px) clamp(24px, 6vw, 80px)',
+      borderTop: '1px solid rgba(201,168,76,0.15)',
+      borderBottom: '1px solid rgba(201,168,76,0.15)',
+      textAlign: 'center',
+    }}>
+      <div style={{
+        maxWidth: '660px', margin: '0 auto',
+        opacity: visible ? 1 : 0,
+        transform: visible ? 'translateY(0)' : 'translateY(28px)',
+        transition: 'opacity 1s ease, transform 1s cubic-bezier(0.16,1,0.3,1)',
+      }}>
+        <div style={{
+          width: '48px', height: '1px', margin: '0 auto 44px',
+          background: 'linear-gradient(90deg, transparent, rgba(201,168,76,0.55), transparent)',
+        }}/>
+        <p style={{
+          fontFamily: 'Raleway, sans-serif', fontSize: '9px', letterSpacing: '7px',
+          color: 'rgba(201,168,76,0.6)', textTransform: 'uppercase', marginBottom: '44px',
+        }}>About the Founder</p>
+        <blockquote style={{
+          fontFamily: "'Cormorant Garamond', serif", fontStyle: 'italic', fontWeight: 300,
+          fontSize: 'clamp(1.5rem, 3.5vw, 2.2rem)',
+          color: '#FAF6EF', lineHeight: 1.55, marginBottom: '40px',
+          letterSpacing: '0.2px',
+        }}>
+          "I created ELARA because I believe scent is the most personal luxury you can own."
+        </blockquote>
+        <p style={{
+          fontFamily: 'Raleway, sans-serif', fontSize: '13px', fontWeight: 300,
+          color: 'rgba(250,246,239,0.48)', lineHeight: 2.1, letterSpacing: '0.3px',
+          marginBottom: '32px',
+        }}>
+          Growing up in Beirut, I was obsessed with my mother's perfume cabinet — French bottles wrapped in tissue, saved for occasions that never quite arrived. At fifteen, I broke the rule and wore every single one. ELARA is my answer to that girl. The belief that luxury should never wait.
+        </p>
+        <p style={{
+          fontFamily: "'Cormorant Garamond', serif", fontStyle: 'italic',
+          fontSize: '18px', color: 'rgba(201,168,76,0.8)', letterSpacing: '0.5px',
+          marginBottom: '44px',
+        }}>— Aicha</p>
+        <div style={{
+          width: '48px', height: '1px', margin: '0 auto',
+          background: 'linear-gradient(90deg, transparent, rgba(201,168,76,0.35), transparent)',
+        }}/>
+      </div>
+    </section>
+  );
+};
+
+/* ── Trust bar ── */
+const TRUST_BAR_ITEMS = [
+  'Free Nationwide Delivery',
+  'Handcrafted in Lebanon',
+  '100% Natural Ingredients',
+  'Authenticated & Sealed',
+];
+
+const TrustBar = () => (
+  <div style={{
+    background: 'rgba(201,168,76,0.08)',
+    borderTop: '1px solid rgba(201,168,76,0.2)',
+    borderBottom: '1px solid rgba(201,168,76,0.2)',
+    padding: '18px clamp(24px, 6vw, 80px)',
+  }}>
+    <div className="trust-bar-inner" style={{
+      maxWidth: '900px', margin: '0 auto',
+      display: 'flex', alignItems: 'center', justifyContent: 'center',
+      flexWrap: 'wrap',
+    }}>
+      {TRUST_BAR_ITEMS.flatMap((item, i) => {
+        const nodes = [(
+          <span key={item} style={{
+            fontFamily: 'Raleway, sans-serif', fontSize: '8px',
+            letterSpacing: '3.5px', textTransform: 'uppercase',
+            color: 'rgba(201,168,76,0.75)', whiteSpace: 'nowrap',
+            padding: '6px 20px',
+          }}>{item}</span>
+        )];
+        if (i < TRUST_BAR_ITEMS.length - 1) {
+          nodes.push(
+            <span key={`sep-${i}`} className="trust-bar-sep" style={{
+              color: 'rgba(201,168,76,0.35)', fontSize: '10px', flexShrink: 0,
+            }}>✦</span>
+          );
+        }
+        return nodes;
+      })}
+    </div>
+  </div>
+);
 
 /* ── Brand story ── */
 const BrandStorySection = () => {
@@ -1116,8 +1212,8 @@ const Home = () => {
         />
       </section>
 
-
-
+      {/* ══════════════════ FOUNDER STORY ══════════════════ */}
+      <FounderStory />
 
       {/* ══════════════════ COLLECTION ══════════════════ */}
       <section id="collection" className="collection-section snap-section-auto" style={{
@@ -1186,12 +1282,14 @@ const Home = () => {
 
       </section>
 
+      {/* ══════════════════ TRUST BAR ══════════════════ */}
+      <TrustBar />
 
       {/* ══════════════════ BRAND STORY ══════════════════ */}
       <BrandStorySection />
 
-      {/* ══════════════════ TRUST PILLARS ══════════════════ */}
-      <TrustSection />
+      {/* ══════════════════ ELARA PROMISE ══════════════════ */}
+      <ElaraPromise />
 
       {/* ══════════════════ CONNECT + CONTACT ══════════════════ */}
       <CombinedConnectSection />

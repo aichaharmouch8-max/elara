@@ -25,10 +25,10 @@ const Navbar = () => {
           height: '76px',
           display: 'flex', alignItems: 'center', justifyContent: 'space-between',
           padding: '0 56px',
-          background: 'transparent',
+          background: 'rgba(8, 4, 1, 0.35)',
           backdropFilter: 'blur(20px)',
           WebkitBackdropFilter: 'blur(20px)',
-          borderBottom: '1px solid rgba(201,168,76,0.15)',
+          borderBottom: '1px solid rgba(201, 168, 76, 0.12)',
           transition: 'background 0.5s ease',
           boxSizing: 'border-box',
         }}

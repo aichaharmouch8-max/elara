@@ -15,7 +15,8 @@ const PRODUCTS = [
     topNotes:   ['Saffron', 'Pink Pepper'],
     heartNotes: ['Bulgarian Rose', 'Jasmine'],
     baseNotes:  ['Amber', 'White Musk', 'Sandalwood'],
-    description: 'She opens with a thread of Iranian saffron — warm, ceremonial, impossibly rare. She surrenders into the deepest Bulgarian rose, harvested at the exact hour of bloom. She closes in amber and white musk: skin-close, irreplaceable. Reine is not just worn. She is inhabited.',
+    description: 'Reine is not just worn. She is inhabited.',
+    scentJourney: 'Iranian saffron opens warm and ceremonial — impossibly rare. The heart surrenders into Bulgarian rose, harvested at the exact hour of bloom. She closes in amber and white musk: skin-close, irreplaceable.',
     perfectFor: 'Date nights. Formal occasions. Mornings you want to never forget.',
     locked: false,
     bestseller: true,
@@ -33,7 +34,9 @@ const PRODUCTS = [
     size: '100ml Eau de Parfum',
     notes: ['?', '?', '?', '?'],
     topNotes: null, heartNotes: null, baseNotes: null,
-    description: 'Gold does not beg to be noticed. Oro opens like afternoon light on ancient stone — rare golden woods, a citrus brightness, then an amber heart that lingers long after you have left the room. Unveiled 2026.',
+    description: 'Gold does not beg to be noticed.',
+    scentJourney: 'Opens like afternoon light on ancient stone — rare golden woods, a citrus brightness, then an amber heart that lingers long after you leave the room. Unveiled 2026.',
+    perfectFor: 'The quiet statement. Days when you want to be remembered without trying.',
     locked: true,
     bestseller: false,
     reviews: [],
@@ -46,7 +49,9 @@ const PRODUCTS = [
     size: '100ml Eau de Parfum',
     notes: ['?', '?', '?', '?'],
     topNotes: null, heartNotes: null, baseNotes: null,
-    description: 'Born from the silence after a storm. Midnight jasmine in full bloom, clean vetiver rooted deep in dark earth, and stardust that drifts long after the music ends. For the woman who is most herself after dark.',
+    description: 'Born from the silence after a storm.',
+    scentJourney: 'Midnight jasmine in full bloom, clean vetiver rooted deep in dark earth, and stardust that drifts long after the music ends.',
+    perfectFor: 'Evenings. Escapes. The hours that belong only to you.',
     locked: true,
     bestseller: false,
     reviews: [],
@@ -326,11 +331,21 @@ const ProductCard = ({ product, inView, delay }) => {
             <p style={{
               fontFamily: "'Cormorant Garamond', serif",
               fontStyle: 'italic', fontWeight: 300,
-              fontSize: '14px', color: 'rgba(250,246,239,0.38)',
-              lineHeight: 2.05, marginBottom: product.perfectFor ? '16px' : '24px', letterSpacing: '0.2px',
+              fontSize: '16px', color: 'rgba(250,246,239,0.52)',
+              lineHeight: 1.65, marginBottom: product.scentJourney ? '12px' : (product.perfectFor ? '16px' : '24px'),
+              letterSpacing: '0.2px',
             }}>
               {product.description}
             </p>
+            {product.scentJourney && (
+              <p style={{
+                fontFamily: 'Raleway, sans-serif', fontSize: '11px', fontWeight: 300,
+                color: 'rgba(250,246,239,0.3)',
+                lineHeight: 2.05, marginBottom: product.perfectFor ? '16px' : '24px', letterSpacing: '0.3px',
+              }}>
+                {product.scentJourney}
+              </p>
+            )}
 
             {product.perfectFor && (
               <div style={{ marginBottom: '24px' }}>

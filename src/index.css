@@ -246,10 +246,10 @@ button { font-family: inherit; }
     left: 0 !important;
     right: 0 !important;
     z-index: 9999 !important;
-    background: transparent !important;
+    background: rgba(8, 4, 1, 0.35) !important;
     backdrop-filter: blur(20px) !important;
     -webkit-backdrop-filter: blur(20px) !important;
-    border-bottom: 1px solid rgba(201,168,76,0.15) !important;
+    border-bottom: 1px solid rgba(201, 168, 76, 0.12) !important;
   }
   nav {
     padding: 0 20px !important;
@@ -599,6 +599,27 @@ button { font-family: inherit; }
   .trust-grid {
     grid-template-columns: 1fr !important;
     gap: 28px !important;
+  }
+}
+
+/* ── ELARA Promise ── */
+@media (max-width: 768px) {
+  .promise-grid {
+    grid-template-columns: 1fr !important;
+    gap: 36px !important;
+  }
+}
+
+/* ── Trust bar ── */
+@media (max-width: 768px) {
+  .trust-bar-inner {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 8px !important;
+    justify-items: center !important;
+  }
+  .trust-bar-sep {
+    display: none !important;
   }
 }
 
