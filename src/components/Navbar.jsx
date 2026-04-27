@@ -23,7 +23,7 @@ const Navbar = () => {
 
   useEffect(() => { setMenuOpen(false); }, [location.pathname]);
 
-  const navBg     = scrolled ? 'rgba(8,4,1,0.65)' : 'rgba(8,4,1,0.4)';
+  const navBg     = scrolled ? 'rgba(8,4,1,0.6)' : 'rgba(8,4,1,0.4)';
   const navBorder = scrolled ? 'rgba(201,168,76,0.28)' : 'rgba(201,168,76,0.15)';
 
   return (
@@ -31,13 +31,13 @@ const Navbar = () => {
       <nav
         className="navbar-root"
         style={{
-          position: 'fixed', top: 0, left: 0, right: 0, zIndex: 1000,
+          position: 'fixed', top: 0, left: 0, right: 0, width: '100%', zIndex: 9999,
           height: '76px',
           display: 'flex', alignItems: 'center', justifyContent: 'space-between',
           padding: '0 56px',
           background: navBg,
-          backdropFilter: 'blur(20px) saturate(160%)',
-          WebkitBackdropFilter: 'blur(20px) saturate(160%)',
+          backdropFilter: 'blur(24px)',
+          WebkitBackdropFilter: 'blur(24px)',
           borderBottom: `1px solid ${navBorder}`,
           transition: 'background 0.5s ease, border-color 0.5s ease',
           boxSizing: 'border-box',
