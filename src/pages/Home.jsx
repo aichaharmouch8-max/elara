@@ -947,7 +947,7 @@ const Home = () => {
         }}/>
 
         {/* Top + bottom vignette */}
-        <div style={{
+        <div className="hero-vignette" style={{
           position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 1,
           background: 'linear-gradient(to bottom, rgba(0,0,0,0.35) 0%, transparent 22%, transparent 72%, rgba(0,0,0,0.55) 100%)',
         }}/>

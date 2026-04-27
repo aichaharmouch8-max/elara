@@ -246,9 +246,9 @@ button { font-family: inherit; }
     left: 0 !important;
     right: 0 !important;
     z-index: 9999 !important;
-    background: rgba(8,4,1,0.45) !important;
-    backdrop-filter: blur(24px) !important;
-    -webkit-backdrop-filter: blur(24px) !important;
+    background: transparent !important;
+    backdrop-filter: blur(20px) !important;
+    -webkit-backdrop-filter: blur(20px) !important;
     border-bottom: 1px solid rgba(201,168,76,0.15) !important;
   }
   nav {
@@ -258,53 +258,61 @@ button { font-family: inherit; }
     display: none !important;
   }
 
-  /* ── Hero mobile ── */
+  /* ── Hero mobile — bottle top 55% / text bottom 45% ── */
 
   .hero-section {
+    display: flex !important;
+    flex-direction: column !important;
     height: 100vh !important;
     min-height: 100vh !important;
     max-height: 100vh !important;
     padding: 0 !important;
-    display: block !important;
     position: relative !important;
-    overflow: clip !important;
+    overflow: hidden !important;
   }
 
+  /* Bottle image: top zone */
   .hero-bg-img {
-    position: absolute !important;
-    inset: 0 !important;
+    position: relative !important;
+    inset: auto !important;
     width: 100% !important;
-    height: 100% !important;
+    height: 55% !important;
+    flex-shrink: 0 !important;
     object-fit: cover !important;
-    object-position: center 20% !important;
-  }
-
-  .hero-overlay-left {
-    position: absolute !important;
-    inset: 0 !important;
-    background: linear-gradient(
-      to top,
-      rgba(0,0,0,0.95) 0%,
-      rgba(0,0,0,0.5)  45%,
-      transparent      100%
-    ) !important;
-    z-index: 1 !important;
-  }
-
-  /* Text block — absolute, pinned to bottom, clear of navbar */
-  .hero-inner {
-    position: absolute !important;
-    bottom: 90px !important;
-    left: 24px !important;
-    right: 24px !important;
+    object-position: center 25% !important;
+    animation: none !important;
+    z-index: 0 !important;
     top: auto !important;
-    width: auto !important;
-    padding: 0 !important;
+  }
+
+  /* Hide gradient overlays — replaced by solid dark text zone */
+  .hero-overlay-left {
+    display: none !important;
+  }
+
+  .hero-vignette {
+    display: none !important;
+  }
+
+  /* Text zone: dark bg, fills remaining height */
+  .hero-inner {
+    position: relative !important;
+    bottom: auto !important;
+    left: auto !important;
+    right: auto !important;
+    top: auto !important;
+    width: 100% !important;
+    flex: 1 !important;
+    background: #0d0700 !important;
+    padding: 20px 20px 16px !important;
     z-index: 2 !important;
     display: flex !important;
     flex-direction: column !important;
     align-items: flex-start !important;
-    gap: 8px !important;
+    justify-content: center !important;
+    gap: 0 !important;
+    overflow: hidden !important;
+    box-sizing: border-box !important;
   }
 
   .hero-text-col {
@@ -316,32 +324,32 @@ button { font-family: inherit; }
     box-sizing: border-box !important;
     display: flex !important;
     flex-direction: column !important;
-    gap: 8px !important;
+    gap: 6px !important;
   }
 
   /* Eyebrow — MAISON DE PARFUM */
   .hero-text-col > div:first-child {
-    margin-bottom: 16px !important;
+    margin-bottom: 4px !important;
   }
   .hero-text-col > div:first-child span {
-    font-size: 10px !important;
+    font-size: 9px !important;
     letter-spacing: 5px !important;
     color: rgba(200,160,60,0.8) !important;
   }
 
   /* Heading */
-  .hero-text-col h1 { margin-bottom: 0 !important; }
-  .hero-text-col h1 span:first-child { font-size: 2.2rem !important; }
-  .hero-text-col h1 span:last-child  { font-size: 2.8rem !important; }
+  .hero-text-col h1 { margin-bottom: 4px !important; }
+  .hero-text-col h1 span:first-child { font-size: 1.8rem !important; color: #FAF6EF !important; }
+  .hero-text-col h1 span:last-child  { font-size: 2.4rem !important; }
 
   /* Subtitle */
   .hero-text-col p {
-    font-size: 15px !important;
-    color: rgba(255,255,255,0.7) !important;
-    margin-top: 8px !important;
+    font-size: 12px !important;
+    color: rgba(255,255,255,0.5) !important;
+    margin-top: 4px !important;
     margin-bottom: 0 !important;
     max-width: 100% !important;
-    line-height: 1.7 !important;
+    line-height: 1.6 !important;
   }
 
 
