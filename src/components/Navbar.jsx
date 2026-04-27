@@ -9,22 +9,12 @@ const navLinks = [
 ];
 
 const Navbar = () => {
-  const [scrolled,  setScrolled ] = useState(false);
-  const [menuOpen,  setMenuOpen ] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
   const { cart } = useCart();
   const location  = useLocation();
   const cartCount = cart.reduce((sum, item) => sum + item.qty, 0);
 
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 50);
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
-
   useEffect(() => { setMenuOpen(false); }, [location.pathname]);
-
-  const navBg     = scrolled ? 'rgba(8,4,1,0.6)' : 'rgba(8,4,1,0.4)';
-  const navBorder = scrolled ? 'rgba(201,168,76,0.28)' : 'rgba(201,168,76,0.15)';
 
   return (
     <>
