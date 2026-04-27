@@ -13,7 +13,7 @@ const ShopNowBtn = () => {
         display: 'inline-block',
         fontFamily: 'Raleway, sans-serif', fontSize: '9px',
         letterSpacing: '5px', textTransform: 'uppercase',
-        padding: '16px 40px',
+        padding: '12px 40px',
         background: hov ? 'rgba(200,160,60,1)' : 'transparent',
         color: hov ? '#0a0600' : 'rgba(200,160,60,1)',
         border: '1px solid rgba(200,160,60,0.7)',
@@ -911,7 +911,7 @@ const Home = () => {
         height: '100vh',
         minHeight: '100vh',
         position: 'relative',
-        overflow: 'hidden',
+        overflow: 'clip',
         width: '100%',
         maxWidth: '100%',
         display: 'flex',
@@ -994,25 +994,14 @@ const Home = () => {
               style={{
                 fontFamily: 'Raleway, sans-serif', fontSize: '14px', fontWeight: 300,
                 color: 'rgba(250,246,239,0.62)', letterSpacing: '0.6px', lineHeight: 2.1,
-                maxWidth: '370px', marginBottom: '12px',
+                maxWidth: '370px', marginBottom: '40px',
               }}
             >
               Born from the rarest ingredients on earth.<br/>
-              Worn by those who need no introduction.
-            </motion.p>
-
-            {/* Delivery subtitle */}
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.9, ease: 'easeOut', delay: 0.6 }}
-              style={{
-                fontFamily: 'Raleway, sans-serif', fontSize: '10px', fontWeight: 300,
-                color: 'rgba(200,160,60,0.55)', letterSpacing: '3px',
-                textTransform: 'uppercase', marginBottom: '40px',
-              }}
-            >
-              Handcrafted luxury · Delivered across Lebanon
+              Worn by those who need no introduction.<br/>
+              <span style={{ fontSize: '11px', color: 'rgba(200,160,60,0.55)', letterSpacing: '1px' }}>
+                Handcrafted luxury · Delivered across Lebanon
+              </span>
             </motion.p>
 
             {/* Shop Now CTA */}
@@ -1025,43 +1014,6 @@ const Home = () => {
             </motion.div>
 
           </div>
-        </div>
-
-        {/* Scroll cue */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 0.45 }}
-          transition={{ duration: 1, ease: 'easeOut', delay: 1.4 }}
-          className="hero-scroll-cue"
-          style={{
-            position: 'absolute', bottom: '44px', left: '50%', transform: 'translateX(-50%)',
-            display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '10px',
-            zIndex: 2,
-          }}
-        >
-          <span style={{ fontFamily: 'Raleway', fontSize: '7px', letterSpacing: '5px', color: '#FAF6EF', textTransform: 'uppercase' }}>Scroll</span>
-          <div style={{ width: '1px', height: '44px', background: 'linear-gradient(to bottom, #FAF6EF, transparent)' }}/>
-        </motion.div>
-
-        {/* Mobile scroll cue — hidden on desktop via CSS */}
-        <div
-          className="hero-scroll-cue-mobile"
-          style={{
-            display: 'none',
-            position: 'absolute', bottom: '16px', left: '50%', transform: 'translateX(-50%)',
-            flexDirection: 'column', alignItems: 'center', gap: '6px',
-            zIndex: 2, pointerEvents: 'none',
-          }}
-        >
-          <span style={{
-            fontFamily: 'Raleway, sans-serif', fontSize: '9px', letterSpacing: '4px',
-            color: 'rgba(200,160,60,1)', textTransform: 'uppercase',
-          }}>Scroll</span>
-          <div style={{
-            width: '1px', height: '30px',
-            background: 'rgba(200,160,60,0.6)',
-            animation: 'scrollLinePulse 1.6s ease-in-out infinite',
-          }}/>
         </div>
 
         {/* Bottom separator — hidden on desktop via CSS */}

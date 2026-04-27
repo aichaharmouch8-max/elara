@@ -5,7 +5,7 @@
 
 html {
   scroll-behavior: smooth;
-  overflow-x: hidden;
+  overflow-x: clip;
   overflow-y: scroll;
   scroll-snap-type: y mandatory;
   max-width: 100%;
@@ -19,7 +19,7 @@ body {
   color: #1C1510;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  overflow-x: hidden;
+  overflow-x: clip;
   max-width: 100%;
   width: 100%;
   height: 100%;
@@ -48,6 +48,49 @@ section {
 
 a { text-decoration: none; color: inherit; }
 button { font-family: inherit; }
+
+/* ── Navbar ── */
+@keyframes navbarSlideIn {
+  from { opacity: 0; transform: translateY(-12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.navbar-root {
+  animation: navbarSlideIn 0.9s cubic-bezier(0.16,1,0.3,1) 0.1s both;
+  backdrop-filter: blur(24px) !important;
+  -webkit-backdrop-filter: blur(24px) !important;
+}
+
+.nav-link-lux {
+  position: relative;
+  text-decoration: none;
+  opacity: 0.45;
+  transition: opacity 0.3s ease;
+}
+.nav-link-lux::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: rgba(201,168,76,0.65);
+  transition: width 0.35s ease;
+}
+.nav-link-lux:hover {
+  opacity: 0.85;
+}
+.nav-link-lux:hover::after {
+  width: 100%;
+}
+.nav-link-lux.lux-active {
+  opacity: 1;
+}
+.nav-link-lux.lux-active::after {
+  width: 100%;
+  background: #c9a84c;
+  transition: none;
+}
 
 /* Hamburger — hidden on desktop, shown on mobile */
 .hamburger { display: none !important; }

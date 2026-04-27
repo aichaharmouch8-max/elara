@@ -11,34 +11,104 @@ import AgentChatWidget from './components/AgentChatWidget';
 import MobileBottomNav from './components/MobileBottomNav';
 import WhatsAppFloat from './components/WhatsAppFloat';
 
+const PARTICLES = Array.from({ length: 28 }, (_, i) => ({
+  id: i,
+  x: Math.random() * 100,
+  y: Math.random() * 100,
+  size: 1 + Math.random() * 1.5,
+  delay: Math.random() * 3,
+  dur: 3 + Math.random() * 3,
+}));
 
 const LoadingScreen = ({ visible }) => (
   <div style={{
     position: 'fixed', inset: 0, zIndex: 99999,
-    background: '#1a0f00',
-    display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '28px',
+    background: '#0d0700',
+    display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
     opacity: visible ? 1 : 0,
     pointerEvents: visible ? 'all' : 'none',
-    transition: 'opacity 0.7s ease',
+    transition: 'opacity 0.5s ease',
+    overflow: 'hidden',
   }}>
-    {/* Perfume bottle silhouette */}
-    <svg width="48" height="80" viewBox="0 0 48 80" fill="none" style={{ animation: 'loadingFloat 2s ease-in-out infinite' }}>
-      <rect x="18" y="0" width="12" height="8" rx="3" fill="rgba(200,160,60,0.4)"/>
-      <rect x="14" y="8" width="20" height="6" rx="2" fill="rgba(200,160,60,0.55)"/>
-      <rect x="6" y="14" width="36" height="54" rx="8" fill="none" stroke="rgba(200,160,60,0.7)" strokeWidth="1.5"/>
-      <rect x="10" y="18" width="28" height="46" rx="6" fill="rgba(200,160,60,0.06)"/>
-      <line x1="6" y1="38" x2="42" y2="38" stroke="rgba(200,160,60,0.2)" strokeWidth="1"/>
-      <text x="24" y="52" textAnchor="middle" fontFamily="serif" fontSize="9" fill="rgba(200,160,60,0.5)" letterSpacing="2">ELARA</text>
+
+    {/* Particle dust */}
+    <svg style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', pointerEvents: 'none' }} aria-hidden="true">
+      {PARTICLES.map(p => (
+        <circle
+          key={p.id}
+          cx={`${p.x}%`} cy={`${p.y}%`}
+          r={p.size}
+          fill="#c9a84c"
+          style={{
+            animation: `particleDrift ${p.dur}s ${p.delay}s ease-in-out infinite alternate`,
+            opacity: 0,
+          }}
+        />
+      ))}
     </svg>
-    <p style={{ fontFamily: 'Raleway, sans-serif', fontSize: '8px', letterSpacing: '8px', color: 'rgba(200,160,60,0.4)', textTransform: 'uppercase' }}>The Art of Scent</p>
-    <style>{`@keyframes loadingFloat { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }`}</style>
+
+    {/* Content stack */}
+    <div style={{ position: 'relative', textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 0 }}>
+
+      {/* Animated line — draws from center outward */}
+      <div style={{
+        width: '64px', height: '1px', marginBottom: '32px',
+        background: 'linear-gradient(to right, transparent, #c9a84c, transparent)',
+        animation: 'lineGrow 0.7s cubic-bezier(0.4,0,0.2,1) 0.2s both',
+        transformOrigin: 'center',
+      }} />
+
+      {/* ELARA wordmark */}
+      <p style={{
+        fontFamily: "'Cormorant Garamond', serif",
+        fontWeight: 300,
+        fontSize: 'clamp(44px, 10vw, 72px)',
+        color: '#c9a84c',
+        letterSpacing: '0.35em',
+        margin: 0,
+        lineHeight: 1,
+        textTransform: 'uppercase',
+        animation: 'wordmarkIn 0.9s cubic-bezier(0.16,1,0.3,1) 0.5s both',
+      }}>Elara</p>
+
+      {/* Tagline */}
+      <p style={{
+        fontFamily: 'Raleway, sans-serif',
+        fontWeight: 300,
+        fontSize: '8px',
+        letterSpacing: '0.42em',
+        color: 'rgba(201,168,76,0.55)',
+        textTransform: 'uppercase',
+        margin: '22px 0 0',
+        animation: 'taglineIn 0.8s ease 1s both',
+      }}>The Art of Scent</p>
+    </div>
+
+    <style>{`
+      @keyframes lineGrow {
+        from { transform: scaleX(0); opacity: 0; }
+        to   { transform: scaleX(1); opacity: 1; }
+      }
+      @keyframes wordmarkIn {
+        from { opacity: 0; letter-spacing: 0.55em; }
+        to   { opacity: 1; letter-spacing: 0.35em; }
+      }
+      @keyframes taglineIn {
+        from { opacity: 0; transform: translateY(8px); }
+        to   { opacity: 1; transform: translateY(0); }
+      }
+      @keyframes particleDrift {
+        from { opacity: 0; transform: translateY(0px); }
+        to   { opacity: 0.35; transform: translateY(-14px); }
+      }
+    `}</style>
   </div>
 );
 
 function App() {
   const [cart, setCart] = useState([]);
   const [loading, setLoading] = useState(true);
-  useEffect(() => { const t = setTimeout(() => setLoading(false), 1400); return () => clearTimeout(t); }, []);
+  useEffect(() => { const t = setTimeout(() => setLoading(false), 2800); return () => clearTimeout(t); }, []);
 
   const addToCart = (product) => {
     setCart(prev => {
