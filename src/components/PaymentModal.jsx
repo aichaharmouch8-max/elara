@@ -144,7 +144,7 @@ const WishMoneyInfo = ({ price }) => {
           {tip && (
             <div style={{
               position: 'absolute', top: '28px', right: 0, zIndex: 10,
-              background: '#261500', border: '1px solid rgba(201,169,110,0.3)',
+              background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(201,169,110,0.3)',
               borderRadius: '6px', padding: '14px 16px', width: '220px',
               boxShadow: '0 8px 32px rgba(0,0,0,0.5)',
             }}>
@@ -317,7 +317,7 @@ const PaymentModal = ({ product, selectedSize = '100ml', selectedPrice, onClose 
           maxHeight: '80vh',
           overflowY: 'auto',
           WebkitOverflowScrolling: 'touch',
-          background: '#1a0f00',
+          background: '#060606',
           border: '1px solid rgba(200,160,60,0.4)',
           borderRadius: '12px',
           padding: '40px 24px 30px',

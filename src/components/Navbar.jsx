@@ -32,7 +32,7 @@ const Navbar = () => {
           alignItems: 'center',
           justifyContent: 'space-between',
           padding: '0 56px',
-          background: 'rgba(10, 5, 0, 0.4)',
+          background: 'rgba(6, 6, 6, 0.4)',
           backdropFilter: 'blur(20px)',
           WebkitBackdropFilter: 'blur(20px)',
           borderBottom: '1px solid rgba(201,168,76,0.12)',

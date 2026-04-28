@@ -155,7 +155,7 @@ const FaqSection = () => {
   const [ref, visible] = useReveal(0.1);
   return (
     <section ref={ref} style={{
-      background: '#0a0500',
+      background: '#060606',
       padding: 'clamp(72px, 9vw, 110px) clamp(24px, 6vw, 80px)',
       borderTop: '1px solid rgba(200,160,60,0.08)',
     }}>
@@ -237,7 +237,7 @@ const Contact = () => {
   };
 
   return (
-    <div style={{ background: '#0a0500', minHeight: '100vh' }}>
+    <div style={{ background: '#060606', minHeight: '100vh' }}>
 
       <style>{`
         input::placeholder, textarea::placeholder { color: rgba(200,160,60,0.35); }
@@ -262,7 +262,7 @@ const Contact = () => {
       <section
         ref={heroRef}
         style={{
-          background: '#0a0500',
+          background: '#060606',
           paddingTop: '160px', paddingBottom: '40px',
           textAlign: 'center',
           position: 'relative', overflow: 'hidden',
@@ -298,7 +298,7 @@ const Contact = () => {
       <section
         ref={formRef}
         style={{
-          background: '#0a0500',
+          background: '#060606',
           padding: '30px clamp(24px, 6vw, 80px) 50px',
           position: 'relative', overflow: 'hidden',
         }}
@@ -416,7 +416,7 @@ const Contact = () => {
                   letterSpacing: '4px', textTransform: 'uppercase',
                   padding: '18px',
                   background: 'rgba(200,160,60,1)',
-                  color: '#0a0500',
+                  color: '#060606',
                   border: 'none', cursor: loading ? 'default' : 'pointer',
                   transition: 'all 0.35s ease',
                   boxShadow: btnHov ? '0 0 30px rgba(200,160,60,0.35)' : 'none',

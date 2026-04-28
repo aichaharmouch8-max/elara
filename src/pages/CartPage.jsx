@@ -7,7 +7,7 @@ const CartPage = () => {
   const subtotal = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
 
   return (
-    <div style={{ background: '#FAF6EF', minHeight: '100vh', paddingTop: '112px' }}>
+    <div style={{ background: '#060606', minHeight: '100vh', paddingTop: '112px' }}>
       <div className="cart-wrapper" style={{ maxWidth: '860px', margin: '0 auto', padding: '60px clamp(20px, 5vw, 48px) 140px' }}>
         {/* Header */}
         <div style={{ marginBottom: '72px' }}>

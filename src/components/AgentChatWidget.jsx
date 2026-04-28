@@ -28,7 +28,7 @@ const ChatPanel = ({ onClose }) => {
     }}>
       {/* Header */}
       <div style={{
-        background: '#0a0500',
+        background: '#060606',
         borderBottom: '1px solid rgba(200,150,42,0.15)',
         padding: '14px 18px',
         display: 'flex',
@@ -72,7 +72,7 @@ const ChatPanel = ({ onClose }) => {
       </div>
 
       {/* Chat */}
-      <div style={{ flex: 1, overflow: 'hidden', background: '#120c02' }}>
+      <div style={{ flex: 1, overflow: 'hidden', background: '#060606' }}>
         <AgentChat
           messages={messages}
           input={input}

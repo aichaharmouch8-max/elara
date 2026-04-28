@@ -506,11 +506,11 @@ const Shop = () => {
   const [gridRef, gridIn] = useInView(0.05);
 
   return (
-    <div style={{ background: '#0a0500', minHeight: '100vh' }}>
+    <div style={{ background: '#060606', minHeight: '100vh' }}>
       {/* ── Page header ── */}
       <div className="shop-header" style={{
-        background: '#0a0500',
-        padding: '184px clamp(20px, 6vw, 80px) 100px',
+        background: '#060606',
+        padding: '120px clamp(20px, 6vw, 80px) 60px',
         position: 'relative', overflow: 'hidden',
         borderBottom: '1px solid rgba(200,150,42,0.1)',
       }}>

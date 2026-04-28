@@ -23,7 +23,7 @@ const PARTICLES = Array.from({ length: 28 }, (_, i) => ({
 const LoadingScreen = ({ visible }) => (
   <div style={{
     position: 'fixed', inset: 0, zIndex: 99999,
-    background: '#0a0500',
+    background: '#060606',
     display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
     opacity: visible ? 1 : 0,
     pointerEvents: visible ? 'all' : 'none',

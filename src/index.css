@@ -14,7 +14,7 @@ html {
 
 body {
   font-family: 'Raleway', sans-serif;
-  background: #0a0500;
+  background: #060606;
   color: #1C1510;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -254,7 +254,7 @@ button { font-family: inherit; }
     left: 0 !important;
     right: 0 !important;
     z-index: 9999 !important;
-    background: rgba(10, 5, 0, 0.4) !important;
+    background: rgba(6, 6, 6, 0.4) !important;
     backdrop-filter: blur(20px) !important;
     -webkit-backdrop-filter: blur(20px) !important;
     border-bottom: 1px solid rgba(201, 168, 76, 0.12) !important;
@@ -402,7 +402,7 @@ button { font-family: inherit; }
     position: sticky !important;
     bottom: 72px !important;
     z-index: 10 !important;
-    background: linear-gradient(to top, #0a0500 80%, transparent) !important;
+    background: linear-gradient(to top, #060606 80%, transparent) !important;
     padding: 16px 0 0 !important;
     margin: 0 !important;
   }
@@ -637,10 +637,20 @@ button { font-family: inherit; }
   .trust-bar-inner {
     display: grid !important;
     grid-template-columns: 1fr 1fr !important;
-    gap: 14px 8px !important;
+    gap: 12px 4px !important;
     justify-items: center !important;
-    max-width: 340px !important;
+    align-items: center !important;
+    max-width: 320px !important;
     margin: 0 auto !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+  }
+  .trust-bar-inner span {
+    font-size: 10px !important;
+    letter-spacing: 0.12em !important;
+    white-space: nowrap !important;
+    padding: 4px 8px !important;
+    text-align: center !important;
   }
   .trust-bar-sep {
     display: none !important;

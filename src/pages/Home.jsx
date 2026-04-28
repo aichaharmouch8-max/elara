@@ -448,7 +448,7 @@ const FounderStory = () => {
   const [ref, visible] = useReveal(0.1);
   return (
     <section ref={ref} style={{
-      background: '#0a0500',
+      background: '#060606',
       padding: 'clamp(60px, 8vw, 100px) clamp(20px, 4vw, 40px)',
       borderTop: '1px solid rgba(201,168,76,0.08)',
       borderBottom: '1px solid rgba(201,168,76,0.08)',
@@ -626,7 +626,7 @@ const CombinedConnectSection = () => {
       id="connect"
       className="snap-section-auto"
       ref={secRef}
-      style={{ background: '#0a0500', padding: 'clamp(60px, 8vw, 100px) clamp(20px, 4vw, 40px)', borderTop: '1px solid rgba(201,168,76,0.08)' }}
+      style={{ background: '#060606', padding: 'clamp(60px, 8vw, 100px) clamp(20px, 4vw, 40px)', borderTop: '1px solid rgba(201,168,76,0.08)' }}
     >
       <style>{`
         .hc-input::placeholder { color: rgba(200,160,60,0.3); font-family: 'Cormorant Garamond', serif; }
@@ -916,7 +916,7 @@ const WhyELARA = () => {
   const [ref, visible] = useReveal(0.1);
   return (
     <section ref={ref} style={{
-      background: '#0a0500',
+      background: '#060606',
       padding: 'clamp(60px, 8vw, 100px) clamp(20px, 4vw, 40px)',
       borderTop: '1px solid rgba(201,168,76,0.08)',
       borderBottom: '1px solid rgba(201,168,76,0.08)',
@@ -972,7 +972,7 @@ const CinematicOpening = () => {
   const [ref, visible] = useReveal(0.2);
   return (
     <section ref={ref} style={{
-      background: '#0a0500',
+      background: '#060606',
       padding: 'clamp(60px, 8vw, 100px) clamp(20px, 4vw, 40px)',
       textAlign: 'center',
       borderTop: '1px solid rgba(201,168,76,0.08)',
@@ -1021,7 +1021,7 @@ const OriginStory = () => {
   const [ref, visible] = useReveal(0.1);
   return (
     <section ref={ref} style={{
-      background: '#0a0500',
+      background: '#060606',
       padding: 'clamp(60px, 8vw, 100px) clamp(20px, 4vw, 40px)',
       borderTop: '1px solid rgba(201,168,76,0.08)',
       borderBottom: '1px solid rgba(201,168,76,0.08)',
@@ -1115,7 +1115,7 @@ const FragrancePhilosophy = () => {
   const [ref, visible] = useReveal(0.1);
   return (
     <section ref={ref} style={{
-      background: '#0a0500',
+      background: '#060606',
       padding: 'clamp(60px, 8vw, 100px) clamp(20px, 4vw, 40px)',
       borderTop: '1px solid rgba(201,168,76,0.08)',
       borderBottom: '1px solid rgba(201,168,76,0.08)',
@@ -1167,7 +1167,7 @@ const ImmersiveQuote = () => {
   const [ref, visible] = useReveal(0.2);
   return (
     <section ref={ref} style={{
-      background: '#0a0500',
+      background: '#060606',
       minHeight: '100vh',
       display: 'flex', flexDirection: 'column',
       alignItems: 'center', justifyContent: 'center',
@@ -1208,7 +1208,7 @@ const EmotionalClosing = () => {
   const [ref, visible] = useReveal(0.2);
   return (
     <section ref={ref} style={{
-      background: '#0a0500',
+      background: '#060606',
       padding: 'clamp(60px, 8vw, 100px) clamp(20px, 4vw, 40px)',
       textAlign: 'center',
       borderTop: '1px solid rgba(201,168,76,0.08)',
@@ -1307,7 +1307,7 @@ const SideNavDots = () => {
 ───────────────────────────────────────── */
 const Home = () => {
   return (
-    <div style={{ background: '#0a0500', minHeight: '100vh' }}>
+    <div style={{ background: '#060606', minHeight: '100vh' }}>
       <SideNavDots />
 
       {/* ══════════════════ HERO ══════════════════ */}
@@ -1441,7 +1441,7 @@ const Home = () => {
 
       {/* ══════════════════ COLLECTION ══════════════════ */}
       <section id="collection" className="collection-section snap-section-auto" style={{
-        background: '#0a0500',
+        background: '#060606',
         padding: 'clamp(60px, 8vw, 100px) clamp(20px, 4vw, 40px)',
         borderTop: '1px solid rgba(201,168,76,0.08)',
         width: '100%',
@@ -1457,13 +1457,9 @@ const Home = () => {
             transition={{ duration: 0.8, ease: [0.4, 0, 0.2, 1] }}
             style={{ textAlign: 'center', marginBottom: '60px' }}
           >
-            <div style={{ display: 'flex', alignItems: 'center', gap: '16px', justifyContent: 'center', marginBottom: '20px' }}>
-              <div style={{ flex: 1, maxWidth: '72px', height: '1px', background: 'linear-gradient(to right, transparent, rgba(255,200,80,0.5))' }}/>
-              <p style={{ fontFamily: 'Raleway', fontSize: '11px', letterSpacing: '4px', color: 'rgba(255,200,80,0.7)', textTransform: 'uppercase' }}>
-                Eau de Parfum
-              </p>
-              <div style={{ flex: 1, maxWidth: '72px', height: '1px', background: 'linear-gradient(to left, transparent, rgba(255,200,80,0.5))' }}/>
-            </div>
+            <p style={{ fontFamily: 'Raleway', fontSize: '11px', letterSpacing: '4px', color: 'rgba(255,200,80,0.7)', textTransform: 'uppercase', marginBottom: '20px' }}>
+              Eau de Parfum
+            </p>
             <h2 style={{
               fontFamily: "'Playfair Display', serif", fontWeight: 300,
               fontSize: 'clamp(40px, 5vw, 62px)', color: '#FAF6EF',
