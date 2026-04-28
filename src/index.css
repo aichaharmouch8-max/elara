@@ -386,10 +386,17 @@ button { font-family: inherit; }
     padding: 40px 20px 100px !important;
   }
 
-  /* Shop cards — compact on mobile, no excessive height */
+  /* Shop cards — full height on mobile, overflow visible for sticky buy btn */
   .shop-card {
-    max-height: 520px !important;
-    overflow: hidden !important;
+    overflow: visible !important;
+  }
+  .shop-buy-area {
+    position: sticky !important;
+    bottom: 72px !important;
+    z-index: 10 !important;
+    background: linear-gradient(to top, #1A1108 80%, transparent) !important;
+    padding: 16px 0 0 !important;
+    margin: 0 !important;
   }
   .shop-card-img-active {
     height: 200px !important;
@@ -607,6 +614,13 @@ button { font-family: inherit; }
   .promise-grid {
     grid-template-columns: 1fr !important;
     gap: 36px !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .why-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 40px 20px !important;
   }
 }
 

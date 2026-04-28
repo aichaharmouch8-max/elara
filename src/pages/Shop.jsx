@@ -11,13 +11,17 @@ const PRODUCTS = [
     image: '/ELARAREINE.png',
     price: 39,
     size: '100ml Eau de Parfum',
-    notes: ['Saffron', 'Bulgarian Rose', 'Amber', 'White Musk'],
-    topNotes:   ['Saffron', 'Pink Pepper'],
+    emotionalHook: 'Worn by the woman who never needs to raise her voice.',
+    smellsLike: "Expensive skin. A warm room. Someone you can't stop thinking about.",
+    scentJourney: 'Opens with saffron and Bulgarian rose — bold, unapologetic. Settles into amber and white musk — intimate, addictive.',
+    topNotes: ['Saffron', 'Pink Pepper'],
     heartNotes: ['Bulgarian Rose', 'Jasmine'],
-    baseNotes:  ['Amber', 'White Musk', 'Sandalwood'],
-    description: 'Reine is not just worn. She is inhabited.',
-    scentJourney: 'Iranian saffron opens warm and ceremonial — impossibly rare. The heart surrenders into Bulgarian rose, harvested at the exact hour of bloom. She closes in amber and white musk: skin-close, irreplaceable.',
-    perfectFor: 'Date nights. Formal occasions. Mornings you want to never forget.',
+    baseNotes: ['Amber', 'White Musk', 'Sandalwood'],
+    longevity: '8–12 hours',
+    projection: 'Strong sillage — enters before you do',
+    occasion: 'Evening events, important meetings, first impressions',
+    season: 'Autumn · Winter',
+    concentration: 'Eau de Parfum · 20% fragrance oil',
     locked: false,
     bestseller: true,
     reviews: [
@@ -32,11 +36,17 @@ const PRODUCTS = [
     image: '/ELARAOROO.png',
     price: 79,
     size: '100ml Eau de Parfum',
-    notes: ['?', '?', '?', '?'],
-    topNotes: null, heartNotes: null, baseNotes: null,
-    description: 'Gold does not beg to be noticed.',
-    scentJourney: 'Opens like afternoon light on ancient stone — rare golden woods, a citrus brightness, then an amber heart that lingers long after you leave the room. Unveiled 2026.',
-    perfectFor: 'The quiet statement. Days when you want to be remembered without trying.',
+    emotionalHook: 'For the person who walks in and owns the room without trying.',
+    smellsLike: "Gold. Success. The confidence you feel when you're exactly where you're supposed to be.",
+    scentJourney: 'Bright citrus and spice at first breath. Rich oud and vanilla at second glance. Impossible to ignore.',
+    topNotes: ['Bergamot', 'Cardamom'],
+    heartNotes: ['Oud', 'Rose'],
+    baseNotes: ['Vanilla', 'Amber', 'Cedarwood'],
+    longevity: '10–14 hours',
+    projection: 'Commanding — leaves a trail',
+    occasion: 'Day to evening, power moves, luxury events',
+    season: 'All seasons',
+    concentration: 'Eau de Parfum · 20% fragrance oil',
     locked: true,
     bestseller: false,
     reviews: [],
@@ -47,67 +57,86 @@ const PRODUCTS = [
     image: '/ELARAREINE.png',
     price: 79,
     size: '100ml Eau de Parfum',
-    notes: ['?', '?', '?', '?'],
-    topNotes: null, heartNotes: null, baseNotes: null,
-    description: 'Born from the silence after a storm.',
-    scentJourney: 'Midnight jasmine in full bloom, clean vetiver rooted deep in dark earth, and stardust that drifts long after the music ends.',
-    perfectFor: 'Evenings. Escapes. The hours that belong only to you.',
+    emotionalHook: 'Born from the silence after a storm.',
+    smellsLike: 'Dark florals at midnight. Smoky skin. Mystery you can wear.',
+    scentJourney: 'Opens dark and dramatic with black rose and oud. Slowly softens into sandalwood and musk — haunting, unforgettable.',
+    topNotes: ['Black Rose', 'Saffron'],
+    heartNotes: ['Oud', 'Dark Jasmine'],
+    baseNotes: ['Sandalwood', 'Musk', 'Amber'],
+    longevity: '12+ hours',
+    projection: 'Intimate but intense — stays on skin for days',
+    occasion: 'Evenings, escapes, the hours that belong only to you',
+    season: 'Autumn · Winter · Night',
+    concentration: 'Eau de Parfum · 20% fragrance oil',
     locked: true,
     bestseller: false,
     reviews: [],
   },
 ];
 
-const Shop = () => {
-  const [gridRef, gridIn] = useInView(0.05);
+const ClockIcon = () => (
+  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
+    <circle cx="12" cy="12" r="10"/>
+    <polyline points="12 6 12 12 16 14"/>
+  </svg>
+);
 
-  return (
-    <div style={{ background: '#1a0f00', minHeight: '100vh' }}>
-      {/* ── Page header ── */}
-      <div className="shop-header" style={{
-        background: 'linear-gradient(148deg, #0e0800 0%, #1a0f00 100%)',
-        padding: '184px clamp(20px, 6vw, 80px) 100px',
-        position: 'relative', overflow: 'hidden',
-        borderBottom: '1px solid rgba(200,150,42,0.1)',
-      }}>
-        <div style={{ maxWidth: '1100px', margin: '0 auto', position: 'relative' }}>
-          <p style={{
-            fontFamily: 'Raleway', fontSize: '9px', letterSpacing: '6px',
-            color: '#C8962A', textTransform: 'uppercase', marginBottom: '20px',
-          }}>
-            The Collection
-          </p>
-          <h1 style={{
-            fontFamily: "'Playfair Display', serif", fontWeight: 300,
-            fontSize: 'clamp(52px, 7vw, 88px)', lineHeight: 1,
-            color: '#FAF6EF',
-          }}>
-            Our <span style={{ fontStyle: 'italic', color: '#E8B84B' }}>Fragrances</span>
-          </h1>
-          <p style={{
-            fontFamily: 'Raleway', fontSize: '13px', fontWeight: 300,
-            color: 'rgba(250,246,239,0.42)', marginTop: '20px',
-            letterSpacing: '0.5px', lineHeight: 2,
-          }}>
-            Three compositions. One obsession.
-          </p>
-        </div>
-      </div>
+const WindIcon = () => (
+  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
+    <path d="M9.59 4.59A2 2 0 1 1 11 8H2m10.59 11.41A2 2 0 1 0 14 16H2m15.73-8.27A2.5 2.5 0 1 1 19.5 12H2"/>
+  </svg>
+);
 
-      {/* ── Product grid ── */}
-      <div ref={gridRef} className="shop-products" style={{
-        maxWidth: '1100px', margin: '0 auto',
-        padding: '100px clamp(20px, 6vw, 80px) 120px',
-      }}>
-        <div className="shop-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '32px' }}>
-          {PRODUCTS.map((p, i) => (
-            <ProductCard key={p.id} product={p} inView={gridIn} delay={i * 0.14} />
-          ))}
-        </div>
-      </div>
+const StarIcon = () => (
+  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
+    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+  </svg>
+);
 
-      <ReviewsSection />
+const LeafIcon = () => (
+  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
+    <path d="M17 8C8 10 5.9 16.17 3.82 22"/>
+    <path d="M17 8c0 6-5 10-13 14"/>
+  </svg>
+);
+
+const MetaItem = ({ icon, label, value }) => (
+  <div style={{ display: 'flex', flexDirection: 'column', gap: '5px' }}>
+    <div style={{ display: 'flex', alignItems: 'center', gap: '5px', color: 'rgba(200,150,42,0.45)' }}>
+      {icon}
+      <span style={{
+        fontFamily: 'Raleway', fontSize: '7px', letterSpacing: '2px',
+        textTransform: 'uppercase', color: 'rgba(200,150,42,0.45)',
+      }}>{label}</span>
     </div>
+    <p style={{
+      fontFamily: 'Raleway', fontSize: '10px', fontWeight: 300,
+      color: 'rgba(250,246,239,0.42)', lineHeight: 1.45, margin: 0,
+      letterSpacing: '0.2px',
+    }}>{value}</p>
+  </div>
+);
+
+const BuyNowBtn = ({ onClick }) => {
+  const [hov, setHov] = useState(false);
+  return (
+    <button
+      onClick={onClick}
+      onMouseEnter={() => setHov(true)}
+      onMouseLeave={() => setHov(false)}
+      style={{
+        fontFamily: 'Raleway', fontSize: '8px', letterSpacing: '4px',
+        textTransform: 'uppercase', padding: '14px 28px',
+        background: hov ? '#E8B84B' : '#c9a84c',
+        color: '#0d0700',
+        border: 'none',
+        cursor: 'pointer',
+        transition: 'background 0.3s ease, box-shadow 0.3s ease',
+        whiteSpace: 'nowrap',
+        fontWeight: 600,
+        boxShadow: hov ? '0 4px 20px rgba(200,150,42,0.35)' : 'none',
+      }}
+    >Buy Now</button>
   );
 };
 
@@ -146,7 +175,6 @@ const ProductCard = ({ product, inView, delay }) => {
           opacity: inView ? 1 : 0,
           transform: inView ? 'translateY(0)' : 'translateY(52px)',
           transition: `opacity 0.95s cubic-bezier(0.16,1,0.3,1) ${delay}s, transform 0.95s cubic-bezier(0.16,1,0.3,1) ${delay}s`,
-          ...(product.id === 'reine' && { maxWidth: '360px', margin: '0 auto' }),
         }}
       >
         <div className="shop-card" style={{
@@ -157,40 +185,37 @@ const ProductCard = ({ product, inView, delay }) => {
             ? '0 36px 88px rgba(0,0,0,0.55), 0 0 36px rgba(200,150,42,0.08)'
             : '0 4px 32px rgba(0,0,0,0.3)',
           transition: 'transform 0.5s cubic-bezier(0.16,1,0.3,1), box-shadow 0.5s ease, border-color 0.4s ease',
-          overflow: 'hidden',
+          position: 'relative',
         }}>
-          {/* Bestseller badge */}
-          {product.bestseller && (
-            <div style={{
-              position: 'absolute', top: '14px', left: '14px', zIndex: 2,
-              fontFamily: 'Raleway', fontSize: '7px', letterSpacing: '3px',
-              textTransform: 'uppercase', padding: '5px 10px',
-              background: 'rgba(200,150,42,1)', color: '#0a0600',
-            }}>Fan Favourite</div>
-          )}
 
-          {/* Image area */}
+          {/* Image area — overflow:hidden scoped here, not on card */}
           <div className={`shop-card-img-area ${product.locked ? 'shop-card-img-locked' : 'shop-card-img-active'}`} style={{
-            height: '260px',
+            height: '280px',
             display: 'flex', alignItems: 'center', justifyContent: 'center',
             position: 'relative', overflow: 'hidden',
             background: product.locked
               ? 'linear-gradient(148deg, #0e0800 0%, #1a0f00 100%)'
               : 'linear-gradient(145deg, #1a0f00 0%, #261500 100%)',
           }}>
+            {product.bestseller && (
+              <div style={{
+                position: 'absolute', top: '14px', left: '14px', zIndex: 2,
+                fontFamily: 'Raleway', fontSize: '7px', letterSpacing: '3px',
+                textTransform: 'uppercase', padding: '5px 10px',
+                background: 'rgba(200,150,42,1)', color: '#0a0600',
+              }}>Fan Favourite</div>
+            )}
+
             {product.locked ? (
               <>
-                {/* Blurred image ghost */}
                 <img
-                  src={product.image}
-                  alt=""
+                  src={product.image} alt=""
                   style={{
                     position: 'absolute', inset: 0, width: '100%', height: '100%',
                     objectFit: 'contain', objectPosition: 'center',
                     opacity: 0.07, filter: 'blur(8px) brightness(0.5)',
                   }}
                 />
-                {/* Lock overlay */}
                 <div style={{
                   position: 'absolute', inset: 0,
                   display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
@@ -208,15 +233,13 @@ const ProductCard = ({ product, inView, delay }) => {
               </>
             ) : (
               <img
-                src={product.image}
-                alt={product.name}
+                src={product.image} alt={product.name}
                 style={{
                   width: '100%', height: '100%',
                   objectFit: 'contain', objectPosition: 'center',
                   transform: hov ? 'scale(1.05)' : 'scale(1)',
                   transition: 'transform 0.6s cubic-bezier(0.16,1,0.3,1)',
-                  padding: '20px',
-                  boxSizing: 'border-box',
+                  padding: '20px', boxSizing: 'border-box',
                 }}
               />
             )}
@@ -224,236 +247,193 @@ const ProductCard = ({ product, inView, delay }) => {
 
           {/* Info */}
           <div className="shop-card-info" style={{ padding: '24px 28px 28px' }}>
-            <p style={{
-              fontFamily: 'Raleway', fontSize: '7px', letterSpacing: '6px',
-              color: '#C8962A', textTransform: 'uppercase', marginBottom: '14px',
-              fontWeight: 200, opacity: 0.65,
-            }}>
-              {product.size}
-            </p>
 
-            <h3 style={{ marginBottom: product.locked ? '14px' : '22px', lineHeight: 1 }}>
+            {/* Concentration */}
+            <p style={{
+              fontFamily: 'Raleway', fontSize: '7px', letterSpacing: '3px',
+              color: product.locked ? 'rgba(200,150,42,0.3)' : 'rgba(200,150,42,0.6)',
+              textTransform: 'uppercase', marginBottom: '14px',
+            }}>{product.concentration}</p>
+
+            {/* Name */}
+            <h3 style={{ marginBottom: '16px', lineHeight: 1 }}>
               <span style={{
-                display: 'block',
-                fontFamily: 'Raleway', fontSize: '8px', letterSpacing: '9px',
+                display: 'block', fontFamily: 'Raleway', fontSize: '8px', letterSpacing: '9px',
                 fontWeight: 300, textTransform: 'uppercase',
                 color: 'rgba(250,246,239,0.32)', marginBottom: '6px',
               }}>ELARA</span>
               <span style={{
-                display: 'block',
-                fontFamily: "'Cormorant Garamond', serif",
-                fontStyle: 'italic', fontWeight: 300,
-                fontSize: '34px', lineHeight: 1,
-                color: product.locked ? 'rgba(250,246,239,0.35)' : '#FAF6EF',
-              }}>
-                <span style={{ color: product.locked ? 'rgba(200,150,42,0.4)' : '#C8962A' }}>
-                  {product.name}
-                </span>
-              </span>
+                display: 'block', fontFamily: "'Cormorant Garamond', serif",
+                fontStyle: 'italic', fontWeight: 300, fontSize: '34px', lineHeight: 1,
+                color: product.locked ? 'rgba(200,150,42,0.4)' : '#C8962A',
+              }}>{product.name}</span>
             </h3>
 
-            {/* ── Size selector (Reine only) ── */}
-            {!product.locked && (
-              <div style={{ marginBottom: '28px' }}>
+            {/* Emotional hook */}
+            <p style={{
+              fontFamily: "'Cormorant Garamond', serif", fontStyle: 'italic', fontWeight: 300,
+              fontSize: '16px', color: product.locked ? 'rgba(250,246,239,0.25)' : 'rgba(250,246,239,0.7)',
+              lineHeight: 1.65, marginBottom: '18px', letterSpacing: '0.2px',
+            }}>{product.emotionalHook}</p>
 
-                {/* SELECT SIZE — its own line, nothing near it */}
+            {/* Gold hairline */}
+            <div style={{
+              height: '1px', marginBottom: '18px',
+              background: 'linear-gradient(to right, rgba(200,150,42,0.3), transparent)',
+            }}/>
+
+            {/* Smells like */}
+            <div style={{ marginBottom: '14px' }}>
+              <span style={{
+                fontFamily: 'Raleway', fontSize: '7px', letterSpacing: '3px',
+                textTransform: 'uppercase', color: 'rgba(200,150,42,0.45)',
+                display: 'block', marginBottom: '6px',
+              }}>Smells like</span>
+              <p style={{
+                fontFamily: "'Cormorant Garamond', serif", fontStyle: 'italic', fontWeight: 300,
+                fontSize: '15px', color: product.locked ? 'rgba(200,150,42,0.3)' : 'rgba(200,150,42,0.85)',
+                lineHeight: 1.65, letterSpacing: '0.2px', margin: 0,
+              }}>{product.smellsLike}</p>
+            </div>
+
+            {/* Scent journey */}
+            <p style={{
+              fontFamily: 'Raleway', fontSize: '11px', fontWeight: 300,
+              color: 'rgba(250,246,239,0.3)',
+              lineHeight: 2.05, marginBottom: '22px', letterSpacing: '0.3px',
+            }}>{product.scentJourney}</p>
+
+            {/* Notes tiers */}
+            <div style={{ marginBottom: '22px' }}>
+              {[
+                { tier: 'Top',   notes: product.topNotes   },
+                { tier: 'Heart', notes: product.heartNotes },
+                { tier: 'Base',  notes: product.baseNotes  },
+              ].map(({ tier, notes }) => (
+                <div key={tier} style={{ display: 'flex', alignItems: 'baseline', gap: '10px', marginBottom: '8px', flexWrap: 'wrap' }}>
+                  <span style={{
+                    fontFamily: 'Raleway', fontSize: '7px', letterSpacing: '3px',
+                    color: 'rgba(200,150,42,0.4)', textTransform: 'uppercase',
+                    minWidth: '40px', flexShrink: 0,
+                  }}>{tier}</span>
+                  <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' }}>
+                    {notes.map((n, i) => (
+                      <span key={i} style={{
+                        fontFamily: 'Raleway', fontSize: '9px', letterSpacing: '0.8px',
+                        padding: '3px 8px',
+                        color: product.locked ? 'rgba(200,150,42,0.3)' : 'rgba(200,150,42,0.8)',
+                        border: `1px solid ${product.locked ? 'rgba(200,150,42,0.1)' : 'rgba(200,150,42,0.2)'}`,
+                        background: 'rgba(200,150,42,0.04)',
+                      }}>{n}</span>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Meta grid */}
+            <div style={{
+              display: 'grid', gridTemplateColumns: '1fr 1fr',
+              gap: '16px 12px', marginBottom: '24px',
+              paddingTop: '16px',
+              borderTop: '1px solid rgba(200,150,42,0.08)',
+            }}>
+              <MetaItem icon={<ClockIcon />} label="Longevity" value={product.longevity} />
+              <MetaItem icon={<WindIcon />}  label="Projection" value={product.projection} />
+              <MetaItem icon={<StarIcon />}  label="Occasion" value={product.occasion} />
+              <MetaItem icon={<LeafIcon />}  label="Season" value={product.season} />
+            </div>
+
+            {/* Size selector — Reine only */}
+            {!product.locked && (
+              <div style={{ marginBottom: '20px' }}>
                 <p style={{
                   fontFamily: 'Raleway', fontSize: '7px', letterSpacing: '6px',
                   color: 'rgba(200,160,60,0.4)', textTransform: 'uppercase',
-                  textAlign: 'center', marginBottom: '20px', fontWeight: 300,
+                  textAlign: 'center', marginBottom: '16px', fontWeight: 300,
                 }}>Select Size</p>
-
-                {/* Buttons */}
                 <div style={{ display: 'flex', gap: '14px' }}>
                   {['50ml', '100ml'].map((size) => {
                     const active  = selectedSize === size;
                     const hovered = hoveredSize === size;
                     return (
                       <div key={size} style={{ flex: 1 }}>
-
-                        {/* position:relative wrapper so badge is anchored to button */}
-                        <div style={{ position: 'relative' }}>
-
-
-                          <button
-                            onClick={() => handleSizeChange(size)}
-                            onMouseEnter={() => setHoveredSize(size)}
-                            onMouseLeave={() => setHoveredSize(null)}
-                            style={{
-                              width: '100%',
-                              fontFamily: 'Raleway', fontSize: '9px', letterSpacing: '3.5px',
-                              textTransform: 'uppercase', padding: '15px 10px',
-                              minHeight: '50px',
-                              background: active
-                                ? 'linear-gradient(135deg, rgba(200,160,60,0.13) 0%, rgba(200,160,60,0.05) 100%)'
-                                : 'transparent',
-                              border: `1px solid ${
-                                active  ? 'rgba(200,160,60,0.95)' :
-                                hovered ? 'rgba(200,160,60,0.55)' :
-                                          'rgba(200,160,60,0.2)'
-                              }`,
-                              color: active  ? 'rgba(200,160,60,1)'  :
-                                     hovered ? 'rgba(200,160,60,0.8)' :
-                                               'rgba(200,160,60,0.45)',
-                              borderRadius: '1px', cursor: 'pointer',
-                              boxShadow: active
-                                ? '0 0 28px rgba(200,160,60,0.09), inset 0 0 18px rgba(200,160,60,0.04)'
-                                : hovered ? '0 0 16px rgba(200,160,60,0.06)' : 'none',
-                              transition: 'border-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease, background 0.3s ease',
-                            }}
-                          >
-                            {size.toUpperCase()} · ${REINE_PRICES[size]}
-                          </button>
-                        </div>
-
-                        {/* Sub-label */}
+                        <button
+                          onClick={() => handleSizeChange(size)}
+                          onMouseEnter={() => setHoveredSize(size)}
+                          onMouseLeave={() => setHoveredSize(null)}
+                          style={{
+                            width: '100%',
+                            fontFamily: 'Raleway', fontSize: '9px', letterSpacing: '3.5px',
+                            textTransform: 'uppercase', padding: '14px 10px',
+                            minHeight: '48px',
+                            background: active
+                              ? 'linear-gradient(135deg, rgba(200,160,60,0.13) 0%, rgba(200,160,60,0.05) 100%)'
+                              : 'transparent',
+                            border: `1px solid ${
+                              active  ? 'rgba(200,160,60,0.95)' :
+                              hovered ? 'rgba(200,160,60,0.55)' :
+                                        'rgba(200,160,60,0.2)'
+                            }`,
+                            color: active  ? 'rgba(200,160,60,1)'  :
+                                   hovered ? 'rgba(200,160,60,0.8)' :
+                                             'rgba(200,160,60,0.45)',
+                            borderRadius: '1px', cursor: 'pointer',
+                            transition: 'border-color 0.3s ease, color 0.3s ease, background 0.3s ease',
+                          }}
+                        >
+                          {size.toUpperCase()} · ${REINE_PRICES[size]}
+                        </button>
                         <p style={{
                           fontFamily: "'Cormorant Garamond', serif",
                           fontStyle: 'italic', fontWeight: 300, fontSize: '12px',
                           color: size === '100ml' ? 'rgba(200,160,60,0.58)' : 'rgba(250,246,239,0.2)',
-                          textAlign: 'center', marginTop: '8px', letterSpacing: '0.3px',
+                          textAlign: 'center', marginTop: '8px',
                         }}>
-                          {size === '50ml' ? 'Entry size' : 'Save 26%'}
+                          {size === '50ml' ? 'Entry size' : 'Best value'}
                         </p>
                       </div>
                     );
                   })}
                 </div>
-
-                {/* Gold separator */}
-                <div style={{
-                  height: '1px', marginTop: '24px',
-                  background: 'linear-gradient(to right, transparent, rgba(200,160,60,0.18), transparent)',
-                }}/>
               </div>
             )}
 
-            <p style={{
-              fontFamily: "'Cormorant Garamond', serif",
-              fontStyle: 'italic', fontWeight: 300,
-              fontSize: '16px', color: 'rgba(250,246,239,0.52)',
-              lineHeight: 1.65, marginBottom: product.scentJourney ? '12px' : (product.perfectFor ? '16px' : '24px'),
-              letterSpacing: '0.2px',
-            }}>
-              {product.description}
-            </p>
-            {product.scentJourney && (
-              <p style={{
-                fontFamily: 'Raleway, sans-serif', fontSize: '11px', fontWeight: 300,
-                color: 'rgba(250,246,239,0.3)',
-                lineHeight: 2.05, marginBottom: product.perfectFor ? '16px' : '24px', letterSpacing: '0.3px',
+            {/* Buy area */}
+            {!product.locked ? (
+              <div className="shop-buy-area" style={{
+                display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+                paddingTop: '16px',
+                borderTop: '1px solid rgba(200,150,42,0.1)',
               }}>
-                {product.scentJourney}
-              </p>
-            )}
-
-            {product.perfectFor && (
-              <div style={{ marginBottom: '24px' }}>
                 <span style={{
-                  fontFamily: 'Raleway, sans-serif', fontSize: '8px', letterSpacing: '3px',
-                  textTransform: 'uppercase', color: 'rgba(200,160,60,0.4)',
-                  display: 'block', marginBottom: '5px',
-                }}>Perfect for</span>
-                <p style={{
-                  fontFamily: "'Cormorant Garamond', serif", fontStyle: 'italic', fontWeight: 300,
-                  fontSize: '13px', color: 'rgba(200,160,60,0.65)',
-                  lineHeight: 1.8, letterSpacing: '0.3px', margin: 0,
-                }}>{product.perfectFor}</p>
-              </div>
-            )}
-
-            {/* Fragrance Notes */}
-            {product.topNotes ? (
-              <div style={{ marginBottom: '28px' }}>
-                {[
-                  { tier: 'Top Notes',   notes: product.topNotes   },
-                  { tier: 'Heart Notes', notes: product.heartNotes  },
-                  { tier: 'Base Notes',  notes: product.baseNotes   },
-                ].map(({ tier, notes }) => (
-                  <div key={tier} style={{ display: 'flex', alignItems: 'baseline', gap: '10px', marginBottom: '8px', flexWrap: 'wrap' }}>
-                    <span style={{
-                      fontFamily: 'Raleway', fontSize: '7px', letterSpacing: '3px',
-                      color: 'rgba(200,150,42,0.45)', textTransform: 'uppercase',
-                      minWidth: '72px', flexShrink: 0,
-                    }}>{tier}</span>
-                    <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' }}>
-                      {notes.map((n, i) => (
-                        <span key={i} style={{
-                          fontFamily: 'Raleway', fontSize: '9px', letterSpacing: '0.8px',
-                          padding: '3px 10px',
-                          color: 'rgba(200,150,42,0.85)',
-                          border: '1px solid rgba(200,150,42,0.2)',
-                          background: 'rgba(200,150,42,0.04)',
-                        }}>{n}</span>
-                      ))}
-                    </div>
-                  </div>
-                ))}
+                  fontFamily: "'Cormorant Garamond', serif",
+                  fontSize: '32px', fontWeight: 300,
+                  color: '#C9A96E', letterSpacing: '1px',
+                  transition: 'opacity 0.2s ease',
+                }}>${displayPrice}</span>
+                <BuyNowBtn onClick={() => setModal(true)} />
               </div>
             ) : (
-              <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap', marginBottom: '28px' }}>
-                {product.notes.map((note, i) => (
-                  <span key={i} style={{
-                    fontFamily: 'Raleway', fontSize: '9px', letterSpacing: '1px',
-                    padding: '4px 10px',
-                    color: 'rgba(200,150,42,0.3)',
-                    border: '1px solid rgba(200,150,42,0.1)',
-                    background: 'transparent',
-                  }}>{note}</span>
-                ))}
-              </div>
-            )}
-
-            {/* Price + CTA */}
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-              <span style={{
-                fontFamily: "'Cormorant Garamond', serif",
-                fontSize: '34px', fontWeight: 300,
-                color: product.locked ? 'rgba(250,246,239,0.2)' : '#C9A96E',
-                letterSpacing: '1px',
-                transition: 'opacity 0.2s ease',
+              <div style={{
+                paddingTop: '16px', borderTop: '1px solid rgba(200,150,42,0.08)',
+                display: 'flex', alignItems: 'center', justifyContent: 'space-between',
               }}>
-                ${product.locked ? product.price : displayPrice}
-              </span>
-
-              {!product.locked ? (
-                <BuyNowBtn onClick={() => setModal(true)} price={displayPrice} />
-              ) : (
+                <span style={{
+                  fontFamily: "'Cormorant Garamond', serif",
+                  fontSize: '32px', fontWeight: 300,
+                  color: 'rgba(250,246,239,0.18)', letterSpacing: '1px',
+                }}>${product.price}</span>
                 <span style={{
                   fontFamily: 'Raleway', fontSize: '8px', letterSpacing: '3px',
                   color: 'rgba(200,150,42,0.32)', textTransform: 'uppercase',
-                }}>
-                  Locked
-                </span>
-              )}
-            </div>
+                }}>Coming 2026</span>
+              </div>
+            )}
           </div>
         </div>
       </div>
     </>
-  );
-};
-
-const BuyNowBtn = ({ onClick, price }) => {
-  const [hov, setHov] = useState(false);
-  return (
-    <button
-      onClick={onClick}
-      onMouseEnter={() => setHov(true)}
-      onMouseLeave={() => setHov(false)}
-      style={{
-        fontFamily: 'Raleway', fontSize: '8px', letterSpacing: '4px',
-        textTransform: 'uppercase', padding: '13px 22px',
-        background: hov ? '#C8962A' : 'transparent',
-        color: hov ? '#1a0f00' : '#C8962A',
-        border: '1px solid rgba(200,150,42,0.7)',
-        cursor: 'pointer',
-        transition: 'all 0.35s ease',
-        whiteSpace: 'nowrap',
-      }}
-    >
-      Buy Now{price ? ` $${price}` : ''}
-    </button>
   );
 };
 
@@ -518,6 +498,59 @@ const ReviewsSection = () => {
           </div>
         ))}
       </div>
+    </div>
+  );
+};
+
+const Shop = () => {
+  const [gridRef, gridIn] = useInView(0.05);
+
+  return (
+    <div style={{ background: '#1a0f00', minHeight: '100vh' }}>
+      {/* ── Page header ── */}
+      <div className="shop-header" style={{
+        background: 'linear-gradient(148deg, #0e0800 0%, #1a0f00 100%)',
+        padding: '184px clamp(20px, 6vw, 80px) 100px',
+        position: 'relative', overflow: 'hidden',
+        borderBottom: '1px solid rgba(200,150,42,0.1)',
+      }}>
+        <div style={{ maxWidth: '1100px', margin: '0 auto', position: 'relative' }}>
+          <p style={{
+            fontFamily: 'Raleway', fontSize: '9px', letterSpacing: '6px',
+            color: '#C8962A', textTransform: 'uppercase', marginBottom: '20px',
+          }}>
+            The Collection
+          </p>
+          <h1 style={{
+            fontFamily: "'Playfair Display', serif", fontWeight: 300,
+            fontSize: 'clamp(52px, 7vw, 88px)', lineHeight: 1,
+            color: '#FAF6EF',
+          }}>
+            Our <span style={{ fontStyle: 'italic', color: '#E8B84B' }}>Fragrances</span>
+          </h1>
+          <p style={{
+            fontFamily: 'Raleway', fontSize: '13px', fontWeight: 300,
+            color: 'rgba(250,246,239,0.42)', marginTop: '20px',
+            letterSpacing: '0.5px', lineHeight: 2,
+          }}>
+            Three compositions. One obsession.
+          </p>
+        </div>
+      </div>
+
+      {/* ── Product grid ── */}
+      <div ref={gridRef} className="shop-products" style={{
+        maxWidth: '1100px', margin: '0 auto',
+        padding: '100px clamp(20px, 6vw, 80px) 120px',
+      }}>
+        <div className="shop-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '32px' }}>
+          {PRODUCTS.map((p, i) => (
+            <ProductCard key={p.id} product={p} inView={gridIn} delay={i * 0.14} />
+          ))}
+        </div>
+      </div>
+
+      <ReviewsSection />
     </div>
   );
 };

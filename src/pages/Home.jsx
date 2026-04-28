@@ -582,10 +582,11 @@ const FounderStory = () => {
 
 /* ── Trust bar ── */
 const TRUST_BAR_ITEMS = [
-  'Free Nationwide Delivery',
-  'Handcrafted in Lebanon',
-  '100% Natural Ingredients',
-  'Authenticated & Sealed',
+  'Secure Checkout',
+  'Fast Delivery Across Lebanon',
+  'Easy Returns',
+  '100% Authentic Formula',
+  'WhatsApp Support',
 ];
 
 const TrustBar = () => (
@@ -948,6 +949,102 @@ const FieldWithFocus = ({ name, label, placeholder, type = 'text', as, value, on
         />
       )}
     </div>
+  );
+};
+
+/* ── Why ELARA ── */
+const WHY_ITEMS = [
+  {
+    icon: (
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+        <polyline points="9 12 11 14 15 10"/>
+      </svg>
+    ),
+    title: 'Niche Formula',
+    body: 'Not a clone. Not inspired by. A completely original formula crafted in Lebanon.',
+  },
+  {
+    icon: (
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
+        <circle cx="12" cy="12" r="10"/>
+        <polyline points="12 6 12 12 16 14"/>
+      </svg>
+    ),
+    title: 'Long Lasting',
+    body: '8 to 14 hours on skin. Our formulas are built to stay with you, not just on you.',
+  },
+  {
+    icon: (
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+        <circle cx="12" cy="10" r="3"/>
+      </svg>
+    ),
+    title: 'Made in Lebanon',
+    body: 'Every bottle of ELARA is created in Beirut, with love and obsession.',
+  },
+  {
+    icon: (
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+      </svg>
+    ),
+    title: 'Real Support',
+    body: "Questions? We're on WhatsApp. Real answers from real people, always.",
+  },
+];
+
+const WhyELARA = () => {
+  const [ref, visible] = useReveal(0.1);
+  return (
+    <section ref={ref} style={{
+      background: '#080400',
+      padding: 'clamp(80px, 10vw, 120px) clamp(24px, 6vw, 80px)',
+      borderTop: '1px solid rgba(201,168,76,0.08)',
+      borderBottom: '1px solid rgba(201,168,76,0.08)',
+      textAlign: 'center',
+    }}>
+      <p style={{
+        fontFamily: 'Raleway, sans-serif', fontSize: '9px', letterSpacing: '7px',
+        color: 'rgba(201,168,76,0.6)', textTransform: 'uppercase', marginBottom: '20px',
+        opacity: visible ? 1 : 0, transition: 'opacity 0.8s ease',
+      }}>Why ELARA</p>
+      <h2 style={{
+        fontFamily: "'Cormorant Garamond', serif", fontWeight: 300,
+        fontSize: 'clamp(1.8rem, 3.5vw, 2.8rem)', color: '#FAF6EF',
+        marginBottom: '64px',
+        opacity: visible ? 1 : 0, transition: 'opacity 0.9s ease 0.1s',
+      }}>
+        The difference you'll{' '}
+        <span style={{ fontStyle: 'italic', color: 'rgba(201,168,76,1)' }}>feel on skin.</span>
+      </h2>
+      <div className="why-grid" style={{
+        maxWidth: '1000px', margin: '0 auto',
+        display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '48px 32px',
+      }}>
+        {WHY_ITEMS.map(({ icon, title, body }, i) => (
+          <div key={title} style={{
+            display: 'flex', flexDirection: 'column', alignItems: 'center',
+            textAlign: 'center', gap: '16px',
+            opacity: visible ? 1 : 0,
+            transform: visible ? 'translateY(0)' : 'translateY(20px)',
+            transition: `opacity 0.9s ease ${i * 0.12}s, transform 0.9s cubic-bezier(0.16,1,0.3,1) ${i * 0.12}s`,
+          }}>
+            <div style={{ color: 'rgba(201,168,76,0.65)' }}>{icon}</div>
+            <h4 style={{
+              fontFamily: "'Cormorant Garamond', serif", fontWeight: 300,
+              fontSize: '20px', color: '#FAF6EF', letterSpacing: '0.5px', margin: 0,
+            }}>{title}</h4>
+            <p style={{
+              fontFamily: 'Raleway, sans-serif', fontSize: '12px', fontWeight: 300,
+              color: 'rgba(250,246,239,0.38)', lineHeight: 2, letterSpacing: '0.3px',
+              margin: 0, maxWidth: '200px',
+            }}>{body}</p>
+          </div>
+        ))}
+      </div>
+    </section>
   );
 };
 
@@ -1572,6 +1669,9 @@ const Home = () => {
 
       {/* ══════════════════ ORIGIN STORY ══════════════════ */}
       <OriginStory />
+
+      {/* ══════════════════ WHY ELARA ══════════════════ */}
+      <WhyELARA />
 
       {/* ══════════════════ CRAFTSMANSHIP ══════════════════ */}
       <CraftsmanshipStory />

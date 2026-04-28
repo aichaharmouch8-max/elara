@@ -88,6 +88,108 @@ const Field = ({
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+const FAQ_ITEMS = [
+  {
+    q: 'How long does the perfume last?',
+    a: 'Most of our fragrances last 8–14 hours depending on your skin type. Drier skin absorbs scent faster — apply to pulse points and moisturized skin for best results.',
+  },
+  {
+    q: 'Is this genuine perfume?',
+    a: '100%. ELARA is our own original formula — not a clone, not inspired by. Every bottle is crafted with premium fragrance oil at 20% concentration.',
+  },
+  {
+    q: 'Do you deliver?',
+    a: 'Yes — we deliver across Lebanon. Orders are packed with care and shipped within 1–2 business days.',
+  },
+  {
+    q: 'Can I return?',
+    a: "If there's an issue with your order, WhatsApp us immediately. We'll make it right — no hassle.",
+  },
+];
+
+const FaqItem = ({ q, a }) => {
+  const [open, setOpen] = useState(false);
+  return (
+    <div style={{
+      borderBottom: '1px solid rgba(200,160,60,0.12)',
+      padding: '0',
+    }}>
+      <button
+        onClick={() => setOpen(v => !v)}
+        style={{
+          width: '100%', background: 'none', border: 'none', cursor: 'pointer',
+          display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+          padding: '20px 0', gap: '16px',
+          textAlign: 'left',
+        }}
+      >
+        <span style={{
+          fontFamily: "'Cormorant Garamond', serif", fontWeight: 300,
+          fontSize: '18px', color: open ? 'rgba(200,160,60,1)' : '#FAF6EF',
+          lineHeight: 1.3, letterSpacing: '0.2px',
+          transition: 'color 0.3s ease',
+        }}>{q}</span>
+        <span style={{
+          color: 'rgba(200,160,60,0.6)', fontSize: '18px', flexShrink: 0,
+          transition: 'transform 0.3s ease',
+          transform: open ? 'rotate(45deg)' : 'rotate(0deg)',
+          display: 'block', lineHeight: 1,
+        }}>+</span>
+      </button>
+      <div style={{
+        maxHeight: open ? '200px' : '0',
+        overflow: 'hidden',
+        transition: 'max-height 0.4s cubic-bezier(0.16,1,0.3,1)',
+      }}>
+        <p style={{
+          fontFamily: 'Raleway, sans-serif', fontSize: '13px', fontWeight: 300,
+          color: 'rgba(250,246,239,0.5)', lineHeight: 2, letterSpacing: '0.3px',
+          paddingBottom: '20px', margin: 0,
+        }}>{a}</p>
+      </div>
+    </div>
+  );
+};
+
+const FaqSection = () => {
+  const [ref, visible] = useReveal(0.1);
+  return (
+    <section ref={ref} style={{
+      background: '#1a0f00',
+      padding: 'clamp(72px, 9vw, 110px) clamp(24px, 6vw, 80px)',
+      borderTop: '1px solid rgba(200,160,60,0.08)',
+    }}>
+      <div style={{ maxWidth: '640px', margin: '0 auto' }}>
+        <p style={{
+          fontFamily: 'Raleway, sans-serif', fontSize: '9px', letterSpacing: '7px',
+          color: 'rgba(200,160,60,0.6)', textTransform: 'uppercase',
+          textAlign: 'center', marginBottom: '20px',
+          opacity: visible ? 1 : 0, transition: 'opacity 0.8s ease',
+        }}>Common Questions</p>
+        <h2 style={{
+          fontFamily: "'Cormorant Garamond', serif", fontWeight: 300,
+          fontSize: 'clamp(1.8rem, 3.5vw, 2.6rem)', color: '#FAF6EF',
+          textAlign: 'center', marginBottom: '52px', lineHeight: 1.2,
+          opacity: visible ? 1 : 0, transition: 'opacity 0.9s ease 0.1s',
+        }}>
+          Good questions deserve{' '}
+          <span style={{ fontStyle: 'italic', color: 'rgba(200,160,60,1)' }}>honest answers.</span>
+        </h2>
+        <div style={{
+          opacity: visible ? 1 : 0,
+          transform: visible ? 'translateY(0)' : 'translateY(20px)',
+          transition: 'opacity 0.9s ease 0.2s, transform 0.9s cubic-bezier(0.16,1,0.3,1) 0.2s',
+          borderTop: '1px solid rgba(200,160,60,0.12)',
+        }}>
+          {FAQ_ITEMS.map((item) => (
+            <FaqItem key={item.q} q={item.q} a={item.a} />
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
 
 /* ─────────────────────────────────────────
    CONTACT PAGE
@@ -327,6 +429,8 @@ const Contact = () => {
           )}
         </div>
       </section>
+
+      <FaqSection />
 
     </div>
   );
