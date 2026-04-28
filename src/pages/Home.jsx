@@ -622,90 +622,6 @@ const TrustBar = () => (
   </div>
 );
 
-/* ── Brand story ── */
-const BrandStorySection = () => {
-  const [ref, visible] = useReveal(0.1);
-  return (
-    <section ref={ref} style={{
-      background: 'linear-gradient(160deg, #0e0800 0%, #1a0f00 100%)',
-      padding: 'clamp(72px, 9vw, 110px) clamp(24px, 6vw, 80px)',
-      borderTop: '1px solid rgba(200,160,60,0.08)',
-    }}>
-      <div style={{
-        maxWidth: '860px', margin: '0 auto',
-        display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '72px', alignItems: 'center',
-      }} className="brand-story-grid">
-        {/* Left — text */}
-        <div style={{
-          opacity: visible ? 1 : 0,
-          transform: visible ? 'translateY(0)' : 'translateY(28px)',
-          transition: 'opacity 1s ease, transform 1s cubic-bezier(0.16,1,0.3,1)',
-        }}>
-          <p style={{
-            fontFamily: 'Raleway, sans-serif', fontSize: '9px', letterSpacing: '7px',
-            color: 'rgba(200,160,60,0.6)', textTransform: 'uppercase', marginBottom: '22px',
-          }}>Our Story</p>
-          <h2 style={{
-            fontFamily: "'Cormorant Garamond', serif", fontWeight: 300,
-            fontSize: 'clamp(2rem, 4vw, 3rem)', lineHeight: 1.15, marginBottom: '28px', color: '#FAF6EF',
-          }}>
-            Born in <span style={{ fontStyle: 'italic', color: 'rgba(200,160,60,1)' }}>Beirut.</span> Made for eternity.
-          </h2>
-          <p style={{
-            fontFamily: 'Raleway, sans-serif', fontSize: '14px', fontWeight: 300,
-            color: 'rgba(250,246,239,0.55)', lineHeight: 2.1, marginBottom: '20px',
-            letterSpacing: '0.3px',
-          }}>
-            ELARA began not in a laboratory, but in a memory. A mother's perfume cabinet — French bottles wrapped in tissue, saved for occasions that never quite arrived. I broke the rule at fifteen. I wore every single one. I have been chasing that feeling ever since.
-          </p>
-          <p style={{
-            fontFamily: 'Raleway, sans-serif', fontSize: '14px', fontWeight: 300,
-            color: 'rgba(250,246,239,0.45)', lineHeight: 2.1, marginBottom: '32px',
-            letterSpacing: '0.3px',
-          }}>
-            Every fragrance begins with one question: what does it feel like to be unforgettable? The answer leads us to saffron fields in Iran, rose valleys in Bulgaria at the exact hour of harvest, and amber routes older than modern trade. We source slowly. We craft in small batches. We release only when the answer is yes.
-          </p>
-          <div style={{ display: 'flex', gap: '40px' }}>
-            {[['100%', 'Natural ingredients'], ['3', 'Compositions'], ['Lebanon', 'Crafted with love']].map(([val, label]) => (
-              <div key={label}>
-                <p style={{
-                  fontFamily: "'Cormorant Garamond', serif", fontStyle: 'italic',
-                  fontSize: '22px', color: 'rgba(200,160,60,1)', marginBottom: '4px',
-                }}>{val}</p>
-                <p style={{
-                  fontFamily: 'Raleway, sans-serif', fontSize: '8px',
-                  letterSpacing: '2px', color: 'rgba(250,246,239,0.3)', textTransform: 'uppercase',
-                }}>{label}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Right — decorative element */}
-        <div style={{
-          opacity: visible ? 1 : 0,
-          transition: 'opacity 1.2s ease 0.2s',
-          display: 'flex', alignItems: 'center', justifyContent: 'center',
-        }}>
-          <div style={{
-            width: '100%', maxWidth: '320px', aspectRatio: '3/4',
-            background: 'linear-gradient(145deg, rgba(200,160,60,0.06) 0%, rgba(200,160,60,0.02) 100%)',
-            border: '1px solid rgba(200,160,60,0.12)',
-            display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
-            gap: '20px', padding: '40px',
-          }}>
-            <img src="/ELARAREINE.png" alt="ELARA Reine" style={{ width: '80%', objectFit: 'contain', opacity: 0.9 }} />
-            <p style={{
-              fontFamily: "'Cormorant Garamond', serif", fontStyle: 'italic',
-              fontSize: '13px', color: 'rgba(200,160,60,0.5)', textAlign: 'center', letterSpacing: '0.3px',
-            }}>Reine · Our debut composition</p>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-};
-
 const fieldStyleFn = (focused) => ({
   width: '100%', background: 'transparent', border: 'none',
   borderBottom: `1px solid ${focused ? 'rgba(200,160,60,0.95)' : 'rgba(200,160,60,0.22)'}`,
@@ -1036,6 +952,366 @@ const FieldWithFocus = ({ name, label, placeholder, type = 'text', as, value, on
 };
 
 /* ─────────────────────────────────────────
+   CINEMATIC OPENING
+───────────────────────────────────────── */
+const CinematicOpening = () => {
+  const [ref, visible] = useReveal(0.2);
+  return (
+    <section ref={ref} style={{
+      background: '#080400',
+      padding: 'clamp(80px, 10vw, 120px) clamp(40px, 8vw, 120px)',
+      textAlign: 'center',
+    }}>
+      <h2 style={{
+        fontFamily: "'Cormorant Garamond', serif", fontWeight: 300,
+        fontSize: 'clamp(32px, 5vw, 48px)', color: '#FAF6EF',
+        lineHeight: 1.35, letterSpacing: '0.02em',
+        marginBottom: '40px',
+        opacity: visible ? 1 : 0,
+        transform: visible ? 'translateY(0)' : 'translateY(24px)',
+        transition: 'opacity 1.1s ease, transform 1.1s cubic-bezier(0.16,1,0.3,1)',
+      }}>
+        Some fragrances are worn.<br/>
+        <span style={{ fontStyle: 'italic', color: '#E8B84B' }}>Others are remembered.</span>
+      </h2>
+
+      <div style={{
+        height: '1px', maxWidth: '120px', margin: '0 auto 40px',
+        background: 'linear-gradient(90deg, transparent, #c9a84c, transparent)',
+        transformOrigin: 'center',
+        transform: visible ? 'scaleX(1)' : 'scaleX(0)',
+        opacity: visible ? 1 : 0,
+        transition: 'transform 1.4s cubic-bezier(0.4,0,0.2,1) 0.4s, opacity 0.8s ease 0.4s',
+      }}/>
+
+      <p style={{
+        fontFamily: 'Raleway, sans-serif', fontSize: 'clamp(13px, 1.5vw, 15px)', fontWeight: 300,
+        color: 'rgba(250,246,239,0.48)', lineHeight: 1.9,
+        maxWidth: '640px', margin: '0 auto',
+        letterSpacing: '0.4px',
+        opacity: visible ? 1 : 0,
+        transform: visible ? 'translateY(0)' : 'translateY(16px)',
+        transition: 'opacity 1s ease 0.85s, transform 1s cubic-bezier(0.16,1,0.3,1) 0.85s',
+      }}>
+        ELARA was not created to compete. It was created to linger — in rooms, in memories, in the minds of everyone you've ever left behind.
+      </p>
+    </section>
+  );
+};
+
+/* ─────────────────────────────────────────
+   ORIGIN STORY
+───────────────────────────────────────── */
+const OriginStory = () => {
+  const [ref, visible] = useReveal(0.1);
+  return (
+    <section ref={ref} style={{
+      background: '#0d0700',
+      padding: 'clamp(80px, 10vw, 120px) clamp(24px, 6vw, 80px)',
+      borderTop: '1px solid rgba(201,168,76,0.08)',
+    }}>
+      <div className="origin-grid" style={{
+        maxWidth: '1100px', margin: '0 auto',
+        display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '80px', alignItems: 'center',
+      }}>
+        <div style={{
+          opacity: visible ? 1 : 0,
+          transition: 'opacity 1.2s ease 0.1s',
+          position: 'relative', overflow: 'hidden',
+          aspectRatio: '3/4',
+        }}>
+          <img
+            src="/elaraaaaa.png" alt="ELARA"
+            style={{
+              width: '100%', height: '100%',
+              objectFit: 'cover', objectPosition: 'center top', display: 'block',
+            }}
+          />
+          <div style={{
+            position: 'absolute', inset: 0,
+            background: 'linear-gradient(135deg, rgba(8,4,0,0.55) 0%, rgba(8,4,0,0.2) 100%)',
+          }}/>
+        </div>
+
+        <div style={{
+          opacity: visible ? 1 : 0,
+          transform: visible ? 'translateY(0)' : 'translateY(28px)',
+          transition: 'opacity 1s ease 0.3s, transform 1s cubic-bezier(0.16,1,0.3,1) 0.3s',
+        }}>
+          <p style={{
+            fontFamily: 'Raleway, sans-serif', fontSize: '9px', letterSpacing: '7px',
+            color: 'rgba(201,168,76,0.6)', textTransform: 'uppercase', marginBottom: '24px',
+          }}>The Story</p>
+          <h2 style={{
+            fontFamily: "'Cormorant Garamond', serif", fontWeight: 300,
+            fontSize: 'clamp(1.8rem, 3vw, 2.6rem)', color: '#FAF6EF',
+            lineHeight: 1.25, marginBottom: '32px',
+          }}>
+            Born from a desire to make luxury{' '}
+            <span style={{ fontStyle: 'italic', color: 'rgba(201,168,76,0.9)' }}>feel personal.</span>
+          </h2>
+          <p style={{
+            fontFamily: 'Raleway, sans-serif', fontSize: '14px', fontWeight: 300,
+            color: 'rgba(250,246,239,0.52)', lineHeight: 1.9, marginBottom: '22px',
+            letterSpacing: '0.3px',
+          }}>
+            ELARA began in Lebanon — a country that has always known how to turn hardship into beauty. We believed that a truly exceptional fragrance should not belong only to fashion capitals or luxury malls. It should belong to anyone who understands that scent is the most intimate thing you can wear.
+          </p>
+          <p style={{
+            fontFamily: 'Raleway, sans-serif', fontSize: '14px', fontWeight: 300,
+            color: 'rgba(250,246,239,0.38)', lineHeight: 1.9, marginBottom: '36px',
+            letterSpacing: '0.3px',
+          }}>
+            Every bottle of ELARA is a quiet rebellion. Against the ordinary. Against the forgettable. Against everything that blends in.
+          </p>
+          <div style={{
+            width: '48px', height: '1px',
+            background: 'linear-gradient(90deg, rgba(201,168,76,0.6), transparent)',
+          }}/>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+/* ─────────────────────────────────────────
+   FRAGRANCE PHILOSOPHY
+───────────────────────────────────────── */
+const PHILOSOPHY_ITEMS = [
+  {
+    number: '01',
+    title: 'Scent is identity.',
+    body: 'What you wear on your skin tells the world who you are before you speak a single word.',
+  },
+  {
+    number: '02',
+    title: 'Luxury is emotional.',
+    body: 'True luxury is not about price. It is about the feeling it leaves behind — long after the moment has passed.',
+  },
+  {
+    number: '03',
+    title: 'Memory is the most powerful sense.',
+    body: 'A single scent can take you back to a place, a person, a version of yourself you never want to forget.',
+  },
+];
+
+const FragrancePhilosophy = () => {
+  const [ref, visible] = useReveal(0.1);
+  return (
+    <section ref={ref} style={{
+      background: '#080400',
+      padding: 'clamp(80px, 10vw, 120px) clamp(24px, 6vw, 80px)',
+      borderTop: '1px solid rgba(201,168,76,0.08)',
+      borderBottom: '1px solid rgba(201,168,76,0.08)',
+    }}>
+      <p style={{
+        fontFamily: 'Raleway, sans-serif', fontSize: '9px', letterSpacing: '7px',
+        color: 'rgba(201,168,76,0.6)', textTransform: 'uppercase',
+        textAlign: 'center', marginBottom: '72px',
+        opacity: visible ? 1 : 0, transition: 'opacity 0.9s ease',
+      }}>Our Philosophy</p>
+
+      <div className="philosophy-grid" style={{
+        maxWidth: '1100px', margin: '0 auto',
+        display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)',
+      }}>
+        {PHILOSOPHY_ITEMS.map(({ number, title, body }, i) => (
+          <div key={number} style={{
+            padding: '0 clamp(24px, 4vw, 56px)',
+            borderLeft: i > 0 ? '1px solid rgba(201,168,76,0.15)' : 'none',
+            opacity: visible ? 1 : 0,
+            transform: visible ? 'translateY(0)' : 'translateY(24px)',
+            transition: `opacity 0.9s ease ${i * 0.15}s, transform 0.9s cubic-bezier(0.16,1,0.3,1) ${i * 0.15}s`,
+          }}>
+            <p style={{
+              fontFamily: "'Cormorant Garamond', serif", fontStyle: 'italic',
+              fontSize: '40px', color: 'rgba(201,168,76,0.28)',
+              marginBottom: '22px', lineHeight: 1,
+            }}>{number}</p>
+            <h3 style={{
+              fontFamily: "'Cormorant Garamond', serif", fontWeight: 300,
+              fontSize: 'clamp(1.1rem, 2vw, 1.4rem)', color: '#FAF6EF',
+              marginBottom: '16px', lineHeight: 1.3,
+            }}>{title}</h3>
+            <p style={{
+              fontFamily: 'Raleway, sans-serif', fontSize: '13px', fontWeight: 300,
+              color: 'rgba(250,246,239,0.4)', lineHeight: 1.9, letterSpacing: '0.3px',
+            }}>{body}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+};
+
+/* ─────────────────────────────────────────
+   IMMERSIVE QUOTE
+───────────────────────────────────────── */
+const ImmersiveQuote = () => {
+  const [ref, visible] = useReveal(0.2);
+  return (
+    <section ref={ref} style={{
+      background: '#060300',
+      minHeight: '100vh',
+      display: 'flex', flexDirection: 'column',
+      alignItems: 'center', justifyContent: 'center',
+      padding: 'clamp(80px, 10vw, 120px) clamp(24px, 8vw, 120px)',
+      textAlign: 'center',
+    }}>
+      <blockquote style={{
+        fontFamily: "'Cormorant Garamond', serif", fontStyle: 'italic', fontWeight: 300,
+        fontSize: 'clamp(1.6rem, 3.5vw, 2.8rem)', color: '#FAF6EF',
+        lineHeight: 1.6, maxWidth: '760px',
+        marginBottom: '32px', letterSpacing: '0.02em',
+        opacity: visible ? 1 : 0,
+        transform: visible ? 'translateY(0)' : 'translateY(32px)',
+        transition: 'opacity 1.3s ease, transform 1.3s cubic-bezier(0.16,1,0.3,1)',
+      }}>
+        "She didn't wear perfume.<br/>
+        She wore ELARA.<br/>
+        There is a difference."
+      </blockquote>
+      <p style={{
+        fontFamily: 'Raleway, sans-serif', fontSize: '9px', letterSpacing: '6px',
+        color: 'rgba(201,168,76,0.5)', textTransform: 'uppercase',
+        opacity: visible ? 1 : 0,
+        transition: 'opacity 1s ease 0.7s',
+      }}>— ELARA, Maison de Parfum</p>
+    </section>
+  );
+};
+
+/* ─────────────────────────────────────────
+   CRAFTSMANSHIP STORY
+───────────────────────────────────────── */
+const CRAFT_STATS = [
+  { value: '100%', label: 'Authentic Formula' },
+  { value: '48H',  label: 'Lasting Impression' },
+  { value: '∞',   label: 'Memories Created' },
+];
+
+const CraftsmanshipStory = () => {
+  const [ref, visible] = useReveal(0.1);
+  return (
+    <section ref={ref} style={{
+      background: '#0d0700',
+      padding: 'clamp(80px, 10vw, 120px) clamp(24px, 6vw, 80px)',
+      borderTop: '1px solid rgba(201,168,76,0.08)',
+    }}>
+      <div style={{ maxWidth: '860px', margin: '0 auto' }}>
+        <div style={{
+          opacity: visible ? 1 : 0,
+          transform: visible ? 'translateY(0)' : 'translateY(24px)',
+          transition: 'opacity 1s ease, transform 1s cubic-bezier(0.16,1,0.3,1)',
+          marginBottom: '64px',
+        }}>
+          <p style={{
+            fontFamily: 'Raleway, sans-serif', fontSize: '9px', letterSpacing: '7px',
+            color: 'rgba(201,168,76,0.6)', textTransform: 'uppercase', marginBottom: '24px',
+          }}>The Craft</p>
+          <h2 style={{
+            fontFamily: "'Cormorant Garamond', serif", fontWeight: 300,
+            fontSize: 'clamp(1.8rem, 3.5vw, 2.8rem)', color: '#FAF6EF',
+            lineHeight: 1.25, marginBottom: '28px',
+          }}>
+            Every detail was chosen with{' '}
+            <span style={{ fontStyle: 'italic', color: 'rgba(201,168,76,0.9)' }}>obsession.</span>
+          </h2>
+          <p style={{
+            fontFamily: 'Raleway, sans-serif', fontSize: '14px', fontWeight: 300,
+            color: 'rgba(250,246,239,0.48)', lineHeight: 1.9, letterSpacing: '0.3px',
+            maxWidth: '640px',
+          }}>
+            From the weight of the bottle to the depth of the fragrance — nothing in ELARA happened by accident. Our formulas are built on premium raw ingredients, layered with precision, and tested until they feel less like perfume and more like a second skin.
+          </p>
+        </div>
+
+        <div className="craft-stats" style={{
+          display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)',
+          borderTop: '1px solid rgba(201,168,76,0.1)',
+        }}>
+          {CRAFT_STATS.map(({ value, label }, i) => (
+            <div key={label} style={{
+              padding: '40px clamp(0px, 3vw, 40px) 40px 0',
+              paddingLeft: i > 0 ? 'clamp(24px, 3vw, 40px)' : '0',
+              borderLeft: i > 0 ? '1px solid rgba(201,168,76,0.1)' : 'none',
+              opacity: visible ? 1 : 0,
+              transition: `opacity 0.9s ease ${0.3 + i * 0.15}s`,
+            }}>
+              <p style={{
+                fontFamily: "'Cormorant Garamond', serif", fontStyle: 'italic',
+                fontSize: 'clamp(2rem, 4vw, 3rem)', color: 'rgba(201,168,76,1)',
+                marginBottom: '8px', lineHeight: 1,
+              }}>{value}</p>
+              <p style={{
+                fontFamily: 'Raleway, sans-serif', fontSize: '8px', letterSpacing: '4px',
+                color: 'rgba(250,246,239,0.3)', textTransform: 'uppercase',
+              }}>{label}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+/* ─────────────────────────────────────────
+   EMOTIONAL CLOSING
+───────────────────────────────────────── */
+const EmotionalClosing = () => {
+  const [hov, setHov] = useState(false);
+  const [ref, visible] = useReveal(0.2);
+  return (
+    <section ref={ref} style={{
+      background: '#080400',
+      padding: 'clamp(80px, 10vw, 120px) clamp(24px, 6vw, 80px)',
+      textAlign: 'center',
+      borderTop: '1px solid rgba(201,168,76,0.12)',
+      borderBottom: '1px solid rgba(201,168,76,0.12)',
+    }}>
+      <div style={{
+        opacity: visible ? 1 : 0,
+        transform: visible ? 'translateY(0)' : 'translateY(24px)',
+        transition: 'opacity 1s ease, transform 1s cubic-bezier(0.16,1,0.3,1)',
+      }}>
+        <h2 style={{
+          fontFamily: "'Cormorant Garamond', serif", fontWeight: 300,
+          fontSize: 'clamp(1.8rem, 4vw, 3rem)', color: '#FAF6EF',
+          lineHeight: 1.3, marginBottom: '20px',
+        }}>
+          You already know what you want to feel like.
+        </h2>
+        <p style={{
+          fontFamily: 'Raleway, sans-serif', fontSize: 'clamp(13px, 1.5vw, 15px)', fontWeight: 300,
+          color: 'rgba(250,246,239,0.45)', lineHeight: 1.9, marginBottom: '48px',
+          letterSpacing: '0.4px',
+        }}>
+          ELARA is simply the scent that gets you there.
+        </p>
+        <Link
+          to="/shop"
+          onMouseEnter={() => setHov(true)}
+          onMouseLeave={() => setHov(false)}
+          style={{
+            display: 'inline-block',
+            fontFamily: 'Raleway, sans-serif', fontSize: '9px',
+            letterSpacing: '5px', textTransform: 'uppercase',
+            padding: '16px 48px',
+            background: hov ? 'rgba(201,168,76,1)' : 'transparent',
+            color: hov ? '#0a0600' : 'rgba(201,168,76,1)',
+            border: '1px solid rgba(201,168,76,0.7)',
+            transition: 'all 0.35s ease',
+            textDecoration: 'none',
+            boxShadow: hov ? '0 4px 28px rgba(201,168,76,0.2)' : 'none',
+            WebkitTapHighlightColor: 'transparent',
+          }}
+        >Explore the Collection</Link>
+      </div>
+    </section>
+  );
+};
+
+/* ─────────────────────────────────────────
    SIDE NAV DOTS
 ───────────────────────────────────────── */
 const SECTIONS = [
@@ -1212,6 +1488,9 @@ const Home = () => {
         />
       </section>
 
+      {/* ══════════════════ CINEMATIC OPENING ══════════════════ */}
+      <CinematicOpening />
+
       {/* ══════════════════ FOUNDER STORY ══════════════════ */}
       <FounderStory />
 
@@ -1282,14 +1561,26 @@ const Home = () => {
 
       </section>
 
+      {/* ══════════════════ FRAGRANCE PHILOSOPHY ══════════════════ */}
+      <FragrancePhilosophy />
+
+      {/* ══════════════════ IMMERSIVE QUOTE ══════════════════ */}
+      <ImmersiveQuote />
+
       {/* ══════════════════ TRUST BAR ══════════════════ */}
       <TrustBar />
 
-      {/* ══════════════════ BRAND STORY ══════════════════ */}
-      <BrandStorySection />
+      {/* ══════════════════ ORIGIN STORY ══════════════════ */}
+      <OriginStory />
+
+      {/* ══════════════════ CRAFTSMANSHIP ══════════════════ */}
+      <CraftsmanshipStory />
 
       {/* ══════════════════ ELARA PROMISE ══════════════════ */}
       <ElaraPromise />
+
+      {/* ══════════════════ EMOTIONAL CLOSING ══════════════════ */}
+      <EmotionalClosing />
 
       {/* ══════════════════ CONNECT + CONTACT ══════════════════ */}
       <CombinedConnectSection />

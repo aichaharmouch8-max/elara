@@ -623,6 +623,52 @@ button { font-family: inherit; }
   }
 }
 
+/* ── Origin story ── */
+@media (max-width: 768px) {
+  .origin-grid {
+    grid-template-columns: 1fr !important;
+    gap: 40px !important;
+  }
+  .origin-grid > div:first-child {
+    display: none !important;
+  }
+}
+
+/* ── Philosophy grid ── */
+@media (max-width: 768px) {
+  .philosophy-grid {
+    grid-template-columns: 1fr !important;
+    gap: 0 !important;
+  }
+  .philosophy-grid > div {
+    border-left: none !important;
+    padding-left: 0 !important;
+    border-top: 1px solid rgba(201,168,76,0.12) !important;
+    padding-top: 40px !important;
+    margin-top: 40px !important;
+  }
+  .philosophy-grid > div:first-child {
+    border-top: none !important;
+    padding-top: 0 !important;
+    margin-top: 0 !important;
+  }
+}
+
+/* ── Craft stats ── */
+@media (max-width: 768px) {
+  .craft-stats {
+    grid-template-columns: 1fr !important;
+  }
+  .craft-stats > div {
+    border-left: none !important;
+    padding-left: 0 !important;
+    border-top: 1px solid rgba(201,168,76,0.1) !important;
+  }
+  .craft-stats > div:first-child {
+    border-top: none !important;
+  }
+}
+
 /* ── Responsive grids ── */
 @media (max-width: 900px) {
   .collection-grid  { grid-template-columns: 1fr !important; }
