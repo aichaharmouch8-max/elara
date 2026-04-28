@@ -128,7 +128,7 @@ const WishMoneyInfo = ({ price }) => {
         <div style={{ flex: 1 }}>
           <p style={{ fontFamily: 'Raleway, sans-serif', fontSize: '9px', letterSpacing: '3px', color: 'rgba(201,169,110,0.6)', textTransform: 'uppercase', marginBottom: '6px' }}>Wish Money</p>
           <p style={{ fontFamily: 'Raleway, sans-serif', fontSize: '13px', fontWeight: 300, color: 'rgba(250,246,239,0.6)', lineHeight: 1.7 }}>
-            Send via Wish Money app — we'll confirm your order and share payment details via WhatsApp.
+            Send via Wish Money app. We'll confirm your order and share payment details via WhatsApp.
           </p>
           <p style={{ fontFamily: 'Raleway, sans-serif', fontSize: '11px', color: 'rgba(201,169,110,0.55)', marginTop: '8px' }}>Amount due: ${price}</p>
         </div>
@@ -350,7 +350,7 @@ const PaymentModal = ({ product, selectedSize = '100ml', selectedPrice, onClose 
             <div style={{ background: 'rgba(201,169,110,0.05)', border: '1px solid rgba(201,169,110,0.15)', borderRadius: '6px', padding: '16px 20px', marginBottom: '20px', textAlign: 'left' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px' }}>
                 <span style={{ fontFamily: 'Raleway, sans-serif', fontSize: '11px', color: 'rgba(250,246,239,0.45)', letterSpacing: '1px' }}>ITEM</span>
-                <span style={{ fontFamily: 'Raleway, sans-serif', fontSize: '11px', color: 'rgba(201,169,110,0.8)' }}>{product.name} · {selectedSize}</span>
+                <span style={{ fontFamily: 'Raleway, sans-serif', fontSize: '11px', color: 'rgba(201,169,110,0.8)' }}>{product.name}  {selectedSize}</span>
               </div>
               <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px' }}>
                 <span style={{ fontFamily: 'Raleway, sans-serif', fontSize: '11px', color: 'rgba(250,246,239,0.45)', letterSpacing: '1px' }}>TOTAL</span>
@@ -371,7 +371,7 @@ const PaymentModal = ({ product, selectedSize = '100ml', selectedPrice, onClose 
           <form onSubmit={handleSubmit}>
             <h3 style={{ fontFamily: "'Playfair Display', serif", fontWeight: 300, fontSize: '26px', fontStyle: 'italic', color: '#FAF6EF', textAlign: 'center', lineHeight: 1.25, marginBottom: '6px' }}>Complete Your Order</h3>
             <p style={{ fontFamily: 'Raleway, sans-serif', fontSize: '12px', fontWeight: 300, color: 'rgba(201,169,110,0.6)', letterSpacing: '1px', textAlign: 'center', marginBottom: '28px' }}>
-              {product.name} · {selectedSize} · ${price}
+              {product.name}  {selectedSize}  ${price}
             </p>
 
             <div style={{ height: '1px', background: 'linear-gradient(to right, transparent, rgba(201,169,110,0.25), transparent)', marginBottom: '24px' }}/>
@@ -386,7 +386,7 @@ const PaymentModal = ({ product, selectedSize = '100ml', selectedPrice, onClose 
             }}>
               {[
                 { icon: '🚚', text: 'Free delivery across Lebanon' },
-                { icon: '⏱', text: '24–48 hrs delivery' },
+                { icon: '⏱', text: '24-48 hrs delivery' },
               ].map(({ icon, text }) => (
                 <div key={text} style={{ flex: 1, textAlign: 'center' }}>
                   <div style={{ fontSize: '16px', marginBottom: '4px' }}>{icon}</div>
@@ -436,7 +436,7 @@ const PaymentModal = ({ product, selectedSize = '100ml', selectedPrice, onClose 
                     <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
                   </svg>
                   <span style={{ fontFamily: 'Raleway, sans-serif', fontSize: '9px', letterSpacing: '2px', color: 'rgba(201,169,110,0.45)', textTransform: 'uppercase' }}>
-                    Order protected · Secure checkout
+                    Order protected. Secure checkout.
                   </span>
                 </div>
               </>

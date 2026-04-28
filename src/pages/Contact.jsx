@@ -91,19 +91,19 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const FAQ_ITEMS = [
   {
     q: 'How long does the perfume last?',
-    a: 'Most of our fragrances last 8–14 hours depending on your skin type. Drier skin absorbs scent faster — apply to pulse points and moisturized skin for best results.',
+    a: 'Most of our fragrances last 8-14 hours depending on your skin type. Drier skin absorbs scent faster. Apply to pulse points and moisturized skin for best results.',
   },
   {
     q: 'Is this genuine perfume?',
-    a: '100%. ELARA is our own original formula — not a clone, not inspired by. Every bottle is crafted with premium fragrance oil at 20% concentration.',
+    a: '100%. ELARA is our own original formula, not a clone, not inspired by. Every bottle is crafted with premium fragrance oil at 20% concentration.',
   },
   {
     q: 'Do you deliver?',
-    a: 'Yes — we deliver across Lebanon. Orders are packed with care and shipped within 1–2 business days.',
+    a: 'Yes, we deliver across Lebanon. Orders are packed with care and shipped within 1-2 business days.',
   },
   {
     q: 'Can I return?',
-    a: "If there's an issue with your order, WhatsApp us immediately. We'll make it right — no hassle.",
+    a: "If there's an issue with your order, WhatsApp us immediately. We'll make it right, no hassle.",
   },
 ];
 

@@ -45,7 +45,7 @@ const PRODUCTS = [
     id: 'reine',
     name: 'Reine',
     image: '/ELARAREINE.png',
-    tagline: 'She does not ask to be noticed. She insists. Saffron, Bulgarian rose, amber — the holy trinity of desire.',
+    tagline: 'She does not ask to be noticed. She insists. Saffron, Bulgarian rose, amber, the holy trinity of desire.',
     price: 39,
     available: true,
   },
@@ -230,7 +230,7 @@ const CollectionCard = ({ product }) => {
           <p style={{
             fontFamily: 'Raleway, sans-serif', fontSize: '11px', letterSpacing: '3px',
             color: 'rgba(200,160,60,0.6)', marginBottom: '10px',
-          }}>100ml · Eau de Parfum</p>
+          }}>100ml Eau de Parfum</p>
           <div style={{
             width: '32px', height: '1px',
             background: 'linear-gradient(90deg, transparent, rgba(201,169,110,0.45), transparent)',
@@ -286,7 +286,7 @@ const CollectionCard = ({ product }) => {
                           boxSizing: 'border-box',
                         }}
                       >
-                        {size} · ${REINE_PRICES[size]}
+                        {size} ${REINE_PRICES[size]}
                       </button>
                       <p style={{
                         fontFamily: 'Raleway, sans-serif', fontSize: '8px', letterSpacing: '0.5px',
@@ -481,13 +481,13 @@ const FounderStory = () => {
           color: 'rgba(250,246,239,0.48)', lineHeight: 2.1, letterSpacing: '0.3px',
           marginBottom: '32px',
         }}>
-          Growing up in Beirut, I was obsessed with my mother's perfume cabinet — French bottles wrapped in tissue, saved for occasions that never quite arrived. At fifteen, I broke the rule and wore every single one. ELARA is my answer to that girl. The belief that luxury should never wait.
+          Growing up in Beirut, I was obsessed with my mother's perfume cabinet, French bottles wrapped in tissue, saved for occasions that never quite arrived. At fifteen, I broke the rule and wore every single one. ELARA is my answer to that girl. The belief that luxury should never wait.
         </p>
         <p style={{
           fontFamily: "'Cormorant Garamond', serif", fontStyle: 'italic',
           fontSize: '18px', color: 'rgba(201,168,76,0.8)', letterSpacing: '0.5px',
           marginBottom: '44px',
-        }}>— Aicha</p>
+        }}>Aicha</p>
         <div style={{
           width: '48px', height: '1px', margin: '0 auto',
           background: 'linear-gradient(90deg, transparent, rgba(201,168,76,0.35), transparent)',
@@ -1008,7 +1008,7 @@ const CinematicOpening = () => {
         transform: visible ? 'translateY(0)' : 'translateY(16px)',
         transition: 'opacity 1s ease 0.85s, transform 1s cubic-bezier(0.16,1,0.3,1) 0.85s',
       }}>
-        ELARA was not created to compete. It was created to linger — in rooms, in memories, in the minds of everyone you've ever left behind.
+        ELARA was not created to compete. It was created to linger, in rooms, in memories, in the minds of everyone you've ever left behind.
       </p>
     </section>
   );
@@ -1071,7 +1071,7 @@ const OriginStory = () => {
             color: 'rgba(250,246,239,0.52)', lineHeight: 1.9, marginBottom: '22px',
             letterSpacing: '0.3px',
           }}>
-            ELARA began in Lebanon — a country that has always known how to turn hardship into beauty. We believed that a truly exceptional fragrance should not belong only to fashion capitals or luxury malls. It should belong to anyone who understands that scent is the most intimate thing you can wear.
+            ELARA began in Lebanon, a country that has always known how to turn hardship into beauty. We believed that a truly exceptional fragrance should not belong only to fashion capitals or luxury malls. It should belong to anyone who understands that scent is the most intimate thing you can wear.
           </p>
           <p style={{
             fontFamily: 'Raleway, sans-serif', fontSize: '14px', fontWeight: 300,
@@ -1102,7 +1102,7 @@ const PHILOSOPHY_ITEMS = [
   {
     number: '02',
     title: 'Luxury is emotional.',
-    body: 'True luxury is not about price. It is about the feeling it leaves behind — long after the moment has passed.',
+    body: 'True luxury is not about price. It is about the feeling it leaves behind, long after the moment has passed.',
   },
   {
     number: '03',
@@ -1194,7 +1194,7 @@ const ImmersiveQuote = () => {
         color: 'rgba(201,168,76,0.5)', textTransform: 'uppercase',
         opacity: visible ? 1 : 0,
         transition: 'opacity 1s ease 0.7s',
-      }}>— ELARA, Maison de Parfum</p>
+      }}>ELARA, Maison de Parfum</p>
     </section>
   );
 };
@@ -1405,7 +1405,7 @@ const Home = () => {
               For the woman who enters a room before she does.
               <br/>
               <span style={{ fontSize: '11px', color: 'rgba(200,160,60,0.55)', letterSpacing: '1px' }}>
-                Crafted in Lebanon · Delivered to your door
+                Crafted in Lebanon. Delivered to your door.
               </span>
             </motion.p>
 
