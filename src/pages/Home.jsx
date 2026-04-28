@@ -113,7 +113,7 @@ const CollectionCard = ({ product }) => {
         onHoverStart={() => setHov(true)}
         onHoverEnd={() => setHov(false)}
         style={{
-          background: 'linear-gradient(160deg, #1A1108 0%, #221710 100%)',
+          background: 'rgba(255,255,255,0.03)',
           border: `1px solid ${hov ? 'rgba(255,200,80,0.4)' : 'rgba(201,169,110,0.08)'}`,
           display: 'flex', flexDirection: 'column',
           alignItems: 'center', textAlign: 'center',
@@ -442,99 +442,16 @@ const useReveal = (threshold = 0.15) => {
   return [ref, visible];
 };
 
-/* ── ELARA Promise ── */
-const PROMISE_PILLARS = [
-  {
-    title: 'Authenticity',
-    body: 'Every bottle is sealed and authenticated before it leaves our hands.',
-    icon: (
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-        <polyline points="9 12 11 14 15 10"/>
-      </svg>
-    ),
-  },
-  {
-    title: 'Craftsmanship',
-    body: 'Small batches, handcrafted in Beirut with ingredients sourced at peak.',
-    icon: (
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/>
-      </svg>
-    ),
-  },
-  {
-    title: 'Luxury',
-    body: 'Because you deserve the rarest ingredients on your skin, always.',
-    icon: (
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
-        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
-      </svg>
-    ),
-  },
-];
-
-const ElaraPromise = () => {
-  const [ref, visible] = useReveal(0.1);
-  return (
-    <section ref={ref} style={{
-      background: '#0a0600',
-      borderTop: '1px solid rgba(200,160,60,0.07)',
-      borderBottom: '1px solid rgba(200,160,60,0.07)',
-      padding: 'clamp(72px, 9vw, 110px) clamp(24px, 6vw, 80px)',
-      textAlign: 'center',
-    }}>
-      <p style={{
-        fontFamily: 'Raleway, sans-serif', fontSize: '9px', letterSpacing: '7px',
-        color: 'rgba(200,160,60,0.6)', textTransform: 'uppercase', marginBottom: '20px',
-        opacity: visible ? 1 : 0, transition: 'opacity 0.8s ease',
-      }}>Our Commitment</p>
-      <h2 style={{
-        fontFamily: "'Cormorant Garamond', serif", fontWeight: 300,
-        fontSize: 'clamp(1.8rem, 3.5vw, 2.8rem)', color: '#FAF6EF',
-        marginBottom: '60px',
-        opacity: visible ? 1 : 0, transition: 'opacity 0.9s ease 0.1s',
-      }}>
-        The ELARA <span style={{ fontStyle: 'italic', color: 'rgba(200,160,60,1)' }}>Promise</span>
-      </h2>
-      <div className="promise-grid" style={{
-        maxWidth: '860px', margin: '0 auto',
-        display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '48px',
-      }}>
-        {PROMISE_PILLARS.map(({ icon, title, body }, i) => (
-          <div key={title} style={{
-            display: 'flex', flexDirection: 'column', alignItems: 'center',
-            textAlign: 'center', gap: '18px',
-            opacity: visible ? 1 : 0,
-            transform: visible ? 'translateY(0)' : 'translateY(20px)',
-            transition: `opacity 0.9s ease ${i * 0.12}s, transform 0.9s cubic-bezier(0.16,1,0.3,1) ${i * 0.12}s`,
-          }}>
-            <div style={{ color: 'rgba(200,160,60,0.7)' }}>{icon}</div>
-            <h4 style={{
-              fontFamily: "'Cormorant Garamond', serif", fontWeight: 300,
-              fontSize: '20px', color: '#FAF6EF', letterSpacing: '1px', margin: 0,
-            }}>{title}</h4>
-            <p style={{
-              fontFamily: 'Raleway, sans-serif', fontSize: '12px', fontWeight: 300,
-              color: 'rgba(250,246,239,0.38)', lineHeight: 2, letterSpacing: '0.3px',
-              margin: 0, maxWidth: '220px',
-            }}>{body}</p>
-          </div>
-        ))}
-      </div>
-    </section>
-  );
-};
 
 /* ── Founder Story ── */
 const FounderStory = () => {
   const [ref, visible] = useReveal(0.1);
   return (
     <section ref={ref} style={{
-      background: '#0d0700',
-      padding: 'clamp(80px, 10vw, 120px) clamp(24px, 6vw, 80px)',
-      borderTop: '1px solid rgba(201,168,76,0.15)',
-      borderBottom: '1px solid rgba(201,168,76,0.15)',
+      background: '#0a0500',
+      padding: 'clamp(60px, 8vw, 100px) clamp(20px, 4vw, 40px)',
+      borderTop: '1px solid rgba(201,168,76,0.08)',
+      borderBottom: '1px solid rgba(201,168,76,0.08)',
       textAlign: 'center',
     }}>
       <div style={{
@@ -604,10 +521,10 @@ const TrustBar = () => (
       {TRUST_BAR_ITEMS.flatMap((item, i) => {
         const nodes = [(
           <span key={item} style={{
-            fontFamily: 'Raleway, sans-serif', fontSize: '8px',
-            letterSpacing: '3.5px', textTransform: 'uppercase',
+            fontFamily: 'Raleway, sans-serif', fontSize: '10px',
+            letterSpacing: '0.15em', textTransform: 'uppercase',
             color: 'rgba(201,168,76,0.75)', whiteSpace: 'nowrap',
-            padding: '6px 20px',
+            padding: '6px 16px',
           }}>{item}</span>
         )];
         if (i < TRUST_BAR_ITEMS.length - 1) {
@@ -709,7 +626,7 @@ const CombinedConnectSection = () => {
       id="connect"
       className="snap-section-auto"
       ref={secRef}
-      style={{ background: '#1a0f00', padding: 'clamp(72px, 9vw, 120px) clamp(24px, 6vw, 80px)' }}
+      style={{ background: '#0a0500', padding: 'clamp(60px, 8vw, 100px) clamp(20px, 4vw, 40px)', borderTop: '1px solid rgba(201,168,76,0.08)' }}
     >
       <style>{`
         .hc-input::placeholder { color: rgba(200,160,60,0.3); font-family: 'Cormorant Garamond', serif; }
@@ -999,8 +916,8 @@ const WhyELARA = () => {
   const [ref, visible] = useReveal(0.1);
   return (
     <section ref={ref} style={{
-      background: '#080400',
-      padding: 'clamp(80px, 10vw, 120px) clamp(24px, 6vw, 80px)',
+      background: '#0a0500',
+      padding: 'clamp(60px, 8vw, 100px) clamp(20px, 4vw, 40px)',
       borderTop: '1px solid rgba(201,168,76,0.08)',
       borderBottom: '1px solid rgba(201,168,76,0.08)',
       textAlign: 'center',
@@ -1055,9 +972,10 @@ const CinematicOpening = () => {
   const [ref, visible] = useReveal(0.2);
   return (
     <section ref={ref} style={{
-      background: '#080400',
-      padding: 'clamp(80px, 10vw, 120px) clamp(40px, 8vw, 120px)',
+      background: '#0a0500',
+      padding: 'clamp(60px, 8vw, 100px) clamp(20px, 4vw, 40px)',
       textAlign: 'center',
+      borderTop: '1px solid rgba(201,168,76,0.08)',
     }}>
       <h2 style={{
         fontFamily: "'Cormorant Garamond', serif", fontWeight: 300,
@@ -1103,9 +1021,10 @@ const OriginStory = () => {
   const [ref, visible] = useReveal(0.1);
   return (
     <section ref={ref} style={{
-      background: '#0d0700',
-      padding: 'clamp(80px, 10vw, 120px) clamp(24px, 6vw, 80px)',
+      background: '#0a0500',
+      padding: 'clamp(60px, 8vw, 100px) clamp(20px, 4vw, 40px)',
       borderTop: '1px solid rgba(201,168,76,0.08)',
+      borderBottom: '1px solid rgba(201,168,76,0.08)',
     }}>
       <div className="origin-grid" style={{
         maxWidth: '1100px', margin: '0 auto',
@@ -1196,8 +1115,8 @@ const FragrancePhilosophy = () => {
   const [ref, visible] = useReveal(0.1);
   return (
     <section ref={ref} style={{
-      background: '#080400',
-      padding: 'clamp(80px, 10vw, 120px) clamp(24px, 6vw, 80px)',
+      background: '#0a0500',
+      padding: 'clamp(60px, 8vw, 100px) clamp(20px, 4vw, 40px)',
       borderTop: '1px solid rgba(201,168,76,0.08)',
       borderBottom: '1px solid rgba(201,168,76,0.08)',
     }}>
@@ -1248,11 +1167,13 @@ const ImmersiveQuote = () => {
   const [ref, visible] = useReveal(0.2);
   return (
     <section ref={ref} style={{
-      background: '#060300',
+      background: '#0a0500',
       minHeight: '100vh',
       display: 'flex', flexDirection: 'column',
       alignItems: 'center', justifyContent: 'center',
-      padding: 'clamp(80px, 10vw, 120px) clamp(24px, 8vw, 120px)',
+      padding: 'clamp(60px, 8vw, 100px) clamp(20px, 4vw, 40px)',
+      borderTop: '1px solid rgba(201,168,76,0.08)',
+      borderBottom: '1px solid rgba(201,168,76,0.08)',
       textAlign: 'center',
     }}>
       <blockquote style={{
@@ -1278,79 +1199,6 @@ const ImmersiveQuote = () => {
   );
 };
 
-/* ─────────────────────────────────────────
-   CRAFTSMANSHIP STORY
-───────────────────────────────────────── */
-const CRAFT_STATS = [
-  { value: '100%', label: 'Authentic Formula' },
-  { value: '48H',  label: 'Lasting Impression' },
-  { value: '∞',   label: 'Memories Created' },
-];
-
-const CraftsmanshipStory = () => {
-  const [ref, visible] = useReveal(0.1);
-  return (
-    <section ref={ref} style={{
-      background: '#0d0700',
-      padding: 'clamp(80px, 10vw, 120px) clamp(24px, 6vw, 80px)',
-      borderTop: '1px solid rgba(201,168,76,0.08)',
-    }}>
-      <div style={{ maxWidth: '860px', margin: '0 auto' }}>
-        <div style={{
-          opacity: visible ? 1 : 0,
-          transform: visible ? 'translateY(0)' : 'translateY(24px)',
-          transition: 'opacity 1s ease, transform 1s cubic-bezier(0.16,1,0.3,1)',
-          marginBottom: '64px',
-        }}>
-          <p style={{
-            fontFamily: 'Raleway, sans-serif', fontSize: '9px', letterSpacing: '7px',
-            color: 'rgba(201,168,76,0.6)', textTransform: 'uppercase', marginBottom: '24px',
-          }}>The Craft</p>
-          <h2 style={{
-            fontFamily: "'Cormorant Garamond', serif", fontWeight: 300,
-            fontSize: 'clamp(1.8rem, 3.5vw, 2.8rem)', color: '#FAF6EF',
-            lineHeight: 1.25, marginBottom: '28px',
-          }}>
-            Every detail was chosen with{' '}
-            <span style={{ fontStyle: 'italic', color: 'rgba(201,168,76,0.9)' }}>obsession.</span>
-          </h2>
-          <p style={{
-            fontFamily: 'Raleway, sans-serif', fontSize: '14px', fontWeight: 300,
-            color: 'rgba(250,246,239,0.48)', lineHeight: 1.9, letterSpacing: '0.3px',
-            maxWidth: '640px',
-          }}>
-            From the weight of the bottle to the depth of the fragrance — nothing in ELARA happened by accident. Our formulas are built on premium raw ingredients, layered with precision, and tested until they feel less like perfume and more like a second skin.
-          </p>
-        </div>
-
-        <div className="craft-stats" style={{
-          display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)',
-          borderTop: '1px solid rgba(201,168,76,0.1)',
-        }}>
-          {CRAFT_STATS.map(({ value, label }, i) => (
-            <div key={label} style={{
-              padding: '40px clamp(0px, 3vw, 40px) 40px 0',
-              paddingLeft: i > 0 ? 'clamp(24px, 3vw, 40px)' : '0',
-              borderLeft: i > 0 ? '1px solid rgba(201,168,76,0.1)' : 'none',
-              opacity: visible ? 1 : 0,
-              transition: `opacity 0.9s ease ${0.3 + i * 0.15}s`,
-            }}>
-              <p style={{
-                fontFamily: "'Cormorant Garamond', serif", fontStyle: 'italic',
-                fontSize: 'clamp(2rem, 4vw, 3rem)', color: 'rgba(201,168,76,1)',
-                marginBottom: '8px', lineHeight: 1,
-              }}>{value}</p>
-              <p style={{
-                fontFamily: 'Raleway, sans-serif', fontSize: '8px', letterSpacing: '4px',
-                color: 'rgba(250,246,239,0.3)', textTransform: 'uppercase',
-              }}>{label}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-};
 
 /* ─────────────────────────────────────────
    EMOTIONAL CLOSING
@@ -1360,11 +1208,11 @@ const EmotionalClosing = () => {
   const [ref, visible] = useReveal(0.2);
   return (
     <section ref={ref} style={{
-      background: '#080400',
-      padding: 'clamp(80px, 10vw, 120px) clamp(24px, 6vw, 80px)',
+      background: '#0a0500',
+      padding: 'clamp(60px, 8vw, 100px) clamp(20px, 4vw, 40px)',
       textAlign: 'center',
-      borderTop: '1px solid rgba(201,168,76,0.12)',
-      borderBottom: '1px solid rgba(201,168,76,0.12)',
+      borderTop: '1px solid rgba(201,168,76,0.08)',
+      borderBottom: '1px solid rgba(201,168,76,0.08)',
     }}>
       <div style={{
         opacity: visible ? 1 : 0,
@@ -1459,7 +1307,7 @@ const SideNavDots = () => {
 ───────────────────────────────────────── */
 const Home = () => {
   return (
-    <div style={{ background: '#1a0f00' }}>
+    <div style={{ background: '#0a0500', minHeight: '100vh' }}>
       <SideNavDots />
 
       {/* ══════════════════ HERO ══════════════════ */}
@@ -1593,8 +1441,9 @@ const Home = () => {
 
       {/* ══════════════════ COLLECTION ══════════════════ */}
       <section id="collection" className="collection-section snap-section-auto" style={{
-        background: '#1a0f00',
-        padding: '80px clamp(32px, 8vw, 100px)',
+        background: '#0a0500',
+        padding: 'clamp(60px, 8vw, 100px) clamp(20px, 4vw, 40px)',
+        borderTop: '1px solid rgba(201,168,76,0.08)',
         width: '100%',
         maxWidth: '100%',
       }}>
@@ -1672,12 +1521,6 @@ const Home = () => {
 
       {/* ══════════════════ WHY ELARA ══════════════════ */}
       <WhyELARA />
-
-      {/* ══════════════════ CRAFTSMANSHIP ══════════════════ */}
-      <CraftsmanshipStory />
-
-      {/* ══════════════════ ELARA PROMISE ══════════════════ */}
-      <ElaraPromise />
 
       {/* ══════════════════ EMOTIONAL CLOSING ══════════════════ */}
       <EmotionalClosing />

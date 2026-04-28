@@ -28,7 +28,7 @@ const ChatPanel = ({ onClose }) => {
     }}>
       {/* Header */}
       <div style={{
-        background: '#0e0800',
+        background: '#0a0500',
         borderBottom: '1px solid rgba(200,150,42,0.15)',
         padding: '14px 18px',
         display: 'flex',

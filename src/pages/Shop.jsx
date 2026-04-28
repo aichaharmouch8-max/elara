@@ -178,7 +178,7 @@ const ProductCard = ({ product, inView, delay }) => {
         }}
       >
         <div className="shop-card" style={{
-          background: 'linear-gradient(160deg, #1A1108 0%, #221710 100%)',
+          background: 'rgba(255,255,255,0.03)',
           border: `1px solid ${hov ? 'rgba(200,150,42,0.35)' : 'rgba(200,150,42,0.1)'}`,
           transform: hov ? 'translateY(-10px)' : 'translateY(0)',
           boxShadow: hov
@@ -194,8 +194,8 @@ const ProductCard = ({ product, inView, delay }) => {
             display: 'flex', alignItems: 'center', justifyContent: 'center',
             position: 'relative', overflow: 'hidden',
             background: product.locked
-              ? 'linear-gradient(148deg, #0e0800 0%, #1a0f00 100%)'
-              : 'linear-gradient(145deg, #1a0f00 0%, #261500 100%)',
+              ? 'rgba(0,0,0,0.3)'
+              : 'rgba(255,255,255,0.02)',
           }}>
             {product.bestseller && (
               <div style={{
@@ -475,7 +475,7 @@ const ReviewsSection = () => {
       }}>
         {reviews.map((r, i) => (
           <div key={i} style={{
-            background: 'linear-gradient(160deg, #1A1108 0%, #1e1308 100%)',
+            background: 'rgba(255,255,255,0.03)',
             border: '1px solid rgba(200,150,42,0.1)',
             padding: '28px 28px 24px',
           }}>
@@ -506,10 +506,10 @@ const Shop = () => {
   const [gridRef, gridIn] = useInView(0.05);
 
   return (
-    <div style={{ background: '#1a0f00', minHeight: '100vh' }}>
+    <div style={{ background: '#0a0500', minHeight: '100vh' }}>
       {/* ── Page header ── */}
       <div className="shop-header" style={{
-        background: 'linear-gradient(148deg, #0e0800 0%, #1a0f00 100%)',
+        background: '#0a0500',
         padding: '184px clamp(20px, 6vw, 80px) 100px',
         position: 'relative', overflow: 'hidden',
         borderBottom: '1px solid rgba(200,150,42,0.1)',

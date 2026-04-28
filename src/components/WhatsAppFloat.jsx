@@ -17,7 +17,7 @@ const WhatsAppFloat = () => {
         bottom: '84px',
         width: '52px', height: '52px',
         borderRadius: '50%',
-        background: hov ? '#1a0f00' : 'rgba(16,9,0,0.95)',
+        background: hov ? '#0a0500' : 'rgba(10,5,0,0.95)',
         border: `1px solid ${hov ? 'rgba(200,160,60,0.9)' : 'rgba(200,160,60,0.35)'}`,
         boxShadow: hov
           ? '0 4px 24px rgba(200,160,60,0.25), 0 0 0 4px rgba(200,160,60,0.08)'

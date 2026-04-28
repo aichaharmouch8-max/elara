@@ -26,7 +26,7 @@ const SocialBtn = ({ href, label, children }) => {
 
 const Footer = () => {
   return (
-    <footer style={{ background: '#1a0f00', margin: 0, padding: 0 }}>
+    <footer style={{ background: '#0a0500', margin: 0, padding: 0 }}>
 
       <div style={{
         maxWidth: '860px', margin: '0 auto',

@@ -21,15 +21,22 @@ const Navbar = () => {
       <nav
         className="navbar-root"
         style={{
-          position: 'fixed', top: 0, left: 0, right: 0, width: '100%', zIndex: 9999,
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          right: 0,
+          width: '100%',
+          zIndex: 9999,
           height: '76px',
-          display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
           padding: '0 56px',
-          background: 'rgba(8, 4, 1, 0.35)',
+          background: 'rgba(10, 5, 0, 0.4)',
           backdropFilter: 'blur(20px)',
           WebkitBackdropFilter: 'blur(20px)',
-          borderBottom: '1px solid rgba(201, 168, 76, 0.12)',
-          transition: 'background 0.5s ease',
+          borderBottom: '1px solid rgba(201,168,76,0.12)',
+          transition: 'background 0.3s ease',
           boxSizing: 'border-box',
         }}
       >
