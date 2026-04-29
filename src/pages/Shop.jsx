@@ -33,7 +33,7 @@ const PRODUCTS = [
   {
     id: 'oro',
     name: 'Oro',
-    image: '/ELARAOROO.png',
+    image: '/elaraoroo.png',
     price: 79,
     size: '100ml Eau de Parfum',
     emotionalHook: 'For the person who walks in and owns the room without trying.',
@@ -54,7 +54,7 @@ const PRODUCTS = [
   {
     id: 'nova',
     name: 'Rawan Noir',
-    image: '/ELARAREINE.png',
+    image: '/elaraaaaa.png',
     price: 79,
     size: '100ml Eau de Parfum',
     emotionalHook: 'Born from the silence after a storm.',
@@ -193,9 +193,7 @@ const ProductCard = ({ product, inView, delay }) => {
             height: '280px',
             display: 'flex', alignItems: 'center', justifyContent: 'center',
             position: 'relative', overflow: 'hidden',
-            background: product.locked
-              ? 'rgba(0,0,0,0.3)'
-              : 'rgba(255,255,255,0.02)',
+            background: 'rgba(255,255,255,0.02)',
           }}>
             {product.bestseller && (
               <div style={{
@@ -206,42 +204,28 @@ const ProductCard = ({ product, inView, delay }) => {
               }}>Fan Favourite</div>
             )}
 
-            {product.locked ? (
-              <>
-                <img
-                  src={product.image} alt=""
-                  style={{
-                    position: 'absolute', inset: 0, width: '100%', height: '100%',
-                    objectFit: 'contain', objectPosition: 'center',
-                    opacity: 0.07, filter: 'blur(8px) brightness(0.5)',
-                  }}
-                />
-                <div style={{
-                  position: 'absolute', inset: 0,
-                  display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
-                  gap: '16px',
-                }}>
-                  <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#C8962A" strokeWidth="0.9" strokeLinecap="round">
-                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
-                    <path d="M7 11V7a5 5 0 0110 0v4"/>
-                  </svg>
-                  <p style={{
-                    fontFamily: 'Raleway', fontSize: '8px', letterSpacing: '5px',
-                    color: 'rgba(200,150,42,0.48)', textTransform: 'uppercase',
-                  }}>Coming Soon</p>
-                </div>
-              </>
-            ) : (
-              <img
-                src={product.image} alt={product.name}
-                style={{
-                  width: '100%', height: '100%',
-                  objectFit: 'contain', objectPosition: 'center',
-                  transform: hov ? 'scale(1.05)' : 'scale(1)',
-                  transition: 'transform 0.6s cubic-bezier(0.16,1,0.3,1)',
-                  padding: '20px', boxSizing: 'border-box',
-                }}
-              />
+            <img
+              src={product.image} alt={product.name}
+              style={{
+                width: '100%', height: '100%',
+                objectFit: 'contain', objectPosition: 'center',
+                transform: hov ? 'scale(1.05)' : 'scale(1)',
+                transition: 'transform 0.6s cubic-bezier(0.16,1,0.3,1)',
+                padding: '20px', boxSizing: 'border-box',
+              }}
+            />
+            {product.locked && (
+              <div style={{
+                position: 'absolute', bottom: 0, left: 0, right: 0,
+                background: 'linear-gradient(to top, rgba(4,2,0,0.72) 0%, transparent 100%)',
+                padding: '28px 14px 12px',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+              }}>
+                <p style={{
+                  fontFamily: 'Raleway', fontSize: '7px', letterSpacing: '5px',
+                  color: 'rgba(201,168,76,0.65)', textTransform: 'uppercase', margin: 0,
+                }}>Coming Soon</p>
+              </div>
             )}
           </div>
 
@@ -251,7 +235,7 @@ const ProductCard = ({ product, inView, delay }) => {
             {/* Concentration */}
             <p style={{
               fontFamily: 'Raleway', fontSize: '7px', letterSpacing: '3px',
-              color: product.locked ? 'rgba(200,150,42,0.3)' : 'rgba(200,150,42,0.6)',
+              color: 'rgba(200,150,42,0.6)',
               textTransform: 'uppercase', marginBottom: '14px',
             }}>{product.concentration}</p>
 
@@ -265,14 +249,14 @@ const ProductCard = ({ product, inView, delay }) => {
               <span style={{
                 display: 'block', fontFamily: "'Cormorant Garamond', serif",
                 fontStyle: 'italic', fontWeight: 300, fontSize: '34px', lineHeight: 1,
-                color: product.locked ? 'rgba(200,150,42,0.4)' : '#C8962A',
+                color: '#C8962A',
               }}>{product.name}</span>
             </h3>
 
             {/* Emotional hook */}
             <p style={{
               fontFamily: "'Cormorant Garamond', serif", fontStyle: 'italic', fontWeight: 300,
-              fontSize: '16px', color: product.locked ? 'rgba(250,246,239,0.25)' : 'rgba(250,246,239,0.7)',
+              fontSize: '16px', color: 'rgba(250,246,239,0.7)',
               lineHeight: 1.65, marginBottom: '18px', letterSpacing: '0.2px',
             }}>{product.emotionalHook}</p>
 
@@ -291,7 +275,7 @@ const ProductCard = ({ product, inView, delay }) => {
               }}>Smells like</span>
               <p style={{
                 fontFamily: "'Cormorant Garamond', serif", fontStyle: 'italic', fontWeight: 300,
-                fontSize: '15px', color: product.locked ? 'rgba(200,150,42,0.3)' : 'rgba(200,150,42,0.85)',
+                fontSize: '15px', color: 'rgba(200,150,42,0.85)',
                 lineHeight: 1.65, letterSpacing: '0.2px', margin: 0,
               }}>{product.smellsLike}</p>
             </div>
@@ -321,8 +305,8 @@ const ProductCard = ({ product, inView, delay }) => {
                       <span key={i} style={{
                         fontFamily: 'Raleway', fontSize: '9px', letterSpacing: '0.8px',
                         padding: '3px 8px',
-                        color: product.locked ? 'rgba(200,150,42,0.3)' : 'rgba(200,150,42,0.8)',
-                        border: `1px solid ${product.locked ? 'rgba(200,150,42,0.1)' : 'rgba(200,150,42,0.2)'}`,
+                        color: 'rgba(200,150,42,0.8)',
+                        border: '1px solid rgba(200,150,42,0.2)',
                         background: 'rgba(200,150,42,0.04)',
                       }}>{n}</span>
                     ))}
@@ -416,18 +400,22 @@ const ProductCard = ({ product, inView, delay }) => {
               </div>
             ) : (
               <div style={{
-                paddingTop: '16px', borderTop: '1px solid rgba(200,150,42,0.08)',
-                display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+                paddingTop: '20px', borderTop: '1px solid rgba(200,150,42,0.1)',
+                display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px',
               }}>
+                <div style={{
+                  width: '24px', height: '1px',
+                  background: 'linear-gradient(to right, transparent, rgba(201,168,76,0.4), transparent)',
+                }}/>
                 <span style={{
                   fontFamily: "'Cormorant Garamond', serif",
-                  fontSize: '32px', fontWeight: 300,
-                  color: 'rgba(250,246,239,0.18)', letterSpacing: '1px',
-                }}>${product.price}</span>
-                <span style={{
-                  fontFamily: 'Raleway', fontSize: '8px', letterSpacing: '3px',
-                  color: 'rgba(200,150,42,0.32)', textTransform: 'uppercase',
-                }}>Coming 2026</span>
+                  fontStyle: 'italic', fontWeight: 300,
+                  fontSize: '16px', color: 'rgba(201,168,76,0.55)', letterSpacing: '1px',
+                }}>Available Soon</span>
+                <p style={{
+                  fontFamily: 'Raleway', fontSize: '7px', letterSpacing: '4px',
+                  color: 'rgba(250,246,239,0.25)', textTransform: 'uppercase', margin: 0,
+                }}>Notify me</p>
               </div>
             )}
           </div>

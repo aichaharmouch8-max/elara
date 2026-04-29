@@ -51,7 +51,7 @@ const PRODUCTS = [
   {
     id: 'oro',
     name: 'Oro',
-    image: '/ELARAOROO.png',
+    image: '/elaraoroo.png',
     tagline: 'Rare golden woods. Luminous amber. A secret worn close to the skin, never told.',
     price: 79,
     available: false,
@@ -59,7 +59,7 @@ const PRODUCTS = [
   {
     id: 'nova',
     name: 'Rawan Noir',
-    image: '/ELARAREINE.png',
+    image: '/elaraaaaa.png',
     tagline: 'Born after midnight. For the woman who lives her most interesting life after dark.',
     price: 79,
     available: false,
@@ -148,31 +148,22 @@ const CollectionCard = ({ product }) => {
               display: 'block',
               transform: hov ? 'scale(1.08)' : 'scale(1)',
               transition: 'transform 0.5s ease',
-              filter: locked ? 'blur(6px) brightness(0.28)' : 'none',
+              filter: 'none',
             }}
           />
 
           {locked && (
             <div style={{
-              position: 'absolute', inset: 0, zIndex: 2,
-              display: 'flex', flexDirection: 'column',
-              alignItems: 'center', justifyContent: 'center', gap: '8px',
-              background: 'rgba(8,3,1,0.55)',
-              backdropFilter: 'blur(2px)',
-              WebkitBackdropFilter: 'blur(2px)',
+              position: 'absolute', bottom: 0, left: 0, right: 0, zIndex: 2,
+              background: 'linear-gradient(to top, rgba(4,2,0,0.72) 0%, transparent 100%)',
+              padding: '28px 14px 12px',
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
             }}>
               <span style={{
-                fontFamily: 'Raleway, sans-serif', fontSize: '8px',
-                letterSpacing: '0.35em', color: 'rgba(201,168,76,0.5)',
+                fontFamily: 'Raleway, sans-serif', fontSize: '7px',
+                letterSpacing: '5px', color: 'rgba(201,168,76,0.65)',
                 textTransform: 'uppercase',
-              }}>— Coming Soon —</span>
-              <p style={{
-                fontFamily: "'Cormorant Garamond', serif", fontStyle: 'italic',
-                fontSize: '22px', fontWeight: 300,
-                color: 'rgba(250,246,239,0.75)',
-                letterSpacing: '0.02em', lineHeight: 1.2,
-                marginTop: '4px',
-              }}>Available Soon</p>
+              }}>Coming Soon</span>
             </div>
           )}
 
@@ -207,7 +198,7 @@ const CollectionCard = ({ product }) => {
           <h3 style={{
             fontFamily: "'Playfair Display', serif", fontWeight: 300,
             fontSize: '28px', fontStyle: 'italic',
-            color: locked ? 'rgba(250,246,239,0.45)' : '#FAF6EF',
+            color: '#FAF6EF',
             lineHeight: 1, marginBottom: '6px',
           }}>{product.name}</h3>
           <p style={{
@@ -216,7 +207,7 @@ const CollectionCard = ({ product }) => {
           }}>100ml Eau de Parfum</p>
           <p style={{
             fontFamily: 'Raleway, sans-serif', fontSize: '12px', fontWeight: 300,
-            color: locked ? 'rgba(250,246,239,0.18)' : 'rgba(232,224,216,0.4)',
+            color: 'rgba(232,224,216,0.4)',
             lineHeight: 1.8, marginBottom: '12px', letterSpacing: '0.3px', flexGrow: 1,
           }}>{product.tagline}</p>
 
@@ -308,12 +299,20 @@ const CollectionCard = ({ product }) => {
           ) : (
             <div style={{
               width: '100%', textAlign: 'center',
-              fontFamily: "'Playfair Display', serif", fontSize: '12px',
-              fontStyle: 'italic', letterSpacing: '1.5px', padding: '13px 0',
-              color: 'rgba(200,160,60,0.45)',
-              border: '1px solid rgba(200,160,60,0.15)',
-              cursor: 'default',
-            }}>Wait for the reveal</div>
+              display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '6px',
+              padding: '13px 0', cursor: 'default',
+              border: '1px solid rgba(200,160,60,0.18)',
+            }}>
+              <span style={{
+                fontFamily: "'Cormorant Garamond', serif", fontStyle: 'italic', fontWeight: 300,
+                fontSize: '15px', color: 'rgba(201,168,76,0.6)', letterSpacing: '0.5px',
+              }}>Available Soon</span>
+              <span style={{
+                fontFamily: 'Raleway, sans-serif', fontSize: '7px',
+                letterSpacing: '4px', color: 'rgba(250,246,239,0.22)',
+                textTransform: 'uppercase',
+              }}>Notify me</span>
+            </div>
           )}
         </div>
       </motion.div>
