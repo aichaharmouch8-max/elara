@@ -32,10 +32,10 @@ const Navbar = () => {
           alignItems: 'center',
           justifyContent: 'space-between',
           padding: '0 56px',
-          background: 'rgba(6, 6, 6, 0.4)',
+          background: 'rgba(8, 4, 1, 0.3)',
           backdropFilter: 'blur(20px)',
           WebkitBackdropFilter: 'blur(20px)',
-          borderBottom: '1px solid rgba(120,20,40,0.25)',
+          borderBottom: '1px solid rgba(201, 168, 76, 0.1)',
           transition: 'background 0.3s ease',
           boxSizing: 'border-box',
         }}
