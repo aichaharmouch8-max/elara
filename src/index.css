@@ -494,34 +494,35 @@ button { font-family: inherit; }
     padding: 0 4vw !important;
     box-sizing: border-box !important;
     scrollbar-width: none !important;
+    align-items: flex-start !important;
   }
 
-  /* ── Carousel card slot — 92vw, exactly one card per snap ── */
+  /* ── Carousel card slot — explicit 600px height so all 3 cards are identical ── */
   .carousel-card-slot {
     scroll-snap-align: start !important;
     width: 92vw !important;
     min-width: 92vw !important;
     max-width: 92vw !important;
-    min-height: 600px !important;
-    height: auto !important;
+    height: 600px !important;
     flex-shrink: 0 !important;
     flex-grow: 0 !important;
     flex-basis: 92vw !important;
     display: flex !important;
     flex-direction: column !important;
+    overflow: hidden !important;
   }
 
-  /* Card inner (motion.div) — stretch to fill slot so all cards are identical height */
+  /* Card inner (motion.div) — height: 100% works because parent has explicit 600px */
   .carousel-card-slot > * {
     width: 100% !important;
     min-width: 0 !important;
     max-width: 100% !important;
-    flex: 1 !important;
-    min-height: 600px !important;
-    height: auto !important;
+    height: 100% !important;
+    min-height: 0 !important;
+    flex-shrink: 0 !important;
   }
 
-  /* Card image height in carousel — uniform 220px, never compress */
+  /* Card image — locked in at 220px, never grows or shrinks */
   .collection-mobile-carousel .collection-card-img-wrap {
     height: 220px !important;
     min-height: 220px !important;
@@ -531,14 +532,19 @@ button { font-family: inherit; }
     padding-top: 0 !important;
     box-sizing: border-box !important;
     width: 100% !important;
+    position: relative !important;
   }
 
-  /* Card body fills remaining height, same padding on all cards */
+  /* Card body — fills the remaining 380px (600 - 220), same on all 3 cards */
   .collection-mobile-carousel .collection-card-body {
     padding: 24px 20px !important;
-    flex: 1 !important;
+    flex: 1 1 0% !important;
     box-sizing: border-box !important;
     width: 100% !important;
+    overflow: hidden !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
   }
 
   /* Buy Now — gold fill, full width, premium feel */
