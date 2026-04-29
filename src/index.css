@@ -704,23 +704,19 @@ button { font-family: inherit; }
   }
 }
 
-/* ── Philosophy grid ── */
+/* ── Philosophy section ── */
 @media (max-width: 768px) {
+  .philosophy-section {
+    padding: 60px 24px !important;
+  }
   .philosophy-grid {
     grid-template-columns: 1fr !important;
-    gap: 0 !important;
+    gap: 40px !important;
   }
   .philosophy-grid > div {
-    border-left: none !important;
-    padding-left: 0 !important;
-    border-top: 1px solid rgba(201,168,76,0.12) !important;
-    padding-top: 40px !important;
-    margin-top: 40px !important;
-  }
-  .philosophy-grid > div:first-child {
-    border-top: none !important;
-    padding-top: 0 !important;
-    margin-top: 0 !important;
+    border: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
   }
 }
 

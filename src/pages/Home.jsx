@@ -744,43 +744,41 @@ const PHILOSOPHY_ITEMS = [
 const FragrancePhilosophy = () => {
   const [ref, visible] = useReveal(0.1);
   return (
-    <section ref={ref} style={{
+    <section ref={ref} className="philosophy-section" style={{
       background: '#0f0508',
-      padding: 'clamp(60px, 8vw, 100px) clamp(20px, 4vw, 40px)',
+      padding: '80px 60px',
       borderTop: '1px solid rgba(120,20,40,0.3)',
     }}>
       <p style={{
-        fontFamily: 'Raleway, sans-serif', fontSize: '9px', letterSpacing: '7px',
+        fontFamily: 'Raleway, sans-serif', fontSize: '10px', letterSpacing: '6px',
         color: 'rgba(201,168,76,0.6)', textTransform: 'uppercase',
-        textAlign: 'center', marginBottom: '72px',
-        opacity: visible ? 1 : 0, transition: 'opacity 0.9s ease',
+        textAlign: 'center', marginBottom: '40px',
+        opacity: visible ? 1 : 0, transition: 'opacity 0.6s ease',
       }}>Our Philosophy</p>
 
       <div className="philosophy-grid" style={{
-        maxWidth: '1100px', margin: '0 auto',
+        maxWidth: '1000px', margin: '0 auto',
         display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)',
+        gap: '0 clamp(32px, 5vw, 64px)',
       }}>
         {PHILOSOPHY_ITEMS.map(({ number, title, body }, i) => (
           <div key={number} style={{
-            padding: '0 clamp(24px, 4vw, 56px)',
-            borderLeft: i > 0 ? '1px solid rgba(201,168,76,0.15)' : 'none',
             opacity: visible ? 1 : 0,
-            transform: visible ? 'translateY(0)' : 'translateY(24px)',
-            transition: `opacity 0.9s ease ${i * 0.15}s, transform 0.9s cubic-bezier(0.16,1,0.3,1) ${i * 0.15}s`,
+            transform: visible ? 'translateY(0)' : 'translateY(20px)',
+            transition: `opacity 0.7s ease ${i * 0.4}s, transform 0.7s cubic-bezier(0.16,1,0.3,1) ${i * 0.4}s`,
           }}>
             <p style={{
               fontFamily: "'Cormorant Garamond', serif", fontStyle: 'italic',
-              fontSize: '40px', color: 'rgba(201,168,76,0.28)',
-              marginBottom: '22px', lineHeight: 1,
+              fontSize: '14px', color: '#c9a84c', lineHeight: 1, margin: 0,
             }}>{number}</p>
             <h3 style={{
-              fontFamily: "'Cormorant Garamond', serif", fontWeight: 300,
-              fontSize: 'clamp(1.1rem, 2vw, 1.4rem)', color: '#FAF6EF',
-              marginBottom: '16px', lineHeight: 1.3,
+              fontFamily: "'Cormorant Garamond', serif", fontWeight: 500,
+              fontSize: '20px', color: '#FAF6EF',
+              margin: '8px 0 0', lineHeight: 1.3,
             }}>{title}</h3>
             <p style={{
               fontFamily: 'Raleway, sans-serif', fontSize: '13px', fontWeight: 300,
-              color: 'rgba(232,224,216,0.48)', lineHeight: 1.9, letterSpacing: '0.3px',
+              color: '#e8e0d8', lineHeight: 1.6, margin: '8px 0 0', letterSpacing: '0.2px',
             }}>{body}</p>
           </div>
         ))}
