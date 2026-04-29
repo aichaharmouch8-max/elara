@@ -26,7 +26,6 @@ const ShopNowBtn = () => {
   );
 };
 
-/* ── Shared animation variants ── */
 const staggerContainer = {
   hidden:  {},
   visible: { transition: { staggerChildren: 0.15 } },
@@ -66,8 +65,6 @@ const PRODUCTS = [
     available: false,
   },
 ];
-
-
 
 const REINE_PRICES = { '50ml': 29, '100ml': 39 };
 
@@ -124,7 +121,6 @@ const CollectionCard = ({ product }) => {
             : '0 8px 32px rgba(0,0,0,0.28)',
         }}
       >
-        {/* Shimmer sweep — locked cards only */}
         {locked && (
           <div style={{
             position: 'absolute', inset: 0, zIndex: 5, pointerEvents: 'none', overflow: 'hidden',
@@ -138,7 +134,6 @@ const CollectionCard = ({ product }) => {
           </div>
         )}
 
-        {/* Product image */}
         <div className={`collection-card-img-wrap ${locked ? 'collection-card-img-locked' : 'collection-card-img-active'}`} style={{
           width: '100%', height: '280px',
           position: 'relative', overflow: 'hidden',
@@ -157,7 +152,6 @@ const CollectionCard = ({ product }) => {
             }}
           />
 
-          {/* Lock overlay — centered icon + tooltip on hover */}
           {locked && (
             <div style={{
               position: 'absolute', inset: 0, zIndex: 2,
@@ -175,8 +169,6 @@ const CollectionCard = ({ product }) => {
                 letterSpacing: '5px', color: 'rgba(200,160,60,0.7)',
                 textTransform: 'uppercase',
               }}>Locked</span>
-
-              {/* Hover tooltip */}
               <p style={{
                 fontFamily: "'Playfair Display', serif", fontStyle: 'italic',
                 fontSize: '11px', color: 'rgba(201,169,110,0.82)',
@@ -191,7 +183,6 @@ const CollectionCard = ({ product }) => {
             </div>
           )}
 
-          {/* Hover Buy Now — available only */}
           {!locked && (
             <div style={{
               position: 'absolute', bottom: 0, left: 0, right: 0,
@@ -214,7 +205,6 @@ const CollectionCard = ({ product }) => {
           )}
         </div>
 
-        {/* Text content */}
         <div className="collection-card-body" style={{ padding: '16px 24px 20px', width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', flexGrow: 1, boxSizing: 'border-box' }}>
           <p style={{
             fontFamily: "'Playfair Display', serif", fontWeight: 300,
@@ -236,7 +226,7 @@ const CollectionCard = ({ product }) => {
             color: locked ? 'rgba(250,246,239,0.18)' : 'rgba(250,246,239,0.32)',
             lineHeight: 1.8, marginBottom: '12px', letterSpacing: '0.3px', flexGrow: 1,
           }}>{product.tagline}</p>
-          {/* Size selector — Reine only */}
+
           {!locked && (
             <div style={{ width: '100%', marginBottom: '10px' }}>
               <p style={{
@@ -333,7 +323,6 @@ const CollectionCard = ({ product }) => {
             }}>Wait for the reveal</div>
           )}
         </div>
-
       </motion.div>
 
       {modal && <PaymentModal product={product} selectedSize={selectedSize} selectedPrice={REINE_PRICES[selectedSize]} onClose={() => setModal(false)} />}
@@ -356,7 +345,6 @@ const CollectionCarousel = () => {
     setActiveIdx(Math.min(Math.max(idx, 0), PRODUCTS.length - 1));
   };
 
-  /* Swipe hint — nudge right then snap back on first load */
   useEffect(() => {
     const el = trackRef.current;
     if (!el) return;
@@ -372,24 +360,18 @@ const CollectionCarousel = () => {
 
   return (
     <div>
-      {/* Scrollable track */}
       <div
         ref={trackRef}
         className="carousel-track"
         onScroll={handleScroll}
         style={{ msOverflowStyle: 'none' }}
       >
-        {PRODUCTS.map((product, i) => (
-          <div
-            key={product.id}
-            className="carousel-card-slot"
-          >
+        {PRODUCTS.map((product) => (
+          <div key={product.id} className="carousel-card-slot">
             <CollectionCard product={product} />
           </div>
         ))}
       </div>
-
-      {/* Dot indicators */}
       <div style={{
         display: 'flex', justifyContent: 'center', alignItems: 'center',
         gap: '8px', marginTop: '24px',
@@ -409,9 +391,6 @@ const CollectionCarousel = () => {
   );
 };
 
-// REPLACE THIS WITH YOUR MAILCHIMP FORM ACTION URL
-const MAILCHIMP_URL = 'https://your-list.us1.list-manage.com/subscribe/post?u=XXXXXXXXXXXXXXXXXXXXXXXX&amp;id=XXXXXXXXXX';
-
 const useReveal = (threshold = 0.15) => {
   const ref = useRef(null);
   const [visible, setVisible] = useState(false);
@@ -428,85 +407,6 @@ const useReveal = (threshold = 0.15) => {
   return [ref, visible];
 };
 
-
-/* ── Founder Story ── */
-const FounderStory = () => {
-  const [ref, visible] = useReveal(0.1);
-  return (
-    <section ref={ref} style={{
-      background: '#060606',
-      padding: 'clamp(60px, 8vw, 100px) clamp(20px, 4vw, 40px)',
-      borderTop: '1px solid rgba(201,168,76,0.08)',
-      borderBottom: '1px solid rgba(201,168,76,0.08)',
-      textAlign: 'center',
-    }}>
-      <div style={{
-        maxWidth: '660px', margin: '0 auto',
-        opacity: visible ? 1 : 0,
-        transform: visible ? 'translateY(0)' : 'translateY(28px)',
-        transition: 'opacity 1s ease, transform 1s cubic-bezier(0.16,1,0.3,1)',
-      }}>
-        <p style={{
-          fontFamily: 'Raleway, sans-serif', fontSize: '9px', letterSpacing: '7px',
-          color: 'rgba(201,168,76,0.6)', textTransform: 'uppercase', marginBottom: '44px',
-        }}>About the Founder</p>
-        <blockquote style={{
-          fontFamily: "'Cormorant Garamond', serif", fontStyle: 'italic', fontWeight: 300,
-          fontSize: 'clamp(1.5rem, 3.5vw, 2.2rem)',
-          color: '#FAF6EF', lineHeight: 1.55, marginBottom: '40px',
-          letterSpacing: '0.2px',
-        }}>
-          "I created ELARA because I believe scent is the most personal luxury you can own."
-        </blockquote>
-        <p style={{
-          fontFamily: 'Raleway, sans-serif', fontSize: '13px', fontWeight: 300,
-          color: 'rgba(250,246,239,0.48)', lineHeight: 2.1, letterSpacing: '0.3px',
-          marginBottom: '32px',
-        }}>
-          Growing up in Beirut, I was obsessed with my mother's perfume cabinet, French bottles wrapped in tissue, saved for occasions that never quite arrived. At fifteen, I broke the rule and wore every single one. ELARA is my answer to that girl. The belief that luxury should never wait.
-        </p>
-        <p style={{
-          fontFamily: "'Cormorant Garamond', serif", fontStyle: 'italic',
-          fontSize: '18px', color: 'rgba(201,168,76,0.8)', letterSpacing: '0.5px',
-        }}>Aicha</p>
-      </div>
-    </section>
-  );
-};
-
-/* ── Trust bar ── */
-const TRUST_BAR_ITEMS = [
-  'Secure Checkout',
-  'Fast Delivery Across Lebanon',
-  'Easy Returns',
-  '100% Authentic Formula',
-  'WhatsApp Support',
-];
-
-const TrustBar = () => (
-  <div style={{
-    background: 'rgba(201,168,76,0.08)',
-    borderTop: '1px solid rgba(201,168,76,0.2)',
-    borderBottom: '1px solid rgba(201,168,76,0.2)',
-    padding: '18px clamp(24px, 6vw, 80px)',
-  }}>
-    <div className="trust-bar-inner" style={{
-      maxWidth: '900px', margin: '0 auto',
-      display: 'flex', alignItems: 'center', justifyContent: 'center',
-      flexWrap: 'wrap',
-    }}>
-      {TRUST_BAR_ITEMS.map((item) => (
-        <span key={item} style={{
-          fontFamily: 'Raleway, sans-serif', fontSize: '10px',
-          letterSpacing: '0.15em', textTransform: 'uppercase',
-          color: 'rgba(201,168,76,0.75)', whiteSpace: 'nowrap',
-          padding: '6px 16px',
-        }}>{item}</span>
-      ))}
-    </div>
-  </div>
-);
-
 const fieldStyleFn = (focused) => ({
   width: '100%', background: 'transparent', border: 'none',
   borderBottom: `1px solid ${focused ? 'rgba(200,160,60,0.95)' : 'rgba(200,160,60,0.22)'}`,
@@ -518,37 +418,16 @@ const fieldStyleFn = (focused) => ({
   boxSizing: 'border-box', resize: 'none',
 });
 
-
-/* ── Combined: Waitlist + Contact ── */
+/* ─────────────────────────────────────────
+   CONTACT SECTION
+───────────────────────────────────────── */
 const CombinedConnectSection = () => {
-  const [wEmail, setWEmail]     = useState('');
-  const [wDone, setWDone]       = useState(false);
-  const [wBusy, setWBusy]       = useState(false);
-  const [wFocused, setWFocused] = useState(false);
-
-  const [form, setForm]     = useState({ name: '', email: '', subject: '', message: '' });
-  const [cDone, setCDone]   = useState(false);
-  const [cBusy, setCBusy]   = useState(false);
-  const [cError, setCError] = useState('');
+  const [form, setForm]       = useState({ name: '', email: '', subject: '', message: '' });
+  const [cDone, setCDone]     = useState(false);
+  const [cBusy, setCBusy]     = useState(false);
+  const [cError, setCError]   = useState('');
   const [sendHov, setSendHov] = useState(false);
-  const [waitHov, setWaitHov] = useState(false);
-
-  const [secRef, secIn] = useReveal(0.05);
-
-  const handleWaitlist = async (e) => {
-    e.preventDefault();
-    if (!wEmail.trim()) return;
-    setWBusy(true);
-    try {
-      await fetch(MAILCHIMP_URL, {
-        method: 'POST', mode: 'no-cors',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams({ EMAIL: wEmail, tags: 'waitlist', b_placeholder: '' }).toString(),
-      });
-    } catch (_) {}
-    setWDone(true);
-    setWBusy(false);
-  };
+  const [secRef, secIn]       = useReveal(0.05);
 
   const handleContact = async (e) => {
     e.preventDefault();
@@ -580,104 +459,18 @@ const CombinedConnectSection = () => {
       id="connect"
       className="snap-section-auto"
       ref={secRef}
-      style={{ background: '#060606', padding: 'clamp(60px, 8vw, 100px) clamp(20px, 4vw, 40px)', borderTop: '1px solid rgba(201,168,76,0.08)' }}
+      style={{
+        background: '#060606',
+        padding: 'clamp(60px, 8vw, 100px) clamp(20px, 4vw, 40px)',
+        borderTop: '1px solid rgba(201,168,76,0.08)',
+      }}
     >
       <style>{`
         .hc-input::placeholder { color: rgba(200,160,60,0.3); font-family: 'Cormorant Garamond', serif; }
-        input[name="EMAIL"]::placeholder { color: rgba(200,160,60,0.3); font-family: 'Cormorant Garamond', serif; font-size: 16px; }
         textarea.hc-input { font-family: 'Cormorant Garamond', serif; }
       `}</style>
 
-      {/* ── WAITLIST BLOCK ── */}
-      <div style={{ maxWidth: '680px', margin: '0 auto', textAlign: 'center', ...fadeUp(0.1) }}>
-
-        <p style={{
-          fontFamily: 'Raleway, sans-serif', fontSize: '9px', letterSpacing: '8px',
-          color: 'rgba(200,160,60,0.6)', textTransform: 'uppercase', marginBottom: '22px',
-        }}>Exclusive Access</p>
-
-        <h2 style={{
-          fontFamily: "'Cormorant Garamond', serif", fontWeight: 300,
-          fontSize: 'clamp(2.4rem, 5.5vw, 4rem)', lineHeight: 1.1, marginBottom: '20px',
-          letterSpacing: '-0.5px',
-        }}>
-          <span style={{ color: '#FAF6EF' }}>Be The First </span>
-          <span style={{ fontStyle: 'italic', color: 'rgba(200,160,60,1)' }}>To Know</span>
-        </h2>
-
-        <p style={{
-          fontFamily: 'Raleway, sans-serif', fontSize: '13px', fontWeight: 300,
-          color: 'rgba(250,246,239,0.38)', lineHeight: 2, marginBottom: '52px',
-          letterSpacing: '0.5px', maxWidth: '420px', margin: '0 auto 52px',
-        }}>
-          Early access to new fragrances,<br />private events and exclusive offers.
-        </p>
-
-        {wDone ? (
-          <div style={{ padding: '16px 0 8px' }}>
-            <p style={{
-              fontFamily: "'Cormorant Garamond', serif", fontStyle: 'italic',
-              fontSize: '24px', color: '#C9A96E', lineHeight: 1.8,
-            }}>
-              Welcome to the ELARA inner circle.
-            </p>
-            <p style={{
-              fontFamily: 'Raleway, sans-serif', fontSize: '11px', fontWeight: 300,
-              letterSpacing: '2px', color: 'rgba(200,160,60,0.45)', marginTop: '10px',
-            }}>Watch your inbox.</p>
-          </div>
-        ) : (
-          <form onSubmit={handleWaitlist} action={MAILCHIMP_URL} method="POST" target="_blank">
-            <input type="text" name="b_placeholder" tabIndex="-1" defaultValue="" style={{ display: 'none' }} aria-hidden="true" readOnly />
-            <div style={{ marginBottom: '0', textAlign: 'left' }}>
-              <label style={{
-                display: 'block', fontFamily: 'Raleway, sans-serif',
-                fontSize: '8px', letterSpacing: '4px',
-                color: 'rgba(200,160,60,0.5)', textTransform: 'uppercase', marginBottom: '10px',
-              }}>Email Address</label>
-              <input
-                type="email" name="EMAIL" value={wEmail}
-                onChange={e => setWEmail(e.target.value)}
-                onFocus={() => setWFocused(true)} onBlur={() => setWFocused(false)}
-                placeholder="your@email.com" required
-                autoComplete="email"
-                className="hc-input"
-                style={{
-                  width: '100%', background: 'transparent', border: 'none',
-                  borderBottom: `1px solid ${wFocused ? 'rgba(200,160,60,0.95)' : 'rgba(200,160,60,0.22)'}`,
-                  boxShadow: wFocused ? '0 1px 0 0 rgba(200,160,60,0.22)' : 'none',
-                  color: '#FAF6EF', fontFamily: "'Cormorant Garamond', serif",
-                  fontSize: '16px', fontWeight: 300,
-                  padding: '14px 0', outline: 'none', boxSizing: 'border-box',
-                  marginBottom: '32px',
-                  transition: 'border-color 0.3s ease, box-shadow 0.3s ease',
-                }}
-              />
-            </div>
-            <button
-              type="submit" disabled={wBusy}
-              onMouseEnter={() => setWaitHov(true)}
-              onMouseLeave={() => setWaitHov(false)}
-              style={{
-                width: '100%',
-                fontFamily: 'Raleway, sans-serif', fontSize: '9px', fontWeight: 600,
-                letterSpacing: '5px', textTransform: 'uppercase', padding: '18px',
-                background: waitHov ? '#D4A93A' : 'rgba(200,160,60,1)',
-                color: '#0a0600',
-                border: 'none',
-                cursor: wBusy ? 'default' : 'pointer',
-                transition: 'background 0.3s ease, box-shadow 0.3s ease',
-                boxShadow: waitHov ? '0 4px 32px rgba(200,160,60,0.28)' : '0 2px 16px rgba(200,160,60,0.1)',
-                opacity: wBusy ? 0.7 : 1,
-              }}
-            >{wBusy ? '...' : 'Join the Waitlist'}</button>
-          </form>
-        )}
-      </div>
-
-      {/* ── CONTACT BLOCK ── */}
-      <div id="contact" style={{ maxWidth: '680px', margin: '88px auto 0', ...fadeUp(0.2) }}>
-
+      <div id="contact" style={{ maxWidth: '680px', margin: '0 auto', ...fadeUp(0.1) }}>
         <p style={{
           fontFamily: 'Raleway, sans-serif', fontSize: '9px', letterSpacing: '8px',
           color: 'rgba(200,160,60,0.6)', textTransform: 'uppercase',
@@ -725,10 +518,10 @@ const CombinedConnectSection = () => {
         ) : (
           <form onSubmit={handleContact}>
             {[
-              { key: 'name',    label: 'Full Name',     placeholder: 'Your full name',             type: 'text',   autoComplete: 'name'  },
-              { key: 'email',   label: 'Email Address', placeholder: 'your@email.com',             type: 'email',  autoComplete: 'email' },
-              { key: 'subject', label: 'Subject',       placeholder: 'How can we help?',           type: 'text',   autoComplete: 'off'   },
-              { key: 'message', label: 'Message',       placeholder: 'Write your message here…',   as: 'textarea', autoComplete: 'off'   },
+              { key: 'name',    label: 'Full Name',     placeholder: 'Your full name',           type: 'text',   autoComplete: 'name'  },
+              { key: 'email',   label: 'Email Address', placeholder: 'your@email.com',           type: 'email',  autoComplete: 'email' },
+              { key: 'subject', label: 'Subject',       placeholder: 'How can we help?',         type: 'text',   autoComplete: 'off'   },
+              { key: 'message', label: 'Message',       placeholder: 'Write your message here…', as: 'textarea', autoComplete: 'off'   },
             ].map(({ key, label, placeholder, type, as, autoComplete }) => (
               <FieldWithFocus
                 key={key} name={key} label={label} placeholder={placeholder}
@@ -764,7 +557,6 @@ const CombinedConnectSection = () => {
           </form>
         )}
       </div>
-
     </section>
   );
 };
@@ -799,7 +591,9 @@ const FieldWithFocus = ({ name, label, placeholder, type = 'text', as, value, on
   );
 };
 
-/* ── Why ELARA ── */
+/* ─────────────────────────────────────────
+   WHY ELARA
+───────────────────────────────────────── */
 const WHY_ITEMS = [
   {
     icon: (
@@ -849,7 +643,6 @@ const WhyELARA = () => {
       background: '#060606',
       padding: 'clamp(60px, 8vw, 100px) clamp(20px, 4vw, 40px)',
       borderTop: '1px solid rgba(201,168,76,0.08)',
-      borderBottom: '1px solid rgba(201,168,76,0.08)',
       textAlign: 'center',
     }}>
       <p style={{
@@ -896,41 +689,39 @@ const WhyELARA = () => {
 };
 
 /* ─────────────────────────────────────────
-   CINEMATIC OPENING
+   IMMERSIVE QUOTE
 ───────────────────────────────────────── */
-const CinematicOpening = () => {
+const ImmersiveQuote = () => {
   const [ref, visible] = useReveal(0.2);
   return (
     <section ref={ref} style={{
       background: '#060606',
+      minHeight: '100vh',
+      display: 'flex', flexDirection: 'column',
+      alignItems: 'center', justifyContent: 'center',
       padding: 'clamp(60px, 8vw, 100px) clamp(20px, 4vw, 40px)',
-      textAlign: 'center',
       borderTop: '1px solid rgba(201,168,76,0.08)',
+      textAlign: 'center',
     }}>
-      <h2 style={{
-        fontFamily: "'Cormorant Garamond', serif", fontWeight: 300,
-        fontSize: 'clamp(32px, 5vw, 48px)', color: '#FAF6EF',
-        lineHeight: 1.35, letterSpacing: '0.02em',
-        marginBottom: '40px',
+      <blockquote style={{
+        fontFamily: "'Cormorant Garamond', serif", fontStyle: 'italic', fontWeight: 300,
+        fontSize: 'clamp(1.6rem, 3.5vw, 2.8rem)', color: '#FAF6EF',
+        lineHeight: 1.6, maxWidth: '760px',
+        marginBottom: '32px', letterSpacing: '0.02em',
         opacity: visible ? 1 : 0,
-        transform: visible ? 'translateY(0)' : 'translateY(24px)',
-        transition: 'opacity 1.1s ease, transform 1.1s cubic-bezier(0.16,1,0.3,1)',
+        transform: visible ? 'translateY(0)' : 'translateY(32px)',
+        transition: 'opacity 1.3s ease, transform 1.3s cubic-bezier(0.16,1,0.3,1)',
       }}>
-        Some fragrances are worn.<br/>
-        <span style={{ fontStyle: 'italic', color: '#E8B84B' }}>Others are remembered.</span>
-      </h2>
-
+        "She didn't wear perfume.<br/>
+        She wore ELARA.<br/>
+        There is a difference."
+      </blockquote>
       <p style={{
-        fontFamily: 'Raleway, sans-serif', fontSize: 'clamp(13px, 1.5vw, 15px)', fontWeight: 300,
-        color: 'rgba(250,246,239,0.48)', lineHeight: 1.9,
-        maxWidth: '640px', margin: '0 auto',
-        letterSpacing: '0.4px',
+        fontFamily: 'Raleway, sans-serif', fontSize: '9px', letterSpacing: '6px',
+        color: 'rgba(201,168,76,0.5)', textTransform: 'uppercase',
         opacity: visible ? 1 : 0,
-        transform: visible ? 'translateY(0)' : 'translateY(16px)',
-        transition: 'opacity 1s ease 0.85s, transform 1s cubic-bezier(0.16,1,0.3,1) 0.85s',
-      }}>
-        ELARA was not created to compete. It was created to linger, in rooms, in memories, in the minds of everyone you've ever left behind.
-      </p>
+        transition: 'opacity 1s ease 0.7s',
+      }}>ELARA, Maison de Parfum</p>
     </section>
   );
 };
@@ -945,7 +736,6 @@ const OriginStory = () => {
       background: '#060606',
       padding: 'clamp(60px, 8vw, 100px) clamp(20px, 4vw, 40px)',
       borderTop: '1px solid rgba(201,168,76,0.08)',
-      borderBottom: '1px solid rgba(201,168,76,0.08)',
     }}>
       <div className="origin-grid" style={{
         maxWidth: '1100px', margin: '0 auto',
@@ -1035,7 +825,6 @@ const FragrancePhilosophy = () => {
       background: '#060606',
       padding: 'clamp(60px, 8vw, 100px) clamp(20px, 4vw, 40px)',
       borderTop: '1px solid rgba(201,168,76,0.08)',
-      borderBottom: '1px solid rgba(201,168,76,0.08)',
     }}>
       <p style={{
         fontFamily: 'Raleway, sans-serif', fontSize: '9px', letterSpacing: '7px',
@@ -1072,102 +861,6 @@ const FragrancePhilosophy = () => {
             }}>{body}</p>
           </div>
         ))}
-      </div>
-    </section>
-  );
-};
-
-/* ─────────────────────────────────────────
-   IMMERSIVE QUOTE
-───────────────────────────────────────── */
-const ImmersiveQuote = () => {
-  const [ref, visible] = useReveal(0.2);
-  return (
-    <section ref={ref} style={{
-      background: '#060606',
-      minHeight: '100vh',
-      display: 'flex', flexDirection: 'column',
-      alignItems: 'center', justifyContent: 'center',
-      padding: 'clamp(60px, 8vw, 100px) clamp(20px, 4vw, 40px)',
-      borderTop: '1px solid rgba(201,168,76,0.08)',
-      borderBottom: '1px solid rgba(201,168,76,0.08)',
-      textAlign: 'center',
-    }}>
-      <blockquote style={{
-        fontFamily: "'Cormorant Garamond', serif", fontStyle: 'italic', fontWeight: 300,
-        fontSize: 'clamp(1.6rem, 3.5vw, 2.8rem)', color: '#FAF6EF',
-        lineHeight: 1.6, maxWidth: '760px',
-        marginBottom: '32px', letterSpacing: '0.02em',
-        opacity: visible ? 1 : 0,
-        transform: visible ? 'translateY(0)' : 'translateY(32px)',
-        transition: 'opacity 1.3s ease, transform 1.3s cubic-bezier(0.16,1,0.3,1)',
-      }}>
-        "She didn't wear perfume.<br/>
-        She wore ELARA.<br/>
-        There is a difference."
-      </blockquote>
-      <p style={{
-        fontFamily: 'Raleway, sans-serif', fontSize: '9px', letterSpacing: '6px',
-        color: 'rgba(201,168,76,0.5)', textTransform: 'uppercase',
-        opacity: visible ? 1 : 0,
-        transition: 'opacity 1s ease 0.7s',
-      }}>ELARA, Maison de Parfum</p>
-    </section>
-  );
-};
-
-
-/* ─────────────────────────────────────────
-   EMOTIONAL CLOSING
-───────────────────────────────────────── */
-const EmotionalClosing = () => {
-  const [hov, setHov] = useState(false);
-  const [ref, visible] = useReveal(0.2);
-  return (
-    <section ref={ref} style={{
-      background: '#060606',
-      padding: 'clamp(60px, 8vw, 100px) clamp(20px, 4vw, 40px)',
-      textAlign: 'center',
-      borderTop: '1px solid rgba(201,168,76,0.08)',
-      borderBottom: '1px solid rgba(201,168,76,0.08)',
-    }}>
-      <div style={{
-        opacity: visible ? 1 : 0,
-        transform: visible ? 'translateY(0)' : 'translateY(24px)',
-        transition: 'opacity 1s ease, transform 1s cubic-bezier(0.16,1,0.3,1)',
-      }}>
-        <h2 style={{
-          fontFamily: "'Cormorant Garamond', serif", fontWeight: 300,
-          fontSize: 'clamp(1.8rem, 4vw, 3rem)', color: '#FAF6EF',
-          lineHeight: 1.3, marginBottom: '20px',
-        }}>
-          You already know what you want to feel like.
-        </h2>
-        <p style={{
-          fontFamily: 'Raleway, sans-serif', fontSize: 'clamp(13px, 1.5vw, 15px)', fontWeight: 300,
-          color: 'rgba(250,246,239,0.45)', lineHeight: 1.9, marginBottom: '48px',
-          letterSpacing: '0.4px',
-        }}>
-          ELARA is simply the scent that gets you there.
-        </p>
-        <Link
-          to="/shop"
-          onMouseEnter={() => setHov(true)}
-          onMouseLeave={() => setHov(false)}
-          style={{
-            display: 'inline-block',
-            fontFamily: 'Raleway, sans-serif', fontSize: '9px',
-            letterSpacing: '5px', textTransform: 'uppercase',
-            padding: '16px 48px',
-            background: hov ? 'rgba(201,168,76,1)' : 'transparent',
-            color: hov ? '#0a0600' : 'rgba(201,168,76,1)',
-            border: '1px solid rgba(201,168,76,0.7)',
-            transition: 'all 0.35s ease',
-            textDecoration: 'none',
-            boxShadow: hov ? '0 4px 28px rgba(201,168,76,0.2)' : 'none',
-            WebkitTapHighlightColor: 'transparent',
-          }}
-        >Explore the Collection</Link>
       </div>
     </section>
   );
@@ -1240,8 +933,6 @@ const Home = () => {
         paddingTop: '76px',
         paddingBottom: '0',
       }}>
-
-        {/* Full-bleed bottle photo — background layer with float animation */}
         <img
           src="/elaraaaaa.png"
           alt=""
@@ -1260,24 +951,18 @@ const Home = () => {
             animation: 'heroBgFloat 5s ease-in-out infinite',
           }}
         />
-
-        {/* Left-to-right gradient — darkens text side, clears on bottle side */}
         <div className="hero-overlay-left" style={{
           position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 1,
           background: 'linear-gradient(to right, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.55) 42%, rgba(0,0,0,0.1) 60%, transparent 100%)',
         }}/>
-
-        {/* Top + bottom vignette */}
         <div className="hero-vignette" style={{
           position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 1,
           background: 'linear-gradient(to bottom, rgba(0,0,0,0.35) 0%, transparent 22%, transparent 72%, rgba(0,0,0,0.55) 100%)',
         }}/>
 
-        {/* Text content — left side, on top */}
         <div className="hero-inner" style={{ pointerEvents: 'none' }}>
           <div className="hero-text-col" style={{ flex: '0 0 auto', width: '42%', maxWidth: '520px', paddingLeft: '50px', paddingTop: '80px', boxSizing: 'border-box', pointerEvents: 'auto' }}>
 
-            {/* Eyebrow */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -1293,7 +978,6 @@ const Home = () => {
               </span>
             </motion.div>
 
-            {/* Heading */}
             <motion.h1
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
@@ -1307,7 +991,6 @@ const Home = () => {
               <span style={{ fontSize: 'clamp(2.4rem, 8vw, 5rem)', fontStyle: 'italic', color: '#E8B84B', display: 'block' }}>Unspeakable</span>
             </motion.h1>
 
-            {/* Sub */}
             <motion.p
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
@@ -1318,11 +1001,9 @@ const Home = () => {
                 maxWidth: '370px', marginBottom: '40px',
               }}
             >
-              A scent so rare, silence speaks first.<br/>
               For the woman who enters a room before she does.
             </motion.p>
 
-            {/* Shop Now CTA */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -1334,7 +1015,6 @@ const Home = () => {
           </div>
         </div>
 
-        {/* Bottom separator — hidden on desktop via CSS */}
         <div
           className="hero-bottom-line"
           style={{
@@ -1346,12 +1026,6 @@ const Home = () => {
         />
       </section>
 
-      {/* ══════════════════ CINEMATIC OPENING ══════════════════ */}
-      <CinematicOpening />
-
-      {/* ══════════════════ FOUNDER STORY ══════════════════ */}
-      <FounderStory />
-
       {/* ══════════════════ COLLECTION ══════════════════ */}
       <section id="collection" className="collection-section snap-section-auto" style={{
         background: '#060606',
@@ -1360,8 +1034,6 @@ const Home = () => {
         width: '100%',
         maxWidth: '100%',
       }}>
-
-        {/* Section header — shared */}
         <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
           <motion.div
             initial={{ opacity: 0, y: -20 }}
@@ -1382,12 +1054,10 @@ const Home = () => {
           </motion.div>
         </div>
 
-        {/* ── Mobile swipe carousel ── */}
         <div className="collection-mobile-carousel">
           <CollectionCarousel />
         </div>
 
-        {/* ── Desktop pyramid ── */}
         <div className="collection-desktop-pyramid" style={{ maxWidth: '1100px', margin: '0 auto' }}>
           <motion.div
             variants={staggerContainer}
@@ -1397,12 +1067,9 @@ const Home = () => {
             className="collection-container"
             style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}
           >
-            {/* Reine — top, centered */}
             <motion.div variants={cardVariant} className="collection-card-top" style={{ width: 'min(340px, 100%)', marginBottom: '24px' }}>
               <CollectionCard product={PRODUCTS[0]} />
             </motion.div>
-
-            {/* Oro + Nova — bottom row */}
             <div className="collection-card-row-wrap" style={{ display: 'flex', gap: '24px', width: '100%', justifyContent: 'center', flexWrap: 'wrap' }}>
               <motion.div variants={cardVariant} className="collection-card-row" style={{ width: 'min(340px, 100%)' }}>
                 <CollectionCard product={PRODUCTS[1]} />
@@ -1413,28 +1080,21 @@ const Home = () => {
             </div>
           </motion.div>
         </div>
-
       </section>
 
-      {/* ══════════════════ FRAGRANCE PHILOSOPHY ══════════════════ */}
+      {/* ══════════════════ PHILOSOPHY ══════════════════ */}
       <FragrancePhilosophy />
-
-      {/* ══════════════════ IMMERSIVE QUOTE ══════════════════ */}
-      <ImmersiveQuote />
-
-      {/* ══════════════════ TRUST BAR ══════════════════ */}
-      <TrustBar />
-
-      {/* ══════════════════ ORIGIN STORY ══════════════════ */}
-      <OriginStory />
 
       {/* ══════════════════ WHY ELARA ══════════════════ */}
       <WhyELARA />
 
-      {/* ══════════════════ EMOTIONAL CLOSING ══════════════════ */}
-      <EmotionalClosing />
+      {/* ══════════════════ IMMERSIVE QUOTE ══════════════════ */}
+      <ImmersiveQuote />
 
-      {/* ══════════════════ CONNECT + CONTACT ══════════════════ */}
+      {/* ══════════════════ THE STORY ══════════════════ */}
+      <OriginStory />
+
+      {/* ══════════════════ CONTACT ══════════════════ */}
       <CombinedConnectSection />
 
     </div>
