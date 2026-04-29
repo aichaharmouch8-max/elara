@@ -333,7 +333,7 @@ const CollectionCarousel = () => {
   const handleScroll = () => {
     const el = trackRef.current;
     if (!el) return;
-    const step = window.innerWidth * 0.88 + 8;
+    const step = window.innerWidth * 0.92 + 16;
     const idx = Math.round(el.scrollLeft / step);
     setActiveIdx(Math.min(Math.max(idx, 0), PRODUCTS.length - 1));
   };

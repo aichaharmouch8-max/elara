@@ -447,16 +447,6 @@ button { font-family: inherit; }
     margin: 0 !important;
   }
 
-  /* Collection carousel — remove forced tall height */
-  .carousel-card-slot {
-    min-height: auto !important;
-    height: auto !important;
-  }
-  .carousel-card-slot > * {
-    min-height: auto !important;
-    height: auto !important;
-  }
-
   /* Collection card images on mobile — locked and active identical */
   .collection-card-img-active,
   .collection-card-img-locked {
@@ -489,49 +479,57 @@ button { font-family: inherit; }
     overflow-x: scroll !important;
     -webkit-overflow-scrolling: touch !important;
     scroll-snap-type: x mandatory !important;
+    scroll-padding-left: 4vw !important;
     width: 100% !important;
-    gap: 8px !important;
-    padding: 0 5vw !important;
+    gap: 16px !important;
+    padding: 0 4vw !important;
     box-sizing: border-box !important;
     scrollbar-width: none !important;
   }
 
-  /* ── Carousel card slot — 88vw, one card visible at a time ── */
+  /* ── Carousel card slot — 92vw, exactly one card per snap ── */
   .carousel-card-slot {
-    scroll-snap-align: center !important;
-    width: 88vw !important;
-    min-width: 88vw !important;
-    max-width: 88vw !important;
+    scroll-snap-align: start !important;
+    width: 92vw !important;
+    min-width: 92vw !important;
+    max-width: 92vw !important;
+    min-height: 600px !important;
     height: auto !important;
-    min-height: 580px !important;
     flex-shrink: 0 !important;
     flex-grow: 0 !important;
-    flex-basis: 88vw !important;
-    overflow: visible !important;
+    flex-basis: 92vw !important;
+    display: flex !important;
+    flex-direction: column !important;
   }
 
-  /* Card inner (motion.div) must fill the slot exactly */
+  /* Card inner (motion.div) — stretch to fill slot so all cards are identical height */
   .carousel-card-slot > * {
     width: 100% !important;
     min-width: 0 !important;
     max-width: 100% !important;
+    flex: 1 !important;
+    min-height: 600px !important;
     height: auto !important;
-    min-height: auto !important;
   }
 
-  /* Card image height in carousel — uniform 220px */
+  /* Card image height in carousel — uniform 220px, never compress */
   .collection-mobile-carousel .collection-card-img-wrap {
     height: 220px !important;
     min-height: 220px !important;
     max-height: 220px !important;
     flex-shrink: 0 !important;
+    flex-grow: 0 !important;
     padding-top: 0 !important;
     box-sizing: border-box !important;
+    width: 100% !important;
   }
 
-  /* Card body padding on mobile */
+  /* Card body fills remaining height, same padding on all cards */
   .collection-mobile-carousel .collection-card-body {
     padding: 24px 20px !important;
+    flex: 1 !important;
+    box-sizing: border-box !important;
+    width: 100% !important;
   }
 
   /* Buy Now — gold fill, full width, premium feel */
