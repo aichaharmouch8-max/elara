@@ -110,15 +110,15 @@ const CollectionCard = ({ product }) => {
         onHoverStart={() => setHov(true)}
         onHoverEnd={() => setHov(false)}
         style={{
-          background: 'rgba(255,255,255,0.03)',
-          border: `1px solid ${hov ? 'rgba(255,200,80,0.4)' : 'rgba(201,169,110,0.08)'}`,
+          background: '#0d0407',
+          border: `1px solid ${hov ? 'rgba(201,168,76,0.3)' : 'rgba(120,20,40,0.2)'}`,
           display: 'flex', flexDirection: 'column',
           alignItems: 'center', textAlign: 'center',
           position: 'relative', overflow: 'hidden',
           transition: 'border-color 0.4s ease, box-shadow 0.4s ease',
           boxShadow: hov
-            ? '0 0 0 1px rgba(255,200,80,0.08), 0 32px 72px rgba(0,0,0,0.55)'
-            : '0 8px 32px rgba(0,0,0,0.28)',
+            ? '0 0 0 1px rgba(201,168,76,0.12), 0 32px 72px rgba(0,0,0,0.55)'
+            : '0 0 60px rgba(100,10,30,0.15), 0 8px 32px rgba(0,0,0,0.28)',
         }}
       >
         {locked && (
@@ -135,7 +135,7 @@ const CollectionCard = ({ product }) => {
         )}
 
         <div className={`collection-card-img-wrap ${locked ? 'collection-card-img-locked' : 'collection-card-img-active'}`} style={{
-          width: '100%', height: '280px',
+          width: '100%', height: '320px',
           position: 'relative', overflow: 'hidden',
           background: 'linear-gradient(to bottom, rgba(201,169,110,0.07) 0%, transparent 100%)',
         }}>
@@ -223,7 +223,7 @@ const CollectionCard = ({ product }) => {
           }}>100ml Eau de Parfum</p>
           <p style={{
             fontFamily: 'Raleway, sans-serif', fontSize: '12px', fontWeight: 300,
-            color: locked ? 'rgba(250,246,239,0.18)' : 'rgba(250,246,239,0.32)',
+            color: locked ? 'rgba(250,246,239,0.18)' : 'rgba(232,224,216,0.4)',
             lineHeight: 1.8, marginBottom: '12px', letterSpacing: '0.3px', flexGrow: 1,
           }}>{product.tagline}</p>
 
@@ -460,9 +460,9 @@ const CombinedConnectSection = () => {
       className="snap-section-auto"
       ref={secRef}
       style={{
-        background: '#060606',
+        background: '#0f0508',
         padding: 'clamp(60px, 8vw, 100px) clamp(20px, 4vw, 40px)',
-        borderTop: '1px solid rgba(201,168,76,0.08)',
+        borderTop: '1px solid rgba(120,20,40,0.3)',
       }}
     >
       <style>{`
@@ -488,7 +488,7 @@ const CombinedConnectSection = () => {
 
         <p style={{
           fontFamily: 'Raleway, sans-serif', fontSize: '12px', fontWeight: 300,
-          color: 'rgba(250,246,239,0.32)', textAlign: 'center',
+          color: 'rgba(232,224,216,0.4)', textAlign: 'center',
           marginBottom: '52px', letterSpacing: '0.4px', lineHeight: 2,
         }}>
           Or reach us directly on{' '}
@@ -640,9 +640,9 @@ const WhyELARA = () => {
   const [ref, visible] = useReveal(0.1);
   return (
     <section ref={ref} style={{
-      background: '#060606',
+      background: '#0f0508',
       padding: 'clamp(60px, 8vw, 100px) clamp(20px, 4vw, 40px)',
-      borderTop: '1px solid rgba(201,168,76,0.08)',
+      borderTop: '1px solid rgba(120,20,40,0.3)',
       textAlign: 'center',
     }}>
       <p style={{
@@ -678,7 +678,7 @@ const WhyELARA = () => {
             }}>{title}</h4>
             <p style={{
               fontFamily: 'Raleway, sans-serif', fontSize: '12px', fontWeight: 300,
-              color: 'rgba(250,246,239,0.38)', lineHeight: 2, letterSpacing: '0.3px',
+              color: 'rgba(232,224,216,0.45)', lineHeight: 2, letterSpacing: '0.3px',
               margin: 0, maxWidth: '200px',
             }}>{body}</p>
           </div>
@@ -700,7 +700,7 @@ const ImmersiveQuote = () => {
       display: 'flex', flexDirection: 'column',
       alignItems: 'center', justifyContent: 'center',
       padding: 'clamp(60px, 8vw, 100px) clamp(20px, 4vw, 40px)',
-      borderTop: '1px solid rgba(201,168,76,0.08)',
+      borderTop: '1px solid rgba(120,20,40,0.3)',
       textAlign: 'center',
     }}>
       <blockquote style={{
@@ -752,9 +752,9 @@ const FragrancePhilosophy = () => {
   const [ref, visible] = useReveal(0.1);
   return (
     <section ref={ref} style={{
-      background: '#060606',
+      background: '#0f0508',
       padding: 'clamp(60px, 8vw, 100px) clamp(20px, 4vw, 40px)',
-      borderTop: '1px solid rgba(201,168,76,0.08)',
+      borderTop: '1px solid rgba(120,20,40,0.3)',
     }}>
       <p style={{
         fontFamily: 'Raleway, sans-serif', fontSize: '9px', letterSpacing: '7px',
@@ -787,7 +787,7 @@ const FragrancePhilosophy = () => {
             }}>{title}</h3>
             <p style={{
               fontFamily: 'Raleway, sans-serif', fontSize: '13px', fontWeight: 300,
-              color: 'rgba(250,246,239,0.4)', lineHeight: 1.9, letterSpacing: '0.3px',
+              color: 'rgba(232,224,216,0.48)', lineHeight: 1.9, letterSpacing: '0.3px',
             }}>{body}</p>
           </div>
         ))}
@@ -889,6 +889,10 @@ const Home = () => {
           position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 1,
           background: 'linear-gradient(to bottom, rgba(0,0,0,0.35) 0%, transparent 22%, transparent 72%, rgba(0,0,0,0.55) 100%)',
         }}/>
+        <div style={{
+          position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 1,
+          background: 'linear-gradient(to top, rgba(80,5,20,0.4) 0%, transparent 40%)',
+        }}/>
 
         <div className="hero-inner" style={{ pointerEvents: 'none' }}>
           <div className="hero-text-col" style={{ flex: '0 0 auto', width: '42%', maxWidth: '520px', paddingLeft: '50px', paddingTop: '80px', boxSizing: 'border-box', pointerEvents: 'auto' }}>
@@ -927,7 +931,7 @@ const Home = () => {
               transition={{ duration: 1, ease: 'easeOut', delay: 0.45 }}
               style={{
                 fontFamily: 'Raleway, sans-serif', fontSize: '14px', fontWeight: 300,
-                color: 'rgba(250,246,239,0.62)', letterSpacing: '0.6px', lineHeight: 2.1,
+                color: 'rgba(232,224,216,0.72)', letterSpacing: '0.6px', lineHeight: 2.1,
                 maxWidth: '370px', marginBottom: '40px',
               }}
             >
@@ -960,7 +964,7 @@ const Home = () => {
       <section id="collection" className="collection-section snap-section-auto" style={{
         background: '#060606',
         padding: 'clamp(60px, 8vw, 100px) clamp(20px, 4vw, 40px)',
-        borderTop: '1px solid rgba(201,168,76,0.08)',
+        borderTop: '1px solid rgba(120,20,40,0.3)',
         width: '100%',
         maxWidth: '100%',
       }}>
@@ -997,14 +1001,14 @@ const Home = () => {
             className="collection-container"
             style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}
           >
-            <motion.div variants={cardVariant} className="collection-card-top" style={{ width: 'min(340px, 100%)', marginBottom: '24px' }}>
+            <motion.div variants={cardVariant} className="collection-card-top" style={{ width: 'min(480px, 100%)', marginBottom: '24px' }}>
               <CollectionCard product={PRODUCTS[0]} />
             </motion.div>
             <div className="collection-card-row-wrap" style={{ display: 'flex', gap: '24px', width: '100%', justifyContent: 'center', flexWrap: 'wrap' }}>
-              <motion.div variants={cardVariant} className="collection-card-row" style={{ width: 'min(340px, 100%)' }}>
+              <motion.div variants={cardVariant} className="collection-card-row" style={{ width: 'min(480px, 100%)' }}>
                 <CollectionCard product={PRODUCTS[1]} />
               </motion.div>
-              <motion.div variants={cardVariant} className="collection-card-row" style={{ width: 'min(340px, 100%)' }}>
+              <motion.div variants={cardVariant} className="collection-card-row" style={{ width: 'min(480px, 100%)' }}>
                 <CollectionCard product={PRODUCTS[2]} />
               </motion.div>
             </div>

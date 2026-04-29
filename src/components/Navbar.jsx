@@ -35,7 +35,7 @@ const Navbar = () => {
           background: 'rgba(6, 6, 6, 0.4)',
           backdropFilter: 'blur(20px)',
           WebkitBackdropFilter: 'blur(20px)',
-          borderBottom: '1px solid rgba(201,168,76,0.12)',
+          borderBottom: '1px solid rgba(120,20,40,0.25)',
           transition: 'background 0.3s ease',
           boxSizing: 'border-box',
         }}

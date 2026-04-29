@@ -257,7 +257,7 @@ button { font-family: inherit; }
     background: rgba(6, 6, 6, 0.4) !important;
     backdrop-filter: blur(20px) !important;
     -webkit-backdrop-filter: blur(20px) !important;
-    border-bottom: 1px solid rgba(201, 168, 76, 0.12) !important;
+    border-bottom: 1px solid rgba(120,20,40,0.25) !important;
   }
   nav {
     padding: 0 20px !important;
