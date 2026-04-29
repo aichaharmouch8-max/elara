@@ -687,20 +687,19 @@ const WhyELARA = () => {
 const ImmersiveQuote = () => {
   const [ref, visible] = useReveal(0.2);
   return (
-    <section ref={ref} style={{
+    <section ref={ref} className="immersive-quote-section" style={{
       background: '#060606',
-      minHeight: '100vh',
       display: 'flex', flexDirection: 'column',
       alignItems: 'center', justifyContent: 'center',
-      padding: 'clamp(60px, 8vw, 100px) clamp(20px, 4vw, 40px)',
+      padding: '80px 32px',
       borderTop: '1px solid rgba(120,20,40,0.3)',
       textAlign: 'center',
     }}>
       <blockquote style={{
         fontFamily: "'Cormorant Garamond', serif", fontStyle: 'italic', fontWeight: 300,
-        fontSize: 'clamp(1.6rem, 3.5vw, 2.8rem)', color: '#FAF6EF',
-        lineHeight: 1.6, maxWidth: '760px',
-        marginBottom: '32px', letterSpacing: '0.02em',
+        fontSize: 'clamp(22px, 4vw, 36px)', color: '#f0ebe3',
+        lineHeight: 1.7, maxWidth: '720px',
+        marginBottom: '0', letterSpacing: '0.02em',
         opacity: visible ? 1 : 0,
         transform: visible ? 'translateY(0)' : 'translateY(32px)',
         transition: 'opacity 1.3s ease, transform 1.3s cubic-bezier(0.16,1,0.3,1)',
@@ -710,8 +709,9 @@ const ImmersiveQuote = () => {
         There is a difference."
       </blockquote>
       <p style={{
-        fontFamily: 'Raleway, sans-serif', fontSize: '9px', letterSpacing: '6px',
-        color: 'rgba(201,168,76,0.5)', textTransform: 'uppercase',
+        fontFamily: 'Raleway, sans-serif', fontSize: '10px', letterSpacing: '6px',
+        color: 'rgba(201,168,76,0.6)', textTransform: 'uppercase',
+        marginTop: '24px',
         opacity: visible ? 1 : 0,
         transition: 'opacity 1s ease 0.7s',
       }}>ELARA, Maison de Parfum</p>
