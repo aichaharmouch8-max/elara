@@ -402,12 +402,11 @@ const useReveal = (threshold = 0.15) => {
 
 const fieldStyleFn = (focused) => ({
   width: '100%', background: 'transparent', border: 'none',
-  borderBottom: `1px solid ${focused ? 'rgba(200,160,60,0.95)' : 'rgba(200,160,60,0.22)'}`,
-  boxShadow: focused ? '0 1px 0 0 rgba(200,160,60,0.22)' : 'none',
+  borderBottom: `1px solid ${focused ? 'rgba(201,168,76,0.8)' : 'rgba(201,168,76,0.3)'}`,
   color: '#FAF6EF', fontFamily: "'Cormorant Garamond', serif",
   fontSize: '16px', fontWeight: 300, letterSpacing: '0.3px',
   padding: '14px 0', outline: 'none',
-  transition: 'border-color 0.3s ease, box-shadow 0.3s ease',
+  transition: 'border-color 0.3s ease',
   boxSizing: 'border-box', resize: 'none',
 });
 
@@ -415,11 +414,12 @@ const fieldStyleFn = (focused) => ({
    CONTACT SECTION
 ───────────────────────────────────────── */
 const CombinedConnectSection = () => {
-  const [form, setForm]       = useState({ name: '', email: '', subject: '', message: '' });
+  const [form, setForm]       = useState({ name: '', message: '' });
   const [cDone, setCDone]     = useState(false);
   const [cBusy, setCBusy]     = useState(false);
   const [cError, setCError]   = useState('');
   const [sendHov, setSendHov] = useState(false);
+  const [waHov, setWaHov]     = useState(false);
   const [secRef, secIn]       = useReveal(0.05);
 
   const handleContact = async (e) => {
@@ -430,11 +430,11 @@ const CombinedConnectSection = () => {
       await window.emailjs.send(
         'REPLACE WITH YOUR EMAILJS SERVICE ID',
         'REPLACE WITH YOUR EMAILJS TEMPLATE ID',
-        { from_name: form.name, from_email: form.email, subject: form.subject, message: form.message },
+        { from_name: form.name, message: form.message },
         'REPLACE WITH YOUR EMAILJS PUBLIC KEY'
       );
       setCDone(true);
-      setForm({ name: '', email: '', subject: '', message: '' });
+      setForm({ name: '', message: '' });
     } catch (_) {
       setCError('Something went wrong. Please try again.');
     }
@@ -443,65 +443,103 @@ const CombinedConnectSection = () => {
 
   const fadeUp = (d = 0) => ({
     opacity: secIn ? 1 : 0,
-    transform: secIn ? 'translateY(0)' : 'translateY(28px)',
-    transition: `opacity 1s ease ${d}s, transform 1s cubic-bezier(0.16,1,0.3,1) ${d}s`,
+    transform: secIn ? 'translateY(0)' : 'translateY(24px)',
+    transition: `opacity 0.9s ease ${d}s, transform 0.9s cubic-bezier(0.16,1,0.3,1) ${d}s`,
   });
 
   return (
     <section
       id="connect"
-      className="snap-section-auto"
+      className="snap-section-auto connect-section"
       ref={secRef}
       style={{
-        background: '#0f0508',
-        padding: 'clamp(60px, 8vw, 100px) clamp(20px, 4vw, 40px)',
+        background: '#060606',
+        padding: '100px 60px',
         borderTop: '1px solid rgba(120,20,40,0.3)',
       }}
     >
       <style>{`
-        .hc-input::placeholder { color: rgba(200,160,60,0.3); font-family: 'Cormorant Garamond', serif; }
+        .hc-input::placeholder { color: rgba(255,255,255,0.25); font-family: 'Cormorant Garamond', serif; }
         textarea.hc-input { font-family: 'Cormorant Garamond', serif; }
       `}</style>
 
-      <div id="contact" style={{ maxWidth: '680px', margin: '0 auto', ...fadeUp(0.1) }}>
+      <div id="contact" style={{ maxWidth: '520px', margin: '0 auto' }}>
+
+        {/* Label */}
         <p style={{
-          fontFamily: 'Raleway, sans-serif', fontSize: '9px', letterSpacing: '8px',
-          color: 'rgba(200,160,60,0.6)', textTransform: 'uppercase',
-          textAlign: 'center', marginBottom: '22px',
+          fontFamily: 'Raleway, sans-serif', fontSize: '10px', letterSpacing: '6px',
+          color: 'rgba(201,168,76,0.6)', textTransform: 'uppercase',
+          textAlign: 'center', marginBottom: '20px',
+          ...fadeUp(0.05),
         }}>Get in Touch</p>
 
+        {/* Headline */}
         <h2 style={{
           fontFamily: "'Cormorant Garamond', serif", fontWeight: 300,
-          fontSize: 'clamp(2.2rem, 4.5vw, 3.6rem)', lineHeight: 1.1,
-          textAlign: 'center', marginBottom: '16px', letterSpacing: '-0.5px',
+          fontSize: 'clamp(2rem, 4.5vw, 3.2rem)', lineHeight: 1.1,
+          textAlign: 'center', marginBottom: '14px', letterSpacing: '-0.5px',
+          ...fadeUp(0.1),
         }}>
           <span style={{ color: '#FAF6EF' }}>We'd Love to </span>
-          <span style={{ fontStyle: 'italic', color: 'rgba(200,160,60,1)' }}>Hear From You</span>
+          <span style={{ fontStyle: 'italic', color: '#c9a84c' }}>Hear From You</span>
         </h2>
 
+        {/* Subtext */}
         <p style={{
-          fontFamily: 'Raleway, sans-serif', fontSize: '12px', fontWeight: 300,
-          color: 'rgba(232,224,216,0.4)', textAlign: 'center',
-          marginBottom: '52px', letterSpacing: '0.4px', lineHeight: 2,
+          fontFamily: 'Raleway, sans-serif', fontSize: '13px', fontWeight: 300,
+          color: 'rgba(232,224,216,0.45)', textAlign: 'center',
+          marginBottom: '40px', letterSpacing: '0.3px', lineHeight: 1.7,
+          ...fadeUp(0.15),
         }}>
-          Or reach us directly on{' '}
-          <a href="https://wa.me/96176510481" target="_blank" rel="noreferrer"
-            style={{
-              color: 'rgba(200,160,60,0.8)', fontFamily: "'Cormorant Garamond', serif",
-              fontStyle: 'italic', fontSize: '14px',
-              borderBottom: '1px solid rgba(200,160,60,0.3)', paddingBottom: '1px',
-              transition: 'color 0.25s ease, border-color 0.25s ease',
-            }}
-            onMouseEnter={e => { e.currentTarget.style.color = '#E8B84B'; e.currentTarget.style.borderColor = 'rgba(232,184,75,0.6)'; }}
-            onMouseLeave={e => { e.currentTarget.style.color = 'rgba(200,160,60,0.8)'; e.currentTarget.style.borderColor = 'rgba(200,160,60,0.3)'; }}
-          >WhatsApp</a>
+          The fastest way to reach us is WhatsApp. We reply within minutes.
         </p>
 
+        {/* WhatsApp CTA — primary action */}
+        <div style={{ ...fadeUp(0.2) }}>
+          <a
+            href="https://wa.me/96176510481"
+            target="_blank"
+            rel="noreferrer"
+            onMouseEnter={() => setWaHov(true)}
+            onMouseLeave={() => setWaHov(false)}
+            style={{
+              display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px',
+              width: '100%', padding: '16px 24px',
+              background: waHov ? '#d4b055' : '#c9a84c',
+              color: '#060606',
+              fontFamily: 'Raleway, sans-serif', fontSize: '10px',
+              fontWeight: 600, letterSpacing: '4px', textTransform: 'uppercase',
+              textDecoration: 'none', boxSizing: 'border-box',
+              transition: 'background 0.25s ease',
+            }}
+          >
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+            </svg>
+            Chat on WhatsApp
+          </a>
+        </div>
+
+        {/* OR divider */}
+        <div style={{
+          display: 'flex', alignItems: 'center', gap: '16px',
+          margin: '36px 0',
+          ...fadeUp(0.25),
+        }}>
+          <div style={{ flex: 1, height: '1px', background: 'rgba(201,168,76,0.15)' }}/>
+          <span style={{
+            fontFamily: 'Raleway, sans-serif', fontSize: '9px', letterSpacing: '4px',
+            color: 'rgba(201,168,76,0.4)', textTransform: 'uppercase',
+          }}>Or</span>
+          <div style={{ flex: 1, height: '1px', background: 'rgba(201,168,76,0.15)' }}/>
+        </div>
+
+        {/* Form */}
         {cDone ? (
-          <div style={{ textAlign: 'center', padding: '24px 0 16px' }}>
+          <div style={{ textAlign: 'center', padding: '24px 0 16px', ...fadeUp(0) }}>
             <p style={{
               fontFamily: "'Cormorant Garamond', serif", fontStyle: 'italic',
-              fontSize: '26px', color: 'rgba(200,160,60,1)', lineHeight: 1.8, marginBottom: '10px',
+              fontSize: '26px', color: '#c9a84c', lineHeight: 1.8, marginBottom: '10px',
             }}>Your message has been sent.</p>
             <p style={{
               fontFamily: 'Raleway, sans-serif', fontSize: '11px', fontWeight: 300,
@@ -509,12 +547,10 @@ const CombinedConnectSection = () => {
             }}>We will get back to you shortly.</p>
           </div>
         ) : (
-          <form onSubmit={handleContact}>
+          <form onSubmit={handleContact} style={{ ...fadeUp(0.3) }}>
             {[
-              { key: 'name',    label: 'Full Name',     placeholder: 'Your full name',           type: 'text',   autoComplete: 'name'  },
-              { key: 'email',   label: 'Email Address', placeholder: 'your@email.com',           type: 'email',  autoComplete: 'email' },
-              { key: 'subject', label: 'Subject',       placeholder: 'How can we help?',         type: 'text',   autoComplete: 'off'   },
-              { key: 'message', label: 'Message',       placeholder: 'Write your message here…', as: 'textarea', autoComplete: 'off'   },
+              { key: 'name',    label: 'Full Name', placeholder: 'Your full name',           type: 'text',   autoComplete: 'name' },
+              { key: 'message', label: 'Message',   placeholder: 'Write your message here…', as: 'textarea', autoComplete: 'off'  },
             ].map(({ key, label, placeholder, type, as, autoComplete }) => (
               <FieldWithFocus
                 key={key} name={key} label={label} placeholder={placeholder}
@@ -538,17 +574,17 @@ const CombinedConnectSection = () => {
                 width: '100%', fontFamily: 'Raleway, sans-serif',
                 fontSize: '9px', fontWeight: 500, letterSpacing: '5px',
                 textTransform: 'uppercase', padding: '18px',
-                background: sendHov ? 'rgba(200,160,60,0.08)' : 'transparent',
-                color: 'rgba(200,160,60,1)',
-                border: `1px solid ${sendHov ? 'rgba(200,160,60,0.9)' : 'rgba(200,160,60,0.45)'}`,
+                background: sendHov ? 'rgba(201,168,76,0.06)' : 'transparent',
+                color: 'rgba(201,168,76,1)',
+                border: `1px solid ${sendHov ? 'rgba(201,168,76,0.85)' : 'rgba(201,168,76,0.4)'}`,
                 cursor: cBusy ? 'default' : 'pointer',
-                transition: 'all 0.35s ease', opacity: cBusy ? 0.7 : 1,
-                boxShadow: sendHov ? '0 0 28px rgba(200,160,60,0.12), inset 0 0 18px rgba(200,160,60,0.04)' : 'none',
-                marginTop: '12px',
+                transition: 'all 0.3s ease', opacity: cBusy ? 0.7 : 1,
+                marginTop: '8px',
               }}
             >{cBusy ? 'Sending…' : 'Send Message'}</button>
           </form>
         )}
+
       </div>
     </section>
   );
@@ -557,24 +593,24 @@ const CombinedConnectSection = () => {
 const FieldWithFocus = ({ name, label, placeholder, type = 'text', as, value, onChange, fieldStyle, style, autoComplete }) => {
   const [focused, setFocused] = useState(false);
   return (
-    <div style={{ marginBottom: '36px', ...style }}>
+    <div style={{ marginBottom: '32px', ...style }}>
       <label style={{
         display: 'block', fontFamily: 'Raleway, sans-serif',
-        fontSize: '8px', letterSpacing: '4px',
-        color: 'rgba(200,160,60,0.5)', textTransform: 'uppercase', marginBottom: '10px',
+        fontSize: '10px', letterSpacing: '6px',
+        color: 'rgba(201,168,76,0.5)', textTransform: 'uppercase', marginBottom: '10px',
       }}>{label}</label>
       {as === 'textarea' ? (
         <textarea
-          name={name} value={value} onChange={onChange} placeholder={placeholder} rows={4}
+          name={name} value={value} onChange={onChange} placeholder={placeholder}
           autoComplete={autoComplete || 'off'}
           onFocus={() => setFocused(true)} onBlur={() => setFocused(false)}
           className="hc-input"
-          style={{ ...fieldStyle(focused), display: 'block' }}
+          style={{ ...fieldStyle(focused), display: 'block', minHeight: '120px' }}
         />
       ) : (
         <input
           type={type} name={name} value={value} onChange={onChange} placeholder={placeholder}
-          autoComplete={autoComplete || (type === 'email' ? 'email' : 'off')}
+          autoComplete={autoComplete || 'off'}
           onFocus={() => setFocused(true)} onBlur={() => setFocused(false)}
           className="hc-input"
           style={fieldStyle(focused)}

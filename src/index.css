@@ -720,6 +720,13 @@ button { font-family: inherit; }
   }
 }
 
+/* ── Connect section ── */
+@media (max-width: 768px) {
+  .connect-section {
+    padding: 80px 24px !important;
+  }
+}
+
 /* ── Craft stats ── */
 @media (max-width: 768px) {
   .craft-stats {
