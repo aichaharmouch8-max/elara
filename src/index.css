@@ -309,7 +309,7 @@ button { font-family: inherit; }
     display: none !important;
   }
 
-  /* Text block: absolute, pinned to bottom, over the gradient */
+  /* Text block: absolute, pinned to bottom, centered */
   .hero-inner {
     position: absolute !important;
     bottom: 90px !important;
@@ -321,7 +321,8 @@ button { font-family: inherit; }
     z-index: 2 !important;
     display: flex !important;
     flex-direction: column !important;
-    align-items: flex-start !important;
+    align-items: center !important;
+    text-align: center !important;
     background: none !important;
     flex: none !important;
     gap: 0 !important;
@@ -338,32 +339,47 @@ button { font-family: inherit; }
     box-sizing: border-box !important;
     display: flex !important;
     flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
     gap: 6px !important;
   }
 
   /* Eyebrow — MAISON DE PARFUM */
   .hero-text-col > div:first-child {
     margin-bottom: 6px !important;
+    display: flex !important;
+    justify-content: center !important;
   }
   .hero-text-col > div:first-child span {
-    font-size: 9px !important;
-    letter-spacing: 5px !important;
+    font-size: 10px !important;
+    letter-spacing: 0.25em !important;
     color: rgba(200,160,60,0.85) !important;
   }
 
   /* Heading */
-  .hero-text-col h1 { margin-bottom: 6px !important; }
-  .hero-text-col h1 span:first-child { font-size: 1.9rem !important; color: #FAF6EF !important; }
-  .hero-text-col h1 span:last-child  { font-size: 2.5rem !important; }
+  .hero-text-col h1 { margin-bottom: 6px !important; text-align: center !important; }
+  .hero-text-col h1 span:first-child { font-size: 36px !important; color: #FAF6EF !important; }
+  .hero-text-col h1 span:last-child  { font-size: 44px !important; }
 
   /* Subtitle */
   .hero-text-col p {
     font-size: 13px !important;
-    color: rgba(255,255,255,0.6) !important;
+    color: #e8e0d8 !important;
     margin-top: 4px !important;
     margin-bottom: 0 !important;
-    max-width: 100% !important;
+    max-width: 280px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
     line-height: 1.7 !important;
+  }
+
+  /* Shop Now button — centered block */
+  .hero-text-col a[href="/shop"] {
+    display: block !important;
+    width: 200px !important;
+    margin: 12px auto 0 !important;
+    text-align: center !important;
+    box-sizing: border-box !important;
   }
 
 
@@ -435,16 +451,12 @@ button { font-family: inherit; }
     height: auto !important;
   }
 
-  /* Collection card images on mobile */
-  .collection-card-img-active {
+  /* Collection card images on mobile — locked and active identical */
+  .collection-card-img-active,
+  .collection-card-img-locked {
     height: 220px !important;
     min-height: 220px !important;
     max-height: 220px !important;
-  }
-  .collection-card-img-locked {
-    height: 160px !important;
-    min-height: 160px !important;
-    max-height: 160px !important;
   }
 
   /* Collection — show carousel, hide pyramid */
@@ -478,17 +490,17 @@ button { font-family: inherit; }
     scrollbar-width: none !important;
   }
 
-  /* ── Carousel card slot — 90vw so first card is centered with ~4% peek ── */
+  /* ── Carousel card slot — 88vw, one card visible at a time ── */
   .carousel-card-slot {
     scroll-snap-align: center !important;
-    width: 90vw !important;
-    min-width: 90vw !important;
-    max-width: 90vw !important;
+    width: 88vw !important;
+    min-width: 88vw !important;
+    max-width: 88vw !important;
     height: auto !important;
-    min-height: auto !important;
+    min-height: 580px !important;
     flex-shrink: 0 !important;
     flex-grow: 0 !important;
-    flex-basis: 90vw !important;
+    flex-basis: 88vw !important;
     overflow: visible !important;
   }
 
@@ -501,19 +513,19 @@ button { font-family: inherit; }
     min-height: auto !important;
   }
 
-  /* Card image height in carousel */
+  /* Card image height in carousel — uniform 220px */
   .collection-mobile-carousel .collection-card-img-wrap {
-    height: 240px !important;
-    min-height: 240px !important;
-    max-height: 240px !important;
+    height: 220px !important;
+    min-height: 220px !important;
+    max-height: 220px !important;
     flex-shrink: 0 !important;
-    padding-top: 12px !important;
+    padding-top: 0 !important;
     box-sizing: border-box !important;
   }
 
-  /* Tighten card body on mobile */
+  /* Card body padding on mobile */
   .collection-mobile-carousel .collection-card-body {
-    padding: 12px 16px 16px !important;
+    padding: 24px 20px !important;
   }
 
   /* Buy Now — gold fill, full width, premium feel */

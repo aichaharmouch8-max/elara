@@ -156,30 +156,23 @@ const CollectionCard = ({ product }) => {
             <div style={{
               position: 'absolute', inset: 0, zIndex: 2,
               display: 'flex', flexDirection: 'column',
-              alignItems: 'center', justifyContent: 'center', gap: '10px',
+              alignItems: 'center', justifyContent: 'center', gap: '8px',
+              background: 'rgba(8,3,1,0.55)',
+              backdropFilter: 'blur(2px)',
+              WebkitBackdropFilter: 'blur(2px)',
             }}>
-              <svg width="34" height="34" viewBox="0 0 24 24" fill="none"
-                stroke="rgba(200,160,60,0.9)" strokeWidth="1.2"
-                strokeLinecap="round" strokeLinejoin="round">
-                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
-                <path d="M7 11V7a5 5 0 0110 0v4"/>
-              </svg>
               <span style={{
                 fontFamily: 'Raleway, sans-serif', fontSize: '8px',
-                letterSpacing: '5px', color: 'rgba(200,160,60,0.7)',
+                letterSpacing: '0.35em', color: 'rgba(201,168,76,0.5)',
                 textTransform: 'uppercase',
-              }}>Locked</span>
+              }}>— Coming Soon —</span>
               <p style={{
-                fontFamily: "'Playfair Display', serif", fontStyle: 'italic',
-                fontSize: '11px', color: 'rgba(201,169,110,0.82)',
-                marginTop: '10px', letterSpacing: '0.3px',
-                opacity: hov ? 1 : 0,
-                transform: hov ? 'translateY(0)' : 'translateY(6px)',
-                transition: 'opacity 0.4s ease, transform 0.4s ease',
-                maxWidth: '200px', lineHeight: 1.6,
-              }}>
-                Join the waitlist to be<br/>the first to know
-              </p>
+                fontFamily: "'Cormorant Garamond', serif", fontStyle: 'italic',
+                fontSize: '22px', fontWeight: 300,
+                color: 'rgba(250,246,239,0.75)',
+                letterSpacing: '0.02em', lineHeight: 1.2,
+                marginTop: '4px',
+              }}>Available Soon</p>
             </div>
           )}
 
@@ -340,7 +333,7 @@ const CollectionCarousel = () => {
   const handleScroll = () => {
     const el = trackRef.current;
     if (!el) return;
-    const step = window.innerWidth * 0.90 + 8;
+    const step = window.innerWidth * 0.88 + 8;
     const idx = Math.round(el.scrollLeft / step);
     setActiveIdx(Math.min(Math.max(idx, 0), PRODUCTS.length - 1));
   };
