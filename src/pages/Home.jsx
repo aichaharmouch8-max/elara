@@ -726,76 +726,6 @@ const ImmersiveQuote = () => {
   );
 };
 
-/* ─────────────────────────────────────────
-   ORIGIN STORY
-───────────────────────────────────────── */
-const OriginStory = () => {
-  const [ref, visible] = useReveal(0.1);
-  return (
-    <section ref={ref} style={{
-      background: '#060606',
-      padding: 'clamp(60px, 8vw, 100px) clamp(20px, 4vw, 40px)',
-      borderTop: '1px solid rgba(201,168,76,0.08)',
-    }}>
-      <div className="origin-grid" style={{
-        maxWidth: '1100px', margin: '0 auto',
-        display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '80px', alignItems: 'center',
-      }}>
-        <div style={{
-          opacity: visible ? 1 : 0,
-          transition: 'opacity 1.2s ease 0.1s',
-          position: 'relative', overflow: 'hidden',
-          aspectRatio: '3/4',
-        }}>
-          <img
-            src="/elaraaaaa.png" alt="ELARA"
-            style={{
-              width: '100%', height: '100%',
-              objectFit: 'cover', objectPosition: 'center top', display: 'block',
-            }}
-          />
-          <div style={{
-            position: 'absolute', inset: 0,
-            background: 'linear-gradient(135deg, rgba(8,4,0,0.55) 0%, rgba(8,4,0,0.2) 100%)',
-          }}/>
-        </div>
-
-        <div style={{
-          opacity: visible ? 1 : 0,
-          transform: visible ? 'translateY(0)' : 'translateY(28px)',
-          transition: 'opacity 1s ease 0.3s, transform 1s cubic-bezier(0.16,1,0.3,1) 0.3s',
-        }}>
-          <p style={{
-            fontFamily: 'Raleway, sans-serif', fontSize: '9px', letterSpacing: '7px',
-            color: 'rgba(201,168,76,0.6)', textTransform: 'uppercase', marginBottom: '24px',
-          }}>The Story</p>
-          <h2 style={{
-            fontFamily: "'Cormorant Garamond', serif", fontWeight: 300,
-            fontSize: 'clamp(1.8rem, 3vw, 2.6rem)', color: '#FAF6EF',
-            lineHeight: 1.25, marginBottom: '32px',
-          }}>
-            Born from a desire to make luxury{' '}
-            <span style={{ fontStyle: 'italic', color: 'rgba(201,168,76,0.9)' }}>feel personal.</span>
-          </h2>
-          <p style={{
-            fontFamily: 'Raleway, sans-serif', fontSize: '14px', fontWeight: 300,
-            color: 'rgba(250,246,239,0.52)', lineHeight: 1.9, marginBottom: '22px',
-            letterSpacing: '0.3px',
-          }}>
-            ELARA began in Lebanon, a country that has always known how to turn hardship into beauty. We believed that a truly exceptional fragrance should not belong only to fashion capitals or luxury malls. It should belong to anyone who understands that scent is the most intimate thing you can wear.
-          </p>
-          <p style={{
-            fontFamily: 'Raleway, sans-serif', fontSize: '14px', fontWeight: 300,
-            color: 'rgba(250,246,239,0.38)', lineHeight: 1.9,
-            letterSpacing: '0.3px',
-          }}>
-            Every bottle of ELARA is a quiet rebellion. Against the ordinary. Against the forgettable. Against everything that blends in.
-          </p>
-        </div>
-      </div>
-    </section>
-  );
-};
 
 /* ─────────────────────────────────────────
    FRAGRANCE PHILOSOPHY
@@ -1090,9 +1020,6 @@ const Home = () => {
 
       {/* ══════════════════ IMMERSIVE QUOTE ══════════════════ */}
       <ImmersiveQuote />
-
-      {/* ══════════════════ THE STORY ══════════════════ */}
-      <OriginStory />
 
       {/* ══════════════════ CONTACT ══════════════════ */}
       <CombinedConnectSection />
