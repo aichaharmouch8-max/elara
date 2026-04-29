@@ -790,6 +790,121 @@ const FragrancePhilosophy = () => {
 };
 
 /* ─────────────────────────────────────────
+   EXCLUSIVE ACCESS / WAITLIST
+───────────────────────────────────────── */
+const ExclusiveAccess = () => {
+  const [email, setEmail]     = useState('');
+  const [focused, setFocused] = useState(false);
+  const [done, setDone]       = useState(false);
+  const [btnHov, setBtnHov]   = useState(false);
+  const [ref, visible]        = useReveal(0.15);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!email.trim()) return;
+    setDone(true);
+  };
+
+  const fadeUp = (d = 0) => ({
+    opacity: visible ? 1 : 0,
+    transform: visible ? 'translateY(0)' : 'translateY(28px)',
+    transition: `opacity 0.9s ease ${d}s, transform 0.9s cubic-bezier(0.16,1,0.3,1) ${d}s`,
+  });
+
+  return (
+    <section
+      ref={ref}
+      className="exclusive-access-section"
+      style={{
+        background: '#060606',
+        padding: '100px 40px',
+        borderTop: '1px solid rgba(120,20,40,0.3)',
+        textAlign: 'center',
+      }}
+    >
+      <style>{`
+        .ea-input::placeholder { color: rgba(201,168,76,0.3); font-family: 'Cormorant Garamond', serif; font-style: italic; }
+      `}</style>
+
+      <div style={{ maxWidth: '520px', margin: '0 auto' }}>
+        <p style={{
+          fontFamily: 'Raleway, sans-serif', fontSize: '9px', letterSpacing: '7px',
+          color: 'rgba(201,168,76,0.6)', textTransform: 'uppercase',
+          marginBottom: '22px', ...fadeUp(0),
+        }}>Exclusive Access</p>
+
+        <h2 style={{
+          fontFamily: "'Cormorant Garamond', serif", fontWeight: 300,
+          fontSize: 'clamp(2rem, 4.5vw, 3.2rem)', lineHeight: 1.15,
+          marginBottom: '18px', letterSpacing: '-0.3px',
+          ...fadeUp(0.1),
+        }}>
+          <span style={{ color: '#FAF6EF' }}>Be The First </span>
+          <span style={{ fontStyle: 'italic', color: '#c9a84c' }}>To Know</span>
+        </h2>
+
+        <p style={{
+          fontFamily: 'Raleway, sans-serif', fontSize: '12px', fontWeight: 300,
+          color: 'rgba(232,224,216,0.42)', letterSpacing: '0.4px', lineHeight: 2,
+          marginBottom: '48px', ...fadeUp(0.2),
+        }}>
+          Early access to new fragrances, private events and exclusive offers.
+        </p>
+
+        {done ? (
+          <div style={{ ...fadeUp(0) }}>
+            <p style={{
+              fontFamily: "'Cormorant Garamond', serif", fontStyle: 'italic',
+              fontSize: '26px', color: 'rgba(201,168,76,0.9)', lineHeight: 1.8,
+              marginBottom: '8px',
+            }}>You're on the list.</p>
+            <p style={{
+              fontFamily: 'Raleway, sans-serif', fontSize: '11px', fontWeight: 300,
+              letterSpacing: '2px', color: 'rgba(250,246,239,0.3)',
+            }}>We'll be in touch.</p>
+          </div>
+        ) : (
+          <form onSubmit={handleSubmit} style={{ ...fadeUp(0.3) }}>
+            <input
+              type="email"
+              value={email}
+              onChange={e => setEmail(e.target.value)}
+              placeholder="your@email.com"
+              required
+              className="ea-input"
+              onFocus={() => setFocused(true)}
+              onBlur={() => setFocused(false)}
+              style={{
+                width: '100%', background: 'transparent', border: 'none',
+                borderBottom: `1px solid ${focused ? 'rgba(201,168,76,0.8)' : 'rgba(201,168,76,0.22)'}`,
+                color: '#FAF6EF', fontFamily: "'Cormorant Garamond', serif",
+                fontSize: '17px', fontWeight: 300, letterSpacing: '0.3px',
+                padding: '14px 0', outline: 'none', textAlign: 'center',
+                transition: 'border-color 0.3s ease',
+                boxSizing: 'border-box', marginBottom: '28px',
+              }}
+            />
+            <button
+              type="submit"
+              onMouseEnter={() => setBtnHov(true)}
+              onMouseLeave={() => setBtnHov(false)}
+              style={{
+                width: '100%', fontFamily: 'Raleway, sans-serif',
+                fontSize: '9px', fontWeight: 600, letterSpacing: '5px',
+                textTransform: 'uppercase', padding: '18px',
+                background: btnHov ? '#E8B84B' : '#c9a84c',
+                color: '#0a0600', border: 'none', cursor: 'pointer',
+                transition: 'background 0.3s ease',
+              }}
+            >Join the Waitlist</button>
+          </form>
+        )}
+      </div>
+    </section>
+  );
+};
+
+/* ─────────────────────────────────────────
    SIDE NAV DOTS
 ───────────────────────────────────────── */
 const SECTIONS = [
@@ -1017,6 +1132,9 @@ const Home = () => {
 
       {/* ══════════════════ IMMERSIVE QUOTE ══════════════════ */}
       <ImmersiveQuote />
+
+      {/* ══════════════════ EXCLUSIVE ACCESS ══════════════════ */}
+      <ExclusiveAccess />
 
       {/* ══════════════════ CONTACT ══════════════════ */}
       <CombinedConnectSection />

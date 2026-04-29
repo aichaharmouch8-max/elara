@@ -577,6 +577,11 @@ button { font-family: inherit; }
   .hamburger { display: flex !important; }
 
 
+  /* Exclusive Access section */
+  .exclusive-access-section {
+    padding: 60px 20px !important;
+  }
+
   /* Contact form — full width, comfortable padding */
   .hc-form-wrap {
     width: 100% !important;
