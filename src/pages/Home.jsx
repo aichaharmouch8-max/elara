@@ -231,11 +231,6 @@ const CollectionCard = ({ product }) => {
             fontFamily: 'Raleway, sans-serif', fontSize: '11px', letterSpacing: '3px',
             color: 'rgba(200,160,60,0.6)', marginBottom: '10px',
           }}>100ml Eau de Parfum</p>
-          <div style={{
-            width: '32px', height: '1px',
-            background: 'linear-gradient(90deg, transparent, rgba(201,169,110,0.45), transparent)',
-            marginBottom: '10px',
-          }}/>
           <p style={{
             fontFamily: 'Raleway, sans-serif', fontSize: '12px', fontWeight: 300,
             color: locked ? 'rgba(250,246,239,0.18)' : 'rgba(250,246,239,0.32)',
@@ -299,10 +294,6 @@ const CollectionCard = ({ product }) => {
                   );
                 })}
               </div>
-              <div style={{
-                height: '1px', marginTop: '14px', marginBottom: '10px',
-                background: 'linear-gradient(to right, transparent, rgba(200,160,60,0.2), transparent)',
-              }}/>
             </div>
           )}
 
@@ -343,11 +334,6 @@ const CollectionCard = ({ product }) => {
           )}
         </div>
 
-        <div style={{
-          position: 'absolute', bottom: 0, left: 0, right: 0, height: '1px',
-          background: 'linear-gradient(90deg, transparent, rgba(201,169,110,0.45), transparent)',
-          opacity: hov ? 0.9 : 0.18, transition: 'opacity 0.4s',
-        }}/>
       </motion.div>
 
       {modal && <PaymentModal product={product} selectedSize={selectedSize} selectedPrice={REINE_PRICES[selectedSize]} onClose={() => setModal(false)} />}
@@ -460,10 +446,6 @@ const FounderStory = () => {
         transform: visible ? 'translateY(0)' : 'translateY(28px)',
         transition: 'opacity 1s ease, transform 1s cubic-bezier(0.16,1,0.3,1)',
       }}>
-        <div style={{
-          width: '48px', height: '1px', margin: '0 auto 44px',
-          background: 'linear-gradient(90deg, transparent, rgba(201,168,76,0.55), transparent)',
-        }}/>
         <p style={{
           fontFamily: 'Raleway, sans-serif', fontSize: '9px', letterSpacing: '7px',
           color: 'rgba(201,168,76,0.6)', textTransform: 'uppercase', marginBottom: '44px',
@@ -486,12 +468,7 @@ const FounderStory = () => {
         <p style={{
           fontFamily: "'Cormorant Garamond', serif", fontStyle: 'italic',
           fontSize: '18px', color: 'rgba(201,168,76,0.8)', letterSpacing: '0.5px',
-          marginBottom: '44px',
         }}>Aicha</p>
-        <div style={{
-          width: '48px', height: '1px', margin: '0 auto',
-          background: 'linear-gradient(90deg, transparent, rgba(201,168,76,0.35), transparent)',
-        }}/>
       </div>
     </section>
   );
@@ -518,24 +495,14 @@ const TrustBar = () => (
       display: 'flex', alignItems: 'center', justifyContent: 'center',
       flexWrap: 'wrap',
     }}>
-      {TRUST_BAR_ITEMS.flatMap((item, i) => {
-        const nodes = [(
-          <span key={item} style={{
-            fontFamily: 'Raleway, sans-serif', fontSize: '10px',
-            letterSpacing: '0.15em', textTransform: 'uppercase',
-            color: 'rgba(201,168,76,0.75)', whiteSpace: 'nowrap',
-            padding: '6px 16px',
-          }}>{item}</span>
-        )];
-        if (i < TRUST_BAR_ITEMS.length - 1) {
-          nodes.push(
-            <span key={`sep-${i}`} className="trust-bar-sep" style={{
-              color: 'rgba(201,168,76,0.35)', fontSize: '10px', flexShrink: 0,
-            }}>✦</span>
-          );
-        }
-        return nodes;
-      })}
+      {TRUST_BAR_ITEMS.map((item) => (
+        <span key={item} style={{
+          fontFamily: 'Raleway, sans-serif', fontSize: '10px',
+          letterSpacing: '0.15em', textTransform: 'uppercase',
+          color: 'rgba(201,168,76,0.75)', whiteSpace: 'nowrap',
+          padding: '6px 16px',
+        }}>{item}</span>
+      ))}
     </div>
   </div>
 );
@@ -551,19 +518,6 @@ const fieldStyleFn = (focused) => ({
   boxSizing: 'border-box', resize: 'none',
 });
 
-/* ── Ornamental divider ── */
-const GoldDivider = ({ visible, delay = 0 }) => (
-  <div style={{
-    maxWidth: '680px', margin: '0 auto',
-    display: 'flex', alignItems: 'center', gap: '22px',
-    opacity: visible ? 1 : 0,
-    transition: `opacity 1.1s ease ${delay}s`,
-  }}>
-    <div style={{ flex: 1, height: '1px', background: 'linear-gradient(to right, transparent, rgba(200,160,60,0.5))' }} />
-    <span className="connect-diamond">✦</span>
-    <div style={{ flex: 1, height: '1px', background: 'linear-gradient(to left, transparent, rgba(200,160,60,0.5))' }} />
-  </div>
-);
 
 /* ── Combined: Waitlist + Contact ── */
 const CombinedConnectSection = () => {
@@ -632,25 +586,10 @@ const CombinedConnectSection = () => {
         .hc-input::placeholder { color: rgba(200,160,60,0.3); font-family: 'Cormorant Garamond', serif; }
         input[name="EMAIL"]::placeholder { color: rgba(200,160,60,0.3); font-family: 'Cormorant Garamond', serif; font-size: 16px; }
         textarea.hc-input { font-family: 'Cormorant Garamond', serif; }
-        @keyframes diamondPulse {
-          0%, 100% { text-shadow: 0 0 4px rgba(200,160,60,0.2); opacity: 0.6; }
-          50%       { text-shadow: 0 0 18px rgba(200,160,60,0.65), 0 0 36px rgba(200,160,60,0.2); opacity: 1; }
-        }
-        .connect-diamond {
-          color: rgba(200,160,60,0.85);
-          font-size: 15px;
-          line-height: 1;
-          animation: diamondPulse 4s ease-in-out infinite;
-          display: block;
-          flex-shrink: 0;
-        }
       `}</style>
 
-      {/* ── TOP DIVIDER ── */}
-      <GoldDivider visible={secIn} delay={0} />
-
       {/* ── WAITLIST BLOCK ── */}
-      <div style={{ maxWidth: '680px', margin: '80px auto 0', textAlign: 'center', ...fadeUp(0.1) }}>
+      <div style={{ maxWidth: '680px', margin: '0 auto', textAlign: 'center', ...fadeUp(0.1) }}>
 
         <p style={{
           fontFamily: 'Raleway, sans-serif', fontSize: '9px', letterSpacing: '8px',
@@ -736,13 +675,8 @@ const CombinedConnectSection = () => {
         )}
       </div>
 
-      {/* ── MIDDLE DIVIDER ── */}
-      <div style={{ margin: '88px 0' }}>
-        <GoldDivider visible={secIn} delay={0.15} />
-      </div>
-
       {/* ── CONTACT BLOCK ── */}
-      <div id="contact" style={{ maxWidth: '680px', margin: '0 auto', ...fadeUp(0.2) }}>
+      <div id="contact" style={{ maxWidth: '680px', margin: '88px auto 0', ...fadeUp(0.2) }}>
 
         <p style={{
           fontFamily: 'Raleway, sans-serif', fontSize: '9px', letterSpacing: '8px',
@@ -831,10 +765,6 @@ const CombinedConnectSection = () => {
         )}
       </div>
 
-      {/* ── BOTTOM DIVIDER ── */}
-      <div style={{ margin: '88px 0 0' }}>
-        <GoldDivider visible={secIn} delay={0.25} />
-      </div>
     </section>
   );
 };
@@ -990,15 +920,6 @@ const CinematicOpening = () => {
         <span style={{ fontStyle: 'italic', color: '#E8B84B' }}>Others are remembered.</span>
       </h2>
 
-      <div style={{
-        height: '1px', maxWidth: '120px', margin: '0 auto 40px',
-        background: 'linear-gradient(90deg, transparent, #c9a84c, transparent)',
-        transformOrigin: 'center',
-        transform: visible ? 'scaleX(1)' : 'scaleX(0)',
-        opacity: visible ? 1 : 0,
-        transition: 'transform 1.4s cubic-bezier(0.4,0,0.2,1) 0.4s, opacity 0.8s ease 0.4s',
-      }}/>
-
       <p style={{
         fontFamily: 'Raleway, sans-serif', fontSize: 'clamp(13px, 1.5vw, 15px)', fontWeight: 300,
         color: 'rgba(250,246,239,0.48)', lineHeight: 1.9,
@@ -1075,15 +996,11 @@ const OriginStory = () => {
           </p>
           <p style={{
             fontFamily: 'Raleway, sans-serif', fontSize: '14px', fontWeight: 300,
-            color: 'rgba(250,246,239,0.38)', lineHeight: 1.9, marginBottom: '36px',
+            color: 'rgba(250,246,239,0.38)', lineHeight: 1.9,
             letterSpacing: '0.3px',
           }}>
             Every bottle of ELARA is a quiet rebellion. Against the ordinary. Against the forgettable. Against everything that blends in.
           </p>
-          <div style={{
-            width: '48px', height: '1px',
-            background: 'linear-gradient(90deg, rgba(201,168,76,0.6), transparent)',
-          }}/>
         </div>
       </div>
     </section>
@@ -1403,10 +1320,6 @@ const Home = () => {
             >
               A scent so rare, silence speaks first.<br/>
               For the woman who enters a room before she does.
-              <br/>
-              <span style={{ fontSize: '11px', color: 'rgba(200,160,60,0.55)', letterSpacing: '1px' }}>
-                Crafted in Lebanon. Delivered to your door.
-              </span>
             </motion.p>
 
             {/* Shop Now CTA */}
