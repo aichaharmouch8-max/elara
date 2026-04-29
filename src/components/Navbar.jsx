@@ -25,19 +25,12 @@ const Navbar = () => {
           top: 0,
           left: 0,
           right: 0,
-          width: '100%',
           zIndex: 9999,
-          height: '76px',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          padding: '0 56px',
-          background: 'rgba(8, 4, 1, 0.3)',
-          backdropFilter: 'blur(20px)',
-          WebkitBackdropFilter: 'blur(20px)',
+          background: 'rgba(8, 4, 1, 0.25)',
+          backdropFilter: 'blur(24px)',
+          WebkitBackdropFilter: 'blur(24px)',
           borderBottom: '1px solid rgba(201, 168, 76, 0.1)',
           transition: 'background 0.3s ease',
-          boxSizing: 'border-box',
         }}
       >
         {/* Wordmark */}

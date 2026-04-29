@@ -28,7 +28,7 @@ const LoadingScreen = ({ visible }) => (
     opacity: visible ? 1 : 0,
     pointerEvents: visible ? 'all' : 'none',
     transition: 'opacity 0.5s ease',
-    overflow: 'hidden',
+    overflow: 'clip',
   }}>
 
     {/* Particle dust */}
