@@ -529,12 +529,7 @@ const CombinedConnectSection = () => {
             Chat on WhatsApp
           </a>
 
-          {/* Response time trust line */}
-          <p style={{
-            fontFamily: "'Cormorant Garamond', serif", fontStyle: 'italic', fontWeight: 300,
-            fontSize: '10px', color: 'rgba(201,168,76,0.4)',
-            textAlign: 'center', marginTop: '16px', letterSpacing: '0.3px',
-          }}>Average response time: under 5 minutes</p>
+
         </div>
 
       </div>

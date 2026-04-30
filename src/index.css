@@ -729,7 +729,7 @@ button { font-family: inherit; }
 /* ── Connect section ── */
 @media (max-width: 768px) {
   .connect-section {
-    padding: 80px 24px !important;
+    padding: 80px 24px 60px !important;
   }
 }
 
