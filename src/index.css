@@ -876,8 +876,7 @@ footer {
   /* Prevent any element from overflowing screen width */
   * { max-width: 100vw; box-sizing: border-box; }
 
-  /* WhatsApp float sits above the bottom nav on mobile */
-  .wa-float { bottom: 74px !important; }
+
 }
 
 /* ── Respect prefers-reduced-motion ── */

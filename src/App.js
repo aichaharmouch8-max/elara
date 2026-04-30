@@ -4,7 +4,7 @@ import { CartContext } from './context/CartContext';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Home from './pages/Home';
-import AgentChatWidget from './components/AgentChatWidget';
+
 import MobileBottomNav from './components/MobileBottomNav';
 import WhatsAppFloat from './components/WhatsAppFloat';
 
@@ -147,7 +147,7 @@ function App() {
           </Routes>
         </Suspense>
         <Footer />
-        <AgentChatWidget />
+
         <MobileBottomNav />
         <WhatsAppFloat />
       </BrowserRouter>
