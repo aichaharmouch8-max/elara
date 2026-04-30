@@ -6,6 +6,68 @@ const CartPage = () => {
   const { cart, removeFromCart, updateQty } = useCart();
   const subtotal = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
 
+  if (cart.length === 0) {
+    return (
+      <div style={{
+        background: '#060606', minHeight: '100vh', boxSizing: 'border-box',
+        display: 'flex', flexDirection: 'column',
+        alignItems: 'center', justifyContent: 'center',
+        padding: '120px 24px 60px',
+        textAlign: 'center',
+      }}>
+        {/* Refined bag icon */}
+        <svg
+          width="48" height="48" viewBox="0 0 24 24" fill="none"
+          stroke="rgba(201,168,76,0.75)" strokeWidth="0.75"
+          strokeLinecap="round" strokeLinejoin="round"
+          style={{ marginBottom: '36px' }}
+        >
+          <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
+          <line x1="3" y1="6" x2="21" y2="6"/>
+          <path d="M16 10a4 4 0 01-8 0"/>
+        </svg>
+
+        {/* Headline */}
+        <h1 style={{
+          fontFamily: "'Cormorant Garamond', serif", fontWeight: 300,
+          fontSize: 'clamp(30px, 6vw, 46px)', fontStyle: 'italic',
+          color: '#FAF6EF', lineHeight: 1.2, letterSpacing: '0.02em',
+          marginBottom: '20px',
+        }}>Your Collection Awaits</h1>
+
+        {/* Scent line */}
+        <p style={{
+          fontFamily: "'Cormorant Garamond', serif", fontStyle: 'italic',
+          fontSize: '18px', fontWeight: 300,
+          color: 'rgba(201,168,76,0.8)',
+          letterSpacing: '0.3px', marginBottom: '10px',
+        }}>You haven't chosen your scent yet.</p>
+
+        {/* Story line */}
+        <p style={{
+          fontFamily: 'Raleway, sans-serif', fontSize: '11px', fontWeight: 300,
+          color: 'rgba(232,224,216,0.35)', letterSpacing: '1px',
+          lineHeight: 1.8, marginBottom: '40px',
+        }}>Every great story begins with a single choice.</p>
+
+        <ShopNowBtn />
+
+        {/* Gold hairline */}
+        <div style={{
+          width: '40px', height: '1px',
+          background: 'rgba(201,168,76,0.35)',
+          marginTop: '40px', marginBottom: '16px',
+        }} />
+
+        {/* Brand mark */}
+        <p style={{
+          fontFamily: 'Raleway, sans-serif', fontSize: '9px', letterSpacing: '4px',
+          color: 'rgba(201,168,76,0.3)', textTransform: 'uppercase',
+        }}>ELARA · Maison de Parfum</p>
+      </div>
+    );
+  }
+
   return (
     <div style={{ background: '#060606', minHeight: '100vh', paddingTop: '112px' }}>
       <div className="cart-wrapper" style={{ maxWidth: '860px', margin: '0 auto', padding: '60px clamp(20px, 5vw, 48px) 140px' }}>
@@ -13,205 +75,163 @@ const CartPage = () => {
         <div style={{ marginBottom: '72px' }}>
           <p style={{
             fontFamily: 'Raleway', fontSize: '9px', letterSpacing: '6px',
-            color: '#C8962A', textTransform: 'uppercase', marginBottom: '14px',
+            color: 'rgba(201,168,76,0.5)', textTransform: 'uppercase', marginBottom: '14px',
           }}>
             Your Selection
           </p>
           <h1 style={{
-            fontFamily: "'Playfair Display', serif", fontWeight: 300,
-            fontSize: 'clamp(56px, 7vw, 80px)', color: '#1C1510', lineHeight: 1,
+            fontFamily: "'Cormorant Garamond', serif", fontWeight: 300, fontStyle: 'italic',
+            fontSize: 'clamp(40px, 6vw, 64px)', color: '#FAF6EF', lineHeight: 1,
           }}>
             Cart
           </h1>
         </div>
 
-        {cart.length === 0 ? (
-          /* ── Empty state ── */
-          <div style={{ textAlign: 'center', padding: '80px 0' }}>
-            <div style={{
-              width: '72px', height: '72px', borderRadius: '50%',
-              border: '1px solid rgba(200,150,42,0.3)',
-              display: 'flex', alignItems: 'center', justifyContent: 'center',
-              margin: '0 auto 32px',
-            }}>
-              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#C8962A" strokeWidth="1.3" strokeLinecap="round">
-                <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
-                <line x1="3" y1="6" x2="21" y2="6"/>
-                <path d="M16 10a4 4 0 01-8 0"/>
-              </svg>
-            </div>
-            <p style={{
-              fontFamily: "'Playfair Display', serif", fontWeight: 300,
-              fontSize: '28px', fontStyle: 'italic', color: '#1C1510', marginBottom: '12px',
-            }}>
-              Your cart is empty
-            </p>
-            <p style={{
-              fontFamily: 'Raleway', fontSize: '12px', fontWeight: 300,
-              color: '#8A7A6A', letterSpacing: '0.5px', marginBottom: '48px',
-            }}>
-              Discover our collection and add a fragrance
-            </p>
-            <ShopNowBtn />
-          </div>
-        ) : (
-          <div>
-            {/* ── Column headers ── */}
-            <div className="cart-grid-header" style={{
-              display: 'grid', gridTemplateColumns: '1fr 160px 120px',
-              gap: '32px', paddingBottom: '16px',
-              borderBottom: '1px solid rgba(200,150,42,0.2)',
-              marginBottom: '8px',
-            }}>
-              {['Fragrance', 'Quantity', 'Total'].map(h => (
-                <p key={h} style={{
-                  fontFamily: 'Raleway', fontSize: '8px', letterSpacing: '4px',
-                  color: 'rgba(200,150,42,0.6)', textTransform: 'uppercase',
-                  textAlign: h === 'Total' ? 'right' : 'left',
-                }}>
-                  {h}
-                </p>
-              ))}
-            </div>
-
-            {/* ── Line items ── */}
-            {cart.map(item => (
-              <CartItem
-                key={item.id}
-                item={item}
-                onUpdate={updateQty}
-                onRemove={removeFromCart}
-              />
+        <div>
+          {/* ── Column headers ── */}
+          <div className="cart-grid-header" style={{
+            display: 'grid', gridTemplateColumns: '1fr 160px 120px',
+            gap: '32px', paddingBottom: '16px',
+            borderBottom: '1px solid rgba(200,150,42,0.2)',
+            marginBottom: '8px',
+          }}>
+            {['Fragrance', 'Quantity', 'Total'].map(h => (
+              <p key={h} style={{
+                fontFamily: 'Raleway', fontSize: '8px', letterSpacing: '4px',
+                color: 'rgba(200,150,42,0.5)', textTransform: 'uppercase',
+                textAlign: h === 'Total' ? 'right' : 'left',
+              }}>
+                {h}
+              </p>
             ))}
+          </div>
 
-            {/* ── Summary ── */}
-            <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '64px' }}>
-              <div className="cart-summary" style={{ width: '360px' }}>
-                {/* Subtotal */}
-                <div style={{
-                  display: 'flex', justifyContent: 'space-between', alignItems: 'baseline',
-                  paddingBottom: '20px',
-                  borderBottom: '1px solid rgba(200,150,42,0.15)',
-                  marginBottom: '16px',
+          {/* ── Line items ── */}
+          {cart.map(item => (
+            <CartItem
+              key={item.id}
+              item={item}
+              onUpdate={updateQty}
+              onRemove={removeFromCart}
+            />
+          ))}
+
+          {/* ── Summary ── */}
+          <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '64px' }}>
+            <div className="cart-summary" style={{ width: '360px' }}>
+              <div style={{
+                display: 'flex', justifyContent: 'space-between', alignItems: 'baseline',
+                paddingBottom: '20px',
+                borderBottom: '1px solid rgba(200,150,42,0.15)',
+                marginBottom: '16px',
+              }}>
+                <span style={{
+                  fontFamily: 'Raleway', fontSize: '9px', letterSpacing: '4px',
+                  color: 'rgba(201,168,76,0.5)', textTransform: 'uppercase',
                 }}>
-                  <span style={{
-                    fontFamily: 'Raleway', fontSize: '9px', letterSpacing: '4px',
-                    color: '#8A7A6A', textTransform: 'uppercase',
-                  }}>
-                    Subtotal
-                  </span>
-                  <span style={{
-                    fontFamily: "'Playfair Display', serif",
-                    fontSize: '34px', fontWeight: 300, color: '#1C1510',
-                  }}>
-                    ${subtotal}
-                  </span>
-                </div>
-
-                <p style={{
-                  fontFamily: 'Raleway', fontSize: '11px', fontWeight: 300,
-                  color: 'rgba(28,21,16,0.38)', letterSpacing: '0.3px',
-                  lineHeight: 1.8, marginBottom: '32px',
+                  Subtotal
+                </span>
+                <span style={{
+                  fontFamily: "'Cormorant Garamond', serif",
+                  fontSize: '34px', fontWeight: 300, color: '#FAF6EF',
                 }}>
-                  Complimentary worldwide shipping on all orders.
-                  Delivered in signature ELARA packaging.
-                </p>
-
-                <CheckoutBtn />
-
-                <Link to="/shop"
-                  style={{
-                    display: 'block', textAlign: 'center', marginTop: '18px',
-                    fontFamily: 'Raleway', fontSize: '10px', letterSpacing: '3px',
-                    color: 'rgba(28,21,16,0.38)', textTransform: 'uppercase',
-                    transition: 'color 0.3s',
-                  }}
-                  onMouseEnter={e => e.currentTarget.style.color = '#C8962A'}
-                  onMouseLeave={e => e.currentTarget.style.color = 'rgba(28,21,16,0.38)'}
-                >
-                  Continue Shopping
-                </Link>
+                  ${subtotal}
+                </span>
               </div>
+
+              <p style={{
+                fontFamily: 'Raleway', fontSize: '11px', fontWeight: 300,
+                color: 'rgba(250,246,239,0.3)', letterSpacing: '0.3px',
+                lineHeight: 1.8, marginBottom: '32px',
+              }}>
+                Complimentary worldwide shipping on all orders.
+                Delivered in signature ELARA packaging.
+              </p>
+
+              <CheckoutBtn />
+
+              <Link to="/shop"
+                style={{
+                  display: 'block', textAlign: 'center', marginTop: '18px',
+                  fontFamily: 'Raleway', fontSize: '10px', letterSpacing: '3px',
+                  color: 'rgba(201,168,76,0.35)', textTransform: 'uppercase',
+                  transition: 'color 0.3s',
+                }}
+                onMouseEnter={e => e.currentTarget.style.color = '#C9A84C'}
+                onMouseLeave={e => e.currentTarget.style.color = 'rgba(201,168,76,0.35)'}
+              >
+                Continue Shopping
+              </Link>
             </div>
           </div>
-        )}
+        </div>
       </div>
     </div>
   );
 };
 
 /* ── Cart line item ── */
-const CartItem = ({ item, onUpdate, onRemove }) => {
-  return (
-    <div
-      className="cart-grid"
-      style={{
-        display: 'grid', gridTemplateColumns: '1fr 160px 120px',
-        gap: '32px', alignItems: 'center',
-        padding: '28px 0',
-        borderBottom: '1px solid rgba(200,150,42,0.12)',
-        transition: 'background 0.2s',
-      }}
-    >
-      {/* Name */}
-      <div>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-          <div>
-            <p style={{
-              fontFamily: "'Playfair Display', serif", fontWeight: 300,
-              fontSize: '22px', color: '#1C1510', marginBottom: '4px',
-            }}>
-              {item.name}
-            </p>
-            <p style={{
-              fontFamily: 'Raleway', fontSize: '10px', letterSpacing: '2px',
-              color: '#C8962A', opacity: 0.8,
-            }}>
-              100ml Eau de Parfum
-            </p>
-          </div>
-        </div>
-      </div>
-
-      {/* Qty controls */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
-        <QtyBtn onClick={() => onUpdate(item.id, item.qty - 1)}>−</QtyBtn>
-        <span style={{
-          fontFamily: 'Raleway', fontSize: '14px', fontWeight: 300,
-          color: '#1C1510', minWidth: '24px', textAlign: 'center',
-        }}>
-          {item.qty}
-        </span>
-        <QtyBtn onClick={() => onUpdate(item.id, item.qty + 1)}>+</QtyBtn>
-        <button
-          onClick={() => onRemove(item.id)}
-          style={{
-            background: 'none', border: 'none', cursor: 'pointer',
-            color: 'rgba(28,21,16,0.28)', marginLeft: '4px',
-            transition: 'color 0.25s', padding: '4px', display: 'flex',
-          }}
-          onMouseEnter={e => e.currentTarget.style.color = '#C8962A'}
-          onMouseLeave={e => e.currentTarget.style.color = 'rgba(28,21,16,0.28)'}
-        >
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
-            <line x1="18" y1="6" x2="6" y2="18"/>
-            <line x1="6" y1="6" x2="18" y2="18"/>
-          </svg>
-        </button>
-      </div>
-
-      {/* Price */}
-      <div style={{ textAlign: 'right' }}>
-        <span style={{
-          fontFamily: "'Playfair Display', serif",
-          fontSize: '24px', fontWeight: 300, color: '#1C1510',
-        }}>
-          ${item.price * item.qty}
-        </span>
-      </div>
+const CartItem = ({ item, onUpdate, onRemove }) => (
+  <div
+    className="cart-grid"
+    style={{
+      display: 'grid', gridTemplateColumns: '1fr 160px 120px',
+      gap: '32px', alignItems: 'center',
+      padding: '28px 0',
+      borderBottom: '1px solid rgba(200,150,42,0.1)',
+    }}
+  >
+    <div>
+      <p style={{
+        fontFamily: "'Cormorant Garamond', serif", fontWeight: 300, fontStyle: 'italic',
+        fontSize: '22px', color: '#FAF6EF', marginBottom: '4px',
+      }}>
+        {item.name}
+      </p>
+      <p style={{
+        fontFamily: 'Raleway', fontSize: '8px', letterSpacing: '3px',
+        color: 'rgba(201,168,76,0.6)', textTransform: 'uppercase',
+      }}>
+        100ml Eau de Parfum
+      </p>
     </div>
-  );
-};
+
+    <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
+      <QtyBtn onClick={() => onUpdate(item.id, item.qty - 1)}>−</QtyBtn>
+      <span style={{
+        fontFamily: 'Raleway', fontSize: '14px', fontWeight: 300,
+        color: '#FAF6EF', minWidth: '24px', textAlign: 'center',
+      }}>
+        {item.qty}
+      </span>
+      <QtyBtn onClick={() => onUpdate(item.id, item.qty + 1)}>+</QtyBtn>
+      <button
+        onClick={() => onRemove(item.id)}
+        style={{
+          background: 'none', border: 'none', cursor: 'pointer',
+          color: 'rgba(201,168,76,0.3)', marginLeft: '4px',
+          transition: 'color 0.25s', padding: '4px', display: 'flex',
+        }}
+        onMouseEnter={e => e.currentTarget.style.color = 'rgba(201,168,76,0.9)'}
+        onMouseLeave={e => e.currentTarget.style.color = 'rgba(201,168,76,0.3)'}
+      >
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
+          <line x1="18" y1="6" x2="6" y2="18"/>
+          <line x1="6" y1="6" x2="18" y2="18"/>
+        </svg>
+      </button>
+    </div>
+
+    <div style={{ textAlign: 'right' }}>
+      <span style={{
+        fontFamily: "'Cormorant Garamond', serif",
+        fontSize: '24px', fontWeight: 300, color: '#FAF6EF',
+      }}>
+        ${item.price * item.qty}
+      </span>
+    </div>
+  </div>
+);
 
 const QtyBtn = ({ children, onClick }) => {
   const [hov, setHov] = useState(false);
@@ -222,9 +242,9 @@ const QtyBtn = ({ children, onClick }) => {
       onMouseLeave={() => setHov(false)}
       style={{
         width: '30px', height: '30px',
-        border: `1px solid ${hov ? '#C8962A' : 'rgba(200,150,42,0.28)'}`,
-        background: hov ? 'rgba(200,150,42,0.08)' : 'transparent',
-        cursor: 'pointer', color: '#1C1510',
+        border: `1px solid ${hov ? 'rgba(201,168,76,0.7)' : 'rgba(201,168,76,0.2)'}`,
+        background: hov ? 'rgba(201,168,76,0.08)' : 'transparent',
+        cursor: 'pointer', color: '#FAF6EF',
         fontSize: '16px', fontWeight: 300,
         display: 'flex', alignItems: 'center', justifyContent: 'center',
         transition: 'all 0.25s ease',
@@ -243,12 +263,12 @@ const CheckoutBtn = () => {
       onMouseEnter={() => setHov(true)}
       onMouseLeave={() => setHov(false)}
       style={{
-        width: '100%', fontFamily: 'Raleway', fontSize: '11px',
+        width: '100%', fontFamily: 'Raleway', fontSize: '9px',
         letterSpacing: '4px', textTransform: 'uppercase', padding: '20px',
-        background: hov ? '#C8962A' : '#1C1510',
-        color: '#FAF6EF',
-        border: `1px solid ${hov ? '#C8962A' : '#1C1510'}`,
-        cursor: 'pointer', transition: 'all 0.4s ease',
+        background: hov ? '#b8973d' : '#c9a84c',
+        color: '#060606', fontWeight: 600,
+        border: 'none',
+        cursor: 'pointer', transition: 'background 0.3s ease',
       }}
     >
       Proceed to Checkout
@@ -259,17 +279,17 @@ const CheckoutBtn = () => {
 const ShopNowBtn = () => {
   const [hov, setHov] = useState(false);
   return (
-    <Link to="/shop">
+    <Link to="/shop" style={{ display: 'inline-block' }}>
       <button
         onMouseEnter={() => setHov(true)}
         onMouseLeave={() => setHov(false)}
         style={{
-          fontFamily: 'Raleway', fontSize: '10px', letterSpacing: '4px',
-          textTransform: 'uppercase', padding: '16px 48px',
-          background: hov ? '#C8962A' : '#1C1510',
-          color: '#FAF6EF',
-          border: `1px solid ${hov ? '#C8962A' : '#1C1510'}`,
-          cursor: 'pointer', transition: 'all 0.35s ease',
+          width: '220px', fontFamily: 'Raleway', fontSize: '9px',
+          letterSpacing: '4px', textTransform: 'uppercase', padding: '17px 0',
+          background: hov ? '#b8973d' : '#c9a84c',
+          color: '#060606', fontWeight: 600,
+          border: 'none',
+          cursor: 'pointer', transition: 'background 0.3s ease',
         }}
       >
         Shop Now
