@@ -625,89 +625,106 @@ const FieldWithFocus = ({ name, label, placeholder, type = 'text', as, value, on
 const WHY_ITEMS = [
   {
     icon: (
-      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-        <polyline points="9 12 11 14 15 10"/>
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="0.9" strokeLinecap="round" strokeLinejoin="round">
+        <polygon points="12 2 20 8 17 21 7 21 4 8 12 2"/>
+        <line x1="4" y1="8" x2="20" y2="8"/>
+        <polyline points="7 21 12 8 17 21"/>
       </svg>
     ),
     title: 'Niche Formula',
-    body: 'Not a clone. Not inspired by. A completely original formula crafted in Lebanon.',
+    body: 'Not a clone. Not inspired by anyone. A completely original scent crafted from scratch with premium raw ingredients.',
   },
   {
     icon: (
-      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
-        <circle cx="12" cy="12" r="10"/>
-        <polyline points="12 6 12 12 16 14"/>
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="0.9" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M5 2h14"/>
+        <path d="M5 22h14"/>
+        <path d="M5.5 2L12 11l6.5-9"/>
+        <path d="M5.5 22L12 13l6.5 9"/>
       </svg>
     ),
-    title: 'Long Lasting',
-    body: '8 to 14 hours on skin. Our formulas are built to stay with you, not just on you.',
+    title: '8–14 Hours On Skin',
+    body: '20% fragrance oil concentration. Designed to last through your longest, most important moments.',
   },
   {
     icon: (
-      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
-        <circle cx="12" cy="10" r="3"/>
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="0.9" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5C6 11.1 5 13 5 15a7 7 0 0 0 7 7z"/>
       </svg>
     ),
-    title: 'Made in Lebanon',
-    body: 'Every bottle of ELARA is created in Beirut, with love and obsession.',
+    title: 'Premium Ingredients',
+    body: 'Bulgarian rose. Oud. Saffron. Sandalwood. Only the finest raw materials make it into every bottle.',
   },
   {
     icon: (
-      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="0.9" strokeLinecap="round" strokeLinejoin="round">
+        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
       </svg>
     ),
-    title: 'Real Support',
-    body: "Questions? We're on WhatsApp. Real answers from real people, always.",
+    title: 'Made to Be Remembered',
+    body: 'A scent that stays — on your skin, in the room, in the memory of everyone who was there.',
   },
 ];
 
 const WhyELARA = () => {
   const [ref, visible] = useReveal(0.1);
   return (
-    <section ref={ref} style={{
-      background: '#0f0508',
-      padding: 'clamp(60px, 8vw, 100px) clamp(20px, 4vw, 40px)',
-      borderTop: '1px solid rgba(120,20,40,0.3)',
+    <section ref={ref} className="why-section" style={{
+      background: '#060606',
+      padding: 'clamp(80px, 8vw, 100px) clamp(24px, 8vw, 80px)',
       textAlign: 'center',
     }}>
+      {/* Label */}
       <p style={{
         fontFamily: 'Raleway, sans-serif', fontSize: '9px', letterSpacing: '7px',
-        color: 'rgba(201,168,76,0.6)', textTransform: 'uppercase', marginBottom: '20px',
-        opacity: visible ? 1 : 0, transition: 'opacity 0.8s ease',
-      }}>Why ELARA</p>
+        color: 'rgba(201,168,76,0.65)', textTransform: 'uppercase', marginBottom: '20px',
+        opacity: visible ? 1 : 0, transition: 'opacity 0.7s ease',
+      }}>Why Elara</p>
+
+      {/* Headline */}
       <h2 style={{
         fontFamily: "'Cormorant Garamond', serif", fontWeight: 300,
-        fontSize: 'clamp(1.8rem, 3.5vw, 2.8rem)', color: '#FAF6EF',
-        marginBottom: '64px',
-        opacity: visible ? 1 : 0, transition: 'opacity 0.9s ease 0.1s',
+        fontSize: 'clamp(1.9rem, 3.5vw, 2.8rem)', color: '#FAF6EF',
+        lineHeight: 1.15, margin: '0 auto 20px', letterSpacing: '0.01em',
+        opacity: visible ? 1 : 0, transition: 'opacity 0.85s ease 0.1s',
       }}>
-        The difference you'll{' '}
-        <span style={{ fontStyle: 'italic', color: 'rgba(201,168,76,1)' }}>feel on skin.</span>
+        Every detail was made{' '}
+        <span style={{ fontStyle: 'italic' }}>for you.</span>
       </h2>
+
+      {/* Subtext */}
+      <p className="why-subtext" style={{
+        fontFamily: 'Raleway, sans-serif', fontWeight: 300, fontSize: '12px',
+        color: 'rgba(232,224,216,0.45)', letterSpacing: '0.4px', lineHeight: 1.9,
+        maxWidth: '400px', margin: '0 auto 64px',
+        opacity: visible ? 1 : 0, transition: 'opacity 0.85s ease 0.2s',
+      }}>
+        From the first spray to the last trace — ELARA is built to be felt, remembered, and desired.
+      </p>
+
+      {/* Grid */}
       <div className="why-grid" style={{
         maxWidth: '1000px', margin: '0 auto',
-        display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '48px 32px',
+        display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '40px 32px',
       }}>
         {WHY_ITEMS.map(({ icon, title, body }, i) => (
           <div key={title} style={{
             display: 'flex', flexDirection: 'column', alignItems: 'center',
             textAlign: 'center', gap: '16px',
             opacity: visible ? 1 : 0,
-            transform: visible ? 'translateY(0)' : 'translateY(20px)',
-            transition: `opacity 0.9s ease ${i * 0.12}s, transform 0.9s cubic-bezier(0.16,1,0.3,1) ${i * 0.12}s`,
+            transform: visible ? 'translateY(0)' : 'translateY(24px)',
+            transition: `opacity 0.9s ease ${0.3 + i * 0.12}s, transform 0.9s cubic-bezier(0.16,1,0.3,1) ${0.3 + i * 0.12}s`,
           }}>
-            <div style={{ color: 'rgba(201,168,76,0.65)' }}>{icon}</div>
+            <div style={{ color: 'rgba(201,168,76,0.7)' }}>{icon}</div>
             <h4 style={{
               fontFamily: "'Cormorant Garamond', serif", fontWeight: 300,
-              fontSize: '20px', color: '#FAF6EF', letterSpacing: '0.5px', margin: 0,
+              fontSize: '18px', color: '#FAF6EF', letterSpacing: '0.4px', margin: 0,
+              lineHeight: 1.2,
             }}>{title}</h4>
             <p style={{
               fontFamily: 'Raleway, sans-serif', fontSize: '12px', fontWeight: 300,
-              color: 'rgba(232,224,216,0.45)', lineHeight: 2, letterSpacing: '0.3px',
-              margin: 0, maxWidth: '200px',
+              color: 'rgba(232,224,216,0.5)', lineHeight: 1.85, letterSpacing: '0.3px',
+              margin: 0, maxWidth: '210px',
             }}>{body}</p>
           </div>
         ))}

@@ -662,9 +662,15 @@ button { font-family: inherit; }
 }
 
 @media (max-width: 768px) {
+  .why-section {
+    padding: 80px 24px !important;
+  }
+  .why-subtext {
+    max-width: 320px !important;
+  }
   .why-grid {
     grid-template-columns: repeat(2, 1fr) !important;
-    gap: 40px 20px !important;
+    gap: 40px 24px !important;
   }
 }
 
