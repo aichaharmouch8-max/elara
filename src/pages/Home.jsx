@@ -399,46 +399,12 @@ const useReveal = (threshold = 0.15) => {
   return [ref, visible];
 };
 
-const fieldStyleFn = (focused) => ({
-  width: '100%', background: 'transparent', border: 'none',
-  borderBottom: `1px solid ${focused ? 'rgba(201,168,76,0.8)' : 'rgba(201,168,76,0.3)'}`,
-  color: '#FAF6EF', fontFamily: "'Cormorant Garamond', serif",
-  fontSize: '16px', fontWeight: 300, letterSpacing: '0.3px',
-  padding: '14px 0', outline: 'none',
-  transition: 'border-color 0.3s ease',
-  boxSizing: 'border-box', resize: 'none',
-});
-
 /* ─────────────────────────────────────────
    CONTACT SECTION
 ───────────────────────────────────────── */
 const CombinedConnectSection = () => {
-  const [form, setForm]       = useState({ name: '', message: '' });
-  const [cDone, setCDone]     = useState(false);
-  const [cBusy, setCBusy]     = useState(false);
-  const [cError, setCError]   = useState('');
-  const [sendHov, setSendHov] = useState(false);
-  const [waHov, setWaHov]     = useState(false);
-  const [secRef, secIn]       = useReveal(0.05);
-
-  const handleContact = async (e) => {
-    e.preventDefault();
-    setCBusy(true);
-    setCError('');
-    try {
-      await window.emailjs.send(
-        'REPLACE WITH YOUR EMAILJS SERVICE ID',
-        'REPLACE WITH YOUR EMAILJS TEMPLATE ID',
-        { from_name: form.name, message: form.message },
-        'REPLACE WITH YOUR EMAILJS PUBLIC KEY'
-      );
-      setCDone(true);
-      setForm({ name: '', message: '' });
-    } catch (_) {
-      setCError('Something went wrong. Please try again.');
-    }
-    setCBusy(false);
-  };
+  const [waHov, setWaHov] = useState(false);
+  const [secRef, secIn]   = useReveal(0.05);
 
   const fadeUp = (d = 0) => ({
     opacity: secIn ? 1 : 0,
@@ -453,22 +419,17 @@ const CombinedConnectSection = () => {
       ref={secRef}
       style={{
         background: '#060606',
-        padding: '100px 60px',
-        borderTop: '1px solid rgba(120,20,40,0.3)',
+        padding: '120px 60px',
+        textAlign: 'center',
       }}
     >
-      <style>{`
-        .hc-input::placeholder { color: rgba(255,255,255,0.25); font-family: 'Cormorant Garamond', serif; }
-        textarea.hc-input { font-family: 'Cormorant Garamond', serif; }
-      `}</style>
-
-      <div id="contact" style={{ maxWidth: '520px', margin: '0 auto' }}>
+      <div id="contact" style={{ maxWidth: '520px', margin: '0 auto', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
 
         {/* Label */}
         <p style={{
           fontFamily: 'Raleway, sans-serif', fontSize: '10px', letterSpacing: '6px',
           color: 'rgba(201,168,76,0.6)', textTransform: 'uppercase',
-          textAlign: 'center', marginBottom: '20px',
+          marginBottom: '20px',
           ...fadeUp(0.05),
         }}>Get in Touch</p>
 
@@ -476,7 +437,7 @@ const CombinedConnectSection = () => {
         <h2 style={{
           fontFamily: "'Cormorant Garamond', serif", fontWeight: 300,
           fontSize: 'clamp(2rem, 4.5vw, 3.2rem)', lineHeight: 1.1,
-          textAlign: 'center', marginBottom: '14px', letterSpacing: '-0.5px',
+          marginBottom: '16px', letterSpacing: '-0.5px',
           ...fadeUp(0.1),
         }}>
           <span style={{ color: '#FAF6EF' }}>We'd Love to </span>
@@ -486,14 +447,15 @@ const CombinedConnectSection = () => {
         {/* Subtext */}
         <p style={{
           fontFamily: 'Raleway, sans-serif', fontSize: '13px', fontWeight: 300,
-          color: 'rgba(232,224,216,0.45)', textAlign: 'center',
+          color: 'rgba(232,224,216,0.45)',
           marginBottom: '40px', letterSpacing: '0.3px', lineHeight: 1.7,
+          maxWidth: '340px',
           ...fadeUp(0.15),
         }}>
           The fastest way to reach us is WhatsApp. We reply within minutes.
         </p>
 
-        {/* WhatsApp CTA — primary action */}
+        {/* WhatsApp CTA */}
         <div style={{ ...fadeUp(0.2) }}>
           <a
             href="https://wa.me/96176510481"
@@ -503,13 +465,14 @@ const CombinedConnectSection = () => {
             onMouseLeave={() => setWaHov(false)}
             style={{
               display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px',
-              width: '100%', padding: '16px 24px',
-              background: waHov ? '#d4b055' : '#c9a84c',
+              width: '280px', height: '54px', margin: '0 auto',
+              background: waHov ? '#b8973d' : '#c9a84c',
               color: '#060606',
-              fontFamily: 'Raleway, sans-serif', fontSize: '10px',
-              fontWeight: 600, letterSpacing: '4px', textTransform: 'uppercase',
-              textDecoration: 'none', boxSizing: 'border-box',
-              transition: 'background 0.25s ease',
+              fontFamily: 'Raleway, sans-serif', fontSize: '13px',
+              fontWeight: 600, letterSpacing: '0.15em', textTransform: 'uppercase',
+              textDecoration: 'none', borderRadius: '2px',
+              transition: 'background 0.3s ease',
+              boxSizing: 'border-box', cursor: 'pointer',
             }}
           >
             <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -517,105 +480,17 @@ const CombinedConnectSection = () => {
             </svg>
             Chat on WhatsApp
           </a>
-        </div>
 
-        {/* OR divider */}
-        <div style={{
-          display: 'flex', alignItems: 'center', gap: '16px',
-          margin: '36px 0',
-          ...fadeUp(0.25),
-        }}>
-          <div style={{ flex: 1, height: '1px', background: 'rgba(201,168,76,0.15)' }}/>
-          <span style={{
-            fontFamily: 'Raleway, sans-serif', fontSize: '9px', letterSpacing: '4px',
-            color: 'rgba(201,168,76,0.4)', textTransform: 'uppercase',
-          }}>Or</span>
-          <div style={{ flex: 1, height: '1px', background: 'rgba(201,168,76,0.15)' }}/>
+          {/* Response time trust line */}
+          <p style={{
+            fontFamily: "'Cormorant Garamond', serif", fontStyle: 'italic', fontWeight: 300,
+            fontSize: '10px', color: 'rgba(201,168,76,0.4)',
+            textAlign: 'center', marginTop: '16px', letterSpacing: '0.3px',
+          }}>Average response time: under 5 minutes</p>
         </div>
-
-        {/* Form */}
-        {cDone ? (
-          <div style={{ textAlign: 'center', padding: '24px 0 16px', ...fadeUp(0) }}>
-            <p style={{
-              fontFamily: "'Cormorant Garamond', serif", fontStyle: 'italic',
-              fontSize: '26px', color: '#c9a84c', lineHeight: 1.8, marginBottom: '10px',
-            }}>Your message has been sent.</p>
-            <p style={{
-              fontFamily: 'Raleway, sans-serif', fontSize: '11px', fontWeight: 300,
-              letterSpacing: '2px', color: 'rgba(250,246,239,0.35)',
-            }}>We will get back to you shortly.</p>
-          </div>
-        ) : (
-          <form onSubmit={handleContact} style={{ ...fadeUp(0.3) }}>
-            {[
-              { key: 'name',    label: 'Full Name', placeholder: 'Your full name',           type: 'text',   autoComplete: 'name' },
-              { key: 'message', label: 'Message',   placeholder: 'Write your message here…', as: 'textarea', autoComplete: 'off'  },
-            ].map(({ key, label, placeholder, type, as, autoComplete }) => (
-              <FieldWithFocus
-                key={key} name={key} label={label} placeholder={placeholder}
-                type={type} as={as} value={form[key]}
-                autoComplete={autoComplete}
-                onChange={e => setForm(f => ({ ...f, [e.target.name]: e.target.value }))}
-                fieldStyle={fieldStyleFn}
-              />
-            ))}
-            {cError && (
-              <p style={{
-                fontFamily: 'Raleway, sans-serif', fontSize: '11px',
-                color: 'rgba(220,80,80,0.75)', marginBottom: '14px', letterSpacing: '0.3px',
-              }}>{cError}</p>
-            )}
-            <button
-              type="submit" disabled={cBusy}
-              onMouseEnter={() => setSendHov(true)}
-              onMouseLeave={() => setSendHov(false)}
-              style={{
-                width: '100%', fontFamily: 'Raleway, sans-serif',
-                fontSize: '9px', fontWeight: 500, letterSpacing: '5px',
-                textTransform: 'uppercase', padding: '18px',
-                background: sendHov ? 'rgba(201,168,76,0.06)' : 'transparent',
-                color: 'rgba(201,168,76,1)',
-                border: `1px solid ${sendHov ? 'rgba(201,168,76,0.85)' : 'rgba(201,168,76,0.4)'}`,
-                cursor: cBusy ? 'default' : 'pointer',
-                transition: 'all 0.3s ease', opacity: cBusy ? 0.7 : 1,
-                marginTop: '8px',
-              }}
-            >{cBusy ? 'Sending…' : 'Send Message'}</button>
-          </form>
-        )}
 
       </div>
     </section>
-  );
-};
-
-const FieldWithFocus = ({ name, label, placeholder, type = 'text', as, value, onChange, fieldStyle, style, autoComplete }) => {
-  const [focused, setFocused] = useState(false);
-  return (
-    <div style={{ marginBottom: '32px', ...style }}>
-      <label style={{
-        display: 'block', fontFamily: 'Raleway, sans-serif',
-        fontSize: '10px', letterSpacing: '6px',
-        color: 'rgba(201,168,76,0.5)', textTransform: 'uppercase', marginBottom: '10px',
-      }}>{label}</label>
-      {as === 'textarea' ? (
-        <textarea
-          name={name} value={value} onChange={onChange} placeholder={placeholder}
-          autoComplete={autoComplete || 'off'}
-          onFocus={() => setFocused(true)} onBlur={() => setFocused(false)}
-          className="hc-input"
-          style={{ ...fieldStyle(focused), display: 'block', minHeight: '120px' }}
-        />
-      ) : (
-        <input
-          type={type} name={name} value={value} onChange={onChange} placeholder={placeholder}
-          autoComplete={autoComplete || 'off'}
-          onFocus={() => setFocused(true)} onBlur={() => setFocused(false)}
-          className="hc-input"
-          style={fieldStyle(focused)}
-        />
-      )}
-    </div>
   );
 };
 
