@@ -54,7 +54,7 @@ const PRODUCTS = [
   {
     id: 'nova',
     name: 'Rawan Noir',
-    image: '/elaraaaaa.webp',
+    image: '/ELARAREINE.webp',
     price: 79,
     size: '100ml Eau de Parfum',
     emotionalHook: 'Born from the silence after a storm.',
@@ -146,6 +146,7 @@ const ProductCard = ({ product, inView, delay }) => {
   const [selectedSize, setSelectedSize] = useState('100ml');
   const [displayPrice, setDisplayPrice] = useState(39);
   const [hoveredSize, setHoveredSize] = useState(null);
+  const [notifyHov, setNotifyHov] = useState(false);
   const timerRef = useRef(null);
 
   const animatePrice = useCallback((from, to) => {
@@ -217,19 +218,6 @@ const ProductCard = ({ product, inView, delay }) => {
                 padding: '20px', boxSizing: 'border-box',
               }}
             />
-            {product.locked && (
-              <div style={{
-                position: 'absolute', bottom: 0, left: 0, right: 0,
-                background: 'linear-gradient(to top, rgba(4,2,0,0.72) 0%, transparent 100%)',
-                padding: '28px 14px 12px',
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
-              }}>
-                <p style={{
-                  fontFamily: 'Raleway', fontSize: '7px', letterSpacing: '5px',
-                  color: 'rgba(201,168,76,0.65)', textTransform: 'uppercase', margin: 0,
-                }}>Coming Soon</p>
-              </div>
-            )}
           </div>
 
           {/* Info */}
@@ -402,26 +390,49 @@ const ProductCard = ({ product, inView, delay }) => {
                 <BuyNowBtn onClick={() => setModal(true)} />
               </div>
             ) : (
-              <div style={{
-                paddingTop: '20px', borderTop: '1px solid rgba(200,150,42,0.1)',
-                display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px',
-              }}>
-                <div style={{
-                  width: '24px', height: '1px',
-                  background: 'linear-gradient(to right, transparent, rgba(201,168,76,0.4), transparent)',
-                }}/>
-                <span style={{
-                  fontFamily: "'Cormorant Garamond', serif",
-                  fontStyle: 'italic', fontWeight: 300,
-                  fontSize: '16px', color: 'rgba(201,168,76,0.55)', letterSpacing: '1px',
-                }}>Available Soon</span>
-                <p style={{
-                  fontFamily: 'Raleway', fontSize: '7px', letterSpacing: '4px',
-                  color: 'rgba(250,246,239,0.25)', textTransform: 'uppercase', margin: 0,
-                }}>Notify me</p>
-              </div>
+              <div style={{ paddingTop: '20px', borderTop: '1px solid rgba(200,150,42,0.08)', height: '56px' }}/>
             )}
           </div>
+
+          {/* Full-card locked overlay */}
+          {product.locked && (
+            <div style={{
+              position: 'absolute', inset: 0, zIndex: 10,
+              background: 'rgba(6,6,6,0.75)',
+              display: 'flex', flexDirection: 'column',
+              alignItems: 'center', justifyContent: 'center',
+              gap: '14px',
+            }}>
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none"
+                stroke="rgba(201,168,76,0.85)" strokeWidth="0.9" strokeLinecap="round">
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                <path d="M7 11V7a5 5 0 0110 0v4"/>
+              </svg>
+              <p style={{
+                fontFamily: 'Raleway', fontSize: '8px', letterSpacing: '5px',
+                color: 'rgba(201,168,76,0.7)', textTransform: 'uppercase', margin: 0,
+              }}>Coming Soon</p>
+              <div
+                onMouseEnter={() => setNotifyHov(true)}
+                onMouseLeave={() => setNotifyHov(false)}
+                style={{
+                  marginTop: '6px', padding: '12px 36px', textAlign: 'center',
+                  border: `1px solid ${notifyHov ? 'rgba(201,168,76,0.9)' : 'rgba(201,168,76,0.4)'}`,
+                  transition: 'border-color 0.3s ease',
+                  display: 'flex', flexDirection: 'column', gap: '5px', cursor: 'default',
+                }}
+              >
+                <span style={{
+                  fontFamily: "'Cormorant Garamond', serif", fontStyle: 'italic', fontWeight: 300,
+                  fontSize: '15px', color: 'rgba(232,224,216,0.85)', letterSpacing: '0.5px',
+                }}>Available Soon</span>
+                <span style={{
+                  fontFamily: 'Raleway', fontSize: '7px', letterSpacing: '4px',
+                  color: 'rgba(201,168,76,0.65)', textTransform: 'uppercase',
+                }}>Notify Me</span>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </>

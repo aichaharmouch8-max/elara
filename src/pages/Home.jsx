@@ -59,7 +59,7 @@ const PRODUCTS = [
   {
     id: 'nova',
     name: 'Rawan Noir',
-    image: '/elaraaaaa.webp',
+    image: '/ELARAREINE.webp',
     tagline: 'Born after midnight. For the woman who lives her most interesting life after dark.',
     price: 79,
     available: false,
@@ -72,6 +72,7 @@ const CollectionCard = ({ product }) => {
   const [hov, setHov] = useState(false);
   const [btnHov, setBtnHov] = useState(false);
   const [modal, setModal] = useState(false);
+  const [notifyHov, setNotifyHov] = useState(false);
   const locked = !product.available;
   const [selectedSize, setSelectedSize] = useState('100ml');
   const [displayPrice, setDisplayPrice] = useState(39);
@@ -121,18 +122,6 @@ const CollectionCard = ({ product }) => {
             : '0 8px 32px rgba(0,0,0,0.28)',
         }}
       >
-        {locked && (
-          <div style={{
-            position: 'absolute', inset: 0, zIndex: 5, pointerEvents: 'none', overflow: 'hidden',
-          }}>
-            <div style={{
-              position: 'absolute', top: 0, left: 0,
-              width: '40%', height: '100%',
-              background: 'linear-gradient(105deg, transparent 30%, rgba(201,169,110,0.07) 50%, transparent 70%)',
-              animation: 'cardShimmer 5s ease-in-out infinite',
-            }}/>
-          </div>
-        )}
 
         <div className={`collection-card-img-wrap ${locked ? 'collection-card-img-locked' : 'collection-card-img-active'}`} style={{
           width: '100%', height: '320px',
@@ -155,20 +144,6 @@ const CollectionCard = ({ product }) => {
             }}
           />
 
-          {locked && (
-            <div style={{
-              position: 'absolute', bottom: 0, left: 0, right: 0, zIndex: 2,
-              background: 'linear-gradient(to top, rgba(4,2,0,0.72) 0%, transparent 100%)',
-              padding: '28px 14px 12px',
-              display: 'flex', alignItems: 'center', justifyContent: 'center',
-            }}>
-              <span style={{
-                fontFamily: 'Raleway, sans-serif', fontSize: '7px',
-                letterSpacing: '5px', color: 'rgba(201,168,76,0.65)',
-                textTransform: 'uppercase',
-              }}>Coming Soon</span>
-            </div>
-          )}
 
           {!locked && (
             <div style={{
@@ -300,24 +275,49 @@ const CollectionCard = ({ product }) => {
               }}
             >Buy Now ${displayPrice}</button>
           ) : (
-            <div style={{
-              width: '100%', textAlign: 'center',
-              display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '6px',
-              padding: '13px 0', cursor: 'default',
-              border: '1px solid rgba(200,160,60,0.18)',
-            }}>
-              <span style={{
-                fontFamily: "'Cormorant Garamond', serif", fontStyle: 'italic', fontWeight: 300,
-                fontSize: '15px', color: 'rgba(201,168,76,0.6)', letterSpacing: '0.5px',
-              }}>Available Soon</span>
-              <span style={{
-                fontFamily: 'Raleway, sans-serif', fontSize: '7px',
-                letterSpacing: '4px', color: 'rgba(250,246,239,0.22)',
-                textTransform: 'uppercase',
-              }}>Notify me</span>
-            </div>
+            <div style={{ height: '48px', borderTop: '1px solid rgba(200,160,60,0.08)', width: '100%' }}/>
           )}
         </div>
+
+        {/* Full-card locked overlay */}
+        {locked && (
+          <div style={{
+            position: 'absolute', inset: 0, zIndex: 10,
+            background: 'rgba(6,6,6,0.75)',
+            display: 'flex', flexDirection: 'column',
+            alignItems: 'center', justifyContent: 'center',
+            gap: '14px',
+          }}>
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none"
+              stroke="rgba(201,168,76,0.85)" strokeWidth="0.9" strokeLinecap="round">
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+              <path d="M7 11V7a5 5 0 0110 0v4"/>
+            </svg>
+            <p style={{
+              fontFamily: 'Raleway, sans-serif', fontSize: '8px', letterSpacing: '5px',
+              color: 'rgba(201,168,76,0.7)', textTransform: 'uppercase', margin: 0,
+            }}>Coming Soon</p>
+            <div
+              onMouseEnter={() => setNotifyHov(true)}
+              onMouseLeave={() => setNotifyHov(false)}
+              style={{
+                marginTop: '6px', padding: '12px 36px', textAlign: 'center',
+                border: `1px solid ${notifyHov ? 'rgba(201,168,76,0.9)' : 'rgba(201,168,76,0.4)'}`,
+                transition: 'border-color 0.3s ease',
+                display: 'flex', flexDirection: 'column', gap: '5px', cursor: 'default',
+              }}
+            >
+              <span style={{
+                fontFamily: "'Cormorant Garamond', serif", fontStyle: 'italic', fontWeight: 300,
+                fontSize: '15px', color: 'rgba(232,224,216,0.85)', letterSpacing: '0.5px',
+              }}>Available Soon</span>
+              <span style={{
+                fontFamily: 'Raleway, sans-serif', fontSize: '7px', letterSpacing: '4px',
+                color: 'rgba(201,168,76,0.65)', textTransform: 'uppercase',
+              }}>Notify Me</span>
+            </div>
+          </div>
+        )}
       </motion.div>
 
       {modal && <PaymentModal product={product} selectedSize={selectedSize} selectedPrice={REINE_PRICES[selectedSize]} onClose={() => setModal(false)} />}
