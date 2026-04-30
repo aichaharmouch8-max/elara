@@ -110,15 +110,15 @@ const CollectionCard = ({ product }) => {
         onHoverStart={() => setHov(true)}
         onHoverEnd={() => setHov(false)}
         style={{
-          background: '#0d0407',
-          border: `1px solid ${hov ? 'rgba(201,168,76,0.3)' : 'rgba(120,20,40,0.2)'}`,
+          background: '#060606',
+          border: `1px solid ${hov ? 'rgba(201,168,76,0.3)' : 'rgba(201,168,76,0.08)'}`,
           display: 'flex', flexDirection: 'column',
           alignItems: 'center', textAlign: 'center',
           position: 'relative', overflow: 'hidden',
           transition: 'border-color 0.4s ease, box-shadow 0.4s ease',
           boxShadow: hov
             ? '0 0 0 1px rgba(201,168,76,0.12), 0 32px 72px rgba(0,0,0,0.55)'
-            : '0 0 60px rgba(100,10,30,0.15), 0 8px 32px rgba(0,0,0,0.28)',
+            : '0 8px 32px rgba(0,0,0,0.28)',
         }}
       >
         {locked && (
@@ -619,7 +619,6 @@ const ImmersiveQuote = () => {
       display: 'flex', flexDirection: 'column',
       alignItems: 'center', justifyContent: 'center',
       padding: '80px 32px',
-      borderTop: '1px solid rgba(120,20,40,0.3)',
       textAlign: 'center',
     }}>
       <blockquote style={{
@@ -672,9 +671,8 @@ const FragrancePhilosophy = () => {
   const [ref, visible] = useReveal(0.1);
   return (
     <section ref={ref} className="philosophy-section" style={{
-      background: '#0f0508',
+      background: '#060606',
       padding: '80px 60px',
-      borderTop: '1px solid rgba(120,20,40,0.3)',
     }}>
       <p style={{
         fontFamily: 'Raleway, sans-serif', fontSize: '10px', letterSpacing: '6px',
@@ -743,7 +741,6 @@ const ExclusiveAccess = () => {
       style={{
         background: '#060606',
         padding: '100px 40px',
-        borderTop: '1px solid rgba(120,20,40,0.3)',
         textAlign: 'center',
       }}
     >
@@ -924,7 +921,7 @@ const Home = () => {
         }}/>
         <div style={{
           position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 1,
-          background: 'linear-gradient(to top, rgba(80,5,20,0.4) 0%, transparent 40%)',
+          background: 'linear-gradient(to top, rgba(0,0,0,0.4) 0%, transparent 40%)',
         }}/>
 
         <div className="hero-inner" style={{ pointerEvents: 'none' }}>
@@ -997,7 +994,6 @@ const Home = () => {
       <section id="collection" className="collection-section snap-section-auto" style={{
         background: '#060606',
         padding: 'clamp(60px, 8vw, 100px) clamp(20px, 4vw, 40px)',
-        borderTop: '1px solid rgba(120,20,40,0.3)',
         width: '100%',
         maxWidth: '100%',
       }}>
