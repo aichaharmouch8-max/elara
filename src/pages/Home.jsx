@@ -146,6 +146,25 @@ const CollectionCard = ({ product }) => {
             }}
           />
 
+          {/* Lock overlay — image area only */}
+          {locked && (
+            <div style={{
+              position: 'absolute', inset: 0, zIndex: 4,
+              background: 'rgba(6,6,6,0.6)',
+              display: 'flex', flexDirection: 'column',
+              alignItems: 'center', justifyContent: 'center', gap: '10px',
+            }}>
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none"
+                stroke="rgba(201,168,76,0.85)" strokeWidth="1" strokeLinecap="round">
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                <path d="M7 11V7a5 5 0 0110 0v4"/>
+              </svg>
+              <p style={{
+                fontFamily: 'Raleway, sans-serif', fontSize: '7px', letterSpacing: '5px',
+                color: 'rgba(201,168,76,0.7)', textTransform: 'uppercase', margin: 0,
+              }}>Coming Soon</p>
+            </div>
+          )}
 
           {!locked && (
             <div style={{
@@ -169,7 +188,7 @@ const CollectionCard = ({ product }) => {
           )}
         </div>
 
-        <div className="collection-card-body" style={{ padding: '16px 24px 20px', width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', flexGrow: 1, boxSizing: 'border-box' }}>
+        <div className="collection-card-body" style={{ padding: '16px 24px 24px', width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', boxSizing: 'border-box' }}>
           <p style={{
             fontFamily: "'Playfair Display', serif", fontWeight: 300,
             fontSize: '10px', color: 'rgba(250,246,239,0.26)',
@@ -188,7 +207,7 @@ const CollectionCard = ({ product }) => {
           <p style={{
             fontFamily: 'Raleway, sans-serif', fontSize: '12px', fontWeight: 300,
             color: 'rgba(232,224,216,0.4)',
-            lineHeight: 1.8, marginBottom: '12px', letterSpacing: '0.3px', flexGrow: 1,
+            lineHeight: 1.8, marginBottom: '12px', letterSpacing: '0.3px',
           }}>{product.tagline}</p>
 
           {!locked && (
@@ -322,49 +341,28 @@ const CollectionCard = ({ product }) => {
               }}
             >{selectedSize === 'signature' ? 'Order — Personalized' : `Buy Now $${displayPrice}`}</button>
           ) : (
-            <div style={{ height: '48px', borderTop: '1px solid rgba(200,160,60,0.08)', width: '100%' }}/>
-          )}
-        </div>
-
-        {/* Full-card locked overlay */}
-        {locked && (
-          <div style={{
-            position: 'absolute', inset: 0, zIndex: 10,
-            background: 'rgba(6,6,6,0.75)',
-            display: 'flex', flexDirection: 'column',
-            alignItems: 'center', justifyContent: 'center',
-            gap: '14px',
-          }}>
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="none"
-              stroke="rgba(201,168,76,0.85)" strokeWidth="0.9" strokeLinecap="round">
-              <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
-              <path d="M7 11V7a5 5 0 0110 0v4"/>
-            </svg>
-            <p style={{
-              fontFamily: 'Raleway, sans-serif', fontSize: '8px', letterSpacing: '5px',
-              color: 'rgba(201,168,76,0.7)', textTransform: 'uppercase', margin: 0,
-            }}>Coming Soon</p>
             <div
               onMouseEnter={() => setNotifyHov(true)}
               onMouseLeave={() => setNotifyHov(false)}
               style={{
-                marginTop: '6px', padding: '12px 36px', textAlign: 'center',
-                border: `1px solid ${notifyHov ? 'rgba(201,168,76,0.9)' : 'rgba(201,168,76,0.4)'}`,
+                width: '100%', padding: '14px 0', textAlign: 'center',
+                border: `1px solid ${notifyHov ? 'rgba(201,168,76,0.55)' : 'rgba(201,168,76,0.2)'}`,
                 transition: 'border-color 0.3s ease',
-                display: 'flex', flexDirection: 'column', gap: '5px', cursor: 'default',
+                display: 'flex', flexDirection: 'column', gap: '5px',
+                cursor: 'default', background: 'transparent', boxSizing: 'border-box',
               }}
             >
               <span style={{
                 fontFamily: "'Cormorant Garamond', serif", fontStyle: 'italic', fontWeight: 300,
-                fontSize: '15px', color: 'rgba(232,224,216,0.85)', letterSpacing: '0.5px',
+                fontSize: '15px', color: 'rgba(232,224,216,0.8)', letterSpacing: '0.5px',
               }}>Available Soon</span>
               <span style={{
                 fontFamily: 'Raleway, sans-serif', fontSize: '7px', letterSpacing: '4px',
-                color: 'rgba(201,168,76,0.65)', textTransform: 'uppercase',
+                color: 'rgba(201,168,76,0.6)', textTransform: 'uppercase',
               }}>Notify Me</span>
             </div>
-          </div>
-        )}
+          )}
+        </div>
       </motion.div>
 
       {modal && <PaymentModal product={product} selectedSize={selectedSize} selectedPrice={REINE_PRICES[selectedSize]} signatureName={selectedSize === 'signature' ? signatureName : ''} onClose={() => setModal(false)} />}
