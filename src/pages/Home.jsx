@@ -403,42 +403,65 @@ const CollectionCard = ({ product }) => {
    MOBILE SWIPE CAROUSEL
 ───────────────────────────────────────── */
 const CollectionCarousel = () => {
-  const [activeIdx, setActiveIdx] = useState(0);
-  const trackRef = useRef(null);
+  const [current, setCurrent] = useState(0);
+  const [touchStart, setTouchStart] = useState(0);
 
-  const handleScroll = () => {
-    const el = trackRef.current;
-    if (!el) return;
-    const idx = Math.round(el.scrollLeft / window.innerWidth);
-    setActiveIdx(Math.min(Math.max(idx, 0), PRODUCTS.length - 1));
-  };
+  const goTo = (index) => setCurrent(Math.min(Math.max(index, 0), PRODUCTS.length - 1));
 
   return (
-    <div>
-      <div
-        ref={trackRef}
-        className="carousel-track"
-        onScroll={handleScroll}
-        style={{ msOverflowStyle: 'none' }}
-      >
-        {PRODUCTS.map((product) => (
-          <div key={product.id} className="carousel-card-slot">
-            <CollectionCard product={product} />
-          </div>
-        ))}
+    <div style={{ width: '100%' }}>
+      {/* Outer wrapper — clips the sliding track, no scroll */}
+      <div style={{ width: '100%', overflow: 'hidden', position: 'relative' }}>
+        {/* Track — moves via translateX, never scrolls */}
+        <div
+          onTouchStart={e => setTouchStart(e.touches[0].clientX)}
+          onTouchEnd={e => {
+            const diff = touchStart - e.changedTouches[0].clientX;
+            if (diff > 50)  goTo(current + 1);
+            if (diff < -50) goTo(current - 1);
+          }}
+          style={{
+            display: 'flex',
+            transform: `translateX(calc(-${current * 100}vw))`,
+            transition: 'transform 0.4s cubic-bezier(0.25,0.46,0.45,0.94)',
+            willChange: 'transform',
+          }}
+        >
+          {PRODUCTS.map((product) => (
+            <div
+              key={product.id}
+              style={{
+                width: '100vw',
+                flexShrink: 0,
+                padding: '0 20px',
+                boxSizing: 'border-box',
+              }}
+            >
+              <CollectionCard product={product} />
+            </div>
+          ))}
+        </div>
       </div>
-      {/* Dots */}
+
+      {/* Navigation dots */}
       <div style={{
         display: 'flex', justifyContent: 'center', alignItems: 'center',
         gap: '8px', marginTop: '24px',
       }}>
         {PRODUCTS.map((_, i) => (
-          <div key={i} style={{
-            width: '6px', height: '6px', borderRadius: '50%',
-            background: i === activeIdx ? '#c9a84c' : 'rgba(201,168,76,0.25)',
-            transition: 'background 0.3s ease',
-            flexShrink: 0,
-          }}/>
+          <div
+            key={i}
+            onClick={() => goTo(i)}
+            style={{
+              width:        i === current ? '24px' : '6px',
+              height:       '6px',
+              borderRadius: i === current ? '3px' : '50%',
+              background:   i === current ? '#c9a84c' : 'rgba(201,168,76,0.25)',
+              transition:   'all 0.3s ease',
+              cursor:       'pointer',
+              flexShrink:   0,
+            }}
+          />
         ))}
       </div>
     </div>
