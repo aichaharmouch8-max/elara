@@ -8,7 +8,7 @@ const PRODUCTS = [
   {
     id: 'reine',
     name: 'Reine',
-    image: '/ELARAREINE.png',
+    image: '/ELARAREINE.webp',
     price: 39,
     size: '100ml Eau de Parfum',
     emotionalHook: 'Worn by the woman who never needs to raise her voice.',
@@ -33,7 +33,7 @@ const PRODUCTS = [
   {
     id: 'oro',
     name: 'Oro',
-    image: '/elaraoroo.png',
+    image: '/elaraoroo.webp',
     price: 79,
     size: '100ml Eau de Parfum',
     emotionalHook: 'For the person who walks in and owns the room without trying.',
@@ -54,7 +54,7 @@ const PRODUCTS = [
   {
     id: 'nova',
     name: 'Rawan Noir',
-    image: '/elaraaaaa.png',
+    image: '/elaraaaaa.webp',
     price: 79,
     size: '100ml Eau de Parfum',
     emotionalHook: 'Born from the silence after a storm.',
@@ -206,6 +206,9 @@ const ProductCard = ({ product, inView, delay }) => {
 
             <img
               src={product.image} alt={product.name}
+              loading="lazy"
+              width="280"
+              height="280"
               style={{
                 width: '100%', height: '100%',
                 objectFit: 'contain', objectPosition: 'center',

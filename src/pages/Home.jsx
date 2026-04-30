@@ -43,7 +43,7 @@ const PRODUCTS = [
   {
     id: 'reine',
     name: 'Reine',
-    image: '/ELARAREINE.png',
+    image: '/ELARAREINE.webp',
     tagline: 'She does not ask to be noticed. She insists. Saffron, Bulgarian rose, amber, the holy trinity of desire.',
     price: 39,
     available: true,
@@ -51,7 +51,7 @@ const PRODUCTS = [
   {
     id: 'oro',
     name: 'Oro',
-    image: '/elaraoroo.png',
+    image: '/elaraoroo.webp',
     tagline: 'Rare golden woods. Luminous amber. A secret worn close to the skin, never told.',
     price: 79,
     available: false,
@@ -59,7 +59,7 @@ const PRODUCTS = [
   {
     id: 'nova',
     name: 'Rawan Noir',
-    image: '/elaraaaaa.png',
+    image: '/elaraaaaa.webp',
     tagline: 'Born after midnight. For the woman who lives her most interesting life after dark.',
     price: 79,
     available: false,
@@ -142,6 +142,9 @@ const CollectionCard = ({ product }) => {
           <img
             src={product.image}
             alt={product.name}
+            loading="lazy"
+            width="320"
+            height="320"
             style={{
               width: '100%', height: '100%',
               objectFit: 'contain', objectPosition: 'center',
@@ -894,9 +897,13 @@ const Home = () => {
         paddingBottom: '0',
       }}>
         <img
-          src="/elaraaaaa.png"
+          src="/elaraaaaa.webp"
           alt=""
           aria-hidden="true"
+          loading="eager"
+          fetchPriority="high"
+          width="1920"
+          height="1080"
           className="hero-bg-img"
           style={{
             position: 'absolute',
@@ -908,6 +915,7 @@ const Home = () => {
             objectPosition: '70% 60%',
             zIndex: 0,
             pointerEvents: 'none',
+            willChange: 'transform',
             animation: 'heroBgFloat 5s ease-in-out infinite',
           }}
         />
