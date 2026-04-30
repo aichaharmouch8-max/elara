@@ -125,28 +125,56 @@ const CollectionCard = ({ product }) => {
         }}
       >
 
-        {/* ── Bottle image — identical on all 3 cards, no overlay ── */}
+        {/* ── Bottle image — identical on all 3 cards ── */}
         <div className={`collection-card-img-wrap ${locked ? 'collection-card-img-locked' : 'collection-card-img-active'}`} style={{
           width: '100%', height: '240px',
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
           position: 'relative', overflow: 'hidden',
-          background: 'linear-gradient(to bottom, rgba(201,169,110,0.05) 0%, transparent 100%)',
+          background: 'rgba(255,255,255,0.01)',
         }}>
           <img
             src={product.image}
             alt={product.name}
             loading="lazy"
-            width="240"
-            height="240"
             style={{
-              width: '100%', height: '100%',
-              objectFit: 'contain', objectPosition: 'center',
-              display: 'block',
-              transform: hov ? 'scale(1.06)' : 'scale(1)',
+              height: '200px', width: 'auto',
+              objectFit: 'contain',
+              transform: hov && !locked ? 'scale(1.05)' : 'scale(1)',
               transition: 'transform 0.5s ease',
+              display: 'block',
             }}
           />
 
-          {/* Hover quick-buy overlay — unlocked only */}
+          {/* Ultra-luxury locked overlay — image area only, bottle visible through veil ── */}
+          {locked && (
+            <div style={{
+              position: 'absolute', inset: 0,
+              background: 'rgba(6,6,6,0.5)',
+              display: 'flex', flexDirection: 'column',
+              alignItems: 'center', justifyContent: 'center', gap: '12px',
+            }}>
+              {/* Gold circle with lock */}
+              <div style={{
+                width: '48px', height: '48px',
+                border: '1px solid rgba(201,168,76,0.6)',
+                borderRadius: '50%',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+              }}>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                  stroke="rgba(201,168,76,0.85)" strokeWidth="1.2" strokeLinecap="round">
+                  <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                  <path d="M7 11V7a5 5 0 0110 0v4"/>
+                </svg>
+              </div>
+              {/* Révélation Prochaine */}
+              <p style={{
+                fontFamily: 'Raleway, sans-serif', fontSize: '7px', letterSpacing: '5px',
+                color: 'rgba(201,168,76,0.65)', textTransform: 'uppercase', margin: 0,
+              }}>Révélation Prochaine</p>
+            </div>
+          )}
+
+          {/* Hover quick-buy — unlocked only */}
           {!locked && (
             <div style={{
               position: 'absolute', bottom: 0, left: 0, right: 0,
@@ -172,15 +200,6 @@ const CollectionCard = ({ product }) => {
         {/* ── Card body ── */}
         <div className="collection-card-body" style={{ padding: '16px 20px 32px', width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', boxSizing: 'border-box' }}>
 
-          {/* COMING SOON label — locked cards only, sits above ELARA */}
-          {locked && (
-            <p style={{
-              fontFamily: 'Raleway, sans-serif', fontSize: '7px', letterSpacing: '5px',
-              color: 'rgba(201,168,76,0.55)', textTransform: 'uppercase',
-              marginBottom: '10px',
-            }}>Coming Soon</p>
-          )}
-
           {/* ELARA */}
           <p style={{
             fontFamily: "'Cormorant Garamond', serif", fontWeight: 300,
@@ -198,8 +217,20 @@ const CollectionCard = ({ product }) => {
           {/* Concentration */}
           <p style={{
             fontFamily: 'Raleway, sans-serif', fontSize: '8px', letterSpacing: '3px',
-            color: 'rgba(200,160,60,0.55)', marginBottom: '10px', textTransform: 'uppercase',
+            color: 'rgba(200,160,60,0.55)', marginBottom: locked ? '10px' : '10px',
+            textTransform: 'uppercase',
           }}>100ml Eau de Parfum</p>
+
+          {/* Bientôt Disponible — locked cards, below concentration */}
+          {locked && (
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '7px', marginBottom: '10px' }}>
+              <div style={{ width: '40px', height: '1px', background: 'rgba(201,168,76,0.35)' }} />
+              <p style={{
+                fontFamily: 'Raleway, sans-serif', fontSize: '7px', letterSpacing: '5px',
+                color: 'rgba(201,168,76,0.5)', textTransform: 'uppercase', margin: 0,
+              }}>Bientôt Disponible</p>
+            </div>
+          )}
 
           {/* Description */}
           <p style={{
@@ -337,28 +368,28 @@ const CollectionCard = ({ product }) => {
             </>
           )}
 
-          {/* ── LOCKED: Available Soon / Notify Me button ── */}
+          {/* ── LOCKED: Notify me — WhatsApp link ── */}
           {locked && (
-            <div
+            <a
+              href={`https://wa.me/96176510481?text=${encodeURIComponent(`I want to be notified when ${product.name} launches`)}`}
+              target="_blank"
+              rel="noreferrer"
               onMouseEnter={() => setNotifyHov(true)}
               onMouseLeave={() => setNotifyHov(false)}
               style={{
-                width: '100%', padding: '14px 0', textAlign: 'center',
-                border: `1px solid ${notifyHov ? 'rgba(201,168,76,0.5)' : 'rgba(201,168,76,0.2)'}`,
-                transition: 'border-color 0.3s ease',
-                display: 'flex', flexDirection: 'column', gap: '5px',
-                cursor: 'default', background: 'transparent', boxSizing: 'border-box',
+                display: 'block', width: '100%', padding: '16px 0', textAlign: 'center',
+                border: `1px solid ${notifyHov ? 'rgba(201,168,76,0.8)' : 'rgba(201,168,76,0.35)'}`,
+                boxShadow: notifyHov ? '0 0 18px rgba(201,168,76,0.1)' : 'none',
+                transition: 'border-color 0.3s ease, box-shadow 0.3s ease',
+                background: 'transparent', textDecoration: 'none', boxSizing: 'border-box',
               }}
             >
               <span style={{
                 fontFamily: "'Cormorant Garamond', serif", fontStyle: 'italic', fontWeight: 300,
-                fontSize: '15px', color: 'rgba(232,224,216,0.75)', letterSpacing: '0.5px',
-              }}>Available Soon</span>
-              <span style={{
-                fontFamily: 'Raleway, sans-serif', fontSize: '7px', letterSpacing: '4px',
-                color: 'rgba(201,168,76,0.55)', textTransform: 'uppercase',
-              }}>Notify Me</span>
-            </div>
+                fontSize: '13px', color: 'rgba(232,224,216,0.75)', letterSpacing: '0.3px',
+                display: 'block',
+              }}>Notify me of the launch</span>
+            </a>
           )}
         </div>
       </motion.div>
@@ -378,23 +409,9 @@ const CollectionCarousel = () => {
   const handleScroll = () => {
     const el = trackRef.current;
     if (!el) return;
-    const step = window.innerWidth * 0.92 + 16;
-    const idx = Math.round(el.scrollLeft / step);
+    const idx = Math.round(el.scrollLeft / window.innerWidth);
     setActiveIdx(Math.min(Math.max(idx, 0), PRODUCTS.length - 1));
   };
-
-  useEffect(() => {
-    const el = trackRef.current;
-    if (!el) return;
-    const t1 = setTimeout(() => {
-      el.scrollLeft = 10;
-      const t2 = setTimeout(() => {
-        el.scrollTo({ left: 0, behavior: 'smooth' });
-      }, 300);
-      return () => clearTimeout(t2);
-    }, 700);
-    return () => clearTimeout(t1);
-  }, []);
 
   return (
     <div>
@@ -410,17 +427,16 @@ const CollectionCarousel = () => {
           </div>
         ))}
       </div>
+      {/* Dots */}
       <div style={{
         display: 'flex', justifyContent: 'center', alignItems: 'center',
         gap: '8px', marginTop: '24px',
       }}>
         {PRODUCTS.map((_, i) => (
           <div key={i} style={{
-            width:        i === activeIdx ? '24px' : '8px',
-            height:       '8px',
-            borderRadius: i === activeIdx ? '4px' : '50%',
-            background:   i === activeIdx ? 'rgba(200,160,60,1)' : 'rgba(201,169,110,0.28)',
-            transition: 'all 0.35s ease',
+            width: '6px', height: '6px', borderRadius: '50%',
+            background: i === activeIdx ? '#c9a84c' : 'rgba(201,168,76,0.25)',
+            transition: 'background 0.3s ease',
             flexShrink: 0,
           }}/>
         ))}
