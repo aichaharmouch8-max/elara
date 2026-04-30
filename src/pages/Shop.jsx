@@ -2,7 +2,7 @@ import { useState, useCallback, useRef } from 'react';
 import PaymentModal from '../components/PaymentModal';
 import useInView from '../hooks/useInView';
 
-const REINE_PRICES = { '50ml': 29, '100ml': 39 };
+const REINE_PRICES = { '100ml': 49, 'signature': 69 };
 
 const PRODUCTS = [
   {
@@ -117,7 +117,7 @@ const MetaItem = ({ icon, label, value }) => (
   </div>
 );
 
-const BuyNowBtn = ({ onClick }) => {
+const BuyNowBtn = ({ onClick, label = 'Buy Now' }) => {
   const [hov, setHov] = useState(false);
   return (
     <button
@@ -136,7 +136,7 @@ const BuyNowBtn = ({ onClick }) => {
         fontWeight: 600,
         boxShadow: hov ? '0 4px 20px rgba(200,150,42,0.35)' : 'none',
       }}
-    >Buy Now</button>
+    >{label}</button>
   );
 };
 
@@ -144,9 +144,11 @@ const ProductCard = ({ product, inView, delay }) => {
   const [hov, setHov] = useState(false);
   const [modal, setModal] = useState(false);
   const [selectedSize, setSelectedSize] = useState('100ml');
-  const [displayPrice, setDisplayPrice] = useState(39);
+  const [displayPrice, setDisplayPrice] = useState(49);
   const [hoveredSize, setHoveredSize] = useState(null);
   const [notifyHov, setNotifyHov] = useState(false);
+  const [signatureName, setSignatureName] = useState('');
+  const [nameFocused, setNameFocused] = useState(false);
   const timerRef = useRef(null);
 
   const animatePrice = useCallback((from, to) => {
@@ -168,7 +170,7 @@ const ProductCard = ({ product, inView, delay }) => {
 
   return (
     <>
-      {modal && <PaymentModal product={product} selectedSize={selectedSize} selectedPrice={REINE_PRICES[selectedSize]} onClose={() => setModal(false)} />}
+      {modal && <PaymentModal product={product} selectedSize={selectedSize} selectedPrice={REINE_PRICES[selectedSize]} signatureName={selectedSize === 'signature' ? signatureName : ''} onClose={() => setModal(false)} />}
       <div
         onMouseEnter={() => setHov(true)}
         onMouseLeave={() => setHov(false)}
@@ -326,22 +328,26 @@ const ProductCard = ({ product, inView, delay }) => {
                   fontFamily: 'Raleway', fontSize: '7px', letterSpacing: '6px',
                   color: 'rgba(200,160,60,0.4)', textTransform: 'uppercase',
                   textAlign: 'center', marginBottom: '16px', fontWeight: 300,
-                }}>Select Size</p>
+                }}>Select Edition</p>
                 <div style={{ display: 'flex', gap: '14px' }}>
-                  {['50ml', '100ml'].map((size) => {
-                    const active  = selectedSize === size;
-                    const hovered = hoveredSize === size;
+                  {/* 100ML card */}
+                  {[
+                    { key: '100ml', topLine: '100ML · $49', subLine: 'Eau de Parfum', exclusive: false },
+                    { key: 'signature', topLine: 'SIGNATURE EDITION', subLine: 'Your Name in Gold · $69', exclusive: true },
+                  ].map(({ key, topLine, subLine, exclusive }) => {
+                    const active  = selectedSize === key;
+                    const hovered = hoveredSize === key;
                     return (
-                      <div key={size} style={{ flex: 1 }}>
+                      <div key={key} style={{ flex: 1 }}>
                         <button
-                          onClick={() => handleSizeChange(size)}
-                          onMouseEnter={() => setHoveredSize(size)}
+                          onClick={() => handleSizeChange(key)}
+                          onMouseEnter={() => setHoveredSize(key)}
                           onMouseLeave={() => setHoveredSize(null)}
                           style={{
-                            width: '100%',
-                            fontFamily: 'Raleway', fontSize: '9px', letterSpacing: '3.5px',
-                            textTransform: 'uppercase', padding: '14px 10px',
-                            minHeight: '48px',
+                            width: '100%', position: 'relative',
+                            fontFamily: 'Raleway', fontSize: '8px', letterSpacing: '2.5px',
+                            textTransform: 'uppercase', padding: '16px 10px 14px',
+                            minHeight: '64px',
                             background: active
                               ? 'linear-gradient(135deg, rgba(200,160,60,0.13) 0%, rgba(200,160,60,0.05) 100%)'
                               : 'transparent',
@@ -350,27 +356,84 @@ const ProductCard = ({ product, inView, delay }) => {
                               hovered ? 'rgba(200,160,60,0.55)' :
                                         'rgba(200,160,60,0.2)'
                             }`,
+                            boxShadow: active && exclusive ? '0 0 18px rgba(200,160,60,0.18)' : 'none',
                             color: active  ? 'rgba(200,160,60,1)'  :
                                    hovered ? 'rgba(200,160,60,0.8)' :
                                              'rgba(200,160,60,0.45)',
                             borderRadius: '1px', cursor: 'pointer',
-                            transition: 'border-color 0.3s ease, color 0.3s ease, background 0.3s ease',
+                            transition: 'border-color 0.3s ease, color 0.3s ease, background 0.3s ease, box-shadow 0.3s ease',
+                            display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '5px',
                           }}
                         >
-                          {size.toUpperCase()} ${REINE_PRICES[size]}
+                          {exclusive && (
+                            <span style={{
+                              position: 'absolute', top: '-9px', left: '50%', transform: 'translateX(-50%)',
+                              fontFamily: 'Raleway', fontSize: '6px', letterSpacing: '3px',
+                              background: active ? '#C9A84C' : 'rgba(6,6,6,1)',
+                              color: active ? '#060606' : 'rgba(200,160,60,0.7)',
+                              border: `1px solid ${active ? '#C9A84C' : 'rgba(200,160,60,0.4)'}`,
+                              padding: '2px 8px', whiteSpace: 'nowrap',
+                              transition: 'all 0.3s ease',
+                            }}>✦ EXCLUSIVE</span>
+                          )}
+                          <span style={{ fontSize: '8px', letterSpacing: '2.5px' }}>{topLine}</span>
+                          <span style={{
+                            fontFamily: "'Cormorant Garamond', serif", fontStyle: 'italic',
+                            fontSize: '11px', letterSpacing: '0.5px', textTransform: 'none',
+                            color: active ? 'rgba(200,160,60,0.75)' : 'rgba(200,160,60,0.3)',
+                            fontWeight: 300, transition: 'color 0.3s ease',
+                          }}>{subLine}</span>
                         </button>
-                        <p style={{
-                          fontFamily: "'Cormorant Garamond', serif",
-                          fontStyle: 'italic', fontWeight: 300, fontSize: '12px',
-                          color: size === '100ml' ? 'rgba(200,160,60,0.58)' : 'rgba(250,246,239,0.2)',
-                          textAlign: 'center', marginTop: '8px',
-                        }}>
-                          {size === '50ml' ? 'Entry size' : 'Best value'}
-                        </p>
                       </div>
                     );
                   })}
                 </div>
+
+                {/* Signature name input */}
+                {selectedSize === 'signature' && (
+                  <div style={{ marginTop: '16px' }}>
+                    <div style={{ position: 'relative' }}>
+                      <input
+                        type="text"
+                        value={signatureName}
+                        onChange={e => setSignatureName(e.target.value.slice(0, 20))}
+                        onFocus={() => setNameFocused(true)}
+                        onBlur={() => setNameFocused(false)}
+                        placeholder="Your name to engrave…"
+                        maxLength={20}
+                        style={{
+                          width: '100%', boxSizing: 'border-box',
+                          fontFamily: "'Cormorant Garamond', serif", fontStyle: 'italic',
+                          fontSize: '15px', fontWeight: 300,
+                          background: nameFocused ? 'rgba(201,168,76,0.06)' : 'rgba(250,246,239,0.02)',
+                          border: `1px solid ${nameFocused ? 'rgba(201,168,76,0.7)' : 'rgba(201,168,76,0.3)'}`,
+                          color: '#FAF6EF', padding: '12px 40px 12px 14px',
+                          outline: 'none', borderRadius: '1px',
+                          transition: 'border-color 0.2s ease, background 0.2s ease',
+                          WebkitAppearance: 'none',
+                        }}
+                      />
+                      <span style={{
+                        position: 'absolute', right: '12px', top: '50%', transform: 'translateY(-50%)',
+                        fontFamily: 'Raleway', fontSize: '8px', letterSpacing: '1px',
+                        color: signatureName.length >= 18 ? 'rgba(201,168,76,0.9)' : 'rgba(201,168,76,0.3)',
+                        transition: 'color 0.2s ease',
+                      }}>{signatureName.length}/20</span>
+                    </div>
+                    <p style={{
+                      fontFamily: "'Cormorant Garamond', serif", fontStyle: 'italic',
+                      fontSize: '11px', color: 'rgba(201,168,76,0.45)',
+                      marginTop: '10px', lineHeight: 1.6, textAlign: 'center',
+                    }}>Each bottle is hand-personalized and quality checked before dispatch.</p>
+                  </div>
+                )}
+
+                {/* Urgency signal */}
+                <p style={{
+                  fontFamily: 'Raleway', fontSize: '7px', letterSpacing: '2.5px',
+                  color: 'rgba(201,168,76,0.35)', textTransform: 'uppercase',
+                  textAlign: 'center', marginTop: '14px',
+                }}>✦ Limited personalized slots available each week</p>
               </div>
             )}
 
@@ -387,7 +450,10 @@ const ProductCard = ({ product, inView, delay }) => {
                   color: '#C9A96E', letterSpacing: '1px',
                   transition: 'opacity 0.2s ease',
                 }}>${displayPrice}</span>
-                <BuyNowBtn onClick={() => setModal(true)} />
+                <BuyNowBtn
+                  onClick={() => setModal(true)}
+                  label={selectedSize === 'signature' ? 'Order — Personalized' : 'Buy Now'}
+                />
               </div>
             ) : (
               <div style={{ paddingTop: '20px', borderTop: '1px solid rgba(200,150,42,0.08)', height: '56px' }}/>

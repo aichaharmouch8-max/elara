@@ -169,7 +169,7 @@ const LABEL_STYLE = {
   color: 'rgba(201,169,110,0.5)', textTransform: 'uppercase', marginBottom: '12px',
 };
 
-const PaymentModal = ({ product, selectedSize = '100ml', selectedPrice, onClose }) => {
+const PaymentModal = ({ product, selectedSize = '100ml', selectedPrice, signatureName = '', onClose }) => {
   const price = selectedPrice ?? product.price;
   const [method, setMethod]         = useState(null);
   const [name, setName]             = useState('');
@@ -259,7 +259,10 @@ const PaymentModal = ({ product, selectedSize = '100ml', selectedPrice, onClose 
       lines.push(`🗺️ Location: https://maps.google.com/?q=${locCoords.lat},${locCoords.lng}`);
     }
     lines.push(`💰 Amount: $${price}`);
-    lines.push(`📦 Size: ${selectedSize}`);
+    lines.push(`📦 Edition: ${selectedSize === 'signature' ? 'Signature Edition (100ml)' : '100ml Eau de Parfum'}`);
+    if (selectedSize === 'signature' && signatureName.trim()) {
+      lines.push(`✍️ Engraving: ${signatureName.trim()}`);
+    }
     lines.push(`💳 Payment: ${methodLabel}`);
     lines.push('─────────────────');
     window.open(`https://wa.me/96176510481?text=${encodeURIComponent(lines.join('\n'))}`, '_blank');
@@ -350,7 +353,7 @@ const PaymentModal = ({ product, selectedSize = '100ml', selectedPrice, onClose 
             <div style={{ background: 'rgba(201,169,110,0.05)', border: '1px solid rgba(201,169,110,0.15)', borderRadius: '6px', padding: '16px 20px', marginBottom: '20px', textAlign: 'left' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px' }}>
                 <span style={{ fontFamily: 'Raleway, sans-serif', fontSize: '11px', color: 'rgba(250,246,239,0.45)', letterSpacing: '1px' }}>ITEM</span>
-                <span style={{ fontFamily: 'Raleway, sans-serif', fontSize: '11px', color: 'rgba(201,169,110,0.8)' }}>{product.name}  {selectedSize}</span>
+                <span style={{ fontFamily: 'Raleway, sans-serif', fontSize: '11px', color: 'rgba(201,169,110,0.8)' }}>{product.name} · {selectedSize === 'signature' ? 'Signature Edition' : '100ml'}</span>
               </div>
               <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px' }}>
                 <span style={{ fontFamily: 'Raleway, sans-serif', fontSize: '11px', color: 'rgba(250,246,239,0.45)', letterSpacing: '1px' }}>TOTAL</span>
@@ -370,9 +373,14 @@ const PaymentModal = ({ product, selectedSize = '100ml', selectedPrice, onClose 
         ) : (
           <form onSubmit={handleSubmit}>
             <h3 style={{ fontFamily: "'Playfair Display', serif", fontWeight: 300, fontSize: '26px', fontStyle: 'italic', color: '#FAF6EF', textAlign: 'center', lineHeight: 1.25, marginBottom: '6px' }}>Complete Your Order</h3>
-            <p style={{ fontFamily: 'Raleway, sans-serif', fontSize: '12px', fontWeight: 300, color: 'rgba(201,169,110,0.6)', letterSpacing: '1px', textAlign: 'center', marginBottom: '28px' }}>
-              {product.name}  {selectedSize}  ${price}
+            <p style={{ fontFamily: 'Raleway, sans-serif', fontSize: '12px', fontWeight: 300, color: 'rgba(201,169,110,0.6)', letterSpacing: '1px', textAlign: 'center', marginBottom: selectedSize === 'signature' && signatureName.trim() ? '8px' : '28px' }}>
+              {product.name} · {selectedSize === 'signature' ? 'Signature Edition' : '100ml'} · ${price}
             </p>
+            {selectedSize === 'signature' && signatureName.trim() && (
+              <p style={{ fontFamily: "'Cormorant Garamond', serif", fontStyle: 'italic', fontSize: '13px', color: 'rgba(201,169,110,0.5)', textAlign: 'center', marginBottom: '28px' }}>
+                Engraving: "{signatureName.trim()}"
+              </p>
+            )}
 
             <div style={{ height: '1px', background: 'linear-gradient(to right, transparent, rgba(201,169,110,0.25), transparent)', marginBottom: '24px' }}/>
 

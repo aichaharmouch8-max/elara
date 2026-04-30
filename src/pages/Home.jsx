@@ -66,7 +66,7 @@ const PRODUCTS = [
   },
 ];
 
-const REINE_PRICES = { '50ml': 29, '100ml': 39 };
+const REINE_PRICES = { '100ml': 49, 'signature': 69 };
 
 const CollectionCard = ({ product }) => {
   const [hov, setHov] = useState(false);
@@ -75,8 +75,10 @@ const CollectionCard = ({ product }) => {
   const [notifyHov, setNotifyHov] = useState(false);
   const locked = !product.available;
   const [selectedSize, setSelectedSize] = useState('100ml');
-  const [displayPrice, setDisplayPrice] = useState(39);
-  const [sizeTooltip, setSizeTooltip] = useState(null);
+  const [displayPrice, setDisplayPrice] = useState(49);
+
+  const [signatureName, setSignatureName] = useState('');
+  const [nameFocused, setNameFocused] = useState(false);
   const priceTimer = useRef(null);
 
   const animatePrice = useCallback((from, to) => {
@@ -195,57 +197,102 @@ const CollectionCard = ({ product }) => {
                 fontFamily: 'Raleway, sans-serif', fontSize: '9px', letterSpacing: '4px',
                 color: 'rgba(200,160,60,0.5)', textTransform: 'uppercase',
                 textAlign: 'center', marginBottom: '10px',
-              }}>Select Size</p>
+              }}>Select Edition</p>
               <div style={{ display: 'flex', gap: '8px' }}>
-                {['50ml', '100ml'].map((size) => {
-                  const active = selectedSize === size;
+                {[
+                  { key: '100ml', topLine: '100ML · $49', subLine: 'Eau de Parfum', exclusive: false },
+                  { key: 'signature', topLine: 'SIGNATURE', subLine: 'Your Name in Gold · $69', exclusive: true },
+                ].map(({ key, topLine, subLine, exclusive }) => {
+                  const active = selectedSize === key;
                   return (
-                    <div key={size} style={{ flex: 1, position: 'relative' }}>
-                      {sizeTooltip === size && (
-                        <div style={{
-                          position: 'absolute',
-                          top: size === '100ml' ? '-50px' : '-34px',
-                          left: '50%', transform: 'translateX(-50%)',
-                          fontFamily: 'Raleway, sans-serif', fontSize: '9px', letterSpacing: '1px',
-                          color: 'rgba(200,160,60,0.95)',
-                          background: 'rgba(15,8,0,0.96)',
-                          border: '1px solid rgba(200,160,60,0.3)',
-                          padding: '3px 8px', whiteSpace: 'nowrap',
-                          pointerEvents: 'none', zIndex: 10,
-                        }}>
-                          {size === '50ml' ? 'Perfect for trying' : 'Our signature size'}
-                        </div>
-                      )}
+                    <div key={key} style={{ flex: 1, position: 'relative' }}>
                       <button
-                        onClick={() => handleSizeChange(size)}
-                        onMouseEnter={() => setSizeTooltip(size)}
-                        onMouseLeave={() => setSizeTooltip(null)}
+                        onClick={() => handleSizeChange(key)}
+
                         className="collection-size-btn"
                         style={{
-                          width: '100%',
-                          fontFamily: 'Raleway, sans-serif', fontSize: '10px', letterSpacing: '1.5px',
-                          textTransform: 'uppercase', padding: '7px 8px', minHeight: '44px',
-                          background: active ? 'rgba(200,160,60,0.15)' : 'transparent',
+                          width: '100%', position: 'relative',
+                          fontFamily: 'Raleway, sans-serif', fontSize: '8px', letterSpacing: '1.5px',
+                          textTransform: 'uppercase', padding: '10px 6px 8px', minHeight: '56px',
+                          background: active
+                            ? 'linear-gradient(135deg, rgba(200,160,60,0.15) 0%, rgba(200,160,60,0.06) 100%)'
+                            : 'transparent',
                           border: `1px solid ${active ? 'rgba(200,160,60,1)' : 'rgba(200,160,60,0.3)'}`,
+                          boxShadow: active && exclusive ? '0 0 16px rgba(200,160,60,0.15)' : 'none',
                           color: active ? 'rgba(200,160,60,1)' : 'rgba(200,160,60,0.6)',
                           borderRadius: '2px', cursor: 'pointer',
-                          transition: 'all 0.3s ease',
-                          boxSizing: 'border-box',
+                          transition: 'all 0.3s ease', boxSizing: 'border-box',
+                          display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px',
                         }}
                       >
-                        {size} ${REINE_PRICES[size]}
+                        {exclusive && (
+                          <span style={{
+                            position: 'absolute', top: '-8px', left: '50%', transform: 'translateX(-50%)',
+                            fontFamily: 'Raleway, sans-serif', fontSize: '6px', letterSpacing: '2px',
+                            background: active ? '#C9A84C' : 'rgba(6,6,6,1)',
+                            color: active ? '#060606' : 'rgba(200,160,60,0.7)',
+                            border: `1px solid ${active ? '#C9A84C' : 'rgba(200,160,60,0.4)'}`,
+                            padding: '2px 6px', whiteSpace: 'nowrap',
+                            transition: 'all 0.3s ease',
+                          }}>✦ EXCL</span>
+                        )}
+                        <span style={{ fontSize: '8px', letterSpacing: '1.5px' }}>{topLine}</span>
+                        <span style={{
+                          fontFamily: "'Cormorant Garamond', serif", fontStyle: 'italic',
+                          fontSize: '10px', letterSpacing: '0.3px', textTransform: 'none',
+                          color: active ? 'rgba(200,160,60,0.75)' : 'rgba(200,160,60,0.35)',
+                          fontWeight: 300, transition: 'color 0.3s ease',
+                        }}>{subLine}</span>
                       </button>
-                      <p style={{
-                        fontFamily: 'Raleway, sans-serif', fontSize: '8px', letterSpacing: '0.5px',
-                        color: size === '100ml' ? 'rgba(200,160,60,0.7)' : 'rgba(250,246,239,0.28)',
-                        textAlign: 'center', marginTop: '4px',
-                      }}>
-                        {size === '50ml' ? 'Entry size' : 'Save 26%'}
-                      </p>
                     </div>
                   );
                 })}
               </div>
+
+              {/* Signature name input */}
+              {selectedSize === 'signature' && (
+                <div style={{ marginTop: '12px' }}>
+                  <div style={{ position: 'relative' }}>
+                    <input
+                      type="text"
+                      value={signatureName}
+                      onChange={e => setSignatureName(e.target.value.slice(0, 20))}
+                      onFocus={() => setNameFocused(true)}
+                      onBlur={() => setNameFocused(false)}
+                      placeholder="Your name to engrave…"
+                      maxLength={20}
+                      style={{
+                        width: '100%', boxSizing: 'border-box',
+                        fontFamily: "'Cormorant Garamond', serif", fontStyle: 'italic',
+                        fontSize: '14px', fontWeight: 300,
+                        background: nameFocused ? 'rgba(201,168,76,0.06)' : 'rgba(250,246,239,0.02)',
+                        border: `1px solid ${nameFocused ? 'rgba(201,168,76,0.7)' : 'rgba(201,168,76,0.3)'}`,
+                        color: '#FAF6EF', padding: '10px 38px 10px 12px',
+                        outline: 'none', borderRadius: '2px',
+                        transition: 'border-color 0.2s ease, background 0.2s ease',
+                        WebkitAppearance: 'none',
+                      }}
+                    />
+                    <span style={{
+                      position: 'absolute', right: '10px', top: '50%', transform: 'translateY(-50%)',
+                      fontFamily: 'Raleway, sans-serif', fontSize: '7px', letterSpacing: '1px',
+                      color: signatureName.length >= 18 ? 'rgba(201,168,76,0.9)' : 'rgba(201,168,76,0.3)',
+                      transition: 'color 0.2s ease',
+                    }}>{signatureName.length}/20</span>
+                  </div>
+                  <p style={{
+                    fontFamily: "'Cormorant Garamond', serif", fontStyle: 'italic',
+                    fontSize: '10px', color: 'rgba(201,168,76,0.45)',
+                    marginTop: '8px', lineHeight: 1.6, textAlign: 'center',
+                  }}>Each bottle is hand-personalized and quality checked before dispatch.</p>
+                </div>
+              )}
+
+              <p style={{
+                fontFamily: 'Raleway, sans-serif', fontSize: '7px', letterSpacing: '2px',
+                color: 'rgba(201,168,76,0.3)', textTransform: 'uppercase',
+                textAlign: 'center', marginTop: '10px',
+              }}>✦ Limited personalized slots available each week</p>
             </div>
           )}
 
@@ -273,7 +320,7 @@ const CollectionCard = ({ product }) => {
                 transition: 'all 0.35s ease',
                 whiteSpace: 'nowrap',
               }}
-            >Buy Now ${displayPrice}</button>
+            >{selectedSize === 'signature' ? 'Order — Personalized' : `Buy Now $${displayPrice}`}</button>
           ) : (
             <div style={{ height: '48px', borderTop: '1px solid rgba(200,160,60,0.08)', width: '100%' }}/>
           )}
@@ -320,7 +367,7 @@ const CollectionCard = ({ product }) => {
         )}
       </motion.div>
 
-      {modal && <PaymentModal product={product} selectedSize={selectedSize} selectedPrice={REINE_PRICES[selectedSize]} onClose={() => setModal(false)} />}
+      {modal && <PaymentModal product={product} selectedSize={selectedSize} selectedPrice={REINE_PRICES[selectedSize]} signatureName={selectedSize === 'signature' ? signatureName : ''} onClose={() => setModal(false)} />}
     </>
   );
 };
