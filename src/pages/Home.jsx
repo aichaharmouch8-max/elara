@@ -942,7 +942,7 @@ const Home = () => {
         height: '100vh',
         minHeight: '100vh',
         position: 'relative',
-        overflow: 'clip',
+        overflow: 'hidden',
         width: '100%',
         maxWidth: '100%',
         display: 'flex',
@@ -962,15 +962,14 @@ const Home = () => {
           style={{
             position: 'absolute',
             inset: 0,
+            top: 0,
             width: '100%',
-            height: 'calc(100% + 20px)',
-            top: '-10px',
+            height: '100%',
             objectFit: 'cover',
             objectPosition: '70% 60%',
             zIndex: 0,
             pointerEvents: 'none',
-            willChange: 'transform',
-            animation: 'heroBgFloat 5s ease-in-out infinite',
+            willChange: 'auto',
           }}
         />
         <div className="hero-overlay-left" style={{
