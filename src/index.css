@@ -459,9 +459,9 @@ button { font-family: inherit; }
   /* Collection card images on mobile — locked and active identical */
   .collection-card-img-active,
   .collection-card-img-locked {
-    height: 220px !important;
-    min-height: 220px !important;
-    max-height: 220px !important;
+    height: 240px !important;
+    min-height: 240px !important;
+    max-height: 240px !important;
   }
 
   /* Collection — show carousel, hide pyramid */
@@ -497,36 +497,36 @@ button { font-family: inherit; }
     align-items: flex-start !important;
   }
 
-  /* ── Carousel card slot — explicit 600px height so all 3 cards are identical ── */
+  /* ── Carousel card slot — auto height, content-driven ── */
   .carousel-card-slot {
     scroll-snap-align: start !important;
     width: 92vw !important;
     min-width: 92vw !important;
     max-width: 92vw !important;
-    height: 600px !important;
+    height: auto !important;
     flex-shrink: 0 !important;
     flex-grow: 0 !important;
     flex-basis: 92vw !important;
     display: flex !important;
     flex-direction: column !important;
-    overflow: hidden !important;
+    overflow: visible !important;
   }
 
-  /* Card inner (motion.div) — height: 100% works because parent has explicit 600px */
+  /* Card inner (motion.div) — natural height */
   .carousel-card-slot > * {
     width: 100% !important;
     min-width: 0 !important;
     max-width: 100% !important;
-    height: 100% !important;
+    height: auto !important;
     min-height: 0 !important;
     flex-shrink: 0 !important;
   }
 
-  /* Card image — locked in at 220px, never grows or shrinks */
+  /* Card image — 240px, same on all 3 cards */
   .collection-mobile-carousel .collection-card-img-wrap {
-    height: 220px !important;
-    min-height: 220px !important;
-    max-height: 220px !important;
+    height: 240px !important;
+    min-height: 240px !important;
+    max-height: 240px !important;
     flex-shrink: 0 !important;
     flex-grow: 0 !important;
     padding-top: 0 !important;
@@ -535,13 +535,13 @@ button { font-family: inherit; }
     position: relative !important;
   }
 
-  /* Card body — fills the remaining 380px (600 - 220), same on all 3 cards */
+  /* Card body — natural height, same padding on all 3 cards */
   .collection-mobile-carousel .collection-card-body {
-    padding: 24px 20px !important;
-    flex: 1 1 0% !important;
+    padding: 20px 20px 32px !important;
+    height: auto !important;
     box-sizing: border-box !important;
     width: 100% !important;
-    overflow: hidden !important;
+    overflow: visible !important;
     display: flex !important;
     flex-direction: column !important;
     align-items: center !important;

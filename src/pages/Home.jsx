@@ -113,11 +113,11 @@ const CollectionCard = ({ product }) => {
         onHoverStart={() => setHov(true)}
         onHoverEnd={() => setHov(false)}
         style={{
-          background: '#060606',
-          border: `1px solid ${hov ? 'rgba(201,168,76,0.3)' : 'rgba(201,168,76,0.08)'}`,
+          background: '#0a0602',
+          border: `1px solid ${hov ? 'rgba(201,168,76,0.3)' : 'rgba(201,168,76,0.12)'}`,
           display: 'flex', flexDirection: 'column',
           alignItems: 'center', textAlign: 'center',
-          position: 'relative', overflow: 'hidden',
+          position: 'relative',
           transition: 'border-color 0.4s ease, box-shadow 0.4s ease',
           boxShadow: hov
             ? '0 0 0 1px rgba(201,168,76,0.12), 0 32px 72px rgba(0,0,0,0.55)'
@@ -125,228 +125,226 @@ const CollectionCard = ({ product }) => {
         }}
       >
 
+        {/* ── Bottle image — identical on all 3 cards, no overlay ── */}
         <div className={`collection-card-img-wrap ${locked ? 'collection-card-img-locked' : 'collection-card-img-active'}`} style={{
-          width: '100%', height: '320px',
+          width: '100%', height: '240px',
           position: 'relative', overflow: 'hidden',
-          background: 'linear-gradient(to bottom, rgba(201,169,110,0.07) 0%, transparent 100%)',
+          background: 'linear-gradient(to bottom, rgba(201,169,110,0.05) 0%, transparent 100%)',
         }}>
           <img
             src={product.image}
             alt={product.name}
             loading="lazy"
-            width="320"
-            height="320"
+            width="240"
+            height="240"
             style={{
               width: '100%', height: '100%',
               objectFit: 'contain', objectPosition: 'center',
               display: 'block',
-              transform: hov ? 'scale(1.08)' : 'scale(1)',
+              transform: hov ? 'scale(1.06)' : 'scale(1)',
               transition: 'transform 0.5s ease',
-              filter: 'none',
             }}
           />
 
-          {/* Lock overlay — image area only */}
-          {locked && (
-            <div style={{
-              position: 'absolute', inset: 0, zIndex: 4,
-              background: 'rgba(6,6,6,0.6)',
-              display: 'flex', flexDirection: 'column',
-              alignItems: 'center', justifyContent: 'center', gap: '10px',
-            }}>
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none"
-                stroke="rgba(201,168,76,0.85)" strokeWidth="1" strokeLinecap="round">
-                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
-                <path d="M7 11V7a5 5 0 0110 0v4"/>
-              </svg>
-              <p style={{
-                fontFamily: 'Raleway, sans-serif', fontSize: '7px', letterSpacing: '5px',
-                color: 'rgba(201,168,76,0.7)', textTransform: 'uppercase', margin: 0,
-              }}>Coming Soon</p>
-            </div>
-          )}
-
+          {/* Hover quick-buy overlay — unlocked only */}
           {!locked && (
             <div style={{
               position: 'absolute', bottom: 0, left: 0, right: 0,
               opacity: hov ? 1 : 0,
-              transform: hov ? 'translateY(0)' : 'translateY(10px)',
-              transition: 'opacity 0.4s ease, transform 0.4s ease',
+              transform: hov ? 'translateY(0)' : 'translateY(8px)',
+              transition: 'opacity 0.35s ease, transform 0.35s ease',
               zIndex: 2,
             }}>
               <button
                 onClick={() => setModal(true)}
                 style={{
                   width: '100%',
-                  fontFamily: 'Raleway, sans-serif', fontSize: '11px',
-                  letterSpacing: '2px', textTransform: 'uppercase',
-                  padding: '14px 0', background: '#C8962A',
-                  color: '#1C1510', border: 'none', cursor: 'pointer', fontWeight: 500,
+                  fontFamily: 'Raleway, sans-serif', fontSize: '9px',
+                  letterSpacing: '3px', textTransform: 'uppercase',
+                  padding: '13px 0', background: '#c9a84c',
+                  color: '#060606', border: 'none', cursor: 'pointer', fontWeight: 600,
                 }}
               >Buy Now</button>
             </div>
           )}
         </div>
 
-        <div className="collection-card-body" style={{ padding: '16px 24px 24px', width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', boxSizing: 'border-box' }}>
+        {/* ── Card body ── */}
+        <div className="collection-card-body" style={{ padding: '16px 20px 32px', width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', boxSizing: 'border-box' }}>
+
+          {/* COMING SOON label — locked cards only, sits above ELARA */}
+          {locked && (
+            <p style={{
+              fontFamily: 'Raleway, sans-serif', fontSize: '7px', letterSpacing: '5px',
+              color: 'rgba(201,168,76,0.55)', textTransform: 'uppercase',
+              marginBottom: '10px',
+            }}>Coming Soon</p>
+          )}
+
+          {/* ELARA */}
           <p style={{
-            fontFamily: "'Playfair Display', serif", fontWeight: 300,
-            fontSize: '10px', color: 'rgba(250,246,239,0.26)',
-            letterSpacing: '4px', textTransform: 'uppercase', marginBottom: '2px',
+            fontFamily: "'Cormorant Garamond', serif", fontWeight: 300,
+            fontSize: '9px', color: 'rgba(250,246,239,0.22)',
+            letterSpacing: '5px', textTransform: 'uppercase', marginBottom: '4px',
           }}>ELARA</p>
+
+          {/* Product name */}
           <h3 style={{
-            fontFamily: "'Playfair Display', serif", fontWeight: 300,
-            fontSize: '28px', fontStyle: 'italic',
-            color: '#FAF6EF',
-            lineHeight: 1, marginBottom: '6px',
+            fontFamily: "'Cormorant Garamond', serif", fontWeight: 300,
+            fontSize: '26px', fontStyle: 'italic',
+            color: '#FAF6EF', lineHeight: 1, marginBottom: '6px',
           }}>{product.name}</h3>
+
+          {/* Concentration */}
           <p style={{
-            fontFamily: 'Raleway, sans-serif', fontSize: '11px', letterSpacing: '3px',
-            color: 'rgba(200,160,60,0.6)', marginBottom: '10px',
+            fontFamily: 'Raleway, sans-serif', fontSize: '8px', letterSpacing: '3px',
+            color: 'rgba(200,160,60,0.55)', marginBottom: '10px', textTransform: 'uppercase',
           }}>100ml Eau de Parfum</p>
+
+          {/* Description */}
           <p style={{
-            fontFamily: 'Raleway, sans-serif', fontSize: '12px', fontWeight: 300,
-            color: 'rgba(232,224,216,0.4)',
-            lineHeight: 1.8, marginBottom: '12px', letterSpacing: '0.3px',
+            fontFamily: 'Raleway, sans-serif', fontSize: '11px', fontWeight: 300,
+            color: 'rgba(232,224,216,0.35)',
+            lineHeight: 1.75, marginBottom: '16px', letterSpacing: '0.2px',
           }}>{product.tagline}</p>
 
+          {/* ── UNLOCKED: edition selector + price + buy ── */}
           {!locked && (
-            <div style={{ width: '100%', marginBottom: '10px' }}>
-              <p style={{
-                fontFamily: 'Raleway, sans-serif', fontSize: '9px', letterSpacing: '4px',
-                color: 'rgba(200,160,60,0.5)', textTransform: 'uppercase',
-                textAlign: 'center', marginBottom: '10px',
-              }}>Select Edition</p>
-              <div style={{ display: 'flex', gap: '8px' }}>
-                {[
-                  { key: '100ml', topLine: '100ML · $49', subLine: 'Eau de Parfum', exclusive: false },
-                  { key: 'signature', topLine: 'SIGNATURE', subLine: 'Your Name in Gold · $69', exclusive: true },
-                ].map(({ key, topLine, subLine, exclusive }) => {
-                  const active = selectedSize === key;
-                  return (
-                    <div key={key} style={{ flex: 1, position: 'relative' }}>
-                      <button
-                        onClick={() => handleSizeChange(key)}
-
-                        className="collection-size-btn"
-                        style={{
-                          width: '100%', position: 'relative',
-                          fontFamily: 'Raleway, sans-serif', fontSize: '8px', letterSpacing: '1.5px',
-                          textTransform: 'uppercase', padding: '10px 6px 8px', minHeight: '56px',
-                          background: active
-                            ? 'linear-gradient(135deg, rgba(200,160,60,0.15) 0%, rgba(200,160,60,0.06) 100%)'
-                            : 'transparent',
-                          border: `1px solid ${active ? 'rgba(200,160,60,1)' : 'rgba(200,160,60,0.3)'}`,
-                          boxShadow: active && exclusive ? '0 0 16px rgba(200,160,60,0.15)' : 'none',
-                          color: active ? 'rgba(200,160,60,1)' : 'rgba(200,160,60,0.6)',
-                          borderRadius: '2px', cursor: 'pointer',
-                          transition: 'all 0.3s ease', boxSizing: 'border-box',
-                          display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px',
-                        }}
-                      >
-                        {exclusive && (
+            <>
+              <div style={{ width: '100%', marginBottom: '12px' }}>
+                <p style={{
+                  fontFamily: 'Raleway, sans-serif', fontSize: '7px', letterSpacing: '4px',
+                  color: 'rgba(200,160,60,0.45)', textTransform: 'uppercase',
+                  textAlign: 'center', marginBottom: '10px',
+                }}>Select Edition</p>
+                <div style={{ display: 'flex', gap: '8px' }}>
+                  {[
+                    { key: '100ml', topLine: '100ML · $49', subLine: 'Eau de Parfum', exclusive: false },
+                    { key: 'signature', topLine: 'SIGNATURE', subLine: 'Name in Gold · $69', exclusive: true },
+                  ].map(({ key, topLine, subLine, exclusive }) => {
+                    const active = selectedSize === key;
+                    return (
+                      <div key={key} style={{ flex: 1, position: 'relative' }}>
+                        <button
+                          onClick={() => handleSizeChange(key)}
+                          className="collection-size-btn"
+                          style={{
+                            width: '100%', position: 'relative',
+                            fontFamily: 'Raleway, sans-serif', fontSize: '7px', letterSpacing: '1.5px',
+                            textTransform: 'uppercase', padding: '10px 6px 8px', minHeight: '52px',
+                            background: active
+                              ? 'linear-gradient(135deg, rgba(200,160,60,0.13) 0%, rgba(200,160,60,0.05) 100%)'
+                              : 'transparent',
+                            border: `1px solid ${active ? 'rgba(200,160,60,0.95)' : 'rgba(200,160,60,0.25)'}`,
+                            boxShadow: active && exclusive ? '0 0 14px rgba(200,160,60,0.12)' : 'none',
+                            color: active ? 'rgba(200,160,60,1)' : 'rgba(200,160,60,0.5)',
+                            borderRadius: '2px', cursor: 'pointer',
+                            transition: 'all 0.3s ease', boxSizing: 'border-box',
+                            display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px',
+                          }}
+                        >
+                          {exclusive && (
+                            <span style={{
+                              position: 'absolute', top: '-8px', left: '50%', transform: 'translateX(-50%)',
+                              fontFamily: 'Raleway, sans-serif', fontSize: '6px', letterSpacing: '2px',
+                              background: active ? '#C9A84C' : '#0a0602',
+                              color: active ? '#060606' : 'rgba(200,160,60,0.65)',
+                              border: `1px solid ${active ? '#C9A84C' : 'rgba(200,160,60,0.35)'}`,
+                              padding: '2px 6px', whiteSpace: 'nowrap',
+                              transition: 'all 0.3s ease',
+                            }}>✦ EXCL</span>
+                          )}
+                          <span>{topLine}</span>
                           <span style={{
-                            position: 'absolute', top: '-8px', left: '50%', transform: 'translateX(-50%)',
-                            fontFamily: 'Raleway, sans-serif', fontSize: '6px', letterSpacing: '2px',
-                            background: active ? '#C9A84C' : 'rgba(6,6,6,1)',
-                            color: active ? '#060606' : 'rgba(200,160,60,0.7)',
-                            border: `1px solid ${active ? '#C9A84C' : 'rgba(200,160,60,0.4)'}`,
-                            padding: '2px 6px', whiteSpace: 'nowrap',
-                            transition: 'all 0.3s ease',
-                          }}>✦ EXCL</span>
-                        )}
-                        <span style={{ fontSize: '8px', letterSpacing: '1.5px' }}>{topLine}</span>
-                        <span style={{
+                            fontFamily: "'Cormorant Garamond', serif", fontStyle: 'italic',
+                            fontSize: '10px', letterSpacing: '0.3px', textTransform: 'none',
+                            color: active ? 'rgba(200,160,60,0.7)' : 'rgba(200,160,60,0.3)',
+                            fontWeight: 300, transition: 'color 0.3s ease',
+                          }}>{subLine}</span>
+                        </button>
+                      </div>
+                    );
+                  })}
+                </div>
+
+                {selectedSize === 'signature' && (
+                  <div style={{ marginTop: '10px' }}>
+                    <div style={{ position: 'relative' }}>
+                      <input
+                        type="text"
+                        value={signatureName}
+                        onChange={e => setSignatureName(e.target.value.slice(0, 20))}
+                        onFocus={() => setNameFocused(true)}
+                        onBlur={() => setNameFocused(false)}
+                        placeholder="Your name to engrave…"
+                        maxLength={20}
+                        style={{
+                          width: '100%', boxSizing: 'border-box',
                           fontFamily: "'Cormorant Garamond', serif", fontStyle: 'italic',
-                          fontSize: '10px', letterSpacing: '0.3px', textTransform: 'none',
-                          color: active ? 'rgba(200,160,60,0.75)' : 'rgba(200,160,60,0.35)',
-                          fontWeight: 300, transition: 'color 0.3s ease',
-                        }}>{subLine}</span>
-                      </button>
+                          fontSize: '14px', fontWeight: 300,
+                          background: nameFocused ? 'rgba(201,168,76,0.06)' : 'rgba(250,246,239,0.02)',
+                          border: `1px solid ${nameFocused ? 'rgba(201,168,76,0.7)' : 'rgba(201,168,76,0.25)'}`,
+                          color: '#FAF6EF', padding: '10px 38px 10px 12px',
+                          outline: 'none', borderRadius: '2px',
+                          transition: 'border-color 0.2s ease, background 0.2s ease',
+                          WebkitAppearance: 'none',
+                        }}
+                      />
+                      <span style={{
+                        position: 'absolute', right: '10px', top: '50%', transform: 'translateY(-50%)',
+                        fontFamily: 'Raleway, sans-serif', fontSize: '7px', letterSpacing: '1px',
+                        color: signatureName.length >= 18 ? 'rgba(201,168,76,0.9)' : 'rgba(201,168,76,0.3)',
+                        transition: 'color 0.2s ease',
+                      }}>{signatureName.length}/20</span>
                     </div>
-                  );
-                })}
+                    <p style={{
+                      fontFamily: "'Cormorant Garamond', serif", fontStyle: 'italic',
+                      fontSize: '10px', color: 'rgba(201,168,76,0.4)',
+                      marginTop: '7px', lineHeight: 1.6, textAlign: 'center',
+                    }}>Each bottle is hand-personalized before dispatch.</p>
+                  </div>
+                )}
+
+                <p style={{
+                  fontFamily: 'Raleway, sans-serif', fontSize: '7px', letterSpacing: '2px',
+                  color: 'rgba(201,168,76,0.25)', textTransform: 'uppercase',
+                  textAlign: 'center', marginTop: '8px',
+                }}>✦ Limited personalized slots available each week</p>
               </div>
 
-              {/* Signature name input */}
-              {selectedSize === 'signature' && (
-                <div style={{ marginTop: '12px' }}>
-                  <div style={{ position: 'relative' }}>
-                    <input
-                      type="text"
-                      value={signatureName}
-                      onChange={e => setSignatureName(e.target.value.slice(0, 20))}
-                      onFocus={() => setNameFocused(true)}
-                      onBlur={() => setNameFocused(false)}
-                      placeholder="Your name to engrave…"
-                      maxLength={20}
-                      style={{
-                        width: '100%', boxSizing: 'border-box',
-                        fontFamily: "'Cormorant Garamond', serif", fontStyle: 'italic',
-                        fontSize: '14px', fontWeight: 300,
-                        background: nameFocused ? 'rgba(201,168,76,0.06)' : 'rgba(250,246,239,0.02)',
-                        border: `1px solid ${nameFocused ? 'rgba(201,168,76,0.7)' : 'rgba(201,168,76,0.3)'}`,
-                        color: '#FAF6EF', padding: '10px 38px 10px 12px',
-                        outline: 'none', borderRadius: '2px',
-                        transition: 'border-color 0.2s ease, background 0.2s ease',
-                        WebkitAppearance: 'none',
-                      }}
-                    />
-                    <span style={{
-                      position: 'absolute', right: '10px', top: '50%', transform: 'translateY(-50%)',
-                      fontFamily: 'Raleway, sans-serif', fontSize: '7px', letterSpacing: '1px',
-                      color: signatureName.length >= 18 ? 'rgba(201,168,76,0.9)' : 'rgba(201,168,76,0.3)',
-                      transition: 'color 0.2s ease',
-                    }}>{signatureName.length}/20</span>
-                  </div>
-                  <p style={{
-                    fontFamily: "'Cormorant Garamond', serif", fontStyle: 'italic',
-                    fontSize: '10px', color: 'rgba(201,168,76,0.45)',
-                    marginTop: '8px', lineHeight: 1.6, textAlign: 'center',
-                  }}>Each bottle is hand-personalized and quality checked before dispatch.</p>
-                </div>
-              )}
-
               <p style={{
-                fontFamily: 'Raleway, sans-serif', fontSize: '7px', letterSpacing: '2px',
-                color: 'rgba(201,168,76,0.3)', textTransform: 'uppercase',
-                textAlign: 'center', marginTop: '10px',
-              }}>✦ Limited personalized slots available each week</p>
-            </div>
+                fontFamily: "'Cormorant Garamond', serif", fontSize: '22px', fontWeight: 300,
+                color: '#C9A96E', marginBottom: '10px',
+                transition: 'opacity 0.2s ease',
+              }}>${displayPrice}</p>
+
+              <button
+                onClick={() => setModal(true)}
+                onMouseEnter={() => setBtnHov(true)}
+                onMouseLeave={() => setBtnHov(false)}
+                className="collection-buy-btn"
+                style={{
+                  width: '100%', cursor: 'pointer',
+                  fontFamily: 'Raleway, sans-serif', fontSize: '8px', letterSpacing: '3px',
+                  textTransform: 'uppercase', padding: '14px', textAlign: 'center',
+                  background: btnHov ? 'rgba(200,160,60,1)' : 'transparent',
+                  color: btnHov ? '#000' : 'rgba(200,160,60,1)',
+                  border: '1px solid rgba(200,160,60,0.7)',
+                  transition: 'all 0.35s ease',
+                  whiteSpace: 'nowrap',
+                }}
+              >{selectedSize === 'signature' ? 'Order — Personalized' : `Buy Now $${displayPrice}`}</button>
+            </>
           )}
 
-          {!locked && (
-            <p style={{
-              fontFamily: "'Playfair Display', serif", fontSize: '24px', fontWeight: 300,
-              color: '#C9A96E', marginBottom: '12px',
-              transition: 'opacity 0.2s ease',
-            }}>${displayPrice}</p>
-          )}
-
-          {!locked ? (
-            <button
-              onClick={() => setModal(true)}
-              onMouseEnter={() => setBtnHov(true)}
-              onMouseLeave={() => setBtnHov(false)}
-              className="collection-buy-btn"
-              style={{
-                width: '100%', cursor: 'pointer',
-                fontFamily: 'Raleway, sans-serif', fontSize: '9px', letterSpacing: '3px',
-                textTransform: 'uppercase', padding: '14px', textAlign: 'center',
-                background: btnHov ? 'rgba(200,160,60,1)' : 'transparent',
-                color: btnHov ? '#000' : 'rgba(200,160,60,1)',
-                border: '1px solid rgba(200,160,60,0.8)',
-                transition: 'all 0.35s ease',
-                whiteSpace: 'nowrap',
-              }}
-            >{selectedSize === 'signature' ? 'Order — Personalized' : `Buy Now $${displayPrice}`}</button>
-          ) : (
+          {/* ── LOCKED: Available Soon / Notify Me button ── */}
+          {locked && (
             <div
               onMouseEnter={() => setNotifyHov(true)}
               onMouseLeave={() => setNotifyHov(false)}
               style={{
                 width: '100%', padding: '14px 0', textAlign: 'center',
-                border: `1px solid ${notifyHov ? 'rgba(201,168,76,0.55)' : 'rgba(201,168,76,0.2)'}`,
+                border: `1px solid ${notifyHov ? 'rgba(201,168,76,0.5)' : 'rgba(201,168,76,0.2)'}`,
                 transition: 'border-color 0.3s ease',
                 display: 'flex', flexDirection: 'column', gap: '5px',
                 cursor: 'default', background: 'transparent', boxSizing: 'border-box',
@@ -354,11 +352,11 @@ const CollectionCard = ({ product }) => {
             >
               <span style={{
                 fontFamily: "'Cormorant Garamond', serif", fontStyle: 'italic', fontWeight: 300,
-                fontSize: '15px', color: 'rgba(232,224,216,0.8)', letterSpacing: '0.5px',
+                fontSize: '15px', color: 'rgba(232,224,216,0.75)', letterSpacing: '0.5px',
               }}>Available Soon</span>
               <span style={{
                 fontFamily: 'Raleway, sans-serif', fontSize: '7px', letterSpacing: '4px',
-                color: 'rgba(201,168,76,0.6)', textTransform: 'uppercase',
+                color: 'rgba(201,168,76,0.55)', textTransform: 'uppercase',
               }}>Notify Me</span>
             </div>
           )}
