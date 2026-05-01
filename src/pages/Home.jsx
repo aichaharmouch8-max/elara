@@ -408,21 +408,48 @@ const CollectionCard = ({ product }) => {
 const CollectionCarousel = () => {
   const [current, setCurrent] = useState(0);
   const [touchStart, setTouchStart] = useState(0);
+  const [touchStartY, setTouchStartY] = useState(0);
+  const [isDragging, setIsDragging] = useState(false);
+  const carouselRef = useRef(null);
 
   const goTo = (index) => setCurrent(index);
 
-  const handleTouchStart = (e) => setTouchStart(e.touches[0].clientX);
+  const handleTouchStart = (e) => {
+    setTouchStart(e.touches[0].clientX);
+    setTouchStartY(e.touches[0].clientY);
+    setIsDragging(false);
+  };
+
+  const handleTouchMove = (e) => {
+    const diffX = Math.abs(e.touches[0].clientX - touchStart);
+    const diffY = Math.abs(e.touches[0].clientY - touchStartY);
+    if (diffX > diffY && diffX > 10) {
+      e.preventDefault();
+      setIsDragging(true);
+    }
+  };
+
   const handleTouchEnd = (e) => {
     const diff = touchStart - e.changedTouches[0].clientX;
-    if (diff > 50) setCurrent(prev => Math.min(prev + 1, PRODUCTS.length - 1));
-    if (diff < -50) setCurrent(prev => Math.max(prev - 1, 0));
+    if (Math.abs(diff) > 50 && isDragging) {
+      if (diff > 0) setCurrent(prev => Math.min(prev + 1, PRODUCTS.length - 1));
+      if (diff < 0) setCurrent(prev => Math.max(prev - 1, 0));
+    }
   };
+
+  useEffect(() => {
+    const el = carouselRef.current;
+    if (!el) return;
+    el.addEventListener('touchmove', handleTouchMove, { passive: false });
+    return () => el.removeEventListener('touchmove', handleTouchMove);
+  });
 
   return (
     <div style={{ width: '100%', overflow: 'hidden' }}>
 
       {/* TRACK */}
       <div
+        ref={carouselRef}
         style={{
           display: 'flex',
           transform: `translateX(-${current * 100}vw)`,
