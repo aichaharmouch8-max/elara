@@ -45,8 +45,9 @@ const PRODUCTS = [
     name: 'Reine',
     image: '/ELARAREINE.webp',
     tagline: 'She does not ask to be noticed. She insists. Saffron, Bulgarian rose, amber, the holy trinity of desire.',
-    price: 39,
+    price: 49,
     available: true,
+    locked: false,
   },
   {
     id: 'oro',
@@ -55,6 +56,7 @@ const PRODUCTS = [
     tagline: 'Rare golden woods. Luminous amber. A secret worn close to the skin, never told.',
     price: 79,
     available: false,
+    locked: true,
   },
   {
     id: 'nova',
@@ -63,6 +65,7 @@ const PRODUCTS = [
     tagline: 'Born after midnight. For the woman who lives her most interesting life after dark.',
     price: 79,
     available: false,
+    locked: true,
   },
 ];
 
@@ -406,62 +409,159 @@ const CollectionCarousel = () => {
   const [current, setCurrent] = useState(0);
   const [touchStart, setTouchStart] = useState(0);
 
-  const goTo = (index) => setCurrent(Math.min(Math.max(index, 0), PRODUCTS.length - 1));
+  const goTo = (index) => setCurrent(index);
+
+  const handleTouchStart = (e) => setTouchStart(e.touches[0].clientX);
+  const handleTouchEnd = (e) => {
+    const diff = touchStart - e.changedTouches[0].clientX;
+    if (diff > 50) setCurrent(prev => Math.min(prev + 1, PRODUCTS.length - 1));
+    if (diff < -50) setCurrent(prev => Math.max(prev - 1, 0));
+  };
 
   return (
-    <div style={{ width: '100%' }}>
-      {/* Outer wrapper — clips the sliding track, no scroll */}
-      <div style={{ width: '100%', overflow: 'hidden', position: 'relative' }}>
-        {/* Track — moves via translateX, never scrolls */}
-        <div
-          onTouchStart={e => setTouchStart(e.touches[0].clientX)}
-          onTouchEnd={e => {
-            const diff = touchStart - e.changedTouches[0].clientX;
-            if (diff > 50)  goTo(current + 1);
-            if (diff < -50) goTo(current - 1);
-          }}
-          style={{
-            display: 'flex',
-            transform: `translateX(calc(-${current * 100}vw))`,
-            transition: 'transform 0.4s cubic-bezier(0.25,0.46,0.45,0.94)',
-            willChange: 'transform',
-          }}
-        >
-          {PRODUCTS.map((product) => (
-            <div
-              key={product.id}
-              style={{
-                width: '100vw',
-                flexShrink: 0,
-                padding: '0 20px',
-                boxSizing: 'border-box',
-              }}
-            >
-              <CollectionCard product={product} />
+    <div style={{ width: '100%', overflow: 'hidden' }}>
+
+      {/* TRACK */}
+      <div
+        style={{
+          display: 'flex',
+          transform: `translateX(-${current * 100}vw)`,
+          transition: 'transform 0.45s cubic-bezier(0.4, 0, 0.2, 1)',
+        }}
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
+      >
+        {PRODUCTS.map((product, index) => (
+          <div key={index} style={{
+            minWidth: '100vw',
+            padding: '0 20px',
+            boxSizing: 'border-box',
+          }}>
+
+            {/* CARD */}
+            <div style={{
+              width: '100%',
+              maxWidth: '380px',
+              margin: '0 auto',
+              background: '#080603',
+              border: '1px solid rgba(201,168,76,0.12)',
+              borderRadius: '2px',
+              padding: '28px 20px 32px',
+              boxSizing: 'border-box',
+              position: 'relative',
+            }}>
+
+              {/* IMAGE CONTAINER */}
+              <div style={{
+                width: '100%',
+                height: '220px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                position: 'relative',
+                marginBottom: '24px',
+              }}>
+                <img
+                  src={product.image}
+                  alt={product.name}
+                  style={{
+                    height: '200px',
+                    width: 'auto',
+                    objectFit: 'contain',
+                    display: 'block',
+                  }}
+                />
+
+                {product.locked && (
+                  <div style={{
+                    position: 'absolute',
+                    inset: 0,
+                    background: 'rgba(6,6,6,0.55)',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: '10px',
+                  }}>
+                    <div style={{
+                      width: '44px',
+                      height: '44px',
+                      borderRadius: '50%',
+                      border: '1px solid rgba(201,168,76,0.6)',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                    }}>
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                        stroke="rgba(201,168,76,0.85)" strokeWidth="1.2" strokeLinecap="round">
+                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                        <path d="M7 11V7a5 5 0 0110 0v4"/>
+                      </svg>
+                    </div>
+                    <span style={{
+                      fontFamily: 'Raleway, sans-serif',
+                      fontSize: '8px',
+                      letterSpacing: '0.25em',
+                      color: '#c9a84c',
+                      textTransform: 'uppercase',
+                    }}>
+                      Révélation Prochaine
+                    </span>
+                  </div>
+                )}
+              </div>
+
+              {/* PRODUCT INFO */}
+              <p style={{ fontFamily: 'Raleway, sans-serif', fontSize: '10px', letterSpacing: '0.2em', color: '#c9a84c', textAlign: 'center', marginBottom: '6px' }}>ELARA</p>
+              <h3 style={{ fontSize: '28px', fontFamily: "'Cormorant Garamond', serif", fontStyle: 'italic', color: '#fff', textAlign: 'center', marginBottom: '6px' }}>{product.name}</h3>
+              <p style={{ fontFamily: 'Raleway, sans-serif', fontSize: '11px', letterSpacing: '0.15em', color: 'rgba(255,255,255,0.5)', textAlign: 'center', marginBottom: '16px' }}>100ML · EAU DE PARFUM</p>
+              <p style={{ fontFamily: 'Raleway, sans-serif', fontSize: '13px', color: '#e8e0d8', textAlign: 'center', lineHeight: '1.7', marginBottom: '24px' }}>{product.tagline}</p>
+
+              {/* BUTTON */}
+              {product.locked ? (
+                <div style={{
+                  border: '1px solid rgba(201,168,76,0.3)',
+                  padding: '14px',
+                  textAlign: 'center',
+                  cursor: 'pointer',
+                }}>
+                  <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: '11px', fontStyle: 'italic', color: '#e8e0d8', margin: 0 }}>Notify me of the launch</p>
+                </div>
+              ) : (
+                <>
+                  <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: '28px', color: '#c9a84c', textAlign: 'center', marginBottom: '16px' }}>${product.price}</p>
+                  <button style={{
+                    width: '100%',
+                    background: '#c9a84c',
+                    color: '#060606',
+                    padding: '16px',
+                    fontFamily: 'Raleway, sans-serif',
+                    fontSize: '12px',
+                    letterSpacing: '0.15em',
+                    textTransform: 'uppercase',
+                    border: 'none',
+                    cursor: 'pointer',
+                  }}>
+                    BUY NOW ${product.price}
+                  </button>
+                </>
+              )}
             </div>
-          ))}
-        </div>
+          </div>
+        ))}
       </div>
 
-      {/* Navigation dots */}
-      <div style={{
-        display: 'flex', justifyContent: 'center', alignItems: 'center',
-        gap: '8px', marginTop: '24px',
-      }}>
+      {/* DOTS */}
+      <div style={{ display: 'flex', justifyContent: 'center', gap: '8px', marginTop: '24px' }}>
         {PRODUCTS.map((_, i) => (
-          <div
-            key={i}
-            onClick={() => goTo(i)}
-            style={{
-              width:        i === current ? '24px' : '6px',
-              height:       '6px',
-              borderRadius: i === current ? '3px' : '50%',
-              background:   i === current ? '#c9a84c' : 'rgba(201,168,76,0.25)',
-              transition:   'all 0.3s ease',
-              cursor:       'pointer',
-              flexShrink:   0,
-            }}
-          />
+          <div key={i} onClick={() => goTo(i)} style={{
+            width: i === current ? '24px' : '6px',
+            height: '6px',
+            borderRadius: i === current ? '3px' : '50%',
+            background: i === current ? '#c9a84c' : 'rgba(201,168,76,0.25)',
+            cursor: 'pointer',
+            transition: 'all 0.3s ease',
+          }} />
         ))}
       </div>
     </div>
