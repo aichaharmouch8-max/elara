@@ -148,33 +148,12 @@ const CollectionCard = ({ product }) => {
             }}
           />
 
-          {/* Ultra-luxury locked overlay — image area only, bottle visible through veil ── */}
+          {/* Subtle veil — bottle remains visible, mystery through darkness alone */}
           {locked && (
             <div style={{
               position: 'absolute', inset: 0,
-              background: 'rgba(6,6,6,0.5)',
-              display: 'flex', flexDirection: 'column',
-              alignItems: 'center', justifyContent: 'center', gap: '12px',
-            }}>
-              {/* Gold circle with lock */}
-              <div style={{
-                width: '48px', height: '48px',
-                border: '1px solid rgba(201,168,76,0.6)',
-                borderRadius: '50%',
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
-              }}>
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
-                  stroke="rgba(201,168,76,0.85)" strokeWidth="1.2" strokeLinecap="round">
-                  <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
-                  <path d="M7 11V7a5 5 0 0110 0v4"/>
-                </svg>
-              </div>
-              {/* Révélation Prochaine */}
-              <p style={{
-                fontFamily: 'Raleway, sans-serif', fontSize: '7px', letterSpacing: '5px',
-                color: 'rgba(201,168,76,0.65)', textTransform: 'uppercase', margin: 0,
-              }}>Révélation Prochaine</p>
-            </div>
+              background: 'rgba(6,6,6,0.4)',
+            }} />
           )}
 
           {/* Hover quick-buy — unlocked only */}
@@ -503,38 +482,8 @@ const CollectionCarousel = () => {
                   <div style={{
                     position: 'absolute',
                     inset: 0,
-                    background: 'rgba(6,6,6,0.55)',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    gap: '10px',
-                  }}>
-                    <div style={{
-                      width: '44px',
-                      height: '44px',
-                      borderRadius: '50%',
-                      border: '1px solid rgba(201,168,76,0.6)',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                    }}>
-                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
-                        stroke="rgba(201,168,76,0.85)" strokeWidth="1.2" strokeLinecap="round">
-                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
-                        <path d="M7 11V7a5 5 0 0110 0v4"/>
-                      </svg>
-                    </div>
-                    <span style={{
-                      fontFamily: 'Raleway, sans-serif',
-                      fontSize: '8px',
-                      letterSpacing: '0.25em',
-                      color: '#c9a84c',
-                      textTransform: 'uppercase',
-                    }}>
-                      Révélation Prochaine
-                    </span>
-                  </div>
+                    background: 'rgba(6,6,6,0.4)',
+                  }} />
                 )}
               </div>
 
