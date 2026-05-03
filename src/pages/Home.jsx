@@ -2,7 +2,6 @@ import { useState, useEffect, useRef, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, useReducedMotion } from 'framer-motion';
 import PaymentModal from '../components/PaymentModal';
-import HeroCanvas from '../components/HeroCanvas';
 
 const ShopNowBtn = () => {
   const [hov, setHov] = useState(false);
@@ -1126,22 +1125,7 @@ const Home = () => {
           }}
         />
 
-        {/* Gold particle field — skips render loop when prefers-reduced-motion */}
-        {!prefersReducedMotion && (
-          <div
-            aria-hidden
-            style={{
-              position: 'absolute',
-              inset: 0,
-              zIndex: 1,
-              pointerEvents: 'none',
-            }}
-          >
-            <HeroCanvas />
-          </div>
-        )}
-
-        <div className="hero-overlay-left hero-atmosphere-overlay" style={{
+<div className="hero-overlay-left hero-atmosphere-overlay" style={{
           position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 2,
           background: 'linear-gradient(to right, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.58) 40%, rgba(0,0,0,0.12) 58%, transparent 100%)',
         }}/>

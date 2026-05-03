@@ -33,8 +33,9 @@
       href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Playfair+Display:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500&family=Raleway:wght@200;300;400;500;600&display=swap"
     />
 
-    <!-- Preload hero — highest priority fetch, eliminates LCP delay -->
-    <link rel="preload" as="image" href="%PUBLIC_URL%/elaraaaaa.webp" fetchpriority="high" />
+    <!-- Hero background -->
+    <link rel="preload" href="%PUBLIC_URL%/hero.mp4" as="video" type="video/mp4" fetchpriority="high" />
+    <link rel="preload" as="image" href="%PUBLIC_URL%/elaraaaaa.webp" fetchpriority="low" />
 
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />

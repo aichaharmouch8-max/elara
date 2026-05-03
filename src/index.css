@@ -407,6 +407,24 @@ button { font-family: inherit; }
   overflow: hidden !important;
 }
 
+img.hero-bg-img,
+video.hero-bg-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 70% 60%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+video.hero-bg-video {
+  display: block;
+  min-height: 100%;
+  min-width: 100%;
+}
+
 
 /* ── Mobile global fixes ── */
 @media (max-width: 768px) {
