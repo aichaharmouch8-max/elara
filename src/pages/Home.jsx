@@ -391,21 +391,38 @@ const CollectionCarousel = () => {
   const [isDragging, setIsDragging] = useState(false);
   const carouselRef = useRef(null);
 
+  // Edition selector state (for unlocked card)
+  const [selectedSize, setSelectedSize] = useState('100ml');
+  const [displayPrice, setDisplayPrice] = useState(49);
+  const [signatureName, setSignatureName] = useState('');
+  const [nameFocused, setNameFocused] = useState(false);
+  const [modal, setModal] = useState(false);
+  const [modalProduct, setModalProduct] = useState(null);
+  const priceTimer = useRef(null);
+
   const goTo = (index) => setCurrent(index);
+
+  const animatePrice = useCallback((from, to) => {
+    clearInterval(priceTimer.current);
+    const steps = 10;
+    let step = 0;
+    priceTimer.current = setInterval(() => {
+      step++;
+      setDisplayPrice(Math.round(from + (to - from) * (step / steps)));
+      if (step >= steps) clearInterval(priceTimer.current);
+    }, 40);
+  }, []);
+
+  const handleSizeChange = (size) => {
+    if (size === selectedSize) return;
+    animatePrice(REINE_PRICES[selectedSize], REINE_PRICES[size]);
+    setSelectedSize(size);
+  };
 
   const handleTouchStart = (e) => {
     setTouchStart(e.touches[0].clientX);
     setTouchStartY(e.touches[0].clientY);
     setIsDragging(false);
-  };
-
-  const handleTouchMove = (e) => {
-    const diffX = Math.abs(e.touches[0].clientX - touchStart);
-    const diffY = Math.abs(e.touches[0].clientY - touchStartY);
-    if (diffX > diffY && diffX > 10) {
-      e.preventDefault();
-      setIsDragging(true);
-    }
   };
 
   const handleTouchEnd = (e) => {
@@ -419,9 +436,17 @@ const CollectionCarousel = () => {
   useEffect(() => {
     const el = carouselRef.current;
     if (!el) return;
-    el.addEventListener('touchmove', handleTouchMove, { passive: false });
-    return () => el.removeEventListener('touchmove', handleTouchMove);
-  });
+    const onMove = (e) => {
+      const diffX = Math.abs(e.touches[0].clientX - touchStart);
+      const diffY = Math.abs(e.touches[0].clientY - touchStartY);
+      if (diffX > diffY && diffX > 10) {
+        e.preventDefault();
+        setIsDragging(true);
+      }
+    };
+    el.addEventListener('touchmove', onMove, { passive: false });
+    return () => el.removeEventListener('touchmove', onMove);
+  }, [touchStart, touchStartY]);
 
   return (
     <div style={{ width: '100%', overflow: 'hidden' }}>
@@ -438,11 +463,7 @@ const CollectionCarousel = () => {
         onTouchEnd={handleTouchEnd}
       >
         {PRODUCTS.map((product, index) => (
-          <div key={index} style={{
-            minWidth: '100vw',
-            padding: '0 20px',
-            boxSizing: 'border-box',
-          }}>
+          <div key={index} style={{ minWidth: '100vw', padding: '0 20px', boxSizing: 'border-box' }}>
 
             {/* CARD */}
             <div style={{
@@ -455,9 +476,10 @@ const CollectionCarousel = () => {
               padding: '28px 20px 32px',
               boxSizing: 'border-box',
               position: 'relative',
+              height: 'auto',
             }}>
 
-              {/* IMAGE CONTAINER */}
+              {/* IMAGE */}
               <div style={{
                 width: '100%',
                 height: '220px',
@@ -470,20 +492,10 @@ const CollectionCarousel = () => {
                 <img
                   src={product.image}
                   alt={product.name}
-                  style={{
-                    height: '200px',
-                    width: 'auto',
-                    objectFit: 'contain',
-                    display: 'block',
-                  }}
+                  style={{ height: '200px', width: 'auto', objectFit: 'contain', display: 'block' }}
                 />
-
                 {product.locked && (
-                  <div style={{
-                    position: 'absolute',
-                    inset: 0,
-                    background: 'rgba(6,6,6,0.4)',
-                  }} />
+                  <div style={{ position: 'absolute', inset: 0, background: 'rgba(6,6,6,0.4)' }} />
                 )}
               </div>
 
@@ -493,34 +505,146 @@ const CollectionCarousel = () => {
               <p style={{ fontFamily: 'Raleway, sans-serif', fontSize: '11px', letterSpacing: '0.15em', color: 'rgba(255,255,255,0.5)', textAlign: 'center', marginBottom: '16px' }}>100ML · EAU DE PARFUM</p>
               <p style={{ fontFamily: 'Raleway, sans-serif', fontSize: '13px', color: '#e8e0d8', textAlign: 'center', lineHeight: '1.7', marginBottom: '24px' }}>{product.tagline}</p>
 
-              {/* BUTTON */}
-              {product.locked ? (
-                <div style={{
-                  border: '1px solid rgba(201,168,76,0.3)',
-                  padding: '14px',
-                  textAlign: 'center',
-                  cursor: 'pointer',
-                }}>
-                  <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: '11px', fontStyle: 'italic', color: '#e8e0d8', margin: 0 }}>Notify me of the launch</p>
-                </div>
-              ) : (
+              {/* UNLOCKED: SELECT EDITION + BUY */}
+              {!product.locked && (
                 <>
-                  <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: '28px', color: '#c9a84c', textAlign: 'center', marginBottom: '16px' }}>${product.price}</p>
-                  <button style={{
-                    width: '100%',
-                    background: '#c9a84c',
-                    color: '#060606',
-                    padding: '16px',
-                    fontFamily: 'Raleway, sans-serif',
-                    fontSize: '12px',
-                    letterSpacing: '0.15em',
-                    textTransform: 'uppercase',
-                    border: 'none',
-                    cursor: 'pointer',
-                  }}>
-                    BUY NOW ${product.price}
-                  </button>
+                  <div style={{ width: '100%', marginBottom: '12px' }}>
+                    <p style={{
+                      fontFamily: 'Raleway, sans-serif', fontSize: '7px', letterSpacing: '4px',
+                      color: 'rgba(200,160,60,0.45)', textTransform: 'uppercase',
+                      textAlign: 'center', marginBottom: '10px',
+                    }}>Select Edition</p>
+                    <div style={{ display: 'flex', gap: '8px' }}>
+                      {[
+                        { key: '100ml', topLine: '100ML · $49', subLine: 'Eau de Parfum', exclusive: false },
+                        { key: 'signature', topLine: 'SIGNATURE', subLine: 'Name in Gold · $69', exclusive: true },
+                      ].map(({ key, topLine, subLine, exclusive }) => {
+                        const active = selectedSize === key;
+                        return (
+                          <div key={key} style={{ flex: 1, position: 'relative' }}>
+                            <button
+                              onClick={() => handleSizeChange(key)}
+                              style={{
+                                width: '100%', position: 'relative',
+                                fontFamily: 'Raleway, sans-serif', fontSize: '12px', letterSpacing: '1.5px',
+                                textTransform: 'uppercase', padding: '10px 6px 8px', minHeight: '52px',
+                                background: active
+                                  ? 'linear-gradient(135deg, rgba(200,160,60,0.13) 0%, rgba(200,160,60,0.05) 100%)'
+                                  : 'transparent',
+                                border: `1px solid ${active ? 'rgba(200,160,60,0.95)' : 'rgba(200,160,60,0.25)'}`,
+                                color: active ? 'rgba(200,160,60,1)' : 'rgba(200,160,60,0.5)',
+                                borderRadius: '2px', cursor: 'pointer',
+                                transition: 'all 0.3s ease', boxSizing: 'border-box',
+                                display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px',
+                              }}
+                            >
+                              {exclusive && (
+                                <span style={{
+                                  position: 'absolute', top: '-8px', left: '50%', transform: 'translateX(-50%)',
+                                  fontFamily: 'Raleway, sans-serif', fontSize: '6px', letterSpacing: '2px',
+                                  background: active ? '#C9A84C' : '#0a0602',
+                                  color: active ? '#060606' : 'rgba(200,160,60,0.65)',
+                                  border: `1px solid ${active ? '#C9A84C' : 'rgba(200,160,60,0.35)'}`,
+                                  padding: '2px 6px', whiteSpace: 'nowrap',
+                                  transition: 'all 0.3s ease',
+                                }}>✦ EXCL</span>
+                              )}
+                              <span>{topLine}</span>
+                              <span style={{
+                                fontFamily: "'Cormorant Garamond', serif", fontStyle: 'italic',
+                                fontSize: '10px', letterSpacing: '0.3px', textTransform: 'none',
+                                color: active ? 'rgba(200,160,60,0.7)' : 'rgba(200,160,60,0.3)',
+                                fontWeight: 300, transition: 'color 0.3s ease',
+                              }}>{subLine}</span>
+                            </button>
+                          </div>
+                        );
+                      })}
+                    </div>
+
+                    {selectedSize === 'signature' && (
+                      <div style={{ marginTop: '10px' }}>
+                        <div style={{ position: 'relative' }}>
+                          <input
+                            type="text"
+                            value={signatureName}
+                            onChange={e => setSignatureName(e.target.value.slice(0, 20))}
+                            onFocus={() => setNameFocused(true)}
+                            onBlur={() => setNameFocused(false)}
+                            placeholder="Your name to engrave…"
+                            maxLength={20}
+                            style={{
+                              width: '100%', boxSizing: 'border-box',
+                              fontFamily: "'Cormorant Garamond', serif", fontStyle: 'italic',
+                              fontSize: '14px', fontWeight: 300,
+                              background: nameFocused ? 'rgba(201,168,76,0.06)' : 'rgba(250,246,239,0.02)',
+                              border: `1px solid ${nameFocused ? 'rgba(201,168,76,0.7)' : 'rgba(201,168,76,0.25)'}`,
+                              color: '#FAF6EF', padding: '10px 38px 10px 12px',
+                              outline: 'none', borderRadius: '2px',
+                              transition: 'border-color 0.2s ease, background 0.2s ease',
+                              WebkitAppearance: 'none',
+                            }}
+                          />
+                          <span style={{
+                            position: 'absolute', right: '10px', top: '50%', transform: 'translateY(-50%)',
+                            fontFamily: 'Raleway, sans-serif', fontSize: '7px', letterSpacing: '1px',
+                            color: signatureName.length >= 18 ? 'rgba(201,168,76,0.9)' : 'rgba(201,168,76,0.3)',
+                            transition: 'color 0.2s ease',
+                          }}>{signatureName.length}/20</span>
+                        </div>
+                        <p style={{
+                          fontFamily: "'Cormorant Garamond', serif", fontStyle: 'italic',
+                          fontSize: '10px', color: 'rgba(201,168,76,0.4)',
+                          marginTop: '7px', lineHeight: 1.6, textAlign: 'center',
+                        }}>Each bottle is hand-personalized before dispatch.</p>
+                      </div>
+                    )}
+
+                    <p style={{
+                      fontFamily: 'Raleway, sans-serif', fontSize: '7px', letterSpacing: '2px',
+                      color: 'rgba(201,168,76,0.25)', textTransform: 'uppercase',
+                      textAlign: 'center', marginTop: '8px',
+                    }}>✦ Limited personalized slots available each week</p>
+                  </div>
+
+                  <p style={{
+                    fontFamily: "'Cormorant Garamond', serif", fontSize: '22px', fontWeight: 300,
+                    color: '#C9A96E', marginBottom: '10px', textAlign: 'center',
+                    transition: 'opacity 0.2s ease',
+                  }}>${displayPrice}</p>
+
+                  <button
+                    onClick={() => { setModal(true); setModalProduct(product); }}
+                    style={{
+                      width: '100%', cursor: 'pointer',
+                      fontFamily: 'Raleway, sans-serif', fontSize: '12px', letterSpacing: '3px',
+                      textTransform: 'uppercase', padding: '14px', textAlign: 'center',
+                      background: '#c9a84c', color: '#060606',
+                      border: '1px solid rgba(200,160,60,0.7)',
+                      transition: 'all 0.35s ease', whiteSpace: 'nowrap',
+                    }}
+                  >{selectedSize === 'signature' ? 'Order — Personalized' : `Buy Now $${displayPrice}`}</button>
                 </>
+              )}
+
+              {/* LOCKED: Notify via WhatsApp */}
+              {product.locked && (
+                <a
+                  href={`https://wa.me/96176510481?text=${encodeURIComponent(`I want to be notified when ${product.name} launches`)}`}
+                  target="_blank"
+                  rel="noreferrer"
+                  style={{
+                    display: 'block', width: '100%', padding: '16px 0', textAlign: 'center',
+                    border: '1px solid rgba(201,168,76,0.35)',
+                    background: 'transparent', textDecoration: 'none', boxSizing: 'border-box',
+                  }}
+                >
+                  <span style={{
+                    fontFamily: "'Cormorant Garamond', serif", fontStyle: 'italic', fontWeight: 300,
+                    fontSize: '13px', color: 'rgba(232,224,216,0.75)', letterSpacing: '0.3px',
+                    display: 'block',
+                  }}>Notify me of the launch</span>
+                </a>
               )}
             </div>
           </div>
@@ -540,6 +664,16 @@ const CollectionCarousel = () => {
           }} />
         ))}
       </div>
+
+      {modal && modalProduct && (
+        <PaymentModal
+          product={modalProduct}
+          selectedSize={selectedSize}
+          selectedPrice={REINE_PRICES[selectedSize]}
+          signatureName={selectedSize === 'signature' ? signatureName : ''}
+          onClose={() => setModal(false)}
+        />
+      )}
     </div>
   );
 };
