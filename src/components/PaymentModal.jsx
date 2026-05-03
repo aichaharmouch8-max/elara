@@ -60,32 +60,44 @@ const MethodCard = ({ selected, onClick, icon, title, subtitle }) => (
   </button>
 );
 
+const PinIcon = () => (
+  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/>
+  </svg>
+);
+
 const LocationField = ({ location, setLocation, focused, onFocus, onBlur, locLoading, locError, locSuccess, fetchLocation }) => (
   <div style={{ marginBottom: '16px' }}>
-    <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
-      <label style={{
-        fontFamily: 'Raleway, sans-serif', fontSize: '9px',
-        letterSpacing: '3px', color: 'rgba(201,169,110,0.5)', textTransform: 'uppercase',
-      }}>
-        Delivery Address{' '}
-        <span style={{ opacity: 0.45, fontWeight: 300, letterSpacing: '1px', textTransform: 'none', fontSize: '9px' }}>(optional)</span>
-      </label>
-      {locSuccess && (
-        <span style={{ color: 'rgba(100,210,120,0.9)', fontSize: '13px', lineHeight: 1 }}>✓</span>
-      )}
-    </div>
-    <textarea value={location} onChange={e => { setLocation(e.target.value); }}
+    <label style={{
+      display: 'block', fontFamily: 'Raleway, sans-serif', fontSize: '9px',
+      letterSpacing: '3px', color: 'rgba(201,169,110,0.5)', textTransform: 'uppercase', marginBottom: '8px',
+    }}>
+      Delivery Address{' '}
+      <span style={{ opacity: 0.45, fontWeight: 300, letterSpacing: '1px', textTransform: 'none', fontSize: '9px' }}>(optional)</span>
+    </label>
+    <textarea value={location} onChange={e => setLocation(e.target.value)}
       onFocus={onFocus} onBlur={onBlur}
       placeholder="Type your address or tap 'Use My Location'…"
       rows={2} style={{ ...inputStyle(focused), resize: 'none' }}
     />
+    {locSuccess && (
+      <p style={{ fontFamily: 'Raleway, sans-serif', fontSize: '10px', letterSpacing: '1px', color: 'rgba(100,210,120,0.85)', marginTop: '5px' }}>
+        ✓ Location detected
+      </p>
+    )}
     <button type="button" onClick={fetchLocation} disabled={locLoading} style={{
       marginTop: '8px', display: 'flex', alignItems: 'center', gap: '6px',
-      background: 'none', border: '1px solid rgba(201,169,110,0.35)', borderRadius: '4px',
-      padding: '10px 16px', cursor: locLoading ? 'default' : 'pointer',
+      background: 'none',
+      border: locSuccess
+        ? '1px solid rgba(100,210,120,0.6)'
+        : '1px solid rgba(201,169,110,0.35)',
+      borderRadius: '4px', padding: '10px 16px',
+      cursor: locLoading ? 'default' : 'pointer',
       fontFamily: 'Raleway, sans-serif', fontSize: '10px', letterSpacing: '2px',
-      textTransform: 'uppercase', color: 'rgba(201,169,110,0.9)',
+      textTransform: 'uppercase',
+      color: locSuccess ? 'rgba(100,210,120,0.9)' : 'rgba(201,169,110,0.9)',
       opacity: locLoading ? 0.6 : 1, WebkitTapHighlightColor: 'transparent',
+      transition: 'border-color 0.3s ease, color 0.3s ease',
     }}>
       {locLoading ? (
         <>
@@ -94,19 +106,22 @@ const LocationField = ({ location, setLocation, focused, onFocus, onBlur, locLoa
             border: '1.5px solid rgba(201,169,110,0.3)', borderTopColor: '#C9A96E',
             display: 'inline-block', animation: 'locSpin 0.7s linear infinite',
           }}/>
-          Detecting...
+          Detecting…
+        </>
+      ) : locSuccess ? (
+        <>
+          <PinIcon />
+          ✓ Location Found
         </>
       ) : (
         <>
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-            <circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/>
-          </svg>
-          {locSuccess ? '✓ Use My Location' : 'Use My Location'}
+          <PinIcon />
+          Use My Location
         </>
       )}
     </button>
     {locError && (
-      <p style={{ fontFamily: 'Raleway, sans-serif', fontSize: '11px', color: 'rgba(255,120,80,0.8)', marginTop: '6px' }}>
+      <p style={{ fontFamily: 'Raleway, sans-serif', fontSize: '11px', color: 'rgba(255,100,80,0.85)', marginTop: '6px', lineHeight: 1.5 }}>
         {locError}
       </p>
     )}
@@ -228,14 +243,14 @@ const PaymentModal = ({ product, selectedSize = '100ml', selectedPrice, signatur
         (error) => {
           setLocLoading(false);
           if (error.code === 1) {
-            setLocError('Location access denied. Please type your address below.');
+            setLocError('Please enable location access in your browser settings, or enter your address manually.');
           } else if (error.code === 2) {
             setLocError('GPS unavailable. Please type your address.');
           } else {
             setLocError('Could not detect location. Please type your address.');
           }
         },
-        { enableHighAccuracy: false, timeout: 10000, maximumAge: 60000 }
+        { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
       );
     } catch {
       setLocLoading(false);
