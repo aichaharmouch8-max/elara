@@ -353,24 +353,29 @@ const CollectionCard = ({ product }) => {
           {/* ── LOCKED: Notify me — WhatsApp link ── */}
           {locked && (
             <a
-              href={`https://wa.me/96176510481?text=${encodeURIComponent(`I want to be notified when ${product.name} launches`)}`}
+              href={`https://wa.me/96176510481?text=${encodeURIComponent(`Notify me when ${product.name} launches — ELARA`)}`}
               target="_blank"
               rel="noreferrer"
               onMouseEnter={() => setNotifyHov(true)}
               onMouseLeave={() => setNotifyHov(false)}
               style={{
-                display: 'block', width: '100%', padding: '16px 0', textAlign: 'center',
+                display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '12px',
+                width: '100%', padding: '16px 24px', boxSizing: 'border-box',
                 border: `1px solid ${notifyHov ? 'rgba(201,168,76,0.8)' : 'rgba(201,168,76,0.35)'}`,
-                boxShadow: notifyHov ? '0 0 18px rgba(201,168,76,0.1)' : 'none',
-                transition: 'border-color 0.3s ease, box-shadow 0.3s ease',
-                background: 'transparent', textDecoration: 'none', boxSizing: 'border-box',
+                boxShadow: notifyHov ? '0 0 20px rgba(201,168,76,0.15)' : 'none',
+                transition: 'all 0.3s ease',
+                background: 'transparent', textDecoration: 'none', cursor: 'pointer',
               }}
             >
-              <span style={{
-                fontFamily: "'Cormorant Garamond', serif", fontStyle: 'italic', fontWeight: 300,
-                fontSize: '13px', color: 'rgba(232,224,216,0.75)', letterSpacing: '0.3px',
-                display: 'block',
-              }}>Notify me of the launch</span>
+              <svg width="14" height="16" viewBox="0 0 14 16" fill="none" style={{ flexShrink: 0 }}>
+                <rect x="1" y="7" width="12" height="9" rx="1" stroke="#c9a84c" strokeWidth="1"/>
+                <path d="M4 7V5a3 3 0 016 0v2" stroke="#c9a84c" strokeWidth="1" strokeLinecap="round"/>
+                <circle cx="7" cy="11.5" r="1" fill="#c9a84c"/>
+              </svg>
+              <div>
+                <p style={{ fontFamily: 'Raleway, sans-serif', fontSize: '11px', letterSpacing: '0.2em', color: '#c9a84c', textTransform: 'uppercase', margin: 0 }}>Launching Soon</p>
+                <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: '10px', color: 'rgba(255,255,255,0.4)', marginTop: '2px', fontStyle: 'italic', margin: '2px 0 0' }}>Notify me of the reveal</p>
+              </div>
             </a>
           )}
         </div>
@@ -398,6 +403,7 @@ const CollectionCarousel = () => {
   const [nameFocused, setNameFocused] = useState(false);
   const [modal, setModal] = useState(false);
   const [modalProduct, setModalProduct] = useState(null);
+  const [notifyHov, setNotifyHov] = useState(null);
   const priceTimer = useRef(null);
 
   const goTo = (index) => setCurrent(index);
@@ -630,20 +636,29 @@ const CollectionCarousel = () => {
               {/* LOCKED: Notify via WhatsApp */}
               {product.locked && (
                 <a
-                  href={`https://wa.me/96176510481?text=${encodeURIComponent(`I want to be notified when ${product.name} launches`)}`}
+                  href={`https://wa.me/96176510481?text=${encodeURIComponent(`Notify me when ${product.name} launches — ELARA`)}`}
                   target="_blank"
                   rel="noreferrer"
+                  onMouseEnter={() => setNotifyHov(product.id)}
+                  onMouseLeave={() => setNotifyHov(null)}
                   style={{
-                    display: 'block', width: '100%', padding: '16px 0', textAlign: 'center',
-                    border: '1px solid rgba(201,168,76,0.35)',
-                    background: 'transparent', textDecoration: 'none', boxSizing: 'border-box',
+                    display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '12px',
+                    width: '100%', padding: '16px 24px', boxSizing: 'border-box',
+                    border: `1px solid ${notifyHov === product.id ? 'rgba(201,168,76,0.8)' : 'rgba(201,168,76,0.35)'}`,
+                    boxShadow: notifyHov === product.id ? '0 0 20px rgba(201,168,76,0.15)' : 'none',
+                    transition: 'all 0.3s ease',
+                    background: 'transparent', textDecoration: 'none', cursor: 'pointer',
                   }}
                 >
-                  <span style={{
-                    fontFamily: "'Cormorant Garamond', serif", fontStyle: 'italic', fontWeight: 300,
-                    fontSize: '13px', color: 'rgba(232,224,216,0.75)', letterSpacing: '0.3px',
-                    display: 'block',
-                  }}>Notify me of the launch</span>
+                  <svg width="14" height="16" viewBox="0 0 14 16" fill="none" style={{ flexShrink: 0 }}>
+                    <rect x="1" y="7" width="12" height="9" rx="1" stroke="#c9a84c" strokeWidth="1"/>
+                    <path d="M4 7V5a3 3 0 016 0v2" stroke="#c9a84c" strokeWidth="1" strokeLinecap="round"/>
+                    <circle cx="7" cy="11.5" r="1" fill="#c9a84c"/>
+                  </svg>
+                  <div>
+                    <p style={{ fontFamily: 'Raleway, sans-serif', fontSize: '11px', letterSpacing: '0.2em', color: '#c9a84c', textTransform: 'uppercase', margin: 0 }}>Launching Soon</p>
+                    <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: '10px', color: 'rgba(255,255,255,0.4)', fontStyle: 'italic', margin: '2px 0 0' }}>Notify me of the reveal</p>
+                  </div>
                 </a>
               )}
             </div>
