@@ -3,6 +3,19 @@ import { Link } from 'react-router-dom';
 import { motion, useReducedMotion } from 'framer-motion';
 import PaymentModal from '../components/PaymentModal';
 
+const useIsMobile = () => {
+  const [isMobile, setIsMobile] = useState(
+    typeof window !== 'undefined' ? window.innerWidth <= 768 : false
+  );
+  useEffect(() => {
+    const mq = window.matchMedia('(max-width: 768px)');
+    const handler = (e) => setIsMobile(e.matches);
+    mq.addEventListener('change', handler);
+    return () => mq.removeEventListener('change', handler);
+  }, []);
+  return isMobile;
+};
+
 const ShopNowBtn = () => {
   const [hov, setHov] = useState(false);
   return (
@@ -1066,6 +1079,7 @@ const SideNavDots = () => {
 ───────────────────────────────────────── */
 const Home = () => {
   const prefersReducedMotion = useReducedMotion();
+  const isMobile = useIsMobile();
 
   return (
     <div style={{ background: 'transparent', minHeight: '100vh' }}>
@@ -1246,51 +1260,67 @@ const Home = () => {
         maxWidth: '100%',
       }}>
         <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-60px' }}
-            transition={{ duration: 0.8, ease: [0.4, 0, 0.2, 1] }}
-            style={{ textAlign: 'center', marginBottom: '60px' }}
-          >
-            <p style={{ fontFamily: 'Raleway', fontSize: '11px', letterSpacing: '4px', color: 'rgba(255,200,80,0.7)', textTransform: 'uppercase', marginBottom: '20px' }}>
-              Eau de Parfum
-            </p>
-            <h2 style={{
-              fontFamily: "'Playfair Display', serif", fontWeight: 300,
-              fontSize: 'clamp(40px, 5vw, 62px)', color: '#FAF6EF',
-            }}>
-              The <span style={{ fontStyle: 'italic', color: '#C9A96E' }}>Collection</span>
-            </h2>
-          </motion.div>
+          {isMobile ? (
+            <div style={{ textAlign: 'center', marginBottom: '60px' }}>
+              <p style={{ fontFamily: 'Raleway', fontSize: '11px', letterSpacing: '4px', color: 'rgba(255,200,80,0.7)', textTransform: 'uppercase', marginBottom: '20px' }}>
+                Eau de Parfum
+              </p>
+              <h2 style={{
+                fontFamily: "'Playfair Display', serif", fontWeight: 300,
+                fontSize: 'clamp(40px, 5vw, 62px)', color: '#FAF6EF',
+              }}>
+                The <span style={{ fontStyle: 'italic', color: '#C9A96E' }}>Collection</span>
+              </h2>
+            </div>
+          ) : (
+            <motion.div
+              initial={{ opacity: 0, y: -20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-60px' }}
+              transition={{ duration: 0.8, ease: [0.4, 0, 0.2, 1] }}
+              style={{ textAlign: 'center', marginBottom: '60px' }}
+            >
+              <p style={{ fontFamily: 'Raleway', fontSize: '11px', letterSpacing: '4px', color: 'rgba(255,200,80,0.7)', textTransform: 'uppercase', marginBottom: '20px' }}>
+                Eau de Parfum
+              </p>
+              <h2 style={{
+                fontFamily: "'Playfair Display', serif", fontWeight: 300,
+                fontSize: 'clamp(40px, 5vw, 62px)', color: '#FAF6EF',
+              }}>
+                The <span style={{ fontStyle: 'italic', color: '#C9A96E' }}>Collection</span>
+              </h2>
+            </motion.div>
+          )}
         </div>
 
         <div className="collection-mobile-carousel">
           <CollectionCarousel />
         </div>
 
-        <div className="collection-desktop-pyramid" style={{ maxWidth: '1100px', margin: '0 auto' }}>
-          <motion.div
-            variants={staggerContainer}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: '-60px' }}
-            className="collection-container"
-            style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}
-          >
-            <motion.div variants={cardVariant} className="collection-card-top" style={{ width: 'min(480px, 100%)', marginBottom: '24px' }}>
-              <CollectionCard product={PRODUCTS[0]} />
+        {!isMobile && (
+          <div className="collection-desktop-pyramid" style={{ maxWidth: '1100px', margin: '0 auto' }}>
+            <motion.div
+              variants={staggerContainer}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: '-60px' }}
+              className="collection-container"
+              style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}
+            >
+              <motion.div variants={cardVariant} className="collection-card-top" style={{ width: 'min(480px, 100%)', marginBottom: '24px' }}>
+                <CollectionCard product={PRODUCTS[0]} />
+              </motion.div>
+              <div className="collection-card-row-wrap" style={{ display: 'flex', gap: '24px', width: '100%', justifyContent: 'center', flexWrap: 'wrap' }}>
+                <motion.div variants={cardVariant} className="collection-card-row" style={{ width: 'min(480px, 100%)' }}>
+                  <CollectionCard product={PRODUCTS[1]} />
+                </motion.div>
+                <motion.div variants={cardVariant} className="collection-card-row" style={{ width: 'min(480px, 100%)' }}>
+                  <CollectionCard product={PRODUCTS[2]} />
+                </motion.div>
+              </div>
             </motion.div>
-            <div className="collection-card-row-wrap" style={{ display: 'flex', gap: '24px', width: '100%', justifyContent: 'center', flexWrap: 'wrap' }}>
-              <motion.div variants={cardVariant} className="collection-card-row" style={{ width: 'min(480px, 100%)' }}>
-                <CollectionCard product={PRODUCTS[1]} />
-              </motion.div>
-              <motion.div variants={cardVariant} className="collection-card-row" style={{ width: 'min(480px, 100%)' }}>
-                <CollectionCard product={PRODUCTS[2]} />
-              </motion.div>
-            </div>
-          </motion.div>
-        </div>
+          </div>
+        )}
       </section>
 
       {/* ══════════════════ WHY ELARA ══════════════════ */}
