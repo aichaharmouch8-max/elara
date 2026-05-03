@@ -1013,71 +1013,6 @@ const ExclusiveAccess = () => {
   );
 };
 
-/* ─────────────────────────────────────────
-   FRAGRANCE PHILOSOPHY
-───────────────────────────────────────── */
-const PHILOSOPHY_ITEMS = [
-  {
-    number: '01',
-    title: 'Scent is identity.',
-    body: 'What you wear on your skin tells the world who you are before you speak a single word.',
-  },
-  {
-    number: '02',
-    title: 'Luxury is emotional.',
-    body: 'True luxury is not about price. It is about the feeling it leaves behind, long after the moment has passed.',
-  },
-  {
-    number: '03',
-    title: 'Memory is the most powerful sense.',
-    body: 'A single scent can take you back to a place, a person, a version of yourself you never want to forget.',
-  },
-];
-
-const FragrancePhilosophy = () => {
-  const [ref, visible] = useReveal(0.1);
-  return (
-    <section ref={ref} className="philosophy-section" style={{
-      background: 'transparent',
-      padding: '80px 60px',
-    }}>
-      <p style={{
-        fontFamily: 'Raleway, sans-serif', fontSize: '10px', letterSpacing: '6px',
-        color: 'rgba(201,168,76,0.6)', textTransform: 'uppercase',
-        textAlign: 'center', marginBottom: '40px',
-        opacity: visible ? 1 : 0, transition: 'opacity 0.6s ease',
-      }}>Our Philosophy</p>
-
-      <div className="philosophy-grid" style={{
-        maxWidth: '1000px', margin: '0 auto',
-        display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)',
-        gap: '0 clamp(32px, 5vw, 64px)',
-      }}>
-        {PHILOSOPHY_ITEMS.map(({ number, title, body }, i) => (
-          <div key={number} style={{
-            opacity: visible ? 1 : 0,
-            transform: visible ? 'translateY(0)' : 'translateY(20px)',
-            transition: `opacity 0.7s ease ${i * 0.4}s, transform 0.7s cubic-bezier(0.16,1,0.3,1) ${i * 0.4}s`,
-          }}>
-            <p style={{
-              fontFamily: "'Cormorant Garamond', serif", fontStyle: 'italic',
-              fontSize: '14px', color: '#c9a84c', lineHeight: 1, margin: 0,
-            }}>{number}</p>
-            <h3 style={{
-              fontFamily: "'Cormorant Garamond', serif", fontWeight: 500,
-              fontSize: '20px', color: '#FAF6EF',
-              margin: '8px 0 0', lineHeight: 1.3,
-            }}>{title}</h3>
-            <p style={{
-              fontFamily: 'Raleway, sans-serif', fontSize: '13px', fontWeight: 300,
-              color: '#e8e0d8', lineHeight: 1.6, margin: '8px 0 0', letterSpacing: '0.2px',
-            }}>{body}</p>
-          </div>
-        ))}
-      </div>
-    </section>
-  );
-};
 
 
 /* ─────────────────────────────────────────
@@ -1357,9 +1292,6 @@ const Home = () => {
           </motion.div>
         </div>
       </section>
-
-      {/* ══════════════════ PHILOSOPHY ══════════════════ */}
-      <FragrancePhilosophy />
 
       {/* ══════════════════ WHY ELARA ══════════════════ */}
       <WhyELARA />
