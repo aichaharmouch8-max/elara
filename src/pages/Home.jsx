@@ -394,10 +394,10 @@ const CollectionCard = ({ product }) => {
 ───────────────────────────────────────── */
 const CollectionCarousel = () => {
   const [current, setCurrent] = useState(0);
-  const [touchStart, setTouchStart] = useState(0);
-  const [touchStartY, setTouchStartY] = useState(0);
-  const [isDragging, setIsDragging] = useState(false);
   const carouselRef = useRef(null);
+  const touchStartX = useRef(0);
+  const touchStartY = useRef(0);
+  const swipeDir = useRef(null); // null = undecided, true = horizontal, false = vertical
 
   // Edition selector state (for unlocked card)
   const [selectedSize, setSelectedSize] = useState('100ml');
@@ -429,14 +429,15 @@ const CollectionCarousel = () => {
   };
 
   const handleTouchStart = (e) => {
-    setTouchStart(e.touches[0].clientX);
-    setTouchStartY(e.touches[0].clientY);
-    setIsDragging(false);
+    touchStartX.current = e.touches[0].clientX;
+    touchStartY.current = e.touches[0].clientY;
+    swipeDir.current = null;
   };
 
   const handleTouchEnd = (e) => {
-    const diff = touchStart - e.changedTouches[0].clientX;
-    if (Math.abs(diff) > 50 && isDragging) {
+    if (!swipeDir.current) return;
+    const diff = touchStartX.current - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 40) {
       if (diff > 0) setCurrent(prev => Math.min(prev + 1, PRODUCTS.length - 1));
       if (diff < 0) setCurrent(prev => Math.max(prev - 1, 0));
     }
@@ -446,16 +447,19 @@ const CollectionCarousel = () => {
     const el = carouselRef.current;
     if (!el) return;
     const onMove = (e) => {
-      const diffX = Math.abs(e.touches[0].clientX - touchStart);
-      const diffY = Math.abs(e.touches[0].clientY - touchStartY);
-      if (diffX > diffY && diffX > 10) {
+      if (swipeDir.current === false) return;
+      const diffX = Math.abs(e.touches[0].clientX - touchStartX.current);
+      const diffY = Math.abs(e.touches[0].clientY - touchStartY.current);
+      if (swipeDir.current === null && (diffX > 4 || diffY > 4)) {
+        swipeDir.current = diffX >= diffY;
+      }
+      if (swipeDir.current === true) {
         e.preventDefault();
-        setIsDragging(true);
       }
     };
     el.addEventListener('touchmove', onMove, { passive: false });
     return () => el.removeEventListener('touchmove', onMove);
-  }, [touchStart, touchStartY]);
+  }, []);
 
   return (
     <div style={{ width: '100%', overflow: 'hidden' }}>
