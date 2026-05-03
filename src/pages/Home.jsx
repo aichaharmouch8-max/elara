@@ -474,15 +474,15 @@ const CollectionCarousel = () => {
             {/* CARD */}
             <div style={{
               width: '100%',
-              maxWidth: '380px',
-              margin: '0 auto',
+              minHeight: '560px',
               background: '#080603',
               border: '1px solid rgba(201,168,76,0.12)',
               borderRadius: '2px',
               padding: '28px 20px 32px',
               boxSizing: 'border-box',
-              position: 'relative',
-              height: 'auto',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
             }}>
 
               {/* IMAGE */}
@@ -492,13 +492,13 @@ const CollectionCarousel = () => {
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
+                marginBottom: '20px',
                 position: 'relative',
-                marginBottom: '24px',
               }}>
                 <img
                   src={product.image}
                   alt={product.name}
-                  style={{ height: '200px', width: 'auto', objectFit: 'contain', display: 'block' }}
+                  style={{ height: '190px', width: 'auto', objectFit: 'contain' }}
                 />
                 {product.locked && (
                   <div style={{ position: 'absolute', inset: 0, background: 'rgba(6,6,6,0.4)' }} />
@@ -506,15 +506,15 @@ const CollectionCarousel = () => {
               </div>
 
               {/* PRODUCT INFO */}
-              <p style={{ fontFamily: 'Raleway, sans-serif', fontSize: '10px', letterSpacing: '0.2em', color: '#c9a84c', textAlign: 'center', marginBottom: '6px' }}>ELARA</p>
-              <h3 style={{ fontSize: '28px', fontFamily: "'Cormorant Garamond', serif", fontStyle: 'italic', color: '#fff', textAlign: 'center', marginBottom: '6px' }}>{product.name}</h3>
-              <p style={{ fontFamily: 'Raleway, sans-serif', fontSize: '11px', letterSpacing: '0.15em', color: 'rgba(255,255,255,0.5)', textAlign: 'center', marginBottom: '16px' }}>100ML · EAU DE PARFUM</p>
-              <p style={{ fontFamily: 'Raleway, sans-serif', fontSize: '13px', color: '#e8e0d8', textAlign: 'center', lineHeight: '1.7', marginBottom: '24px' }}>{product.tagline}</p>
+              <p style={{ width: '100%', fontFamily: 'Raleway, sans-serif', fontSize: '10px', letterSpacing: '0.2em', color: '#c9a84c', textAlign: 'center', marginBottom: '6px' }}>ELARA</p>
+              <h3 style={{ width: '100%', fontSize: '28px', fontFamily: "'Cormorant Garamond', serif", fontStyle: 'italic', color: '#fff', textAlign: 'center', marginBottom: '6px' }}>{product.name}</h3>
+              <p style={{ width: '100%', fontFamily: 'Raleway, sans-serif', fontSize: '11px', letterSpacing: '0.15em', color: 'rgba(255,255,255,0.5)', textAlign: 'center', marginBottom: '16px' }}>100ML · EAU DE PARFUM</p>
+              <p style={{ width: '100%', fontFamily: 'Raleway, sans-serif', fontSize: '13px', color: '#e8e0d8', textAlign: 'center', lineHeight: '1.7', marginBottom: '24px' }}>{product.tagline}</p>
 
               {/* UNLOCKED: SELECT EDITION + BUY */}
               {!product.locked && (
                 <>
-                  <div style={{ width: '100%', marginBottom: '12px' }}>
+                  <div style={{ width: '100%', marginBottom: '12px', marginTop: 'auto' }}>
                     <p style={{
                       fontFamily: 'Raleway, sans-serif', fontSize: '7px', letterSpacing: '4px',
                       color: 'rgba(200,160,60,0.45)', textTransform: 'uppercase',
@@ -614,7 +614,7 @@ const CollectionCarousel = () => {
                   </div>
 
                   <p style={{
-                    fontFamily: "'Cormorant Garamond', serif", fontSize: '22px', fontWeight: 300,
+                    width: '100%', fontFamily: "'Cormorant Garamond', serif", fontSize: '22px', fontWeight: 300,
                     color: '#C9A96E', marginBottom: '10px', textAlign: 'center',
                     transition: 'opacity 0.2s ease',
                   }}>${displayPrice}</p>
@@ -642,6 +642,7 @@ const CollectionCarousel = () => {
                   onMouseEnter={() => setNotifyHov(product.id)}
                   onMouseLeave={() => setNotifyHov(null)}
                   style={{
+                    marginTop: 'auto',
                     display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '12px',
                     width: '100%', padding: '16px 24px', boxSizing: 'border-box',
                     border: `1px solid ${notifyHov === product.id ? 'rgba(201,168,76,0.8)' : 'rgba(201,168,76,0.35)'}`,
