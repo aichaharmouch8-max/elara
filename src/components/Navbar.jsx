@@ -19,14 +19,14 @@ const Navbar = () => {
   return (
     <>
       <nav
-        className="navbar-root"
+        className="navbar-root lux-navbar-glass"
         style={{
           position: 'fixed',
           top: 0,
           left: 0,
           right: 0,
           zIndex: 9999,
-          background: 'rgba(8, 4, 1, 0.25)',
+          background: 'rgba(8, 4, 1, 0.2)',
           backdropFilter: 'blur(24px)',
           WebkitBackdropFilter: 'blur(24px)',
           borderBottom: '1px solid rgba(201, 168, 76, 0.1)',
@@ -135,8 +135,8 @@ const Navbar = () => {
       {/* Mobile drawer */}
       <div style={{
         position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
-        background: 'rgba(8,4,0,0.92)',
-        backdropFilter: 'blur(24px)', WebkitBackdropFilter: 'blur(24px)',
+        background: 'linear-gradient(165deg, rgba(10,6,3,0.97) 0%, rgba(3,2,1,0.96) 50%, rgba(5,4,2,0.94) 100%)',
+        backdropFilter: 'blur(32px)', WebkitBackdropFilter: 'blur(32px)',
         display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
         gap: '48px', zIndex: 999,
         opacity: menuOpen ? 1 : 0,

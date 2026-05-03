@@ -9,16 +9,17 @@ const CartPage = () => {
   if (cart.length === 0) {
     return (
       <div style={{
-        background: '#060606', minHeight: '100vh', boxSizing: 'border-box',
+        background: 'transparent', minHeight: '100vh', boxSizing: 'border-box',
         display: 'flex', flexDirection: 'column',
         alignItems: 'center', justifyContent: 'center',
         padding: '120px 24px 60px',
         textAlign: 'center',
       }}>
         {/* Refined bag icon */}
+        <div className="cart-empty-state" style={{ maxWidth: '420px', width: '100%', padding: '56px 40px 48px', boxSizing: 'border-box' }}>
         <svg
           width="48" height="48" viewBox="0 0 24 24" fill="none"
-          stroke="rgba(201,168,76,0.75)" strokeWidth="0.75"
+          stroke="rgba(228,208,145,0.88)" strokeWidth="0.75"
           strokeLinecap="round" strokeLinejoin="round"
           style={{ marginBottom: '36px' }}
         >
@@ -64,12 +65,13 @@ const CartPage = () => {
           fontFamily: 'Raleway, sans-serif', fontSize: '9px', letterSpacing: '4px',
           color: 'rgba(201,168,76,0.3)', textTransform: 'uppercase',
         }}>ELARA · Maison de Parfum</p>
+        </div>
       </div>
     );
   }
 
   return (
-    <div style={{ background: '#060606', minHeight: '100vh', paddingTop: '112px' }}>
+    <div style={{ background: 'transparent', minHeight: '100vh', paddingTop: '112px' }}>
       <div className="cart-wrapper" style={{ maxWidth: '860px', margin: '0 auto', padding: '60px clamp(20px, 5vw, 48px) 140px' }}>
         {/* Header */}
         <div style={{ marginBottom: '72px' }}>
@@ -118,7 +120,7 @@ const CartPage = () => {
 
           {/* ── Summary ── */}
           <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '64px' }}>
-            <div className="cart-summary" style={{ width: '360px' }}>
+            <div className="cart-summary cart-summary-lux" style={{ width: 'min(380px, 100%)', boxSizing: 'border-box' }}>
               <div style={{
                 display: 'flex', justifyContent: 'space-between', alignItems: 'baseline',
                 paddingBottom: '20px',
@@ -260,15 +262,20 @@ const CheckoutBtn = () => {
   const [hov, setHov] = useState(false);
   return (
     <button
+      type="button"
+      className="lux-checkout-btn discover-shimmer"
       onMouseEnter={() => setHov(true)}
       onMouseLeave={() => setHov(false)}
       style={{
         width: '100%', fontFamily: 'Raleway', fontSize: '9px',
-        letterSpacing: '4px', textTransform: 'uppercase', padding: '20px',
-        background: hov ? '#b8973d' : '#c9a84c',
-        color: '#060606', fontWeight: 600,
+        letterSpacing: '4px', textTransform: 'uppercase', padding: '22px',
+        background: hov ? 'linear-gradient(145deg,#f0dc9a,#c4932e)' : 'linear-gradient(145deg,#d4af37,#9d7324)',
+        color: '#0a0806', fontWeight: 600,
         border: 'none',
-        cursor: 'pointer', transition: 'background 0.3s ease',
+        cursor: 'pointer',
+        transition: 'background 0.3s ease, box-shadow 0.3s ease',
+        boxShadow: 'inset 0 1px 0 rgba(255,240,200,0.35)',
+        overflow: 'hidden',
       }}
     >
       Proceed to Checkout
@@ -281,15 +288,20 @@ const ShopNowBtn = () => {
   return (
     <Link to="/shop" style={{ display: 'inline-block' }}>
       <button
+        type="button"
+        className="lux-checkout-btn discover-shimmer"
         onMouseEnter={() => setHov(true)}
         onMouseLeave={() => setHov(false)}
         style={{
           width: '220px', fontFamily: 'Raleway', fontSize: '9px',
-          letterSpacing: '4px', textTransform: 'uppercase', padding: '17px 0',
-          background: hov ? '#b8973d' : '#c9a84c',
-          color: '#060606', fontWeight: 600,
+          letterSpacing: '4px', textTransform: 'uppercase', padding: '18px 0',
+          background: hov ? 'linear-gradient(145deg,#f0dc9a,#c4932e)' : 'linear-gradient(145deg,#d4af37,#9d7324)',
+          color: '#0a0806', fontWeight: 600,
           border: 'none',
-          cursor: 'pointer', transition: 'background 0.3s ease',
+          cursor: 'pointer',
+          transition: 'background 0.3s ease',
+          overflow: 'hidden',
+          boxShadow: 'inset 0 1px 0 rgba(255,240,200,0.35)',
         }}
       >
         Shop Now

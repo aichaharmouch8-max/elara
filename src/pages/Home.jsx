@@ -1,26 +1,30 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import PaymentModal from '../components/PaymentModal';
+import HeroCanvas from '../components/HeroCanvas';
 
 const ShopNowBtn = () => {
   const [hov, setHov] = useState(false);
   return (
     <Link to="/shop"
+      className="discover-shimmer hero-shop-cta"
       onMouseEnter={() => setHov(true)}
       onMouseLeave={() => setHov(false)}
       style={{
         display: 'inline-block',
         fontFamily: 'Raleway, sans-serif', fontSize: '9px',
         letterSpacing: '5px', textTransform: 'uppercase',
-        padding: '12px 40px',
-        background: hov ? 'rgba(200,160,60,1)' : 'transparent',
-        color: hov ? '#0a0600' : 'rgba(200,160,60,1)',
-        border: '1px solid rgba(200,160,60,0.7)',
+        padding: '14px 44px',
+        background: hov ? 'rgba(232,184,75,1)' : 'rgba(232,184,75,0.06)',
+        color: hov ? '#0a0600' : 'rgba(232,216,178,1)',
+        border: '1px solid rgba(232,184,75,0.55)',
         transition: 'all 0.35s ease',
         textDecoration: 'none',
         WebkitTapHighlightColor: 'transparent',
-        boxShadow: hov ? '0 4px 24px rgba(200,160,60,0.2)' : 'none',
+        boxShadow: hov ? '0 8px 40px rgba(200,160,60,0.35), inset 0 1px 0 rgba(255,255,255,0.08)' : '0 18px 50px rgba(0,0,0,0.35)',
+        borderRadius: '2px',
+        position: 'relative',
       }}
     >Shop Now</Link>
   );
@@ -729,7 +733,7 @@ const CombinedConnectSection = () => {
       className="snap-section-auto connect-section"
       ref={secRef}
       style={{
-        background: '#060606',
+        background: 'transparent',
         padding: '120px 60px',
         textAlign: 'center',
       }}
@@ -851,7 +855,7 @@ const WhyELARA = () => {
   const [ref, visible] = useReveal(0.1);
   return (
     <section ref={ref} className="why-section" style={{
-      background: '#060606',
+      background: 'transparent',
       padding: 'clamp(80px, 8vw, 100px) clamp(24px, 8vw, 80px)',
       textAlign: 'center',
     }}>
@@ -921,7 +925,7 @@ const ImmersiveQuote = () => {
   const [ref, visible] = useReveal(0.2);
   return (
     <section ref={ref} className="immersive-quote-section" style={{
-      background: '#060606',
+      background: 'transparent',
       display: 'flex', flexDirection: 'column',
       alignItems: 'center', justifyContent: 'center',
       padding: '80px 40px',
@@ -977,7 +981,7 @@ const FragrancePhilosophy = () => {
   const [ref, visible] = useReveal(0.1);
   return (
     <section ref={ref} className="philosophy-section" style={{
-      background: '#060606',
+      background: 'transparent',
       padding: '80px 60px',
     }}>
       <p style={{
@@ -1069,8 +1073,10 @@ const SideNavDots = () => {
    HOME PAGE
 ───────────────────────────────────────── */
 const Home = () => {
+  const prefersReducedMotion = useReducedMotion();
+
   return (
-    <div style={{ background: '#060606', minHeight: '100vh' }}>
+    <div style={{ background: 'transparent', minHeight: '100vh' }}>
       <SideNavDots />
 
       {/* ══════════════════ HERO ══════════════════ */}
@@ -1086,7 +1092,7 @@ const Home = () => {
         paddingTop: '76px',
         paddingBottom: '0',
       }}>
-        <img
+        <motion.img
           src="/elaraaaaa.webp"
           alt=""
           aria-hidden="true"
@@ -1095,6 +1101,17 @@ const Home = () => {
           width="1920"
           height="1080"
           className="hero-bg-img"
+          initial={false}
+          animate={
+            prefersReducedMotion
+              ? {}
+              : { scale: [1, 1.07] }
+          }
+          transition={
+            prefersReducedMotion
+              ? undefined
+              : { duration: 26, repeat: Infinity, repeatType: 'mirror', ease: 'linear' }
+          }
           style={{
             position: 'absolute',
             inset: 0,
@@ -1105,70 +1122,127 @@ const Home = () => {
             objectPosition: '70% 60%',
             zIndex: 0,
             pointerEvents: 'none',
-            willChange: 'auto',
+            transformOrigin: '70% 60%',
           }}
         />
-        <div className="hero-overlay-left" style={{
-          position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 1,
-          background: 'linear-gradient(to right, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.55) 42%, rgba(0,0,0,0.1) 60%, transparent 100%)',
+
+        {/* Gold particle field — skips render loop when prefers-reduced-motion */}
+        {!prefersReducedMotion && (
+          <div
+            aria-hidden
+            style={{
+              position: 'absolute',
+              inset: 0,
+              zIndex: 1,
+              pointerEvents: 'none',
+            }}
+          >
+            <HeroCanvas />
+          </div>
+        )}
+
+        <div className="hero-overlay-left hero-atmosphere-overlay" style={{
+          position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 2,
+          background: 'linear-gradient(to right, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.58) 40%, rgba(0,0,0,0.12) 58%, transparent 100%)',
         }}/>
         <div className="hero-vignette" style={{
-          position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 1,
-          background: 'linear-gradient(to bottom, rgba(0,0,0,0.35) 0%, transparent 22%, transparent 72%, rgba(0,0,0,0.55) 100%)',
+          position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 2,
+          background: 'linear-gradient(to bottom, rgba(0,0,0,0.4) 0%, transparent 24%, transparent 70%, rgba(0,0,0,0.58) 100%)',
         }}/>
         <div style={{
-          position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 1,
-          background: 'linear-gradient(to top, rgba(0,0,0,0.4) 0%, transparent 40%)',
+          position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 2,
+          background: 'linear-gradient(115deg, rgba(201,168,76,0.04) 0%, transparent 42%, transparent 100%)',
+        }}/>
+        <div style={{
+          position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 2,
+          background: 'linear-gradient(to top, rgba(0,0,0,0.48) 0%, transparent 38%)',
         }}/>
 
-        <div className="hero-inner" style={{ pointerEvents: 'none' }}>
+        <div className="hero-inner" style={{ pointerEvents: 'none', zIndex: 3 }}>
           <div className="hero-text-col" style={{ flex: '0 0 auto', width: '42%', maxWidth: '520px', paddingLeft: '50px', paddingTop: '80px', boxSizing: 'border-box', pointerEvents: 'auto' }}>
 
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 22 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.9, ease: 'easeOut', delay: 0.1 }}
-              style={{ marginBottom: '28px' }}
+              transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.06 }}
+              style={{ marginBottom: '28px', display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '14px' }}
             >
               <span style={{
                 fontFamily: 'Raleway, sans-serif', fontSize: '9px',
-                letterSpacing: '7px', color: '#E8B84B', textTransform: 'uppercase',
+                letterSpacing: '8px', color: '#EED79A', textTransform: 'uppercase',
                 whiteSpace: 'nowrap',
               }}>
                 Maison de Parfum
               </span>
+              <motion.div
+                aria-hidden
+                initial={{ scaleX: 0, opacity: 0 }}
+                animate={{ scaleX: 1, opacity: 1 }}
+                transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1], delay: 0.28 }}
+                style={{
+                  width: '140px',
+                  height: '1px',
+                  transformOrigin: 'left center',
+                  background: 'linear-gradient(90deg, rgba(255,224,150,0.95) 0%, rgba(232,184,75,0.45) 70%, transparent 100%)',
+                }}
+              />
             </motion.div>
 
             <motion.h1
-              initial={{ opacity: 0, y: 40 }}
+              initial={{ opacity: 0, y: 44 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1], delay: 0.25 }}
+              transition={{ duration: 1.15, ease: [0.16, 1, 0.3, 1], delay: 0.22 }}
               style={{
                 fontFamily: "'Playfair Display', serif", fontWeight: 300,
-                lineHeight: 1.1, color: '#FAF6EF', marginBottom: '36px',
+                lineHeight: 1.08, color: '#FAF6EF', marginBottom: '36px',
               }}
             >
-              <span style={{ fontSize: 'clamp(2rem, 7vw, 3.5rem)', display: 'block' }}>Wear the</span>
-              <span style={{ fontSize: 'clamp(2.4rem, 8vw, 5rem)', fontStyle: 'italic', color: '#E8B84B', display: 'block' }}>Unspeakable</span>
+              <motion.span
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.95, delay: 0.32, ease: [0.16, 1, 0.3, 1] }}
+                style={{ fontSize: 'clamp(2rem, 7vw, 3.5rem)', display: 'block' }}
+              >
+                Wear the
+              </motion.span>
+              <motion.span
+                initial={{ opacity: 0, y: 22 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 1.05, delay: 0.48, ease: [0.16, 1, 0.3, 1] }}
+                style={{
+                  fontSize: 'clamp(2.4rem, 8vw, 5rem)',
+                  fontStyle: 'italic',
+                  display: 'block',
+                  backgroundImage: 'linear-gradient(132deg, #fff2c8 6%, #e8b84b 38%, #b8892e 94%)',
+                  WebkitBackgroundClip: 'text',
+                  backgroundClip: 'text',
+                  color: '#E8B84B',
+                  WebkitTextFillColor: 'transparent',
+                  paddingRight: '0.02em',
+                }}
+              >
+                Unspeakable
+              </motion.span>
             </motion.h1>
 
             <motion.p
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 28 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, ease: 'easeOut', delay: 0.45 }}
+              transition={{ duration: 1.05, ease: [0.16, 1, 0.3, 1], delay: 0.62 }}
               style={{
                 fontFamily: 'Raleway, sans-serif', fontSize: '14px', fontWeight: 300,
-                color: 'rgba(232,224,216,0.72)', letterSpacing: '0.6px', lineHeight: 2.1,
-                maxWidth: '370px', marginBottom: '40px',
+                color: 'rgba(235,226,216,0.78)', letterSpacing: '0.55px', lineHeight: 2.05,
+                maxWidth: '380px', marginBottom: '40px',
+                textWrap: 'balance',
               }}
             >
               For the woman who enters a room before she does.
             </motion.p>
 
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 22 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.9, ease: 'easeOut', delay: 0.75 }}
+              transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.82 }}
             >
               <ShopNowBtn />
             </motion.div>
@@ -1189,7 +1263,7 @@ const Home = () => {
 
       {/* ══════════════════ COLLECTION ══════════════════ */}
       <section id="collection" className="collection-section snap-section-auto" style={{
-        background: '#060606',
+        background: 'transparent',
         padding: 'clamp(60px, 8vw, 100px) clamp(20px, 4vw, 40px)',
         width: '100%',
         maxWidth: '100%',

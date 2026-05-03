@@ -11,7 +11,7 @@ const Shop     = lazy(() => import('./pages/Shop'));
 const Contact  = lazy(() => import('./pages/Contact'));
 const CartPage = lazy(() => import('./pages/CartPage'));
 
-const PageFallback = () => <div style={{ background: '#060606', minHeight: '100vh' }} />;
+const PageFallback = () => <div style={{ background: 'transparent', minHeight: '100vh' }} />;
 
 const PARTICLES = Array.from({ length: 28 }, (_, i) => ({
   id: i,
@@ -23,9 +23,8 @@ const PARTICLES = Array.from({ length: 28 }, (_, i) => ({
 }));
 
 const LoadingScreen = ({ visible }) => (
-  <div style={{
+  <div className="app-loading-screen" style={{
     position: 'fixed', inset: 0, zIndex: 99999,
-    background: '#060606',
     display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
     opacity: visible ? 1 : 0,
     pointerEvents: visible ? 'all' : 'none',

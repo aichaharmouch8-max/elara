@@ -121,20 +121,23 @@ const BuyNowBtn = ({ onClick, label = 'Buy Now' }) => {
   const [hov, setHov] = useState(false);
   return (
     <button
+      type="button"
+      className="discover-shimmer lux-checkout-btn"
       onClick={onClick}
       onMouseEnter={() => setHov(true)}
       onMouseLeave={() => setHov(false)}
       style={{
         fontFamily: 'Raleway', fontSize: '8px', letterSpacing: '4px',
-        textTransform: 'uppercase', padding: '14px 28px',
-        background: hov ? '#E8B84B' : '#c9a84c',
+        textTransform: 'uppercase', padding: '14px 30px',
+        background: hov ? 'linear-gradient(145deg,#f0dc9a,#cfa040)' : 'linear-gradient(145deg,#d4af37,#9d7324)',
         color: '#0d0700',
         border: 'none',
         cursor: 'pointer',
-        transition: 'background 0.3s ease, box-shadow 0.3s ease',
+        transition: 'background 0.3s ease, box-shadow 0.3s ease, transform 0.25s ease',
         whiteSpace: 'nowrap',
         fontWeight: 600,
-        boxShadow: hov ? '0 4px 20px rgba(200,150,42,0.35)' : 'none',
+        overflow: 'hidden',
+        boxShadow: hov ? '0 8px 32px rgba(200,150,42,0.45)' : 'inset 0 1px 0 rgba(255,240,200,0.35)',
       }}
     >{label}</button>
   );
@@ -542,9 +545,7 @@ const ReviewsSection = () => {
         gap: '24px',
       }}>
         {reviews.map((r, i) => (
-          <div key={i} style={{
-            background: 'rgba(255,255,255,0.03)',
-            border: '1px solid rgba(200,150,42,0.1)',
+          <div key={i} className="lux-review-card" style={{
             padding: '28px 28px 24px',
           }}>
             <StarRating rating={r.rating} />
@@ -574,10 +575,10 @@ const Shop = () => {
   const [gridRef, gridIn] = useInView(0.05);
 
   return (
-    <div style={{ background: '#060606', minHeight: '100vh' }}>
+    <div style={{ background: 'transparent', minHeight: '100vh' }}>
       {/* ── Page header ── */}
       <div className="shop-header" style={{
-        background: '#060606',
+        background: 'transparent',
         padding: '120px clamp(20px, 6vw, 80px) 60px',
         position: 'relative', overflow: 'hidden',
         borderBottom: '1px solid rgba(200,150,42,0.1)',

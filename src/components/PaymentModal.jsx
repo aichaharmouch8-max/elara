@@ -352,14 +352,18 @@ const PaymentModal = ({ product, selectedSize = '100ml', selectedPrice, signatur
       `}</style>
 
       {/* Backdrop */}
-      <div onClick={onClose} style={{
-        position: 'fixed', inset: 0, zIndex: 100000,
-        background: 'rgba(0,0,0,0.88)', animation: 'modalFadeIn 0.3s ease',
-      }} />
+      <div
+        className="lux-modal-backdrop"
+        onClick={onClose}
+        style={{
+          position: 'fixed', inset: 0, zIndex: 100000,
+          animation: 'modalFadeIn 0.3s ease',
+        }}
+      />
 
       {/* Modal */}
       <div
-        className="elara-modal"
+        className="elara-modal lux-modal-shell"
         onClick={e => e.stopPropagation()}
         style={{
           position: 'fixed', top: '50%', left: '50%',
@@ -368,9 +372,7 @@ const PaymentModal = ({ product, selectedSize = '100ml', selectedPrice, signatur
           width: '92vw', maxWidth: '440px',
           maxHeight: '88vh', overflowY: 'auto',
           WebkitOverflowScrolling: 'touch',
-          background: '#060606',
-          border: '1px solid rgba(200,160,60,0.4)',
-          borderRadius: '12px', padding: '40px 24px 32px',
+          padding: '44px 28px 34px',
           boxSizing: 'border-box',
           animation: 'modalScaleIn 0.3s ease',
         }}
@@ -519,16 +521,21 @@ const PaymentModal = ({ product, selectedSize = '100ml', selectedPrice, signatur
             <button
               type="submit"
               disabled={submitting}
+              className="lux-checkout-btn discover-shimmer"
               onMouseEnter={() => setBtnHov(true)}
               onMouseLeave={() => setBtnHov(false)}
               style={{
                 width: '100%', fontFamily: 'Raleway, sans-serif', fontSize: '10px',
-                letterSpacing: '4px', textTransform: 'uppercase', padding: '18px 0',
-                background: submitting ? 'rgba(201,169,110,0.55)' : (btnHov ? '#b8973d' : '#c9a84c'),
-                color: '#1C1510', border: 'none', borderRadius: '4px',
+                letterSpacing: '4px', textTransform: 'uppercase', padding: '20px 0',
+                background: submitting
+                  ? 'rgba(201,169,110,0.42)'
+                  : (btnHov ? 'linear-gradient(145deg,#f0dc9a,#c4932e)' : 'linear-gradient(145deg,#d4af37,#9d7324)'),
+                color: '#0a0806', border: 'none', borderRadius: '3px',
                 cursor: submitting ? 'default' : 'pointer',
-                transition: 'background 0.2s ease',
+                transition: 'background 0.2s ease, box-shadow 0.25s ease',
                 fontWeight: 600, WebkitTapHighlightColor: 'transparent',
+                overflow: 'hidden',
+                boxShadow: submitting ? 'none' : 'inset 0 1px 0 rgba(255,240,200,0.38)',
               }}
             >
               {submitting ? 'Getting your location…' : 'Confirm Order'}

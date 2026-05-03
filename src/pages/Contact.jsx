@@ -155,9 +155,9 @@ const FaqSection = () => {
   const [ref, visible] = useReveal(0.1);
   return (
     <section ref={ref} style={{
-      background: '#060606',
+      background: 'transparent',
       padding: 'clamp(72px, 9vw, 110px) clamp(24px, 6vw, 80px)',
-      borderTop: '1px solid rgba(200,160,60,0.08)',
+      borderTop: '1px solid rgba(200,160,60,0.1)',
     }}>
       <div style={{ maxWidth: '640px', margin: '0 auto' }}>
         <p style={{
@@ -237,7 +237,7 @@ const Contact = () => {
   };
 
   return (
-    <div style={{ background: '#060606', minHeight: '100vh' }}>
+    <div style={{ background: 'transparent', minHeight: '100vh' }}>
 
       <style>{`
         input::placeholder, textarea::placeholder { color: rgba(200,160,60,0.35); }
@@ -262,7 +262,7 @@ const Contact = () => {
       <section
         ref={heroRef}
         style={{
-          background: '#060606',
+          background: 'transparent',
           paddingTop: '160px', paddingBottom: '40px',
           textAlign: 'center',
           position: 'relative', overflow: 'hidden',
@@ -298,19 +298,19 @@ const Contact = () => {
       <section
         ref={formRef}
         style={{
-          background: '#060606',
-          padding: '30px clamp(24px, 6vw, 80px) 50px',
+          background: 'transparent',
+          padding: '30px clamp(24px, 6vw, 80px) 72px',
           position: 'relative', overflow: 'hidden',
         }}
       >
         {/* Radial gold glow — item 6 */}
         <div style={{
           position: 'absolute', inset: 0,
-          background: 'radial-gradient(ellipse at center, rgba(200,160,60,0.04) 0%, transparent 70%)',
+          background: 'radial-gradient(ellipse at center, rgba(200,160,60,0.06) 0%, transparent 72%)',
           pointerEvents: 'none',
         }}/>
 
-        <div style={{ maxWidth: '580px', margin: '0 auto', position: 'relative' }}>
+        <div className="lux-contact-panel" style={{ maxWidth: '580px', margin: '0 auto', position: 'relative', boxSizing: 'border-box' }}>
 
           {/* WhatsApp direct line */}
           <p style={{
@@ -408,20 +408,22 @@ const Contact = () => {
               <button
                 type="submit"
                 disabled={loading}
+                className="lux-checkout-btn discover-shimmer"
                 onMouseEnter={() => setBtnHov(true)}
                 onMouseLeave={() => setBtnHov(false)}
                 style={{
                   width: '100%',
                   fontFamily: 'Raleway, sans-serif', fontSize: '11px', fontWeight: 600,
                   letterSpacing: '4px', textTransform: 'uppercase',
-                  padding: '18px',
-                  background: 'rgba(200,160,60,1)',
-                  color: '#060606',
+                  padding: '20px',
+                  background: btnHov ? 'linear-gradient(145deg,#f0dc9a,#c4932e)' : 'linear-gradient(145deg,#d4af37,#9d7324)',
+                  color: '#0a0806',
                   border: 'none', cursor: loading ? 'default' : 'pointer',
                   transition: 'all 0.35s ease',
-                  boxShadow: btnHov ? '0 0 30px rgba(200,160,60,0.35)' : 'none',
-                  filter: btnHov ? 'brightness(1.1)' : 'brightness(1)',
-                  opacity: loading ? 0.7 : 1,
+                  boxShadow: btnHov ? '0 10px 40px rgba(200,160,60,0.4)' : 'inset 0 1px 0 rgba(255,240,200,0.35)',
+                  filter: loading ? 'brightness(0.88)' : 'brightness(1)',
+                  opacity: loading ? 0.75 : 1,
+                  overflow: 'hidden',
                 }}
               >{loading ? 'Sending...' : 'Send Message'}</button>
             </div>

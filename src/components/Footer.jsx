@@ -26,23 +26,31 @@ const SocialBtn = ({ href, label, children }) => {
 
 const Footer = () => {
   return (
-    <footer style={{ background: '#060606', margin: 0, padding: 0 }}>
+    <footer style={{ background: 'transparent', margin: 0, padding: 0 }}>
 
-      <div style={{
-        maxWidth: '860px', margin: '0 auto',
-        padding: '40px 40px 30px',
-        display: 'flex', flexDirection: 'column', alignItems: 'center',
-        textAlign: 'center',
-      }}>
+      <div
+        className="footer-lux-inner"
+        style={{
+          maxWidth: '860px', margin: '0 auto',
+          padding: '48px 40px 36px',
+          display: 'flex', flexDirection: 'column', alignItems: 'center',
+          textAlign: 'center',
+        }}
+      >
 
         {/* Logo */}
         <div style={{ marginBottom: '10px' }}>
-          <span style={{
-            fontFamily: "'Playfair Display', serif",
-            fontSize: '2rem', fontWeight: 300,
-            letterSpacing: '8px', color: '#FAF6EF',
-            textTransform: 'uppercase',
-          }}>ELARA</span>
+          <span
+            className="footer-lux-brand"
+            style={{
+              fontFamily: "'Playfair Display', serif",
+              fontSize: '2rem', fontWeight: 300,
+              letterSpacing: '10px',
+              textTransform: 'uppercase',
+            }}
+          >
+            ELARA
+          </span>
         </div>
 
         {/* Tagline */}

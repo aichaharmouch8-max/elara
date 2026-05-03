@@ -83,12 +83,14 @@ export default function HeroCanvas() {
     let sparkles = []
     let frame    = 0
 
+    const reducedMotionMq = window.matchMedia('(prefers-reduced-motion: reduce)')
+
     function resize() {
       W = canvas.offsetWidth
       H = canvas.offsetHeight
       canvas.width  = W
       canvas.height = H
-      init()
+      if (!reducedMotionMq.matches) init()
     }
 
     function init() {
@@ -231,13 +233,37 @@ export default function HeroCanvas() {
       animId = requestAnimationFrame(drawFrame)
     }
 
-    resize()
-    const ro = new ResizeObserver(resize)
+    const stopLoop = () => {
+      cancelAnimationFrame(animId)
+    }
+
+    const startIfAllowed = () => {
+      stopLoop()
+      resize()
+      if (reducedMotionMq.matches) {
+        ctx.clearRect(0, 0, W, H)
+        return
+      }
+      animId = requestAnimationFrame(drawFrame)
+    }
+
+    startIfAllowed()
+    const ro = new ResizeObserver(() => startIfAllowed())
     ro.observe(canvas)
-    animId = requestAnimationFrame(drawFrame)
+    const onMq = () => startIfAllowed()
+    if (typeof reducedMotionMq.addEventListener === 'function') {
+      reducedMotionMq.addEventListener('change', onMq)
+    } else {
+      reducedMotionMq.addListener(onMq)
+    }
 
     return () => {
       cancelAnimationFrame(animId)
+      if (typeof reducedMotionMq.removeEventListener === 'function') {
+        reducedMotionMq.removeEventListener('change', onMq)
+      } else {
+        reducedMotionMq.removeListener(onMq)
+      }
       ro.disconnect()
     }
   }, [])

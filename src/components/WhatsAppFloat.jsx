@@ -10,14 +10,15 @@ const WhatsAppFloat = () => {
       aria-label="Chat on WhatsApp"
       onMouseEnter={() => setHov(true)}
       onMouseLeave={() => setHov(false)}
+      className="lux-wa-chip"
       style={{
         position: 'fixed',
         bottom: '24px',
         right: '20px',
-        width: '52px',
-        height: '52px',
+        width: '54px',
+        height: '54px',
         borderRadius: '50%',
-        background: hov ? '#b8973d' : '#c9a84c',
+        background: hov ? 'linear-gradient(145deg,#e4c56a,#b8892e)' : 'linear-gradient(145deg,#d4af37,#a67c29)',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
