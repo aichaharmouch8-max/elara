@@ -1,34 +1,117 @@
 import { useState, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 
-const inputStyle = (focused) => ({
+// ── Shared styles ─────────────────────────────────────────────────────────────
+
+const inputStyle = (focused, hasError) => ({
   width: '100%',
   fontFamily: 'Raleway, sans-serif', fontSize: '14px', fontWeight: 300,
   background: focused ? 'rgba(201,169,110,0.06)' : 'rgba(250,246,239,0.03)',
-  border: `1px solid ${focused ? 'rgba(201,169,110,0.55)' : 'rgba(201,169,110,0.2)'}`,
+  border: `1px solid ${hasError ? 'rgba(255,90,70,0.55)' : focused ? 'rgba(201,169,110,0.55)' : 'rgba(201,169,110,0.2)'}`,
   color: '#FAF6EF', padding: '14px 16px', outline: 'none',
   transition: 'border-color 0.2s ease', boxSizing: 'border-box', borderRadius: '4px',
   WebkitAppearance: 'none', appearance: 'none',
 });
 
-const Field = ({ label, type = 'text', value, onChange, placeholder, focused, onFocus, onBlur, as }) => (
+const LABEL = {
+  display: 'block', fontFamily: 'Raleway, sans-serif', fontSize: '9px',
+  letterSpacing: '3px', color: 'rgba(201,169,110,0.5)', textTransform: 'uppercase', marginBottom: '8px',
+};
+
+const SEC_LABEL = {
+  fontFamily: 'Raleway, sans-serif', fontSize: '9px', letterSpacing: '4px',
+  color: 'rgba(201,169,110,0.5)', textTransform: 'uppercase', marginBottom: '12px',
+};
+
+const ErrMsg = ({ msg }) => msg ? (
+  <p style={{ fontFamily: 'Raleway, sans-serif', fontSize: '10px', color: 'rgba(255,90,70,0.85)', marginTop: '4px', lineHeight: 1.4 }}>{msg}</p>
+) : null;
+
+// ── Sub-components ────────────────────────────────────────────────────────────
+
+const Field = ({ label, type = 'text', value, onChange, placeholder, focused, onFocus, onBlur, as, optional, error }) => (
   <div style={{ marginBottom: '16px' }}>
-    <label style={{
-      display: 'block', fontFamily: 'Raleway, sans-serif', fontSize: '9px',
-      letterSpacing: '3px', color: 'rgba(201,169,110,0.5)', textTransform: 'uppercase', marginBottom: '8px',
-    }}>{label}</label>
+    <label style={LABEL}>
+      {label}
+      {optional && <span style={{ opacity: 0.4, fontWeight: 300, letterSpacing: '1px', textTransform: 'none' }}> (optional)</span>}
+    </label>
     {as === 'textarea' ? (
       <textarea value={value} onChange={onChange} onFocus={onFocus} onBlur={onBlur}
-        placeholder={placeholder} required rows={3}
-        style={{ ...inputStyle(focused), resize: 'none' }}
+        placeholder={placeholder} rows={2}
+        style={{ ...inputStyle(focused, error), resize: 'none' }}
       />
     ) : (
       <input type={type} value={value} onChange={onChange} onFocus={onFocus} onBlur={onBlur}
-        placeholder={placeholder} required style={inputStyle(focused)}
+        placeholder={placeholder} style={inputStyle(focused, error)}
       />
     )}
+    <ErrMsg msg={error} />
   </div>
 );
+
+const PhoneField = ({ value, onChange, focused, onFocus, onBlur, error }) => (
+  <div style={{ marginBottom: '16px' }}>
+    <label style={LABEL}>Phone Number</label>
+    <div style={{ display: 'flex', gap: '8px' }}>
+      <div style={{
+        display: 'flex', alignItems: 'center', gap: '6px', flexShrink: 0,
+        padding: '14px 12px', borderRadius: '4px',
+        background: 'rgba(250,246,239,0.03)',
+        border: `1px solid ${error ? 'rgba(255,90,70,0.55)' : 'rgba(201,169,110,0.2)'}`,
+        fontFamily: 'Raleway, sans-serif', fontSize: '13px', color: 'rgba(250,246,239,0.6)',
+      }}>
+        <span>🇱🇧</span>
+        <span style={{ fontSize: '11px' }}>+961</span>
+      </div>
+      <input type="tel" value={value} onChange={onChange} onFocus={onFocus} onBlur={onBlur}
+        placeholder="76 510 481"
+        style={{ ...inputStyle(focused, error), flex: 1 }}
+      />
+    </div>
+    <ErrMsg msg={error} />
+  </div>
+);
+
+// Location button: 'idle' | 'loading' | 'success' | 'error'
+const PinSvg = ({ color = 'currentColor' }) => (
+  <svg width="11" height="14" viewBox="0 0 24 28" fill="none" stroke={color} strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
+    <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
+    <circle cx="12" cy="9" r="2.5"/>
+  </svg>
+);
+
+const Spinner = () => (
+  <span style={{
+    width: '10px', height: '10px', borderRadius: '50%', display: 'inline-block', flexShrink: 0,
+    border: '1.5px solid rgba(201,169,110,0.25)', borderTopColor: '#C9A96E',
+    animation: 'locSpin 0.7s linear infinite',
+  }} />
+);
+
+const LOC_BTN = {
+  idle:    { border: 'rgba(201,169,110,0.35)', color: 'rgba(201,169,110,0.9)',  label: 'Use My Location',  icon: <PinSvg /> },
+  loading: { border: 'rgba(201,169,110,0.3)',  color: 'rgba(201,169,110,0.55)', label: 'Detecting…',       icon: <Spinner /> },
+  success: { border: 'rgba(100,210,120,0.6)',  color: 'rgba(100,210,120,0.9)',  label: '✓ Location Found', icon: null },
+  error:   { border: 'rgba(255,90,70,0.45)',   color: 'rgba(255,110,80,0.9)',   label: '✗  Try Again',     icon: <PinSvg color="rgba(255,110,80,0.9)" /> },
+};
+
+const LocationBtn = ({ state, onClick }) => {
+  const cfg = LOC_BTN[state];
+  return (
+    <button type="button" onClick={onClick} disabled={state === 'loading'} style={{
+      marginTop: '8px', display: 'flex', alignItems: 'center', gap: '7px',
+      background: 'none', border: `1px solid ${cfg.border}`, borderRadius: '4px',
+      padding: '10px 16px', cursor: state === 'loading' ? 'default' : 'pointer',
+      fontFamily: 'Raleway, sans-serif', fontSize: '10px', letterSpacing: '2px',
+      textTransform: 'uppercase', color: cfg.color,
+      transition: 'border-color 0.3s ease, color 0.3s ease',
+      WebkitTapHighlightColor: 'transparent',
+    }}>
+      {cfg.icon}
+      {cfg.label}
+    </button>
+  );
+};
 
 const WishMoneyIcon = () => (
   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round">
@@ -52,80 +135,11 @@ const MethodCard = ({ selected, onClick, icon, title, subtitle }) => (
     color: selected ? '#C9A96E' : 'rgba(201,169,110,0.45)',
     transition: 'border-color 0.2s ease, background 0.2s ease',
     WebkitTapHighlightColor: 'transparent',
-    pointerEvents: 'auto',
   }}>
     <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '10px' }}>{icon}</div>
     <p style={{ fontFamily: 'Raleway, sans-serif', fontSize: '9px', letterSpacing: '3px', textTransform: 'uppercase', marginBottom: '4px', color: selected ? '#C9A96E' : 'rgba(201,169,110,0.45)' }}>{title}</p>
     <p style={{ fontFamily: "'Playfair Display', serif", fontStyle: 'italic', fontSize: '11px', color: selected ? 'rgba(250,246,239,0.5)' : 'rgba(250,246,239,0.2)' }}>{subtitle}</p>
   </button>
-);
-
-const PinIcon = () => (
-  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/>
-  </svg>
-);
-
-const LocationField = ({ location, setLocation, focused, onFocus, onBlur, locLoading, locError, locSuccess, fetchLocation }) => (
-  <div style={{ marginBottom: '16px' }}>
-    <label style={{
-      display: 'block', fontFamily: 'Raleway, sans-serif', fontSize: '9px',
-      letterSpacing: '3px', color: 'rgba(201,169,110,0.5)', textTransform: 'uppercase', marginBottom: '8px',
-    }}>
-      Delivery Address{' '}
-      <span style={{ opacity: 0.45, fontWeight: 300, letterSpacing: '1px', textTransform: 'none', fontSize: '9px' }}>(optional)</span>
-    </label>
-    <textarea value={location} onChange={e => setLocation(e.target.value)}
-      onFocus={onFocus} onBlur={onBlur}
-      placeholder="Type your address or tap 'Use My Location'…"
-      rows={2} style={{ ...inputStyle(focused), resize: 'none' }}
-    />
-    {locSuccess && (
-      <p style={{ fontFamily: 'Raleway, sans-serif', fontSize: '10px', letterSpacing: '1px', color: 'rgba(100,210,120,0.85)', marginTop: '5px' }}>
-        ✓ Location detected
-      </p>
-    )}
-    <button type="button" onClick={fetchLocation} disabled={locLoading} style={{
-      marginTop: '8px', display: 'flex', alignItems: 'center', gap: '6px',
-      background: 'none',
-      border: locSuccess
-        ? '1px solid rgba(100,210,120,0.6)'
-        : '1px solid rgba(201,169,110,0.35)',
-      borderRadius: '4px', padding: '10px 16px',
-      cursor: locLoading ? 'default' : 'pointer',
-      fontFamily: 'Raleway, sans-serif', fontSize: '10px', letterSpacing: '2px',
-      textTransform: 'uppercase',
-      color: locSuccess ? 'rgba(100,210,120,0.9)' : 'rgba(201,169,110,0.9)',
-      opacity: locLoading ? 0.6 : 1, WebkitTapHighlightColor: 'transparent',
-      transition: 'border-color 0.3s ease, color 0.3s ease',
-    }}>
-      {locLoading ? (
-        <>
-          <span style={{
-            width: '10px', height: '10px', borderRadius: '50%',
-            border: '1.5px solid rgba(201,169,110,0.3)', borderTopColor: '#C9A96E',
-            display: 'inline-block', animation: 'locSpin 0.7s linear infinite',
-          }}/>
-          Detecting…
-        </>
-      ) : locSuccess ? (
-        <>
-          <PinIcon />
-          ✓ Location Found
-        </>
-      ) : (
-        <>
-          <PinIcon />
-          Use My Location
-        </>
-      )}
-    </button>
-    {locError && (
-      <p style={{ fontFamily: 'Raleway, sans-serif', fontSize: '11px', color: 'rgba(255,100,80,0.85)', marginTop: '6px', lineHeight: 1.5 }}>
-        {locError}
-      </p>
-    )}
-  </div>
 );
 
 const WishMoneyInfo = ({ price }) => {
@@ -147,7 +161,6 @@ const WishMoneyInfo = ({ price }) => {
           </p>
           <p style={{ fontFamily: 'Raleway, sans-serif', fontSize: '11px', color: 'rgba(201,169,110,0.55)', marginTop: '8px' }}>Amount due: ${price}</p>
         </div>
-        {/* ? tooltip trigger */}
         <div ref={tipRef} style={{ position: 'relative', flexShrink: 0 }}>
           <button type="button" onClick={() => setTip(t => !t)} style={{
             width: '22px', height: '22px', borderRadius: '50%',
@@ -159,7 +172,7 @@ const WishMoneyInfo = ({ price }) => {
           {tip && (
             <div style={{
               position: 'absolute', top: '28px', right: 0, zIndex: 10,
-              background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(201,169,110,0.3)',
+              background: 'rgba(10,8,4,0.98)', border: '1px solid rgba(201,169,110,0.3)',
               borderRadius: '6px', padding: '14px 16px', width: '220px',
               boxShadow: '0 8px 32px rgba(0,0,0,0.5)',
             }}>
@@ -179,24 +192,63 @@ const WishMoneyInfo = ({ price }) => {
   );
 };
 
-const LABEL_STYLE = {
-  fontFamily: 'Raleway, sans-serif', fontSize: '9px', letterSpacing: '4px',
-  color: 'rgba(201,169,110,0.5)', textTransform: 'uppercase', marginBottom: '12px',
-};
+// ── Location helper ───────────────────────────────────────────────────────────
+
+const getLocation = () => new Promise((resolve, reject) => {
+  if (!navigator.geolocation) { reject('Geolocation not supported'); return; }
+  navigator.geolocation.getCurrentPosition(
+    async ({ coords: { latitude, longitude, accuracy } }) => {
+      const mapsLink = `https://maps.google.com/?q=${latitude},${longitude}`;
+      try {
+        const res = await fetch(
+          `https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json&accept-language=en`
+        );
+        const data = await res.json();
+        resolve({
+          lat: latitude, lng: longitude,
+          accuracy: Math.round(accuracy),
+          address: data.display_name || '',
+          city: data.address?.city || data.address?.town || data.address?.village || '',
+          country: data.address?.country || '',
+          mapsLink,
+        });
+      } catch {
+        resolve({ lat: latitude, lng: longitude, accuracy: Math.round(accuracy), address: '', mapsLink });
+      }
+    },
+    (err) => {
+      if (err.code === 1) reject('PERMISSION_DENIED');
+      else if (err.code === 2) reject('POSITION_UNAVAILABLE');
+      else reject('TIMEOUT');
+    },
+    { enableHighAccuracy: true, timeout: 15000, maximumAge: 0 }
+  );
+});
+
+// ── Main modal ────────────────────────────────────────────────────────────────
 
 const PaymentModal = ({ product, selectedSize = '100ml', selectedPrice, signatureName = '', onClose }) => {
   const price = selectedPrice ?? product.price;
-  const [method, setMethod]         = useState(null);
-  const [name, setName]             = useState('');
-  const [phone, setPhone]           = useState('');
-  const [location, setLocation]     = useState('');
-  const [locLoading, setLocLoading] = useState(false);
-  const [locError, setLocError]     = useState('');
-  const [locSuccess, setLocSuccess] = useState(false);
-  const [locCoords, setLocCoords]   = useState(null);
+
+  // Form fields
+  const [name, setName]     = useState('');
+  const [phone, setPhone]   = useState('');
+  const [street, setStreet] = useState('');
+  const [floor, setFloor]   = useState('');
+  const [notes, setNotes]   = useState('');
+  const [method, setMethod] = useState(null);
+
+  // Location
+  const [locState, setLocState] = useState('idle'); // 'idle'|'loading'|'success'|'error'
+  const [locData, setLocData]   = useState(null);
+  const [locError, setLocError] = useState('');
+
+  // UI state
+  const [errors, setErrors]         = useState({});
+  const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted]   = useState(false);
-  const [btnHov, setBtnHov]         = useState(false);
   const [focus, setFocus]           = useState({});
+  const [btnHov, setBtnHov]         = useState(false);
 
   useEffect(() => {
     document.body.style.overflow = 'hidden';
@@ -205,99 +257,85 @@ const PaymentModal = ({ product, selectedSize = '100ml', selectedPrice, signatur
 
   const setF = (key, val) => setFocus(f => ({ ...f, [key]: val }));
 
-  const fetchLocation = () => {
-    if (!navigator.geolocation) {
-      setLocError("Your browser doesn't support location, please type manually");
-      return;
-    }
-    setLocLoading(true);
+  const handleDetectLocation = async () => {
+    setLocState('loading');
     setLocError('');
-    setLocSuccess(false);
     try {
-      navigator.geolocation.getCurrentPosition(
-        async (position) => {
-          const { latitude: lat, longitude: lon } = position.coords;
-          setLocCoords({ lat, lng: lon });
-          try {
-            const res = await fetch(
-              `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}&accept-language=en`,
-              { headers: { 'Accept': 'application/json', 'Accept-Language': 'en' } }
-            );
-            if (!res.ok) throw new Error('API error');
-            const data = await res.json();
-            const addr = data.address || {};
-            const parts = [
-              addr.road || addr.pedestrian,
-              addr.suburb || addr.neighbourhood || addr.quarter,
-              addr.city || addr.town || addr.village,
-              addr.country,
-            ].filter(Boolean);
-            setLocation(parts.length ? parts.join(', ') : data.display_name);
-            setLocSuccess(true);
-          } catch {
-            setLocation(`${lat.toFixed(5)}, ${lon.toFixed(5)}`);
-            setLocSuccess(true);
-          }
-          setLocLoading(false);
-        },
-        (error) => {
-          setLocLoading(false);
-          if (error.code === 1) {
-            setLocError('Please enable location access in your browser settings, or enter your address manually.');
-          } else if (error.code === 2) {
-            setLocError('GPS unavailable. Please type your address.');
-          } else {
-            setLocError('Could not detect location. Please type your address.');
-          }
-        },
-        { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
-      );
-    } catch {
-      setLocLoading(false);
-      setLocError('Could not get your location, please type manually');
+      const data = await getLocation();
+      setLocData(data);
+      if (data.address) setStreet(data.address);
+      setLocState('success');
+      setErrors(e => ({ ...e, street: undefined }));
+    } catch (err) {
+      setLocState('error');
+      if (err === 'PERMISSION_DENIED') {
+        setLocError('Please enable location access in your browser settings, or enter your address manually.');
+      } else {
+        setLocError('Could not detect location. Please enter your address manually.');
+      }
     }
   };
 
-  const handleSubmit = (e) => {
+  const validate = () => {
+    const e = {};
+    if (!name.trim() || name.trim().length < 3)
+      e.name = 'Please enter your full name (min 3 characters)';
+    if (phone.replace(/\D/g, '').length < 8)
+      e.phone = 'Please enter a valid phone number (min 8 digits)';
+    if (!street.trim())
+      e.street = 'Please detect your location or enter your address manually';
+    if (!method)
+      e.method = 'Please select a payment method';
+    return e;
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!name.trim() || !phone.trim()) return;
+    const errs = validate();
+    if (Object.keys(errs).length) { setErrors(errs); return; }
+    setErrors({});
+    setSubmitting(true);
+
     const methodLabel = method === 'wish' ? 'Wish Money' : 'Cash on Delivery';
-    const loc = location.trim() || 'Not provided';
+    const orderTime   = new Date().toLocaleString('en-GB', { timeZone: 'Asia/Beirut' });
+
     const lines = [
-      '🛍️ New Order - ELARA',
-      '─────────────────',
-      `👤 Name: ${name.trim()}`,
-      `📞 Phone: ${phone.trim()}`,
-      `📍 Address: ${loc}`,
+      '🛍️ *NEW ELARA ORDER*',
+      '━━━━━━━━━━━━━━━━━━',
+      '',
+      `👤 *Customer:* ${name.trim()}`,
+      `📱 *Phone:* +961 ${phone.trim()}`,
+      '',
+      `🌸 *Product:* ${product.name}`,
+      `📦 *Edition:* ${selectedSize === 'signature' ? 'Signature Edition (100ml)' : '100ml Eau de Parfum'}`,
     ];
-    if (locCoords) {
-      lines.push(`🗺️ Location: https://maps.google.com/?q=${locCoords.lat},${locCoords.lng}`);
+    if (selectedSize === 'signature' && signatureName.trim())
+      lines.push(`✍️ *Engraving:* ${signatureName.trim()}`);
+    lines.push(`💰 *Price:* $${price}`);
+    lines.push(`💳 *Payment:* ${methodLabel}`);
+    lines.push('');
+    lines.push('📍 *Delivery Address:*');
+    lines.push(street.trim());
+    if (floor.trim())  lines.push(`Floor/Apt: ${floor.trim()}`);
+    if (notes.trim())  lines.push(`Notes: ${notes.trim()}`);
+    if (locData) {
+      lines.push('');
+      lines.push(`🗺️ *Exact GPS Location:*`);
+      lines.push(locData.mapsLink);
+      lines.push(`📏 *Accuracy:* ±${locData.accuracy}m`);
     }
-    lines.push(`💰 Amount: $${price}`);
-    lines.push(`📦 Edition: ${selectedSize === 'signature' ? 'Signature Edition (100ml)' : '100ml Eau de Parfum'}`);
-    if (selectedSize === 'signature' && signatureName.trim()) {
-      lines.push(`✍️ Engraving: ${signatureName.trim()}`);
-    }
-    lines.push(`💳 Payment: ${methodLabel}`);
-    lines.push('─────────────────');
-    window.open(`https://wa.me/96176510481?text=${encodeURIComponent(lines.join('\n'))}`, '_blank');
+    lines.push('');
+    lines.push('━━━━━━━━━━━━━━━━━━');
+    lines.push(`⏰ *Order Time:* ${orderTime}`);
+
+    const encoded = encodeURIComponent(lines.join('\n'));
+    window.open(`https://wa.me/96176510481?text=${encoded}`, '_blank');
+    setSubmitting(false);
     setSubmitted(true);
-    setTimeout(onClose, 2000);
+    setTimeout(onClose, 4000);
   };
 
-  const sharedFields = (
-    <>
-      <Field label="Full Name" value={name} onChange={e => setName(e.target.value)}
-        placeholder="Your full name" focused={focus.name}
-        onFocus={() => setF('name', true)} onBlur={() => setF('name', false)} />
-      <Field label="Phone Number" type="tel" value={phone} onChange={e => setPhone(e.target.value)}
-        placeholder="+961 __ ___ ___" focused={focus.phone}
-        onFocus={() => setF('phone', true)} onBlur={() => setF('phone', false)} />
-      <LocationField location={location} setLocation={setLocation} focused={focus.location}
-        onFocus={() => setF('location', true)} onBlur={() => setF('location', false)}
-        locLoading={locLoading} locError={locError} locSuccess={locSuccess} fetchLocation={fetchLocation} />
-    </>
-  );
+  // ── Render ──────────────────────────────────────────────────────────────────
 
   const content = (
     <>
@@ -313,81 +351,74 @@ const PaymentModal = ({ product, selectedSize = '100ml', selectedPrice, signatur
         .elara-modal textarea { font-family: Raleway, sans-serif; }
       `}</style>
 
-      {/* Full-screen backdrop — dismiss on click outside */}
+      {/* Backdrop */}
       <div onClick={onClose} style={{
-        position: 'fixed', inset: 0,
-        zIndex: 100000,
-        background: 'rgba(0,0,0,0.85)',
-        animation: 'modalFadeIn 0.3s ease',
+        position: 'fixed', inset: 0, zIndex: 100000,
+        background: 'rgba(0,0,0,0.88)', animation: 'modalFadeIn 0.3s ease',
       }} />
 
-      {/* Modal box — above backdrop, never clipped by cursor layers */}
+      {/* Modal */}
       <div
         className="elara-modal"
         onClick={e => e.stopPropagation()}
         style={{
-          position: 'fixed',
-          top: '50%', left: '50%',
+          position: 'fixed', top: '50%', left: '50%',
           transform: 'translate(-50%, -50%)',
-          zIndex: 100001,
-          pointerEvents: 'auto',
-          width: '92vw', maxWidth: '420px',
-          maxHeight: '80vh',
-          overflowY: 'auto',
+          zIndex: 100001, pointerEvents: 'auto',
+          width: '92vw', maxWidth: '440px',
+          maxHeight: '88vh', overflowY: 'auto',
           WebkitOverflowScrolling: 'touch',
           background: '#060606',
           border: '1px solid rgba(200,160,60,0.4)',
-          borderRadius: '12px',
-          padding: '40px 24px 30px',
+          borderRadius: '12px', padding: '40px 24px 32px',
           boxSizing: 'border-box',
           animation: 'modalScaleIn 0.3s ease',
         }}
       >
-        {/* Close button — inside modal, top-right corner */}
+        {/* Close */}
         <button onClick={onClose} aria-label="Close" style={{
           position: 'absolute', top: '12px', right: '12px',
-          width: '32px', height: '32px',
-          display: 'flex', alignItems: 'center', justifyContent: 'center',
+          width: '32px', height: '32px', display: 'flex', alignItems: 'center', justifyContent: 'center',
           background: 'rgba(200,160,60,0.12)', color: 'rgba(200,160,60,1)',
           border: '1px solid rgba(200,160,60,0.3)', borderRadius: '50%',
           cursor: 'pointer', fontSize: '14px', lineHeight: 1,
           WebkitTapHighlightColor: 'transparent',
-          pointerEvents: 'auto',
         }}>✕</button>
 
-        {/* Brand */}
+        {/* Brand wordmark */}
         <p style={{ fontFamily: 'Raleway, sans-serif', fontSize: '8px', letterSpacing: '7px', color: 'rgba(201,169,110,0.4)', textTransform: 'uppercase', textAlign: 'center', marginBottom: '12px' }}>ELARA</p>
 
         {submitted ? (
-          <div style={{ textAlign: 'center', padding: '20px 0 8px' }}>
-            <div style={{ width: '56px', height: '56px', borderRadius: '50%', border: '1px solid rgba(100,210,120,0.5)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 20px', color: 'rgba(100,210,120,0.9)', fontSize: '22px' }}>✓</div>
-            <h3 style={{ fontFamily: "'Playfair Display', serif", fontWeight: 300, fontSize: '26px', fontStyle: 'italic', color: '#FAF6EF', marginBottom: '6px', lineHeight: 1.25 }}>Order Placed</h3>
-            <p style={{ fontFamily: 'Raleway, sans-serif', fontSize: '11px', color: 'rgba(100,210,120,0.7)', letterSpacing: '2px', marginBottom: '20px' }}>CONFIRMED</p>
-            <div style={{ height: '1px', background: 'linear-gradient(to right, transparent, rgba(201,169,110,0.22), transparent)', marginBottom: '20px' }}/>
-            {/* Order summary */}
-            <div style={{ background: 'rgba(201,169,110,0.05)', border: '1px solid rgba(201,169,110,0.15)', borderRadius: '6px', padding: '16px 20px', marginBottom: '20px', textAlign: 'left' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px' }}>
-                <span style={{ fontFamily: 'Raleway, sans-serif', fontSize: '11px', color: 'rgba(250,246,239,0.45)', letterSpacing: '1px' }}>ITEM</span>
-                <span style={{ fontFamily: 'Raleway, sans-serif', fontSize: '11px', color: 'rgba(201,169,110,0.8)' }}>{product.name} · {selectedSize === 'signature' ? 'Signature Edition' : '100ml'}</span>
-              </div>
-              <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px' }}>
-                <span style={{ fontFamily: 'Raleway, sans-serif', fontSize: '11px', color: 'rgba(250,246,239,0.45)', letterSpacing: '1px' }}>TOTAL</span>
-                <span style={{ fontFamily: "'Playfair Display', serif", fontSize: '16px', color: '#C9A96E' }}>${price}</span>
-              </div>
-              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <span style={{ fontFamily: 'Raleway, sans-serif', fontSize: '11px', color: 'rgba(250,246,239,0.45)', letterSpacing: '1px' }}>PAYMENT</span>
-                <span style={{ fontFamily: 'Raleway, sans-serif', fontSize: '11px', color: 'rgba(250,246,239,0.7)' }}>{method === 'wish' ? 'Wish Money' : 'Cash on Delivery'}</span>
-              </div>
+          /* ── Success screen ───────────────────────────────────────────────── */
+          <div style={{ textAlign: 'center', padding: '20px 0 12px' }}>
+            <div style={{
+              width: '64px', height: '64px', borderRadius: '50%',
+              border: '1px solid rgba(201,169,110,0.45)',
+              background: 'rgba(201,169,110,0.06)',
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              margin: '0 auto 24px',
+            }}>
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#C9A96E" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                <polyline points="20 6 9 17 4 12"/>
+              </svg>
             </div>
-            <p style={{ fontFamily: 'Raleway, sans-serif', fontSize: '13px', fontWeight: 300, color: 'rgba(250,246,239,0.45)', lineHeight: 2, marginBottom: '8px' }}>
-              We will contact you shortly to{' '}
-              <span style={{ color: '#C9A96E', fontStyle: 'italic' }}>confirm delivery</span>.
+            <h3 style={{ fontFamily: "'Cormorant Garamond', serif", fontWeight: 300, fontSize: '28px', fontStyle: 'italic', color: '#FAF6EF', marginBottom: '12px', lineHeight: 1.2 }}>
+              Your order has been sent!
+            </h3>
+            <p style={{ fontFamily: 'Raleway, sans-serif', fontSize: '12px', fontWeight: 300, color: 'rgba(201,169,110,0.7)', lineHeight: 1.9, marginBottom: '28px', maxWidth: '260px', margin: '0 auto 28px' }}>
+              We will confirm your order within minutes on WhatsApp
             </p>
-            <p style={{ fontFamily: 'Raleway, sans-serif', fontSize: '11px', color: 'rgba(201,169,110,0.35)' }}>Closing automatically…</p>
+            <div style={{ height: '1px', background: 'linear-gradient(to right, transparent, rgba(201,169,110,0.22), transparent)', marginBottom: '20px' }}/>
+            <p style={{ fontFamily: 'Raleway, sans-serif', fontSize: '8px', letterSpacing: '5px', color: 'rgba(201,169,110,0.35)', textTransform: 'uppercase' }}>
+              ELARA · Maison de Parfum
+            </p>
           </div>
         ) : (
-          <form onSubmit={handleSubmit}>
-            <h3 style={{ fontFamily: "'Playfair Display', serif", fontWeight: 300, fontSize: '26px', fontStyle: 'italic', color: '#FAF6EF', textAlign: 'center', lineHeight: 1.25, marginBottom: '6px' }}>Complete Your Order</h3>
+          /* ── Order form ───────────────────────────────────────────────────── */
+          <form onSubmit={handleSubmit} noValidate>
+            <h3 style={{ fontFamily: "'Cormorant Garamond', serif", fontWeight: 300, fontSize: '26px', fontStyle: 'italic', color: '#FAF6EF', textAlign: 'center', lineHeight: 1.25, marginBottom: '6px' }}>
+              Complete Your Order
+            </h3>
             <p style={{ fontFamily: 'Raleway, sans-serif', fontSize: '12px', fontWeight: 300, color: 'rgba(201,169,110,0.6)', letterSpacing: '1px', textAlign: 'center', marginBottom: selectedSize === 'signature' && signatureName.trim() ? '8px' : '28px' }}>
               {product.name} · {selectedSize === 'signature' ? 'Signature Edition' : '100ml'} · ${price}
             </p>
@@ -399,18 +430,9 @@ const PaymentModal = ({ product, selectedSize = '100ml', selectedPrice, signatur
 
             <div style={{ height: '1px', background: 'linear-gradient(to right, transparent, rgba(201,169,110,0.25), transparent)', marginBottom: '24px' }}/>
 
-            {/* Delivery policy */}
-            <div style={{
-              display: 'flex', gap: '16px', marginBottom: '24px',
-              padding: '14px 16px',
-              background: 'rgba(201,169,110,0.04)',
-              border: '1px solid rgba(201,169,110,0.12)',
-              borderRadius: '6px',
-            }}>
-              {[
-                { icon: '🚚', text: 'Free delivery across Lebanon' },
-                { icon: '⏱', text: '24-48 hrs delivery' },
-              ].map(({ icon, text }) => (
+            {/* Delivery badges */}
+            <div style={{ display: 'flex', gap: '16px', marginBottom: '24px', padding: '14px 16px', background: 'rgba(201,169,110,0.04)', border: '1px solid rgba(201,169,110,0.12)', borderRadius: '6px' }}>
+              {[{ icon: '🚚', text: 'Free delivery across Lebanon' }, { icon: '⏱', text: '24–48 hrs delivery' }].map(({ icon, text }) => (
                 <div key={text} style={{ flex: 1, textAlign: 'center' }}>
                   <div style={{ fontSize: '16px', marginBottom: '4px' }}>{icon}</div>
                   <p style={{ fontFamily: 'Raleway, sans-serif', fontSize: '8px', letterSpacing: '0.5px', color: 'rgba(250,246,239,0.4)', lineHeight: 1.5 }}>{text}</p>
@@ -418,52 +440,109 @@ const PaymentModal = ({ product, selectedSize = '100ml', selectedPrice, signatur
               ))}
             </div>
 
-            <p style={LABEL_STYLE}>Your Details</p>
-            {sharedFields}
+            {/* ── Customer details ────────────────────────────────────────── */}
+            <p style={SEC_LABEL}>Your Details</p>
+            <Field
+              label="Full Name" value={name} onChange={e => setName(e.target.value)}
+              placeholder="Your full name" focused={focus.name} error={errors.name}
+              onFocus={() => setF('name', true)} onBlur={() => setF('name', false)}
+            />
+            <PhoneField
+              value={phone} onChange={e => setPhone(e.target.value)}
+              focused={focus.phone} error={errors.phone}
+              onFocus={() => setF('phone', true)} onBlur={() => setF('phone', false)}
+            />
 
-            <div style={{ height: '1px', background: 'linear-gradient(to right, transparent, rgba(201,169,110,0.18), transparent)', margin: '24px 0' }}/>
+            <div style={{ height: '1px', background: 'linear-gradient(to right, transparent, rgba(201,169,110,0.18), transparent)', margin: '20px 0' }}/>
 
-            <p style={LABEL_STYLE}>Choose Payment Method</p>
-            <div style={{ display: 'flex', gap: '12px', marginBottom: '28px' }}>
-              <MethodCard selected={method === 'wish'} onClick={() => setMethod('wish')} icon={<WishMoneyIcon />} title="Wish Money"       subtitle="Digital transfer" />
-              <MethodCard selected={method === 'cod'}  onClick={() => setMethod('cod')}  icon={<CodIcon />}       title="Cash on Delivery" subtitle="Pay on arrival"   />
+            {/* ── Delivery address ────────────────────────────────────────── */}
+            <p style={SEC_LABEL}>Delivery Address</p>
+
+            <div style={{ marginBottom: '16px' }}>
+              <label style={LABEL}>Building / Street</label>
+              <input
+                type="text" value={street}
+                onChange={e => { setStreet(e.target.value); if (errors.street) setErrors(prev => ({ ...prev, street: undefined })); }}
+                onFocus={() => setF('street', true)} onBlur={() => setF('street', false)}
+                placeholder="e.g. 12 Hamra Street, Beirut"
+                style={inputStyle(focus.street, errors.street)}
+              />
+              <ErrMsg msg={errors.street} />
+              <LocationBtn state={locState} onClick={handleDetectLocation} />
+              {locState === 'success' && (
+                <p style={{ fontFamily: 'Raleway, sans-serif', fontSize: '10px', letterSpacing: '1px', color: 'rgba(100,210,120,0.85)', marginTop: '5px' }}>✓ Location detected</p>
+              )}
+              {locError && (
+                <p style={{ fontFamily: 'Raleway, sans-serif', fontSize: '11px', color: 'rgba(255,100,80,0.85)', marginTop: '6px', lineHeight: 1.5 }}>{locError}</p>
+              )}
             </div>
 
+            <Field
+              label="Floor / Apartment" value={floor} onChange={e => setFloor(e.target.value)}
+              placeholder="e.g. Floor 3, Apt 12" focused={focus.floor} optional
+              onFocus={() => setF('floor', true)} onBlur={() => setF('floor', false)}
+            />
+            <Field
+              label="Additional Notes" value={notes} onChange={e => setNotes(e.target.value)}
+              placeholder="Landmark, gate code, special instructions…"
+              focused={focus.notes} optional as="textarea"
+              onFocus={() => setF('notes', true)} onBlur={() => setF('notes', false)}
+            />
+
+            <div style={{ height: '1px', background: 'linear-gradient(to right, transparent, rgba(201,169,110,0.18), transparent)', margin: '20px 0' }}/>
+
+            {/* ── Payment method ───────────────────────────────────────────── */}
+            <p style={SEC_LABEL}>Payment Method</p>
+            <div style={{ display: 'flex', gap: '12px', marginBottom: errors.method ? '8px' : '28px' }}>
+              <MethodCard
+                selected={method === 'wish'}
+                onClick={() => { setMethod('wish'); setErrors(e => ({ ...e, method: undefined })); }}
+                icon={<WishMoneyIcon />} title="Wish Money" subtitle="Digital transfer"
+              />
+              <MethodCard
+                selected={method === 'cod'}
+                onClick={() => { setMethod('cod'); setErrors(e => ({ ...e, method: undefined })); }}
+                icon={<CodIcon />} title="Cash on Delivery" subtitle="Pay on arrival"
+              />
+            </div>
+            <ErrMsg msg={errors.method} />
+
             {method === 'wish' && (
-              <div style={{ marginBottom: '8px' }}>
+              <div style={{ marginTop: errors.method ? '12px' : 0, marginBottom: '8px' }}>
                 <WishMoneyInfo price={price} />
               </div>
             )}
 
-            {method && (
-              <>
-                <div style={{ height: '1px', background: 'linear-gradient(to right, transparent, rgba(201,169,110,0.18), transparent)', margin: '20px 0' }}/>
-                <button
-                  type="submit"
-                  onMouseEnter={() => setBtnHov(true)}
-                  onMouseLeave={() => setBtnHov(false)}
-                  style={{
-                    width: '100%', fontFamily: 'Raleway, sans-serif', fontSize: '10px',
-                    letterSpacing: '5px', textTransform: 'uppercase', padding: '18px 0',
-                    background: btnHov ? '#C9A96E' : 'rgba(201,169,110,0.1)',
-                    color: btnHov ? '#1C1510' : '#C9A96E',
-                    border: `1px solid ${btnHov ? '#C9A96E' : 'rgba(201,169,110,0.4)'}`,
-                    borderRadius: '4px', cursor: 'pointer',
-                    transition: 'background 0.2s ease, color 0.2s ease, border-color 0.2s ease',
-                    fontWeight: 500, WebkitTapHighlightColor: 'transparent',
-                  }}
-                >Confirm Order</button>
-                {/* Trust badge */}
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px', marginTop: '12px' }}>
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="rgba(201,169,110,0.45)" strokeWidth="1.5" strokeLinecap="round">
-                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-                  </svg>
-                  <span style={{ fontFamily: 'Raleway, sans-serif', fontSize: '9px', letterSpacing: '2px', color: 'rgba(201,169,110,0.45)', textTransform: 'uppercase' }}>
-                    Order protected. Secure checkout.
-                  </span>
-                </div>
-              </>
-            )}
+            <div style={{ height: '1px', background: 'linear-gradient(to right, transparent, rgba(201,169,110,0.18), transparent)', margin: '20px 0' }}/>
+
+            {/* ── Submit ───────────────────────────────────────────────────── */}
+            <button
+              type="submit"
+              disabled={submitting}
+              onMouseEnter={() => setBtnHov(true)}
+              onMouseLeave={() => setBtnHov(false)}
+              style={{
+                width: '100%', fontFamily: 'Raleway, sans-serif', fontSize: '10px',
+                letterSpacing: '4px', textTransform: 'uppercase', padding: '18px 0',
+                background: submitting ? 'rgba(201,169,110,0.55)' : (btnHov ? '#b8973d' : '#c9a84c'),
+                color: '#1C1510', border: 'none', borderRadius: '4px',
+                cursor: submitting ? 'default' : 'pointer',
+                transition: 'background 0.2s ease',
+                fontWeight: 600, WebkitTapHighlightColor: 'transparent',
+              }}
+            >
+              {submitting ? 'Getting your location…' : 'Confirm Order'}
+            </button>
+
+            {/* Trust badge */}
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px', marginTop: '12px' }}>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="rgba(201,169,110,0.4)" strokeWidth="1.5" strokeLinecap="round">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+              </svg>
+              <span style={{ fontFamily: 'Raleway, sans-serif', fontSize: '9px', letterSpacing: '2px', color: 'rgba(201,169,110,0.4)', textTransform: 'uppercase' }}>
+                Order protected · Secure checkout
+              </span>
+            </div>
           </form>
         )}
       </div>
