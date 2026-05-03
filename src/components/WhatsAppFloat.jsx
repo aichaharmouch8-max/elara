@@ -12,7 +12,7 @@ const WhatsAppFloat = () => {
       onMouseLeave={() => setHov(false)}
       style={{
         position: 'fixed',
-        bottom: '90px',
+        bottom: '24px',
         right: '20px',
         width: '52px',
         height: '52px',

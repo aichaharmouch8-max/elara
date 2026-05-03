@@ -429,7 +429,7 @@ button { font-family: inherit; }
   }
   .shop-buy-area {
     position: sticky !important;
-    bottom: 72px !important;
+    bottom: 16px !important;
     z-index: 10 !important;
     background: linear-gradient(to top, #060606 80%, transparent) !important;
     padding: 16px 0 0 !important;
@@ -750,31 +750,9 @@ footer {
   width: 100%;
 }
 
-/* ── Mobile bottom nav — hidden on desktop ── */
-.mobile-bottom-nav { display: none !important; }
-
 @media (max-width: 768px) {
-  .mobile-bottom-nav { display: flex !important; }
-
-  /* Push page content above the bottom nav bar */
-  #root > * > footer,
-  footer { margin-bottom: 80px; }
-
-  /* Global bottom padding so content never hides under the bottom nav */
-  #root > div { padding-bottom: 80px; }
-
-  /* Offset non-hero pages below the fixed top navbar */
-  .shop-header {
-    padding-top: 110px !important;
-  }
-  .cart-wrapper {
-    padding-top: 96px !important;
-  }
-
   /* Prevent any element from overflowing screen width */
   * { max-width: 100vw; box-sizing: border-box; }
-
-
 }
 
 /* ── Respect prefers-reduced-motion ── */

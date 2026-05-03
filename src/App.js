@@ -5,7 +5,6 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Home from './pages/Home';
 
-import MobileBottomNav from './components/MobileBottomNav';
 import WhatsAppFloat from './components/WhatsAppFloat';
 
 const Shop     = lazy(() => import('./pages/Shop'));
@@ -148,7 +147,6 @@ function App() {
         </Suspense>
         <Footer />
 
-        <MobileBottomNav />
         <WhatsAppFloat />
       </BrowserRouter>
     </CartContext.Provider>
