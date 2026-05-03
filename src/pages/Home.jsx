@@ -1117,11 +1117,11 @@ const Home = () => {
             top: 0,
             width: '100%',
             height: '100%',
-            objectFit: 'cover',
-            objectPosition: '70% 60%',
+            objectFit: 'contain',
+            objectPosition: 'right bottom',
             zIndex: 0,
             pointerEvents: 'none',
-            transformOrigin: '70% 60%',
+            transformOrigin: 'right bottom',
           }}
         />
 
