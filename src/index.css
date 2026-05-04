@@ -24,10 +24,8 @@
 
 html {
   scroll-behavior: auto;
-  overflow-x: clip;
+  overflow-x: hidden;
   overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
-  overscroll-behavior: none;
   max-width: 100%;
   width: 100%;
 }
@@ -42,11 +40,9 @@ body {
     radial-gradient(ellipse 65% 50% at 0% 100%, rgba(14, 10, 6, 0.78) 0%, transparent 54%);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  overflow-x: clip;
+  overflow-x: hidden;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
-  overscroll-behavior-y: none;
-  overscroll-behavior-x: none;
   position: relative;
   max-width: 100%;
   width: 100%;
