@@ -474,6 +474,7 @@ const CollectionCarousel = () => {
         ref={carouselRef}
         style={{
           display: 'flex',
+          alignItems: 'stretch',
           transform: `translateX(-${current * 100}vw)`,
           transition: 'transform 0.45s cubic-bezier(0.4, 0, 0.2, 1)',
         }}
@@ -481,12 +482,12 @@ const CollectionCarousel = () => {
         onTouchEnd={handleTouchEnd}
       >
         {PRODUCTS.map((product, index) => (
-          <div key={index} style={{ minWidth: '100vw', padding: '0 20px', boxSizing: 'border-box' }}>
+          <div key={index} style={{ minWidth: '100vw', padding: '0 20px', boxSizing: 'border-box', display: 'flex', flexDirection: 'column' }}>
 
             {/* CARD */}
             <div style={{
               width: '100%',
-              minHeight: '560px',
+              height: '100%',
               background: '#080603',
               border: '1px solid rgba(201,168,76,0.12)',
               borderRadius: '2px',
