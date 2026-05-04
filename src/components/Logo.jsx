@@ -4,11 +4,11 @@ const Logo = ({ light = true, height = 36 }) => {
   const [err, setErr] = useState(false);
 
   const textStyle = {
-    fontFamily: "'Playfair Display', serif",
+    fontFamily: "'Tenor Sans', sans-serif",
     fontSize: '20px',
     fontWeight: 400,
     letterSpacing: '16px',
-    color: light ? '#FAF6EF' : '#1C1510',
+    color: light ? '#f5eed9' : '#1C1510',
     textTransform: 'uppercase',
     display: 'inline-block',
     lineHeight: 1,

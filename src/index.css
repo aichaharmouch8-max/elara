@@ -6,19 +6,29 @@
    ELARA · Maison — luxury palette & atmospheric depth
    ════════════════════════════════════════════════════ */
 :root {
-  --lux-void: #030201;
-  --lux-elevate: #0b0907;
-  --lux-cream: #faf6ef;
-  --lux-cream-mute: rgba(250, 246, 239, 0.55);
-  --lux-gold: #c9a84c;
-  --lux-gold-bright: #e8cf8a;
-  --lux-border: rgba(201, 168, 76, 0.11);
-  --lux-border-strong: rgba(212, 185, 110, 0.28);
+  --bg-primary: #0d0a07;
+  --bg-secondary: #151008;
+  --bg-card: #1c1509;
+  --gold-primary: #c9a415;
+  --gold-light: #e8d5a3;
+  --gold-dim: #8a6e2f;
+  --text-primary: #f5eed9;
+  --text-secondary: #9e8860;
+  --border: #2e2210;
+  /* Legacy aliases */
+  --lux-void: #0d0a07;
+  --lux-elevate: #151008;
+  --lux-cream: #f5eed9;
+  --lux-cream-mute: rgba(245, 238, 217, 0.55);
+  --lux-gold: #c9a415;
+  --lux-gold-bright: #e8d5a3;
+  --lux-border: rgba(201, 164, 21, 0.11);
+  --lux-border-strong: rgba(201, 164, 21, 0.28);
   --lux-panel: linear-gradient(
     154deg,
     rgba(255, 252, 246, 0.042) 0%,
-    rgba(14, 11, 8, 0.88) 46%,
-    rgba(5, 4, 3, 0.97) 100%
+    rgba(21, 16, 8, 0.88) 46%,
+    rgba(13, 10, 7, 0.97) 100%
   );
 }
 
@@ -34,15 +44,16 @@ html {
 }
 
 body {
-  font-family: 'Raleway', sans-serif;
-  color: var(--lux-cream-mute);
-  background-color: var(--lux-void);
+  font-family: 'Jost', sans-serif;
+  color: var(--text-primary);
+  background-color: var(--bg-primary);
   background-image:
-    radial-gradient(ellipse 130% 82% at 50% -14%, rgba(201, 168, 76, 0.12) 0%, transparent 56%),
+    radial-gradient(ellipse 130% 82% at 50% -14%, rgba(201, 164, 21, 0.10) 0%, transparent 56%),
     radial-gradient(ellipse 75% 48% at 98% 0%, rgba(48, 32, 20, 0.42) 0%, transparent 46%),
     radial-gradient(ellipse 65% 50% at 0% 100%, rgba(14, 10, 6, 0.78) 0%, transparent 54%);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  line-height: 1.8;
   overflow-x: hidden;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
@@ -77,7 +88,7 @@ body {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background: radial-gradient(ellipse 72% 58% at 18% 18%, rgba(201,168,76,0.08) 0%, transparent 58%);
+  background: radial-gradient(ellipse 72% 58% at 18% 18%, rgba(201,164,21,0.08) 0%, transparent 58%);
 }
 
 .lux-review-card {
@@ -85,7 +96,7 @@ body {
   backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px);
   background: linear-gradient(158deg, rgba(255,250,242,0.038) 0%, rgba(8,7,5,0.55) 100%) !important;
-  border: 1px solid rgba(201,168,76,0.13) !important;
+  border: 1px solid rgba(201,164,21,0.13) !important;
   box-shadow: inset 0 1px 0 rgba(255,255,255,0.02);
 }
 
@@ -94,7 +105,7 @@ body {
   background: linear-gradient(180deg, rgba(4, 2, 1, 0.95) 0%, rgba(5, 3, 1, 0.82) 100%) !important;
   backdrop-filter: blur(32px) saturate(145%);
   -webkit-backdrop-filter: blur(32px) saturate(145%);
-  border-bottom: 1px solid rgba(201,168,76,0.15) !important;
+  border-bottom: 1px solid rgba(201,164,21,0.15) !important;
   box-shadow: 0 14px 48px rgba(0, 0, 0, 0.5);
 }
 
@@ -105,7 +116,7 @@ body {
   width: 56px;
   height: 1px;
   margin: 0 auto 24px;
-  background: linear-gradient(90deg, transparent, rgba(232,207,138,0.95) 50%, transparent);
+  background: linear-gradient(90deg, transparent, rgba(201,164,21,0.95) 50%, transparent);
   opacity: 0.9;
 }
 
@@ -115,7 +126,7 @@ body {
 
 @supports ((-webkit-background-clip: text) or (background-clip: text)) {
   .footer-lux-brand {
-    background: linear-gradient(135deg, #fff8ea 10%, var(--lux-gold) 55%, #8a6928 95%);
+    background: linear-gradient(135deg, #f5eed9 10%, var(--gold-primary) 55%, #8a6e2f 95%);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
@@ -126,7 +137,7 @@ body {
 /* Contact · correspondence desk */
 .lux-contact-panel {
   border-radius: 4px !important;
-  border: 1px solid rgba(201,168,76,0.13) !important;
+  border: 1px solid rgba(201,164,21,0.13) !important;
   background: linear-gradient(182deg, rgba(255,252,246,0.03) 0%, rgba(5, 4, 3, 0.72) 100%) !important;
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
@@ -146,7 +157,7 @@ body {
 /* Checkout modal · bespoke concierge */
 .lux-modal-backdrop {
   background:
-    radial-gradient(ellipse at 50% 20%, rgba(201,168,76,0.09) 0%, transparent 55%),
+    radial-gradient(ellipse at 50% 20%, rgba(201,164,21,0.09) 0%, transparent 55%),
     rgba(0, 0, 0, 0.92) !important;
 }
 
@@ -158,14 +169,14 @@ body {
     inset 0 1px 0 rgba(255,245,212,0.07),
     0 0 0 1px rgba(0,0,0,0.55),
     0 52px 140px rgba(0, 0, 0, 0.82),
-    0 0 100px rgba(201,168,76, 0.05) !important;
+    0 0 100px rgba(201,164,21, 0.05) !important;
 }
 
 .cart-summary-lux {
   border-radius: 4px !important;
   padding: 32px 36px !important;
   margin-top: 8px !important;
-  border: 1px solid rgba(201,168,76,0.12) !important;
+  border: 1px solid rgba(201,164,21,0.12) !important;
   background: linear-gradient(160deg, rgba(255,250,242,0.035) 0%, rgba(6, 5, 4, 0.92) 100%) !important;
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
@@ -175,14 +186,14 @@ body {
 }
 
 .app-loading-screen {
-  background-color: var(--lux-void) !important;
-  background-image: radial-gradient(ellipse at 50% 42%, rgba(201,168,76,0.1) 0%, transparent 58%) !important;
+  background-color: var(--bg-primary) !important;
+  background-image: radial-gradient(ellipse at 50% 42%, rgba(201,164,21,0.1) 0%, transparent 58%) !important;
 }
 
 .cart-empty-state {
   position: relative;
   border-radius: 4px;
-  border: 1px solid rgba(201,168,76,0.1);
+  border: 1px solid rgba(201,164,21,0.1);
   background: linear-gradient(165deg, rgba(255,250,242,0.02) 0%, rgba(5,4,3,0.6) 100%);
   box-shadow:
     inset 0 1px 0 rgba(255,248,228,0.03),
@@ -190,11 +201,9 @@ body {
 }
 
 .lux-checkout-btn {
-  letter-spacing: 0.42em !important;
-  border-radius: 2px !important;
-  box-shadow:
-    inset 0 1px 0 rgba(255,240,200,0.25),
-    0 14px 40px rgba(201,168,76, 0.2) !important;
+  font-family: 'Montserrat', sans-serif !important;
+  letter-spacing: 0.2em !important;
+  border-radius: 1px !important;
 }
 
 
@@ -208,7 +217,13 @@ section {
 }
 
 a { text-decoration: none; color: inherit; }
-button { font-family: inherit; }
+button { font-family: 'Montserrat', sans-serif; }
+
+h1, h2, h3, h4, h5 {
+  font-family: 'Tenor Sans', sans-serif;
+  letter-spacing: 0.1em;
+  line-height: 1.3;
+}
 
 /* ── Navbar ── */
 @keyframes navbarSlideIn {
@@ -240,7 +255,7 @@ button { font-family: inherit; }
   left: 0;
   width: 0;
   height: 1px;
-  background: rgba(201,168,76,0.65);
+  background: rgba(201,164,21,0.65);
   transition: width 0.35s ease;
 }
 .nav-link-lux:hover {
@@ -254,7 +269,7 @@ button { font-family: inherit; }
 }
 .nav-link-lux.lux-active::after {
   width: 100%;
-  background: #c9a84c;
+  background: #c9a415;
   transition: none;
 }
 
@@ -272,9 +287,9 @@ button { font-family: inherit; }
 ::selection { background: rgba(200, 150, 42, 0.22); }
 
 ::-webkit-scrollbar { width: 5px; }
-::-webkit-scrollbar-track { background: rgba(4, 3, 2, 0.85); border-left: 1px solid rgba(201,168,76,0.06); }
+::-webkit-scrollbar-track { background: rgba(4, 3, 2, 0.85); border-left: 1px solid rgba(201,164,21,0.06); }
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, rgba(240,218,154,0.95) 0%, rgba(140,106,42,0.9) 100%);
+  background: linear-gradient(180deg, rgba(232,213,163,0.95) 0%, rgba(138,110,47,0.9) 100%);
   border-radius: 99px;
   border: 1px solid rgba(0, 0, 0, 0.35);
 }
@@ -543,12 +558,12 @@ video.hero-bg-video {
   .hero-text-col > div:first-child span {
     font-size: 9px !important;
     letter-spacing: 0.3em !important;
-    color: #c9a84c !important;
+    color: #c9a415 !important;
   }
 
   /* Heading */
   .hero-text-col h1 { margin-bottom: 6px !important; text-align: center !important; }
-  .hero-text-col h1 span:first-child { font-size: 34px !important; font-weight: 300 !important; color: #FAF6EF !important; }
+  .hero-text-col h1 span:first-child { font-size: 34px !important; font-weight: 300 !important; color: #f5eed9 !important; }
   .hero-text-col h1 span:last-child {
     font-size: 40px !important;
     color: transparent !important;
@@ -823,7 +838,7 @@ video.hero-bg-video {
   .craft-stats > div {
     border-left: none !important;
     padding-left: 0 !important;
-    border-top: 1px solid rgba(201,168,76,0.1) !important;
+    border-top: 1px solid rgba(201,164,21,0.1) !important;
   }
   .craft-stats > div:first-child {
     border-top: none !important;
@@ -903,8 +918,8 @@ video.hero-bg-video {
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: rgba(200, 150, 42, 0.28);
-  border: 1px solid rgba(200, 150, 42, 0.35);
+  background: rgba(201, 164, 21, 0.28);
+  border: 1px solid rgba(201, 164, 21, 0.35);
   cursor: pointer;
   transition: all 0.4s ease;
   padding: 0;
@@ -912,9 +927,9 @@ video.hero-bg-video {
 }
 
 .side-nav-dot.active {
-  background: #C8962A;
-  border-color: #C8962A;
-  box-shadow: 0 0 6px rgba(200, 150, 42, 0.45);
+  background: #c9a415;
+  border-color: #c9a415;
+  box-shadow: 0 0 6px rgba(201, 164, 21, 0.45);
   transform: scale(1.3);
 }
 

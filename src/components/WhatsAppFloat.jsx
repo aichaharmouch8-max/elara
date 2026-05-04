@@ -24,8 +24,8 @@ const WhatsAppFloat = () => {
         justifyContent: 'center',
         zIndex: 999,
         boxShadow: hov
-          ? '0 6px 28px rgba(201,168,76,0.5)'
-          : '0 4px 20px rgba(201,168,76,0.3)',
+          ? '0 6px 28px rgba(201,164,21,0.5)'
+          : '0 4px 20px rgba(201,164,21,0.3)',
         transform: hov ? 'scale(1.05)' : 'scale(1)',
         transition: 'background 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease',
         WebkitTapHighlightColor: 'transparent',

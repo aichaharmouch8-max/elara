@@ -5,9 +5,9 @@ const LanguageContext = createContext();
 export const T = {
   en: {
     /* fonts */
-    headingFont: "'Playfair Display', serif",
+    headingFont: "'Tenor Sans', sans-serif",
     serifFont:   "'Cormorant Garamond', serif",
-    sansFont:    'Raleway, sans-serif',
+    sansFont:    "'Jost', sans-serif",
     /* hero */
     heroEyebrow: 'Maison de Parfum',
     heroLine1:   'Wear the',

@@ -12,10 +12,11 @@ const SocialBtn = ({ href, label, children }) => {
       onMouseLeave={() => setHov(false)}
       style={{
         display: 'flex', alignItems: 'center', justifyContent: 'center',
-        width: '38px', height: '38px', borderRadius: '50%',
-        border: `1px solid ${hov ? 'rgba(200,160,60,1)' : 'rgba(200,160,60,0.35)'}`,
-        color: hov ? 'rgba(200,160,60,1)' : 'rgba(200,160,60,0.7)',
-        boxShadow: hov ? '0 0 12px rgba(200,160,60,0.4)' : 'none',
+        width: '38px', height: '38px', borderRadius: '1px',
+        border: `1px solid ${hov ? 'rgba(201,164,21,0.9)' : 'rgba(201,164,21,0.3)'}`,
+        color: hov ? '#c9a415' : 'rgba(201,164,21,0.65)',
+        background: hov ? 'rgba(201,164,21,0.08)' : 'transparent',
+        boxShadow: hov ? '0 0 12px rgba(201,164,21,0.3)' : 'none',
         transition: 'all 0.3s ease',
       }}
     >
@@ -43,8 +44,8 @@ const Footer = () => {
           <span
             className="footer-lux-brand"
             style={{
-              fontFamily: "'Playfair Display', serif",
-              fontSize: '2rem', fontWeight: 300,
+              fontFamily: "'Tenor Sans', sans-serif",
+              fontSize: '2rem', fontWeight: 400,
               letterSpacing: '10px',
               textTransform: 'uppercase',
             }}
@@ -55,9 +56,9 @@ const Footer = () => {
 
         {/* Tagline */}
         <p style={{
-          fontFamily: "'Playfair Display', serif",
+          fontFamily: "'Cormorant Garamond', serif",
           fontStyle: 'italic', fontSize: '13px',
-          color: 'rgba(200,160,60,0.7)', letterSpacing: '3px',
+          color: 'rgba(201,164,21,0.7)', letterSpacing: '3px',
           marginBottom: '20px',
         }}>The Art of Scent</p>
 
@@ -87,14 +88,14 @@ const Footer = () => {
         {/* Gold separator */}
         <div style={{
           width: '100%', height: '1px',
-          background: 'linear-gradient(90deg, transparent, rgba(201,169,110,0.24), transparent)',
+          background: 'linear-gradient(90deg, transparent, rgba(201,164,21,0.28), transparent)',
           marginBottom: '16px',
         }}/>
 
         {/* Copyright */}
         <p style={{
-          fontFamily: 'Raleway, sans-serif', fontSize: '9px', fontWeight: 300,
-          letterSpacing: '2px', color: 'rgba(250,246,239,0.16)',
+          fontFamily: "'Jost', sans-serif", fontSize: '9px', fontWeight: 300,
+          letterSpacing: '2px', color: 'rgba(245,238,217,0.16)',
         }}>
           © 2026 ELARA. All rights reserved.
         </p>

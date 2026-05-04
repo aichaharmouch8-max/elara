@@ -110,26 +110,26 @@ const NotifyForm = ({ productName }) => {
     <div style={{ textAlign: 'center', padding: '16px 0' }}>
       <p style={{
         fontFamily: t.serifFont, fontStyle: 'italic',
-        fontSize: '18px', color: 'rgba(201,168,76,0.9)', marginBottom: '4px',
+        fontSize: '18px', color: 'rgba(201,164,21,0.9)', marginBottom: '4px',
       }}>{t.onTheList}</p>
       <p style={{
         fontFamily: t.sansFont, fontSize: '9px',
-        color: 'rgba(250,246,239,0.3)', textTransform: 'uppercase',
+        color: 'rgba(245,238,217,0.3)', textTransform: 'uppercase',
       }}>{t.inTouch}</p>
     </div>
   );
 
   return (
     <form onSubmit={handleSubmit} style={{ width: '100%' }}>
-      <style>{`.nf-input::placeholder{color:rgba(201,168,76,0.3);font-style:italic;font-family:'Cormorant Garamond',serif;}`}</style>
+      <style>{`.nf-input::placeholder{color:rgba(201,164,21,0.3);font-style:italic;font-family:'Cormorant Garamond',serif;}`}</style>
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px', marginBottom: '14px' }}>
         <svg width="9" height="11" viewBox="0 0 9 11" fill="none" aria-hidden="true">
-          <rect x="1" y="4.5" width="7" height="6" rx="0.8" stroke="rgba(201,168,76,0.5)" strokeWidth="0.8"/>
-          <path d="M2.5 4.5V3a2 2 0 0 1 4 0v1.5" stroke="rgba(201,168,76,0.5)" strokeWidth="0.8" strokeLinecap="round"/>
+          <rect x="1" y="4.5" width="7" height="6" rx="0.8" stroke="rgba(201,164,21,0.5)" strokeWidth="0.8"/>
+          <path d="M2.5 4.5V3a2 2 0 0 1 4 0v1.5" stroke="rgba(201,164,21,0.5)" strokeWidth="0.8" strokeLinecap="round"/>
         </svg>
         <p style={{
           fontFamily: t.sansFont, fontSize: '8px', margin: 0,
-          color: 'rgba(201,168,76,0.5)', textTransform: 'uppercase',
+          color: 'rgba(201,164,21,0.5)', textTransform: 'uppercase',
         }}>{t.launchingSoon}</p>
       </div>
       <input
@@ -144,8 +144,8 @@ const NotifyForm = ({ productName }) => {
         style={{
           width: '100%', boxSizing: 'border-box',
           background: 'transparent', border: 'none',
-          borderBottom: `1px solid ${focused ? 'rgba(201,168,76,0.7)' : 'rgba(201,168,76,0.22)'}`,
-          color: '#FAF6EF',
+          borderBottom: `1px solid ${focused ? 'rgba(201,164,21,0.7)' : 'rgba(201,164,21,0.22)'}`,
+          color: '#f5eed9',
           fontFamily: t.serifFont,
           fontSize: '15px', fontWeight: 300,
           padding: '10px 0', outline: 'none', textAlign: 'center',
@@ -162,9 +162,9 @@ const NotifyForm = ({ productName }) => {
           fontFamily: t.sansFont, fontSize: '8px', fontWeight: 600,
           textTransform: 'uppercase',
           padding: '14px',
-          background: btnHov ? 'rgba(201,168,76,0.1)' : 'transparent',
-          color: 'rgba(201,168,76,0.9)',
-          border: '1px solid rgba(201,168,76,0.4)',
+          background: btnHov ? 'rgba(201,164,21,0.1)' : 'transparent',
+          color: 'rgba(201,164,21,0.9)',
+          border: '1px solid rgba(201,164,21,0.4)',
           cursor: 'pointer',
           transition: 'all 0.3s ease',
         }}
@@ -209,12 +209,12 @@ const CollectionCard = ({ product }) => {
         onHoverEnd={() => setHov(false)}
         style={{
           background: '#07050200',
-          border: `1px solid ${hov ? 'rgba(201,168,76,0.32)' : 'rgba(201,168,76,0.13)'}`,
+          border: `1px solid ${hov ? 'rgba(201,164,21,0.32)' : 'rgba(201,164,21,0.13)'}`,
           display: 'flex', flexDirection: 'column',
           width: '100%', minHeight: '720px',
           transition: 'border-color 0.55s ease, box-shadow 0.55s ease',
           boxShadow: hov
-            ? '0 0 0 1px rgba(201,168,76,0.08), 0 40px 100px rgba(0,0,0,0.6)'
+            ? '0 0 0 1px rgba(201,164,21,0.08), 0 40px 100px rgba(0,0,0,0.6)'
             : '0 2px 20px rgba(0,0,0,0.18)',
         }}
       >
@@ -244,12 +244,12 @@ const CollectionCard = ({ product }) => {
               display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px',
             }}>
               <svg width="9" height="11" viewBox="0 0 9 11" fill="none" aria-hidden="true">
-                <rect x="1" y="4.5" width="7" height="6" rx="0.8" stroke="rgba(201,168,76,0.55)" strokeWidth="0.8"/>
-                <path d="M2.5 4.5V3a2 2 0 0 1 4 0v1.5" stroke="rgba(201,168,76,0.55)" strokeWidth="0.8" strokeLinecap="round"/>
+                <rect x="1" y="4.5" width="7" height="6" rx="0.8" stroke="rgba(201,164,21,0.55)" strokeWidth="0.8"/>
+                <path d="M2.5 4.5V3a2 2 0 0 1 4 0v1.5" stroke="rgba(201,164,21,0.55)" strokeWidth="0.8" strokeLinecap="round"/>
               </svg>
               <p style={{
                 fontFamily: t.sansFont, fontSize: '7px', margin: 0,
-                color: 'rgba(201,168,76,0.45)', textTransform: 'uppercase',
+                color: 'rgba(201,164,21,0.45)', textTransform: 'uppercase',
               }}>{t.launchingSoon}</p>
             </div>
           )}
@@ -262,19 +262,19 @@ const CollectionCard = ({ product }) => {
           boxSizing: 'border-box',
         }}>
           <p style={{
-            fontFamily: 'Raleway, sans-serif', fontSize: '8px', letterSpacing: '6px',
-            color: 'rgba(201,168,76,0.4)', textTransform: 'uppercase', marginBottom: '14px',
+            fontFamily: "'Jost', sans-serif", fontSize: '8px', letterSpacing: '6px',
+            color: 'rgba(201,164,21,0.4)', textTransform: 'uppercase', marginBottom: '14px',
           }}>ELARA</p>
 
           <h3 style={{
             fontFamily: t.serifFont, fontWeight: 300,
             fontSize: '34px', fontStyle: 'italic',
-            color: '#FAF6EF', lineHeight: 1.05, marginBottom: '10px',
+            color: '#f5eed9', lineHeight: 1.05, marginBottom: '10px',
           }}>{product.name}</h3>
 
           <p style={{
             fontFamily: t.sansFont, fontSize: '8px',
-            color: 'rgba(201,168,76,0.38)', textTransform: 'uppercase', marginBottom: '22px',
+            color: 'rgba(201,164,21,0.38)', textTransform: 'uppercase', marginBottom: '22px',
           }}>{t.eauDeParfum}</p>
 
           <p style={{
@@ -320,9 +320,9 @@ const CollectionCard = ({ product }) => {
                             <span style={{
                               position: 'absolute', top: '-8px', left: '50%', transform: 'translateX(-50%)',
                               fontFamily: t.sansFont, fontSize: '6px',
-                              background: active ? '#C9A84C' : '#07050200',
+                              background: active ? '#c9a415' : '#07050200',
                               color: active ? '#060606' : 'rgba(200,160,60,0.6)',
-                              border: `1px solid ${active ? '#C9A84C' : 'rgba(200,160,60,0.3)'}`,
+                              border: `1px solid ${active ? '#c9a415' : 'rgba(200,160,60,0.3)'}`,
                               padding: '2px 6px', whiteSpace: 'nowrap', transition: 'all 0.3s ease',
                             }}>{t.exclusiveBadge}</span>
                           )}
@@ -354,9 +354,9 @@ const CollectionCard = ({ product }) => {
                           width: '100%', boxSizing: 'border-box',
                           fontFamily: t.serifFont, fontStyle: 'italic',
                           fontSize: '14px', fontWeight: 300,
-                          background: nameFocused ? 'rgba(201,168,76,0.05)' : 'transparent',
-                          border: `1px solid ${nameFocused ? 'rgba(201,168,76,0.65)' : 'rgba(201,168,76,0.22)'}`,
-                          color: '#FAF6EF', padding: '10px 38px 10px 12px',
+                          background: nameFocused ? 'rgba(201,164,21,0.05)' : 'transparent',
+                          border: `1px solid ${nameFocused ? 'rgba(201,164,21,0.65)' : 'rgba(201,164,21,0.22)'}`,
+                          color: '#f5eed9', padding: '10px 38px 10px 12px',
                           outline: 'none', transition: 'border-color 0.2s ease, background 0.2s ease',
                           WebkitAppearance: 'none',
                         }}
@@ -364,13 +364,13 @@ const CollectionCard = ({ product }) => {
                       <span style={{
                         position: 'absolute', right: '10px', top: '50%', transform: 'translateY(-50%)',
                         fontFamily: t.sansFont, fontSize: '7px',
-                        color: signatureName.length >= 18 ? 'rgba(201,168,76,0.9)' : 'rgba(201,168,76,0.28)',
+                        color: signatureName.length >= 18 ? 'rgba(201,164,21,0.9)' : 'rgba(201,164,21,0.28)',
                         transition: 'color 0.2s ease',
                       }}>{signatureName.length}/20</span>
                     </div>
                     <p style={{
                       fontFamily: t.serifFont, fontStyle: 'italic',
-                      fontSize: '10px', color: 'rgba(201,168,76,0.38)',
+                      fontSize: '10px', color: 'rgba(201,164,21,0.38)',
                       marginTop: '6px', lineHeight: 1.6, textAlign: 'center',
                     }}>{t.engraveNote}</p>
                   </div>
@@ -379,7 +379,7 @@ const CollectionCard = ({ product }) => {
 
               <p style={{
                 fontFamily: t.serifFont, fontSize: '26px', fontWeight: 300,
-                color: '#C9A96E', marginBottom: '14px',
+                color: '#e8d5a3', marginBottom: '14px',
               }}>${displayPrice}</p>
 
               <button
@@ -390,9 +390,9 @@ const CollectionCard = ({ product }) => {
                   width: '100%', cursor: 'pointer',
                   fontFamily: t.sansFont, fontSize: '8px',
                   textTransform: 'uppercase', padding: '16px', textAlign: 'center',
-                  background: btnHov ? '#C9A84C' : 'transparent',
-                  color: btnHov ? '#060606' : 'rgba(201,168,76,0.85)',
-                  border: '1px solid rgba(201,168,76,0.5)',
+                  background: btnHov ? '#c9a415' : 'transparent',
+                  color: btnHov ? '#060606' : 'rgba(201,164,21,0.85)',
+                  border: '1px solid rgba(201,164,21,0.5)',
                   transition: 'all 0.4s ease',
                 }}
               >{selectedSize === 'signature' ? t.orderPersonalized : `${t.buyNow} · $${displayPrice}`}</button>
@@ -483,7 +483,7 @@ const CollectionCarousel = () => {
               width: '100%',
               height: '100%',
               background: '#080603',
-              border: '1px solid rgba(201,168,76,0.12)',
+              border: '1px solid rgba(201,164,21,0.12)',
               borderRadius: '2px',
               padding: '28px 20px 32px',
               boxSizing: 'border-box',
@@ -513,7 +513,7 @@ const CollectionCarousel = () => {
               </div>
 
               {/* PRODUCT INFO */}
-              <p style={{ width: '100%', fontFamily: 'Raleway, sans-serif', fontSize: '10px', color: '#c9a84c', textAlign: 'center', marginBottom: '6px' }}>ELARA</p>
+              <p style={{ width: '100%', fontFamily: "'Jost', sans-serif", fontSize: '10px', color: '#c9a415', textAlign: 'center', marginBottom: '6px' }}>ELARA</p>
               <h3 style={{ width: '100%', fontSize: '28px', fontFamily: t.serifFont, fontStyle: 'italic', color: '#fff', textAlign: 'center', marginBottom: '6px' }}>{product.name}</h3>
               <p style={{ width: '100%', fontFamily: t.sansFont, fontSize: '11px', color: 'rgba(255,255,255,0.5)', textAlign: 'center', marginBottom: '16px' }}>{t.eauDeParfum}</p>
               <p style={{ width: '100%', fontFamily: t.serifFont, fontSize: '17px', fontWeight: 500, color: '#FFFFFF', textAlign: 'center', lineHeight: 1.8, marginBottom: '24px' }}>{t.productTaglines[product.id] || product.tagline}</p>
@@ -555,9 +555,9 @@ const CollectionCarousel = () => {
                                 <span style={{
                                   position: 'absolute', top: '-8px', left: '50%', transform: 'translateX(-50%)',
                                   fontFamily: t.sansFont, fontSize: '6px',
-                                  background: active ? '#C9A84C' : '#0a0602',
+                                  background: active ? '#c9a415' : '#0a0602',
                                   color: active ? '#060606' : 'rgba(200,160,60,0.65)',
-                                  border: `1px solid ${active ? '#C9A84C' : 'rgba(200,160,60,0.35)'}`,
+                                  border: `1px solid ${active ? '#c9a415' : 'rgba(200,160,60,0.35)'}`,
                                   padding: '2px 6px', whiteSpace: 'nowrap',
                                   transition: 'all 0.3s ease',
                                 }}>{t.exclusiveBadge}</span>
@@ -590,9 +590,9 @@ const CollectionCarousel = () => {
                               width: '100%', boxSizing: 'border-box',
                               fontFamily: t.serifFont, fontStyle: 'italic',
                               fontSize: '14px', fontWeight: 300,
-                              background: nameFocused ? 'rgba(201,168,76,0.06)' : 'rgba(250,246,239,0.02)',
-                              border: `1px solid ${nameFocused ? 'rgba(201,168,76,0.7)' : 'rgba(201,168,76,0.25)'}`,
-                              color: '#FAF6EF', padding: '10px 38px 10px 12px',
+                              background: nameFocused ? 'rgba(201,164,21,0.06)' : 'rgba(245,238,217,0.02)',
+                              border: `1px solid ${nameFocused ? 'rgba(201,164,21,0.7)' : 'rgba(201,164,21,0.25)'}`,
+                              color: '#f5eed9', padding: '10px 38px 10px 12px',
                               outline: 'none', borderRadius: '2px',
                               transition: 'border-color 0.2s ease, background 0.2s ease',
                               WebkitAppearance: 'none',
@@ -601,13 +601,13 @@ const CollectionCarousel = () => {
                           <span style={{
                             position: 'absolute', right: '10px', top: '50%', transform: 'translateY(-50%)',
                             fontFamily: t.sansFont, fontSize: '7px',
-                            color: signatureName.length >= 18 ? 'rgba(201,168,76,0.9)' : 'rgba(201,168,76,0.3)',
+                            color: signatureName.length >= 18 ? 'rgba(201,164,21,0.9)' : 'rgba(201,164,21,0.3)',
                             transition: 'color 0.2s ease',
                           }}>{signatureName.length}/20</span>
                         </div>
                         <p style={{
                           fontFamily: t.serifFont, fontStyle: 'italic',
-                          fontSize: '10px', color: 'rgba(201,168,76,0.4)',
+                          fontSize: '10px', color: 'rgba(201,164,21,0.4)',
                           marginTop: '7px', lineHeight: 1.6, textAlign: 'center',
                         }}>{t.engraveNote}</p>
                       </div>
@@ -615,14 +615,14 @@ const CollectionCarousel = () => {
 
                     <p style={{
                       fontFamily: t.sansFont, fontSize: '7px',
-                      color: 'rgba(201,168,76,0.25)', textTransform: 'uppercase',
+                      color: 'rgba(201,164,21,0.25)', textTransform: 'uppercase',
                       textAlign: 'center', marginTop: '8px',
                     }}>{t.limitedSlots}</p>
                   </div>
 
                   <p style={{
                     width: '100%', fontFamily: t.serifFont, fontSize: '22px', fontWeight: 300,
-                    color: '#C9A96E', marginBottom: '10px', textAlign: 'center',
+                    color: '#e8d5a3', marginBottom: '10px', textAlign: 'center',
                     transition: 'opacity 0.2s ease',
                   }}>${displayPrice}</p>
 
@@ -632,7 +632,7 @@ const CollectionCarousel = () => {
                       width: '100%', cursor: 'pointer',
                       fontFamily: t.sansFont, fontSize: '12px',
                       textTransform: 'uppercase', padding: '14px', textAlign: 'center',
-                      background: '#c9a84c', color: '#060606',
+                      background: '#c9a415', color: '#060606',
                       border: '1px solid rgba(200,160,60,0.7)',
                       transition: 'all 0.35s ease', whiteSpace: 'nowrap',
                     }}
@@ -658,7 +658,7 @@ const CollectionCarousel = () => {
             width: i === current ? '24px' : '6px',
             height: '6px',
             borderRadius: i === current ? '3px' : '50%',
-            background: i === current ? '#c9a84c' : 'rgba(201,168,76,0.25)',
+            background: i === current ? '#c9a415' : 'rgba(201,164,21,0.25)',
             cursor: 'pointer',
             transition: 'all 0.3s ease',
           }} />
@@ -755,7 +755,7 @@ const WhyELARA = () => {
     }}>
       <p style={{
         fontFamily: t.sansFont, fontSize: '9px',
-        color: 'rgba(201,168,76,0.65)', textTransform: 'uppercase', marginBottom: '40px',
+        color: 'rgba(201,164,21,0.65)', textTransform: 'uppercase', marginBottom: '40px',
         opacity: visible ? 1 : 0, transition: 'opacity 0.7s ease',
       }}>{t.whyEyebrow}</p>
 
@@ -773,10 +773,10 @@ const WhyELARA = () => {
               transform: visible ? 'translateY(0)' : 'translateY(24px)',
               transition: `opacity 0.9s ease ${0.1 + i * 0.12}s, transform 0.9s cubic-bezier(0.16,1,0.3,1) ${0.1 + i * 0.12}s`,
             }}>
-              <div style={{ color: 'rgba(201,168,76,0.7)' }}>{icon}</div>
+              <div style={{ color: 'rgba(201,164,21,0.7)' }}>{icon}</div>
               <h4 style={{
                 fontFamily: t.serifFont, fontWeight: 300,
-                fontSize: '18px', color: '#FAF6EF', margin: 0,
+                fontSize: '18px', color: '#f5eed9', margin: 0,
                 lineHeight: 1.2,
               }}>{title}</h4>
               <p style={{
@@ -822,18 +822,18 @@ const ExclusiveAccess = () => {
       style={{
         background: '#060606',
         padding: '60px 40px 80px',
-        borderTop: '1px solid rgba(201,168,76,0.12)',
+        borderTop: '1px solid rgba(201,164,21,0.12)',
         textAlign: 'center',
       }}
     >
       <style>{`
-        .ea-input::placeholder { color: rgba(201,168,76,0.3); font-family: 'Cormorant Garamond', serif; font-style: italic; }
+        .ea-input::placeholder { color: rgba(201,164,21,0.3); font-family: 'Cormorant Garamond', serif; font-style: italic; }
       `}</style>
 
       <div style={{ maxWidth: '520px', margin: '0 auto' }}>
         <p style={{
           fontFamily: t.sansFont, fontSize: '9px',
-          color: 'rgba(201,168,76,0.6)', textTransform: 'uppercase',
+          color: 'rgba(201,164,21,0.6)', textTransform: 'uppercase',
           marginBottom: '22px', ...fadeUp(0),
         }}>{t.exclusiveEyebrow}</p>
 
@@ -843,8 +843,8 @@ const ExclusiveAccess = () => {
           marginBottom: '18px',
           ...fadeUp(0.1),
         }}>
-          <span style={{ color: '#FAF6EF' }}>{t.exclusiveHead1}</span>
-          <span style={{ fontStyle: 'italic', color: '#c9a84c' }}>{t.exclusiveHead2}</span>
+          <span style={{ color: '#f5eed9' }}>{t.exclusiveHead1}</span>
+          <span style={{ fontStyle: 'italic', color: '#c9a415' }}>{t.exclusiveHead2}</span>
         </h2>
 
         <p style={{
@@ -859,12 +859,12 @@ const ExclusiveAccess = () => {
           <div style={{ ...fadeUp(0) }}>
             <p style={{
               fontFamily: t.serifFont, fontStyle: 'italic',
-              fontSize: '26px', color: 'rgba(201,168,76,0.9)', lineHeight: 1.8,
+              fontSize: '26px', color: 'rgba(201,164,21,0.9)', lineHeight: 1.8,
               marginBottom: '8px',
             }}>{t.onTheList}</p>
             <p style={{
               fontFamily: t.sansFont, fontSize: '11px', fontWeight: 300,
-              color: 'rgba(250,246,239,0.3)',
+              color: 'rgba(245,238,217,0.3)',
             }}>{t.inTouch}</p>
           </div>
         ) : (
@@ -880,8 +880,8 @@ const ExclusiveAccess = () => {
               onBlur={() => setFocused(false)}
               style={{
                 width: '100%', background: 'transparent', border: 'none',
-                borderBottom: `1px solid ${focused ? 'rgba(201,168,76,0.8)' : 'rgba(201,168,76,0.22)'}`,
-                color: '#FAF6EF', fontFamily: t.serifFont,
+                borderBottom: `1px solid ${focused ? 'rgba(201,164,21,0.8)' : 'rgba(201,164,21,0.22)'}`,
+                color: '#f5eed9', fontFamily: t.serifFont,
                 fontSize: '17px', fontWeight: 300,
                 padding: '14px 0', outline: 'none', textAlign: 'center',
                 transition: 'border-color 0.3s ease',
@@ -893,12 +893,16 @@ const ExclusiveAccess = () => {
               onMouseEnter={() => setBtnHov(true)}
               onMouseLeave={() => setBtnHov(false)}
               style={{
-                width: '100%', fontFamily: t.sansFont,
-                fontSize: '9px', fontWeight: 600,
+                width: '100%', fontFamily: "'Montserrat', sans-serif",
+                fontSize: '9px', fontWeight: 500,
+                letterSpacing: '0.2em',
                 textTransform: 'uppercase', padding: '18px',
-                background: btnHov ? '#E8B84B' : '#c9a84c',
-                color: '#0a0600', border: 'none', cursor: 'pointer',
-                transition: 'background 0.3s ease',
+                background: btnHov ? '#c9a415' : 'transparent',
+                color: btnHov ? '#0d0a07' : '#c9a415',
+                border: '1px solid rgba(201,164,21,0.65)',
+                borderRadius: '1px',
+                cursor: 'pointer',
+                transition: 'all 0.35s ease',
               }}
             >{t.joinWaitlist}</button>
           </form>
@@ -1011,7 +1015,7 @@ const Home = () => {
         }}/>
         <div style={{
           position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 2,
-          background: 'linear-gradient(115deg, rgba(201,168,76,0.04) 0%, transparent 42%, transparent 100%)',
+          background: 'linear-gradient(115deg, rgba(201,164,21,0.04) 0%, transparent 42%, transparent 100%)',
         }}/>
         <div style={{
           position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 2,
@@ -1054,7 +1058,7 @@ const Home = () => {
               transition={{ duration: 1.15, ease: [0.16, 1, 0.3, 1], delay: 0.22 }}
               style={{
                 fontFamily: t.headingFont, fontWeight: 300,
-                lineHeight: 1.08, color: '#FAF6EF', marginBottom: '36px',
+                lineHeight: 1.08, color: '#f5eed9', marginBottom: '36px',
               }}
             >
               {t.heroLine1 && (
@@ -1140,14 +1144,14 @@ const Home = () => {
         >
           {/* Pyramid ornament */}
           <svg width="18" height="18" viewBox="0 0 18 18" fill="none" style={{ marginBottom: '22px', display: 'block', margin: '0 auto 22px' }} aria-hidden="true">
-            <polygon points="9,1 17,17 1,17" stroke="rgba(201,168,76,0.55)" strokeWidth="0.8" fill="none"/>
-            <polygon points="9,5 14,14 4,14" fill="rgba(201,168,76,0.18)"/>
+            <polygon points="9,1 17,17 1,17" stroke="rgba(201,164,21,0.55)" strokeWidth="0.8" fill="none"/>
+            <polygon points="9,5 14,14 4,14" fill="rgba(201,164,21,0.18)"/>
           </svg>
           <p style={{ fontFamily: t.sansFont, fontSize: '11px', color: 'rgba(255,200,80,0.7)', textTransform: 'uppercase', marginBottom: '20px' }}>
             {t.collectionEyebrow}
           </p>
-          <h2 style={{ fontFamily: t.headingFont, fontWeight: 300, fontSize: 'clamp(40px, 5vw, 62px)', color: '#FAF6EF' }}>
-            {t.collectionPre}<span style={{ fontStyle: 'italic', color: '#C9A96E' }}>{t.collectionHighlight}</span>
+          <h2 style={{ fontFamily: t.headingFont, fontWeight: 300, fontSize: 'clamp(40px, 5vw, 62px)', color: '#f5eed9' }}>
+            {t.collectionPre}<span style={{ fontStyle: 'italic', color: '#e8d5a3' }}>{t.collectionHighlight}</span>
           </h2>
         </motion.div>
 

@@ -15,23 +15,30 @@ const LangToggle = () => {
       style={{
         background: 'none', border: 'none', cursor: 'pointer',
         padding: '4px 2px', display: 'flex', alignItems: 'center', gap: '2px',
-        fontFamily: 'Raleway, sans-serif', fontSize: '9px', letterSpacing: '1px',
+        fontFamily: "'Montserrat', sans-serif", fontSize: '9px', letterSpacing: '1px',
         opacity: hov ? 1 : 0.75, transition: 'opacity 0.3s ease',
       }}
     >
-      <span style={{ color: lang === 'en' ? '#C9A84C' : 'rgba(201,168,76,0.38)', transition: 'color 0.3s ease' }}>EN</span>
-      <span style={{ color: 'rgba(201,168,76,0.25)', margin: '0 1px' }}>|</span>
-      <span style={{ fontFamily: "'Noto Naskh Arabic', serif", fontSize: '11px', color: lang === 'ar' ? '#C9A84C' : 'rgba(201,168,76,0.38)', transition: 'color 0.3s ease' }}>عر</span>
+      <span style={{ color: lang === 'en' ? '#c9a415' : 'rgba(201,164,21,0.38)', transition: 'color 0.3s ease' }}>EN</span>
+      <span style={{ color: 'rgba(201,164,21,0.25)', margin: '0 1px' }}>|</span>
+      <span style={{ fontFamily: "'Noto Naskh Arabic', serif", fontSize: '11px', color: lang === 'ar' ? '#c9a415' : 'rgba(201,164,21,0.38)', transition: 'color 0.3s ease' }}>عر</span>
     </button>
   );
 };
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const { cart } = useCart();
   const { t } = useLanguage();
   const location  = useLocation();
   const cartCount = cart.reduce((sum, item) => sum + item.qty, 0);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 60);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
   const navLinks = [
     ['/',        t.navHome   ],
@@ -51,11 +58,11 @@ const Navbar = () => {
           left: 0,
           right: 0,
           zIndex: 9999,
-          background: 'rgba(8, 4, 1, 0.2)',
-          backdropFilter: 'blur(24px)',
-          WebkitBackdropFilter: 'blur(24px)',
-          borderBottom: '1px solid rgba(201, 168, 76, 0.1)',
-          transition: 'background 0.3s ease',
+          background: scrolled ? 'rgba(13,10,7,0.97)' : 'transparent',
+          backdropFilter: scrolled ? 'blur(24px)' : 'none',
+          WebkitBackdropFilter: scrolled ? 'blur(24px)' : 'none',
+          borderBottom: scrolled ? '1px solid rgba(201,164,21,0.12)' : '1px solid transparent',
+          transition: 'background 0.4s ease, border-color 0.4s ease, backdrop-filter 0.4s ease',
         }}
       >
         {/* Wordmark */}
@@ -65,7 +72,7 @@ const Navbar = () => {
             fontWeight: 300,
             fontSize: '1.25rem',
             letterSpacing: '0.38em',
-            color: '#c9a84c',
+            color: '#c9a415',
             textTransform: 'uppercase',
           }}>
             Elara
@@ -85,12 +92,12 @@ const Navbar = () => {
                 to={path}
                 className={`nav-link-lux${active ? ' lux-active' : ''}`}
                 style={{
-                  fontFamily: 'Raleway, sans-serif',
+                  fontFamily: "'Montserrat', sans-serif",
                   fontSize: '9px',
-                  fontWeight: 400,
-                  letterSpacing: '0.28em',
+                  fontWeight: 500,
+                  letterSpacing: '0.2em',
                   textTransform: 'uppercase',
-                  color: '#FAF6EF',
+                  color: '#f5eed9',
                 }}
               >
                 {label}
@@ -107,7 +114,7 @@ const Navbar = () => {
           <Link
             to="/cart"
             className="nav-link-lux"
-            style={{ color: '#FAF6EF', position: 'relative', display: 'flex' }}
+            style={{ color: '#f5eed9', position: 'relative', display: 'flex' }}
           >
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round">
               <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
@@ -118,10 +125,10 @@ const Navbar = () => {
               <span style={{
                 position: 'absolute', top: '-6px', right: '-8px',
                 width: '16px', height: '16px', borderRadius: '50%',
-                background: '#c9a84c', color: '#0d0700',
+                background: '#c9a415', color: '#0d0a07',
                 fontSize: '8px', fontWeight: 700,
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
-                fontFamily: 'Raleway, sans-serif',
+                fontFamily: "'Montserrat', sans-serif",
               }}>
                 {cartCount > 9 ? '9+' : cartCount}
               </span>
@@ -140,17 +147,17 @@ const Navbar = () => {
             }}
           >
             <span style={{
-              width: '22px', height: '1px', background: '#c9a84c', display: 'block',
+              width: '22px', height: '1px', background: '#c9a415', display: 'block',
               transition: 'transform 0.3s ease',
               transform: menuOpen ? 'rotate(45deg) translate(4px, 5px)' : 'none',
             }}/>
             <span style={{
-              width: '14px', height: '1px', background: 'rgba(201,168,76,0.6)', display: 'block',
+              width: '14px', height: '1px', background: 'rgba(201,164,21,0.6)', display: 'block',
               transition: 'opacity 0.3s ease, width 0.3s ease',
               opacity: menuOpen ? 0 : 1,
             }}/>
             <span style={{
-              width: '22px', height: '1px', background: '#c9a84c', display: 'block',
+              width: '22px', height: '1px', background: '#c9a415', display: 'block',
               transition: 'transform 0.3s ease',
               transform: menuOpen ? 'rotate(-45deg) translate(4px, -5px)' : 'none',
             }}/>
@@ -170,7 +177,7 @@ const Navbar = () => {
         transition: 'opacity 0.4s ease',
       }}>
         {/* Decorative top line */}
-        <div style={{ width: '32px', height: '1px', background: 'rgba(201,168,76,0.35)' }}/>
+        <div style={{ width: '32px', height: '1px', background: 'rgba(201,164,21,0.35)' }}/>
 
         {navLinks.map(([path, label]) => {
           const active = location.pathname === path;
@@ -179,11 +186,11 @@ const Navbar = () => {
               key={path} to={path}
               onClick={() => setMenuOpen(false)}
               style={{
-                fontFamily: 'Raleway, sans-serif',
+                fontFamily: "'Montserrat', sans-serif",
                 fontSize: '10px', fontWeight: 300,
                 letterSpacing: '0.45em', textTransform: 'uppercase',
-                color: active ? '#c9a84c' : 'rgba(250,246,239,0.55)',
-                borderBottom: active ? '1px solid rgba(201,168,76,0.45)' : '1px solid transparent',
+                color: active ? '#c9a415' : 'rgba(245,238,217,0.55)',
+                borderBottom: active ? '1px solid rgba(201,164,21,0.45)' : '1px solid transparent',
                 paddingBottom: '4px',
                 transition: 'color 0.3s',
                 textDecoration: 'none',
@@ -194,12 +201,12 @@ const Navbar = () => {
           );
         })}
 
-        <div style={{ width: '32px', height: '1px', background: 'rgba(201,168,76,0.2)' }}/>
+        <div style={{ width: '32px', height: '1px', background: 'rgba(201,164,21,0.2)' }}/>
 
         <Link to="/cart" onClick={() => setMenuOpen(false)} style={{
-          fontFamily: 'Raleway, sans-serif', fontSize: '8px',
-          letterSpacing: '0.4em', textTransform: 'uppercase',
-          color: 'rgba(201,168,76,0.4)', textDecoration: 'none',
+          fontFamily: "'Montserrat', sans-serif", fontSize: '8px',
+          letterSpacing: '0.2em', textTransform: 'uppercase',
+          color: 'rgba(201,164,21,0.4)', textDecoration: 'none',
         }}>
           {t.navCart}{cartCount > 0 ? ` (${cartCount})` : ''}
         </Link>

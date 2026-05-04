@@ -26,9 +26,9 @@ const Field = ({
   const [focused, setFocused] = useState(false);
   const base = {
     width: '100%', background: 'transparent', border: 'none',
-    borderBottom: `1px solid ${focused ? 'rgba(200,160,60,0.9)' : 'rgba(200,160,60,0.3)'}`,
-    color: '#FAF6EF',
-    fontFamily: 'Raleway, sans-serif', fontSize: '14px', fontWeight: 300,
+    borderBottom: `1px solid ${focused ? 'rgba(201,164,21,0.9)' : 'rgba(201,164,21,0.3)'}`,
+    color: '#f5eed9',
+    fontFamily: "'Jost', sans-serif", fontSize: '14px', fontWeight: 300,
     letterSpacing: '0.4px',
     padding: '16px 0',
     paddingRight: showCheck ? '24px' : '0',
@@ -41,8 +41,8 @@ const Field = ({
     <div style={{ marginBottom: '24px', position: 'relative' }}>
       <label style={{
         display: 'block',
-        fontFamily: 'Raleway, sans-serif', fontSize: '12px', letterSpacing: '3px',
-        color: 'rgba(200,160,60,0.8)', textTransform: 'uppercase', marginBottom: '10px',
+        fontFamily: "'Montserrat', sans-serif", fontSize: '10px', letterSpacing: '0.2em',
+        color: 'rgba(201,164,21,0.8)', textTransform: 'uppercase', marginBottom: '10px',
       }}>{label}</label>
 
       {as === 'textarea' ? (
@@ -69,7 +69,7 @@ const Field = ({
       {showCheck && (
         <span style={{
           position: 'absolute', right: 0, bottom: '16px',
-          color: 'rgba(200,160,60,1)', fontSize: '14px',
+          color: 'rgba(201,164,21,1)', fontSize: '14px',
           pointerEvents: 'none',
         }}>✓</span>
       )}
@@ -78,8 +78,8 @@ const Field = ({
       {showCounter && (
         <div style={{
           textAlign: 'right', marginTop: '6px',
-          fontFamily: 'Raleway, sans-serif', fontSize: '11px',
-          color: 'rgba(200,160,60,0.5)',
+          fontFamily: "'Jost', sans-serif", fontSize: '11px',
+          color: 'rgba(201,164,21,0.5)',
         }}>{value.length}/{maxLength || 500}</div>
       )}
     </div>
@@ -111,7 +111,7 @@ const FaqItem = ({ q, a }) => {
   const [open, setOpen] = useState(false);
   return (
     <div style={{
-      borderBottom: '1px solid rgba(200,160,60,0.12)',
+      borderBottom: '1px solid rgba(201,164,21,0.12)',
       padding: '0',
     }}>
       <button
@@ -124,13 +124,13 @@ const FaqItem = ({ q, a }) => {
         }}
       >
         <span style={{
-          fontFamily: "'Cormorant Garamond', serif", fontWeight: 300,
-          fontSize: '18px', color: open ? 'rgba(200,160,60,1)' : '#FAF6EF',
-          lineHeight: 1.3, letterSpacing: '0.2px',
+          fontFamily: "'Jost', sans-serif", fontWeight: 300,
+          fontSize: '16px', color: open ? '#c9a415' : '#f5eed9',
+          lineHeight: 1.5, letterSpacing: '0.02em',
           transition: 'color 0.3s ease',
         }}>{q}</span>
         <span style={{
-          color: 'rgba(200,160,60,0.6)', fontSize: '18px', flexShrink: 0,
+          color: 'rgba(201,164,21,0.6)', fontSize: '18px', flexShrink: 0,
           transition: 'transform 0.3s ease',
           transform: open ? 'rotate(45deg)' : 'rotate(0deg)',
           display: 'block', lineHeight: 1,
@@ -142,8 +142,8 @@ const FaqItem = ({ q, a }) => {
         transition: 'max-height 0.4s cubic-bezier(0.16,1,0.3,1)',
       }}>
         <p style={{
-          fontFamily: 'Raleway, sans-serif', fontSize: '13px', fontWeight: 300,
-          color: 'rgba(250,246,239,0.5)', lineHeight: 2, letterSpacing: '0.3px',
+          fontFamily: "'Jost', sans-serif", fontSize: '13px', fontWeight: 300,
+          color: 'rgba(245,238,217,0.5)', lineHeight: 1.8, letterSpacing: '0.3px',
           paddingBottom: '20px', margin: 0,
         }}>{a}</p>
       </div>
@@ -157,29 +157,29 @@ const FaqSection = () => {
     <section ref={ref} style={{
       background: 'transparent',
       padding: 'clamp(72px, 9vw, 110px) clamp(24px, 6vw, 80px)',
-      borderTop: '1px solid rgba(200,160,60,0.1)',
+      borderTop: '1px solid rgba(201,164,21,0.1)',
     }}>
       <div style={{ maxWidth: '640px', margin: '0 auto' }}>
         <p style={{
-          fontFamily: 'Raleway, sans-serif', fontSize: '9px', letterSpacing: '7px',
-          color: 'rgba(200,160,60,0.6)', textTransform: 'uppercase',
+          fontFamily: "'Montserrat', sans-serif", fontSize: '9px', letterSpacing: '0.2em',
+          color: 'rgba(201,164,21,0.65)', textTransform: 'uppercase',
           textAlign: 'center', marginBottom: '20px',
           opacity: visible ? 1 : 0, transition: 'opacity 0.8s ease',
         }}>Common Questions</p>
         <h2 style={{
-          fontFamily: "'Cormorant Garamond', serif", fontWeight: 300,
-          fontSize: 'clamp(1.8rem, 3.5vw, 2.6rem)', color: '#FAF6EF',
-          textAlign: 'center', marginBottom: '52px', lineHeight: 1.2,
+          fontFamily: "'Tenor Sans', sans-serif", fontWeight: 400,
+          fontSize: 'clamp(1.8rem, 3.5vw, 2.6rem)', color: '#f5eed9',
+          textAlign: 'center', marginBottom: '52px', lineHeight: 1.3, letterSpacing: '0.08em',
           opacity: visible ? 1 : 0, transition: 'opacity 0.9s ease 0.1s',
         }}>
           Good questions deserve{' '}
-          <span style={{ fontStyle: 'italic', color: 'rgba(200,160,60,1)' }}>honest answers.</span>
+          <span style={{ fontStyle: 'italic', fontFamily: "'Cormorant Garamond', serif", color: '#c9a415' }}>honest answers.</span>
         </h2>
         <div style={{
           opacity: visible ? 1 : 0,
           transform: visible ? 'translateY(0)' : 'translateY(20px)',
           transition: 'opacity 0.9s ease 0.2s, transform 0.9s cubic-bezier(0.16,1,0.3,1) 0.2s',
-          borderTop: '1px solid rgba(200,160,60,0.12)',
+          borderTop: '1px solid rgba(201,164,21,0.12)',
         }}>
           {FAQ_ITEMS.map((item) => (
             <FaqItem key={item.q} q={item.q} a={item.a} />
@@ -240,8 +240,8 @@ const Contact = () => {
     <div style={{ background: 'transparent', minHeight: '100vh' }}>
 
       <style>{`
-        input::placeholder, textarea::placeholder { color: rgba(200,160,60,0.35); }
-        textarea { font-family: Raleway, sans-serif; }
+        input::placeholder, textarea::placeholder { color: rgba(201,164,21,0.35); }
+        textarea { font-family: 'Jost', sans-serif; }
         @media (max-width: 768px) {
           .contact-send-btn {
             position: sticky !important;
@@ -271,8 +271,8 @@ const Contact = () => {
 
         {/* GET IN TOUCH label */}
         <p style={{
-          fontFamily: 'Raleway, sans-serif', fontSize: '11px', letterSpacing: '6px',
-          color: 'rgba(200,160,60,1)', textTransform: 'uppercase',
+          fontFamily: "'Montserrat', sans-serif", fontSize: '10px', letterSpacing: '0.2em',
+          color: '#c9a415', textTransform: 'uppercase',
           marginBottom: '20px',
           opacity: heroIn ? 1 : 0,
           transform: heroIn ? 'translateY(0)' : 'translateY(16px)',
@@ -281,15 +281,15 @@ const Contact = () => {
 
         {/* Heading */}
         <h1 style={{
-          fontFamily: "'Playfair Display', serif", fontWeight: 300,
+          fontFamily: "'Tenor Sans', sans-serif", fontWeight: 400,
           fontSize: 'clamp(2.5rem, 5vw, 4.5rem)',
-          lineHeight: 1.12, marginBottom: '36px',
+          lineHeight: 1.2, letterSpacing: '0.1em', marginBottom: '36px',
           opacity: heroIn ? 1 : 0,
           transform: heroIn ? 'translateY(0)' : 'translateY(24px)',
           transition: 'opacity 1s ease 0.15s, transform 1s ease 0.15s',
         }}>
-          <span style={{ color: '#FAF6EF' }}>We'd Love to</span><br/>
-          <span style={{ fontStyle: 'italic', color: 'rgba(200,160,60,1)' }}>Hear From You</span>
+          <span style={{ color: '#f5eed9' }}>We'd Love to</span><br/>
+          <span style={{ fontStyle: 'italic', fontFamily: "'Cormorant Garamond', serif", color: '#c9a415' }}>Hear From You</span>
         </h1>
 
       </section>
@@ -306,7 +306,7 @@ const Contact = () => {
         {/* Radial gold glow — item 6 */}
         <div style={{
           position: 'absolute', inset: 0,
-          background: 'radial-gradient(ellipse at center, rgba(200,160,60,0.06) 0%, transparent 72%)',
+          background: 'radial-gradient(ellipse at center, rgba(201,164,21,0.06) 0%, transparent 72%)',
           pointerEvents: 'none',
         }}/>
 
@@ -314,7 +314,7 @@ const Contact = () => {
 
           {/* WhatsApp direct line */}
           <p style={{
-            fontFamily: 'Raleway, sans-serif', fontSize: '13px', fontWeight: 300,
+            fontFamily: "'Jost', sans-serif", fontSize: '13px', fontWeight: 300,
             color: 'rgba(255,255,255,0.5)', textAlign: 'center',
             marginBottom: '30px', letterSpacing: '0.3px',
           }}>
@@ -324,31 +324,31 @@ const Contact = () => {
               target="_blank"
               rel="noreferrer"
               style={{
-                color: 'rgba(200,160,60,1)',
-                fontFamily: "'Playfair Display', serif",
+                color: 'rgba(201,164,21,1)',
+                fontFamily: "'Cormorant Garamond', serif",
                 fontStyle: 'italic',
                 textDecoration: 'none',
-                borderBottom: '1px solid rgba(200,160,60,0.35)',
+                borderBottom: '1px solid rgba(201,164,21,0.35)',
                 paddingBottom: '1px',
                 transition: 'color 0.3s, border-color 0.3s',
               }}
               onMouseEnter={e => { e.currentTarget.style.color = '#E8B84B'; e.currentTarget.style.borderColor = '#E8B84B'; }}
-              onMouseLeave={e => { e.currentTarget.style.color = 'rgba(200,160,60,1)'; e.currentTarget.style.borderColor = 'rgba(200,160,60,0.35)'; }}
+              onMouseLeave={e => { e.currentTarget.style.color = 'rgba(201,164,21,1)'; e.currentTarget.style.borderColor = 'rgba(201,164,21,0.35)'; }}
             >WhatsApp</a>
           </p>
 
           {success ? (
             <div style={{ textAlign: 'center', padding: '40px 0' }}>
               <p style={{
-                fontFamily: "'Playfair Display', serif", fontStyle: 'italic',
-                fontSize: '20px', color: 'rgba(200,160,60,1)', lineHeight: 1.9,
+                fontFamily: "'Cormorant Garamond', serif", fontStyle: 'italic',
+                fontSize: '20px', color: 'rgba(201,164,21,1)', lineHeight: 1.9,
                 marginBottom: '8px',
               }}>
                 Your message has been sent.
               </p>
               <p style={{
-                fontFamily: 'Raleway, sans-serif', fontSize: '13px', fontWeight: 300,
-                color: 'rgba(250,246,239,0.4)', letterSpacing: '0.3px',
+                fontFamily: "'Jost', sans-serif", fontSize: '13px', fontWeight: 300,
+                color: 'rgba(245,238,217,0.4)', letterSpacing: '0.3px',
               }}>
                 We will get back to you shortly.
               </p>
@@ -392,7 +392,7 @@ const Contact = () => {
 
             {error && (
               <p style={{
-                fontFamily: 'Raleway, sans-serif', fontSize: '12px', fontWeight: 300,
+                fontFamily: "'Jost', sans-serif", fontSize: '12px', fontWeight: 300,
                 color: 'rgba(220,80,80,0.85)', marginBottom: '16px', letterSpacing: '0.3px',
               }}>{error}</p>
             )}
@@ -408,22 +408,21 @@ const Contact = () => {
               <button
                 type="submit"
                 disabled={loading}
-                className="lux-checkout-btn discover-shimmer"
+                className="lux-checkout-btn"
                 onMouseEnter={() => setBtnHov(true)}
                 onMouseLeave={() => setBtnHov(false)}
                 style={{
                   width: '100%',
-                  fontFamily: 'Raleway, sans-serif', fontSize: '11px', fontWeight: 600,
-                  letterSpacing: '4px', textTransform: 'uppercase',
+                  fontFamily: "'Montserrat', sans-serif", fontSize: '10px', fontWeight: 500,
+                  letterSpacing: '0.2em', textTransform: 'uppercase',
                   padding: '20px',
-                  background: btnHov ? 'linear-gradient(145deg,#f0dc9a,#c4932e)' : 'linear-gradient(145deg,#d4af37,#9d7324)',
-                  color: '#0a0806',
-                  border: 'none', cursor: loading ? 'default' : 'pointer',
+                  background: btnHov ? '#c9a415' : 'transparent',
+                  color: btnHov ? '#0d0a07' : '#c9a415',
+                  border: '1px solid rgba(201,164,21,0.65)',
+                  borderRadius: '1px',
+                  cursor: loading ? 'default' : 'pointer',
                   transition: 'all 0.35s ease',
-                  boxShadow: btnHov ? '0 10px 40px rgba(200,160,60,0.4)' : 'inset 0 1px 0 rgba(255,240,200,0.35)',
-                  filter: loading ? 'brightness(0.88)' : 'brightness(1)',
-                  opacity: loading ? 0.75 : 1,
-                  overflow: 'hidden',
+                  opacity: loading ? 0.6 : 1,
                 }}
               >{loading ? 'Sending...' : 'Send Message'}</button>
             </div>

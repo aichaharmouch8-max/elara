@@ -6,26 +6,26 @@ import { supabase } from '../lib/supabase';
 
 const inputStyle = (focused, hasError) => ({
   width: '100%',
-  fontFamily: 'Raleway, sans-serif', fontSize: '14px', fontWeight: 300,
-  background: focused ? 'rgba(201,169,110,0.06)' : 'rgba(250,246,239,0.03)',
-  border: `1px solid ${hasError ? 'rgba(255,90,70,0.55)' : focused ? 'rgba(201,169,110,0.55)' : 'rgba(201,169,110,0.2)'}`,
-  color: '#FAF6EF', padding: '14px 16px', outline: 'none',
+  fontFamily: "'Jost', sans-serif", fontSize: '14px', fontWeight: 300,
+  background: focused ? 'rgba(201,164,21,0.06)' : 'rgba(245,238,217,0.03)',
+  border: `1px solid ${hasError ? 'rgba(255,90,70,0.55)' : focused ? 'rgba(201,164,21,0.55)' : 'rgba(201,164,21,0.2)'}`,
+  color: '#f5eed9', padding: '14px 16px', outline: 'none',
   transition: 'border-color 0.2s ease', boxSizing: 'border-box', borderRadius: '4px',
   WebkitAppearance: 'none', appearance: 'none',
 });
 
 const LABEL = {
-  display: 'block', fontFamily: 'Raleway, sans-serif', fontSize: '9px',
-  letterSpacing: '3px', color: 'rgba(201,169,110,0.5)', textTransform: 'uppercase', marginBottom: '8px',
+  display: 'block', fontFamily: "'Jost', sans-serif", fontSize: '9px',
+  letterSpacing: '3px', color: 'rgba(201,164,21,0.5)', textTransform: 'uppercase', marginBottom: '8px',
 };
 
 const SEC_LABEL = {
-  fontFamily: 'Raleway, sans-serif', fontSize: '9px', letterSpacing: '4px',
-  color: 'rgba(201,169,110,0.5)', textTransform: 'uppercase', marginBottom: '12px',
+  fontFamily: "'Jost', sans-serif", fontSize: '9px', letterSpacing: '4px',
+  color: 'rgba(201,164,21,0.5)', textTransform: 'uppercase', marginBottom: '12px',
 };
 
 const ErrMsg = ({ msg }) => msg ? (
-  <p style={{ fontFamily: 'Raleway, sans-serif', fontSize: '10px', color: 'rgba(255,90,70,0.85)', marginTop: '4px', lineHeight: 1.4 }}>{msg}</p>
+  <p style={{ fontFamily: "'Jost', sans-serif", fontSize: '10px', color: 'rgba(255,90,70,0.85)', marginTop: '4px', lineHeight: 1.4 }}>{msg}</p>
 ) : null;
 
 // ── Sub-components ────────────────────────────────────────────────────────────
@@ -57,9 +57,9 @@ const PhoneField = ({ value, onChange, focused, onFocus, onBlur, error }) => (
       <div style={{
         display: 'flex', alignItems: 'center', gap: '6px', flexShrink: 0,
         padding: '14px 12px', borderRadius: '4px',
-        background: 'rgba(250,246,239,0.03)',
-        border: `1px solid ${error ? 'rgba(255,90,70,0.55)' : 'rgba(201,169,110,0.2)'}`,
-        fontFamily: 'Raleway, sans-serif', fontSize: '13px', color: 'rgba(250,246,239,0.6)',
+        background: 'rgba(245,238,217,0.03)',
+        border: `1px solid ${error ? 'rgba(255,90,70,0.55)' : 'rgba(201,164,21,0.2)'}`,
+        fontFamily: "'Jost', sans-serif", fontSize: '13px', color: 'rgba(245,238,217,0.6)',
       }}>
         <span>🇱🇧</span>
         <span style={{ fontSize: '11px' }}>+961</span>
@@ -84,14 +84,14 @@ const PinSvg = ({ color = 'currentColor' }) => (
 const Spinner = () => (
   <span style={{
     width: '10px', height: '10px', borderRadius: '50%', display: 'inline-block', flexShrink: 0,
-    border: '1.5px solid rgba(201,169,110,0.25)', borderTopColor: '#C9A96E',
+    border: '1.5px solid rgba(201,164,21,0.25)', borderTopColor: '#c9a415',
     animation: 'locSpin 0.7s linear infinite',
   }} />
 );
 
 const LOC_BTN = {
-  idle:    { border: 'rgba(201,169,110,0.35)', color: 'rgba(201,169,110,0.9)',  label: 'Use My Location',  icon: <PinSvg /> },
-  loading: { border: 'rgba(201,169,110,0.3)',  color: 'rgba(201,169,110,0.55)', label: 'Detecting…',       icon: <Spinner /> },
+  idle:    { border: 'rgba(201,164,21,0.35)', color: 'rgba(201,164,21,0.9)',  label: 'Use My Location',  icon: <PinSvg /> },
+  loading: { border: 'rgba(201,164,21,0.3)',  color: 'rgba(201,164,21,0.55)', label: 'Detecting…',       icon: <Spinner /> },
   success: { border: 'rgba(100,210,120,0.6)',  color: 'rgba(100,210,120,0.9)',  label: '✓ Location Found', icon: null },
   error:   { border: 'rgba(255,90,70,0.45)',   color: 'rgba(255,110,80,0.9)',   label: '✗  Try Again',     icon: <PinSvg color="rgba(255,110,80,0.9)" /> },
 };
@@ -103,7 +103,7 @@ const LocationBtn = ({ state, onClick }) => {
       marginTop: '8px', display: 'flex', alignItems: 'center', gap: '7px',
       background: 'none', border: `1px solid ${cfg.border}`, borderRadius: '4px',
       padding: '10px 16px', cursor: state === 'loading' ? 'default' : 'pointer',
-      fontFamily: 'Raleway, sans-serif', fontSize: '10px', letterSpacing: '2px',
+      fontFamily: "'Jost', sans-serif", fontSize: '10px', letterSpacing: '2px',
       textTransform: 'uppercase', color: cfg.color,
       transition: 'border-color 0.3s ease, color 0.3s ease',
       WebkitTapHighlightColor: 'transparent',
@@ -131,25 +131,25 @@ const MethodCard = ({ selected, onClick, icon, title, desc }) => (
   <button type="button" onClick={onClick} style={{
     flex: 1, cursor: 'pointer', textAlign: 'center',
     background: selected
-      ? 'linear-gradient(160deg, rgba(201,169,110,0.13) 0%, rgba(201,169,110,0.06) 100%)'
-      : 'rgba(250,246,239,0.02)',
-    border: `1px solid ${selected ? 'rgba(201,169,110,0.65)' : 'rgba(201,169,110,0.16)'}`,
+      ? 'linear-gradient(160deg, rgba(201,164,21,0.13) 0%, rgba(201,164,21,0.06) 100%)'
+      : 'rgba(245,238,217,0.02)',
+    border: `1px solid ${selected ? 'rgba(201,164,21,0.65)' : 'rgba(201,164,21,0.16)'}`,
     borderRadius: '10px', padding: '24px 14px 20px',
-    color: selected ? '#C9A96E' : 'rgba(201,169,110,0.42)',
+    color: selected ? '#c9a415' : 'rgba(201,164,21,0.42)',
     transition: 'all 0.35s ease',
     WebkitTapHighlightColor: 'transparent',
     position: 'relative',
     boxShadow: selected
-      ? '0 0 0 1px rgba(201,169,110,0.12), 0 10px 36px rgba(201,169,110,0.14), inset 0 1px 0 rgba(201,169,110,0.1)'
+      ? '0 0 0 1px rgba(201,164,21,0.12), 0 10px 36px rgba(201,164,21,0.14), inset 0 1px 0 rgba(201,164,21,0.1)'
       : '0 2px 10px rgba(0,0,0,0.14)',
   }}>
     {selected && (
       <div style={{
         position: 'absolute', top: '10px', right: '10px',
         width: '18px', height: '18px', borderRadius: '50%',
-        background: '#C9A96E',
+        background: '#c9a415',
         display: 'flex', alignItems: 'center', justifyContent: 'center',
-        boxShadow: '0 2px 8px rgba(201,169,110,0.4)',
+        boxShadow: '0 2px 8px rgba(201,164,21,0.4)',
       }}>
         <svg width="10" height="8" viewBox="0 0 10 8" fill="none">
           <polyline points="1 4 3.5 6.5 9 1" stroke="#0a0600" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
@@ -160,22 +160,22 @@ const MethodCard = ({ selected, onClick, icon, title, desc }) => (
     <div style={{
       display: 'flex', justifyContent: 'center', alignItems: 'center',
       width: '50px', height: '50px', borderRadius: '50%',
-      background: selected ? 'rgba(201,169,110,0.14)' : 'rgba(201,169,110,0.05)',
-      border: `1px solid ${selected ? 'rgba(201,169,110,0.38)' : 'rgba(201,169,110,0.1)'}`,
+      background: selected ? 'rgba(201,164,21,0.14)' : 'rgba(201,164,21,0.05)',
+      border: `1px solid ${selected ? 'rgba(201,164,21,0.38)' : 'rgba(201,164,21,0.1)'}`,
       margin: '0 auto 14px',
       transition: 'all 0.35s ease',
     }}>{icon}</div>
 
     <p style={{
-      fontFamily: 'Raleway, sans-serif', fontSize: '9px', letterSpacing: '3px',
+      fontFamily: "'Jost', sans-serif", fontSize: '9px', letterSpacing: '3px',
       textTransform: 'uppercase', marginBottom: '9px', fontWeight: 500,
-      color: selected ? '#C9A96E' : 'rgba(201,169,110,0.45)',
+      color: selected ? '#c9a415' : 'rgba(201,164,21,0.45)',
       transition: 'color 0.35s ease',
     }}>{title}</p>
 
     <p style={{
       fontFamily: "'Cormorant Garamond', serif", fontStyle: 'italic', fontSize: '12.5px',
-      color: selected ? 'rgba(250,246,239,0.6)' : 'rgba(250,246,239,0.18)',
+      color: selected ? 'rgba(245,238,217,0.6)' : 'rgba(245,238,217,0.18)',
       lineHeight: 1.65, transition: 'color 0.35s ease',
     }}>{desc}</p>
   </button>
@@ -191,27 +191,27 @@ const WishMoneyInfo = ({ price }) => {
     return () => document.removeEventListener('mousedown', fn);
   }, [tip]);
   return (
-    <div style={{ background: 'rgba(201,169,110,0.06)', border: '1px solid rgba(201,169,110,0.2)', borderRadius: '6px', padding: '16px', marginBottom: '24px' }}>
+    <div style={{ background: 'rgba(201,164,21,0.06)', border: '1px solid rgba(201,164,21,0.2)', borderRadius: '6px', padding: '16px', marginBottom: '24px' }}>
       <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: '10px' }}>
         <div style={{ flex: 1 }}>
-          <p style={{ fontFamily: 'Raleway, sans-serif', fontSize: '9px', letterSpacing: '3px', color: 'rgba(201,169,110,0.6)', textTransform: 'uppercase', marginBottom: '6px' }}>Wish Money</p>
-          <p style={{ fontFamily: 'Raleway, sans-serif', fontSize: '13px', fontWeight: 300, color: 'rgba(250,246,239,0.6)', lineHeight: 1.7 }}>
+          <p style={{ fontFamily: "'Jost', sans-serif", fontSize: '9px', letterSpacing: '3px', color: 'rgba(201,164,21,0.6)', textTransform: 'uppercase', marginBottom: '6px' }}>Wish Money</p>
+          <p style={{ fontFamily: "'Jost', sans-serif", fontSize: '13px', fontWeight: 300, color: 'rgba(245,238,217,0.6)', lineHeight: 1.7 }}>
             Send via Wish Money app. We'll confirm your order and share payment details via WhatsApp.
           </p>
-          <p style={{ fontFamily: 'Raleway, sans-serif', fontSize: '11px', color: 'rgba(201,169,110,0.55)', marginTop: '8px' }}>Amount due: ${price}</p>
+          <p style={{ fontFamily: "'Jost', sans-serif", fontSize: '11px', color: 'rgba(201,164,21,0.55)', marginTop: '8px' }}>Amount due: ${price}</p>
         </div>
         <div ref={tipRef} style={{ position: 'relative', flexShrink: 0 }}>
           <button type="button" onClick={() => setTip(t => !t)} style={{
             width: '22px', height: '22px', borderRadius: '50%',
-            border: '1px solid rgba(201,169,110,0.35)', background: 'rgba(201,169,110,0.08)',
-            color: 'rgba(201,169,110,0.7)', fontFamily: 'Raleway, sans-serif',
+            border: '1px solid rgba(201,164,21,0.35)', background: 'rgba(201,164,21,0.08)',
+            color: 'rgba(201,164,21,0.7)', fontFamily: "'Jost', sans-serif",
             fontSize: '11px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center',
             WebkitTapHighlightColor: 'transparent',
           }}>?</button>
           {tip && (
             <div style={{
               position: 'absolute', top: '28px', right: 0, zIndex: 10,
-              background: 'rgba(10,8,4,0.98)', border: '1px solid rgba(201,169,110,0.3)',
+              background: 'rgba(10,8,4,0.98)', border: '1px solid rgba(201,164,21,0.3)',
               borderRadius: '6px', padding: '14px 16px', width: '220px',
               boxShadow: '0 8px 32px rgba(0,0,0,0.5)',
             }}>
@@ -221,7 +221,7 @@ const WishMoneyInfo = ({ price }) => {
                 '3. Transfer the amount via Wish Money',
                 '4. Your order ships once payment is confirmed',
               ].map((step, i) => (
-                <p key={i} style={{ fontFamily: 'Raleway, sans-serif', fontSize: '11px', fontWeight: 300, color: 'rgba(250,246,239,0.65)', lineHeight: 1.7, marginBottom: i < 3 ? '6px' : 0 }}>{step}</p>
+                <p key={i} style={{ fontFamily: "'Jost', sans-serif", fontSize: '11px', fontWeight: 300, color: 'rgba(245,238,217,0.65)', lineHeight: 1.7, marginBottom: i < 3 ? '6px' : 0 }}>{step}</p>
               ))}
             </div>
           )}
@@ -367,8 +367,8 @@ const PaymentModal = ({ product, selectedSize = '100ml', selectedPrice, signatur
         }
         @keyframes locSpin { to { transform:rotate(360deg); } }
         .elara-modal input::placeholder,
-        .elara-modal textarea::placeholder { color: rgba(250,246,239,0.25); }
-        .elara-modal textarea { font-family: Raleway, sans-serif; }
+        .elara-modal textarea::placeholder { color: rgba(245,238,217,0.25); }
+        .elara-modal textarea { font-family: 'Jost', sans-serif; }
       `}</style>
 
       {/* Backdrop */}
@@ -408,15 +408,15 @@ const PaymentModal = ({ product, selectedSize = '100ml', selectedPrice, signatur
         }}>✕</button>
 
         {/* Brand wordmark */}
-        <p style={{ fontFamily: 'Raleway, sans-serif', fontSize: '8px', letterSpacing: '7px', color: 'rgba(201,169,110,0.4)', textTransform: 'uppercase', textAlign: 'center', marginBottom: '12px' }}>ELARA</p>
+        <p style={{ fontFamily: "'Montserrat', sans-serif", fontSize: '8px', letterSpacing: '0.35em', color: 'rgba(201,164,21,0.4)', textTransform: 'uppercase', textAlign: 'center', marginBottom: '12px' }}>ELARA</p>
 
         {submitted ? (
           /* ── Success screen ───────────────────────────────────────────────── */
           <div style={{ textAlign: 'center', padding: '20px 0 12px' }}>
             <div style={{
               width: '64px', height: '64px', borderRadius: '50%',
-              border: '1px solid rgba(201,169,110,0.45)',
-              background: 'rgba(201,169,110,0.06)',
+              border: '1px solid rgba(201,164,21,0.45)',
+              background: 'rgba(201,164,21,0.06)',
               display: 'flex', alignItems: 'center', justifyContent: 'center',
               margin: '0 auto 24px',
             }}>
@@ -424,33 +424,33 @@ const PaymentModal = ({ product, selectedSize = '100ml', selectedPrice, signatur
                 <polyline points="20 6 9 17 4 12"/>
               </svg>
             </div>
-            <h3 style={{ fontFamily: "'Cormorant Garamond', serif", fontWeight: 300, fontSize: '28px', fontStyle: 'italic', color: '#FAF6EF', marginBottom: '12px', lineHeight: 1.2 }}>
+            <h3 style={{ fontFamily: "'Cormorant Garamond', serif", fontWeight: 300, fontSize: '28px', fontStyle: 'italic', color: '#f5eed9', marginBottom: '12px', lineHeight: 1.2 }}>
               Order placed successfully.
             </h3>
-            <p style={{ fontFamily: 'Raleway, sans-serif', fontSize: '12px', fontWeight: 300, color: 'rgba(201,169,110,0.7)', lineHeight: 1.9, marginBottom: '28px', maxWidth: '260px', margin: '0 auto 28px' }}>
+            <p style={{ fontFamily: "'Jost', sans-serif", fontSize: '12px', fontWeight: 300, color: 'rgba(201,164,21,0.7)', lineHeight: 1.9, marginBottom: '28px', maxWidth: '260px', margin: '0 auto 28px' }}>
               Your order has been placed successfully. We will contact you shortly.
             </p>
-            <div style={{ height: '1px', background: 'linear-gradient(to right, transparent, rgba(201,169,110,0.22), transparent)', marginBottom: '20px' }}/>
-            <p style={{ fontFamily: 'Raleway, sans-serif', fontSize: '8px', letterSpacing: '5px', color: 'rgba(201,169,110,0.35)', textTransform: 'uppercase' }}>
+            <div style={{ height: '1px', background: 'linear-gradient(to right, transparent, rgba(201,164,21,0.22), transparent)', marginBottom: '20px' }}/>
+            <p style={{ fontFamily: "'Jost', sans-serif", fontSize: '8px', letterSpacing: '5px', color: 'rgba(201,164,21,0.35)', textTransform: 'uppercase' }}>
               ELARA · Maison de Parfum
             </p>
           </div>
         ) : (
           /* ── Order form ───────────────────────────────────────────────────── */
           <form onSubmit={handleSubmit} noValidate>
-            <h3 style={{ fontFamily: "'Cormorant Garamond', serif", fontWeight: 300, fontSize: '26px', fontStyle: 'italic', color: '#FAF6EF', textAlign: 'center', lineHeight: 1.25, marginBottom: '6px' }}>
+            <h3 style={{ fontFamily: "'Cormorant Garamond', serif", fontWeight: 300, fontSize: '26px', fontStyle: 'italic', color: '#f5eed9', textAlign: 'center', lineHeight: 1.25, marginBottom: '6px' }}>
               Complete Your Order
             </h3>
-            <p style={{ fontFamily: 'Raleway, sans-serif', fontSize: '12px', fontWeight: 300, color: 'rgba(201,169,110,0.6)', letterSpacing: '1px', textAlign: 'center', marginBottom: selectedSize === 'signature' && signatureName.trim() ? '8px' : '28px' }}>
+            <p style={{ fontFamily: "'Jost', sans-serif", fontSize: '12px', fontWeight: 300, color: 'rgba(201,164,21,0.6)', letterSpacing: '1px', textAlign: 'center', marginBottom: selectedSize === 'signature' && signatureName.trim() ? '8px' : '28px' }}>
               {product.name} · {selectedSize === 'signature' ? 'Signature Edition' : '100ml'} · ${price}
             </p>
             {selectedSize === 'signature' && signatureName.trim() && (
-              <p style={{ fontFamily: "'Cormorant Garamond', serif", fontStyle: 'italic', fontSize: '13px', color: 'rgba(201,169,110,0.5)', textAlign: 'center', marginBottom: '28px' }}>
+              <p style={{ fontFamily: "'Cormorant Garamond', serif", fontStyle: 'italic', fontSize: '13px', color: 'rgba(201,164,21,0.5)', textAlign: 'center', marginBottom: '28px' }}>
                 Engraving: "{signatureName.trim()}"
               </p>
             )}
 
-            <div style={{ height: '1px', background: 'linear-gradient(to right, transparent, rgba(201,169,110,0.25), transparent)', marginBottom: '24px' }}/>
+            <div style={{ height: '1px', background: 'linear-gradient(to right, transparent, rgba(201,164,21,0.25), transparent)', marginBottom: '24px' }}/>
 
             {/* ── Customer details ────────────────────────────────────────── */}
             <p style={SEC_LABEL}>Your Details</p>
@@ -465,7 +465,7 @@ const PaymentModal = ({ product, selectedSize = '100ml', selectedPrice, signatur
               onFocus={() => setF('phone', true)} onBlur={() => setF('phone', false)}
             />
 
-            <div style={{ height: '1px', background: 'linear-gradient(to right, transparent, rgba(201,169,110,0.18), transparent)', margin: '20px 0' }}/>
+            <div style={{ height: '1px', background: 'linear-gradient(to right, transparent, rgba(201,164,21,0.18), transparent)', margin: '20px 0' }}/>
 
             {/* ── Delivery address ────────────────────────────────────────── */}
             <p style={SEC_LABEL}>Delivery Address</p>
@@ -482,10 +482,10 @@ const PaymentModal = ({ product, selectedSize = '100ml', selectedPrice, signatur
               <ErrMsg msg={errors.street} />
               <LocationBtn state={locState} onClick={handleDetectLocation} />
               {locState === 'success' && (
-                <p style={{ fontFamily: 'Raleway, sans-serif', fontSize: '10px', letterSpacing: '1px', color: 'rgba(100,210,120,0.85)', marginTop: '5px' }}>✓ Location detected</p>
+                <p style={{ fontFamily: "'Jost', sans-serif", fontSize: '10px', letterSpacing: '1px', color: 'rgba(100,210,120,0.85)', marginTop: '5px' }}>✓ Location detected</p>
               )}
               {locError && (
-                <p style={{ fontFamily: 'Raleway, sans-serif', fontSize: '11px', color: 'rgba(255,100,80,0.85)', marginTop: '6px', lineHeight: 1.5 }}>{locError}</p>
+                <p style={{ fontFamily: "'Jost', sans-serif", fontSize: '11px', color: 'rgba(255,100,80,0.85)', marginTop: '6px', lineHeight: 1.5 }}>{locError}</p>
               )}
             </div>
 
@@ -501,7 +501,7 @@ const PaymentModal = ({ product, selectedSize = '100ml', selectedPrice, signatur
               onFocus={() => setF('notes', true)} onBlur={() => setF('notes', false)}
             />
 
-            <div style={{ height: '1px', background: 'linear-gradient(to right, transparent, rgba(201,169,110,0.18), transparent)', margin: '20px 0' }}/>
+            <div style={{ height: '1px', background: 'linear-gradient(to right, transparent, rgba(201,164,21,0.18), transparent)', margin: '20px 0' }}/>
 
             {/* ── Payment method ───────────────────────────────────────────── */}
             <p style={SEC_LABEL}>Payment Method</p>
@@ -529,23 +529,23 @@ const PaymentModal = ({ product, selectedSize = '100ml', selectedPrice, signatur
               </div>
             )}
 
-            <div style={{ height: '1px', background: 'linear-gradient(to right, transparent, rgba(201,169,110,0.18), transparent)', margin: '20px 0' }}/>
+            <div style={{ height: '1px', background: 'linear-gradient(to right, transparent, rgba(201,164,21,0.18), transparent)', margin: '20px 0' }}/>
 
             {/* ── Security assurance ───────────────────────────────────────── */}
             <div style={{
               display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '9px',
               padding: '13px 16px', marginBottom: '16px',
-              background: 'linear-gradient(135deg, rgba(201,169,110,0.07) 0%, rgba(201,169,110,0.03) 100%)',
-              border: '1px solid rgba(201,169,110,0.18)',
+              background: 'linear-gradient(135deg, rgba(201,164,21,0.07) 0%, rgba(201,164,21,0.03) 100%)',
+              border: '1px solid rgba(201,164,21,0.18)',
               borderRadius: '8px',
             }}>
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="rgba(201,169,110,0.75)"/>
-                <polyline points="9 12 11 14 15 10" stroke="rgba(201,169,110,0.75)"/>
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="rgba(201,164,21,0.75)"/>
+                <polyline points="9 12 11 14 15 10" stroke="rgba(201,164,21,0.75)"/>
               </svg>
               <span style={{
-                fontFamily: 'Raleway, sans-serif', fontSize: '10px', letterSpacing: '2.5px',
-                color: 'rgba(201,169,110,0.75)', textTransform: 'uppercase', fontWeight: 400,
+                fontFamily: "'Jost', sans-serif", fontSize: '10px', letterSpacing: '2.5px',
+                color: 'rgba(201,164,21,0.75)', textTransform: 'uppercase', fontWeight: 400,
               }}>Your order is 100% secure</span>
             </div>
 
@@ -557,17 +557,15 @@ const PaymentModal = ({ product, selectedSize = '100ml', selectedPrice, signatur
               onMouseEnter={() => setBtnHov(true)}
               onMouseLeave={() => setBtnHov(false)}
               style={{
-                width: '100%', fontFamily: 'Raleway, sans-serif', fontSize: '10px',
-                letterSpacing: '4px', textTransform: 'uppercase', padding: '20px 0',
-                background: submitting
-                  ? 'rgba(201,169,110,0.42)'
-                  : (btnHov ? 'linear-gradient(145deg,#f0dc9a,#c4932e)' : 'linear-gradient(145deg,#d4af37,#9d7324)'),
-                color: '#0a0806', border: 'none', borderRadius: '3px',
+                width: '100%', fontFamily: "'Montserrat', sans-serif", fontSize: '10px',
+                letterSpacing: '0.2em', textTransform: 'uppercase', padding: '20px 0',
+                background: submitting ? 'rgba(201,164,21,0.15)' : (btnHov ? '#c9a415' : 'transparent'),
+                color: submitting ? 'rgba(201,164,21,0.5)' : (btnHov ? '#0d0a07' : '#c9a415'),
+                border: '1px solid rgba(201,164,21,0.65)',
+                borderRadius: '1px',
                 cursor: submitting ? 'default' : 'pointer',
-                transition: 'background 0.2s ease, box-shadow 0.25s ease',
-                fontWeight: 600, WebkitTapHighlightColor: 'transparent',
-                overflow: 'hidden',
-                boxShadow: submitting ? 'none' : 'inset 0 1px 0 rgba(255,240,200,0.38)',
+                transition: 'all 0.35s ease',
+                fontWeight: 500, WebkitTapHighlightColor: 'transparent',
               }}
             >
               {submitting ? 'Getting your location…' : 'Confirm Order'}
@@ -575,7 +573,7 @@ const PaymentModal = ({ product, selectedSize = '100ml', selectedPrice, signatur
 
             <p style={{
               fontFamily: "'Cormorant Garamond', serif", fontStyle: 'italic',
-              fontSize: '12px', color: 'rgba(201,169,110,0.3)',
+              fontSize: '12px', color: 'rgba(201,164,21,0.3)',
               textAlign: 'center', marginTop: '14px', letterSpacing: '0.3px',
             }}>
               We'll confirm your order personally via WhatsApp.

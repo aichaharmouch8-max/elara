@@ -12,8 +12,8 @@ const CloseBtn = () => {
       onMouseLeave={() => setHov(false)}
       aria-label="Close cart"
       style={{
-        background: hov ? 'rgba(201,168,76,0.06)' : 'transparent',
-        border: `1px solid ${hov ? 'rgba(201,168,76,0.55)' : 'rgba(201,168,76,0.22)'}`,
+        background: hov ? 'rgba(201,164,21,0.06)' : 'transparent',
+        border: `1px solid ${hov ? 'rgba(201,164,21,0.55)' : 'rgba(201,164,21,0.22)'}`,
         borderRadius: '50%',
         width: '48px', height: '48px',
         display: 'flex', alignItems: 'center', justifyContent: 'center',
@@ -23,7 +23,7 @@ const CloseBtn = () => {
       }}
     >
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
-        stroke={hov ? 'rgba(201,168,76,1)' : 'rgba(201,168,76,0.65)'}
+        stroke={hov ? 'rgba(201,164,21,1)' : 'rgba(201,164,21,0.65)'}
         strokeWidth="1" strokeLinecap="round"
         style={{ transition: 'stroke 0.3s ease' }}
       >
@@ -55,9 +55,9 @@ const CartPage = () => {
 
         {/* Headline */}
         <h1 style={{
-          fontFamily: "'Cormorant Garamond', serif", fontWeight: 300,
-          fontSize: 'clamp(30px, 6vw, 46px)', fontStyle: 'italic',
-          color: '#FAF6EF', lineHeight: 1.2, letterSpacing: '0.02em',
+          fontFamily: "'Tenor Sans', sans-serif", fontWeight: 400,
+          fontSize: 'clamp(30px, 6vw, 46px)',
+          color: '#f5eed9', lineHeight: 1.2, letterSpacing: '0.1em',
           marginBottom: '20px',
         }}>Your Collection Awaits</h1>
 
@@ -65,14 +65,14 @@ const CartPage = () => {
         <p style={{
           fontFamily: "'Cormorant Garamond', serif", fontStyle: 'italic',
           fontSize: '18px', fontWeight: 300,
-          color: 'rgba(201,168,76,0.8)',
+          color: 'rgba(201,164,21,0.85)',
           letterSpacing: '0.3px', marginBottom: '10px',
         }}>You haven't chosen your scent yet.</p>
 
         {/* Story line */}
         <p style={{
-          fontFamily: 'Raleway, sans-serif', fontSize: '11px', fontWeight: 300,
-          color: 'rgba(232,224,216,0.35)', letterSpacing: '1px',
+          fontFamily: "'Jost', sans-serif", fontSize: '11px', fontWeight: 300,
+          color: 'rgba(245,238,217,0.35)', letterSpacing: '0.5px',
           lineHeight: 1.8, marginBottom: '40px',
         }}>Every great story begins with a single choice.</p>
 
@@ -81,14 +81,14 @@ const CartPage = () => {
         {/* Gold hairline */}
         <div style={{
           width: '40px', height: '1px',
-          background: 'rgba(201,168,76,0.35)',
+          background: 'rgba(201,164,21,0.35)',
           marginTop: '40px', marginBottom: '16px',
         }} />
 
         {/* Brand mark */}
         <p style={{
-          fontFamily: 'Raleway, sans-serif', fontSize: '9px', letterSpacing: '4px',
-          color: 'rgba(201,168,76,0.3)', textTransform: 'uppercase',
+          fontFamily: "'Montserrat', sans-serif", fontSize: '9px', letterSpacing: '0.2em',
+          color: 'rgba(201,164,21,0.3)', textTransform: 'uppercase',
         }}>ELARA · Maison de Parfum</p>
         </div>
       </div>
@@ -102,14 +102,14 @@ const CartPage = () => {
         <div style={{ marginBottom: '72px', display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between' }}>
           <div>
             <p style={{
-              fontFamily: 'Raleway', fontSize: '9px', letterSpacing: '6px',
-              color: 'rgba(201,168,76,0.5)', textTransform: 'uppercase', marginBottom: '14px',
+              fontFamily: "'Montserrat', sans-serif", fontSize: '9px', letterSpacing: '0.2em',
+              color: 'rgba(201,164,21,0.55)', textTransform: 'uppercase', marginBottom: '14px',
             }}>
               Your Selection
             </p>
             <h1 style={{
-              fontFamily: "'Cormorant Garamond', serif", fontWeight: 300, fontStyle: 'italic',
-              fontSize: 'clamp(40px, 6vw, 64px)', color: '#FAF6EF', lineHeight: 1,
+              fontFamily: "'Tenor Sans', sans-serif", fontWeight: 400,
+              fontSize: 'clamp(40px, 6vw, 64px)', color: '#f5eed9', lineHeight: 1.1, letterSpacing: '0.1em',
             }}>
               Cart
             </h1>
@@ -122,13 +122,13 @@ const CartPage = () => {
           <div className="cart-grid-header" style={{
             display: 'grid', gridTemplateColumns: '1fr 160px 120px',
             gap: '32px', paddingBottom: '16px',
-            borderBottom: '1px solid rgba(200,150,42,0.2)',
+            borderBottom: '1px solid rgba(138,110,47,0.2)',
             marginBottom: '8px',
           }}>
             {['Fragrance', 'Quantity', 'Total'].map(h => (
               <p key={h} style={{
-                fontFamily: 'Raleway', fontSize: '8px', letterSpacing: '4px',
-                color: 'rgba(200,150,42,0.5)', textTransform: 'uppercase',
+                fontFamily: "'Jost', sans-serif", fontSize: '8px', letterSpacing: '4px',
+                color: 'rgba(138,110,47,0.5)', textTransform: 'uppercase',
                 textAlign: h === 'Total' ? 'right' : 'left',
               }}>
                 {h}
@@ -152,26 +152,26 @@ const CartPage = () => {
               <div style={{
                 display: 'flex', justifyContent: 'space-between', alignItems: 'baseline',
                 paddingBottom: '20px',
-                borderBottom: '1px solid rgba(200,150,42,0.15)',
+                borderBottom: '1px solid rgba(138,110,47,0.15)',
                 marginBottom: '16px',
               }}>
                 <span style={{
-                  fontFamily: 'Raleway', fontSize: '9px', letterSpacing: '4px',
-                  color: 'rgba(201,168,76,0.5)', textTransform: 'uppercase',
+                  fontFamily: "'Montserrat', sans-serif", fontSize: '9px', letterSpacing: '0.2em',
+                  color: 'rgba(201,164,21,0.55)', textTransform: 'uppercase',
                 }}>
                   Subtotal
                 </span>
                 <span style={{
                   fontFamily: "'Cormorant Garamond', serif",
-                  fontSize: '34px', fontWeight: 300, color: '#FAF6EF',
+                  fontSize: '34px', fontWeight: 300, color: '#f5eed9',
                 }}>
                   ${subtotal}
                 </span>
               </div>
 
               <p style={{
-                fontFamily: 'Raleway', fontSize: '11px', fontWeight: 300,
-                color: 'rgba(250,246,239,0.3)', letterSpacing: '0.3px',
+                fontFamily: "'Jost', sans-serif", fontSize: '11px', fontWeight: 300,
+                color: 'rgba(245,238,217,0.35)', letterSpacing: '0.3px',
                 lineHeight: 1.8, marginBottom: '32px',
               }}>
                 Complimentary worldwide shipping on all orders.
@@ -183,12 +183,12 @@ const CartPage = () => {
               <Link to="/shop"
                 style={{
                   display: 'block', textAlign: 'center', marginTop: '18px',
-                  fontFamily: 'Raleway', fontSize: '10px', letterSpacing: '3px',
-                  color: 'rgba(201,168,76,0.35)', textTransform: 'uppercase',
+                  fontFamily: "'Jost', sans-serif", fontSize: '10px', letterSpacing: '3px',
+                  color: 'rgba(201,164,21,0.35)', textTransform: 'uppercase',
                   transition: 'color 0.3s',
                 }}
-                onMouseEnter={e => e.currentTarget.style.color = '#C9A84C'}
-                onMouseLeave={e => e.currentTarget.style.color = 'rgba(201,168,76,0.35)'}
+                onMouseEnter={e => e.currentTarget.style.color = '#c9a415'}
+                onMouseLeave={e => e.currentTarget.style.color = 'rgba(201,164,21,0.35)'}
               >
                 Continue Shopping
               </Link>
@@ -208,19 +208,19 @@ const CartItem = ({ item, onUpdate, onRemove }) => (
       display: 'grid', gridTemplateColumns: '1fr 160px 120px',
       gap: '32px', alignItems: 'center',
       padding: '28px 0',
-      borderBottom: '1px solid rgba(200,150,42,0.1)',
+      borderBottom: '1px solid rgba(138,110,47,0.1)',
     }}
   >
     <div>
       <p style={{
         fontFamily: "'Cormorant Garamond', serif", fontWeight: 300, fontStyle: 'italic',
-        fontSize: '22px', color: '#FAF6EF', marginBottom: '4px',
+        fontSize: '22px', color: '#f5eed9', marginBottom: '4px',
       }}>
         {item.name}
       </p>
       <p style={{
-        fontFamily: 'Raleway', fontSize: '8px', letterSpacing: '3px',
-        color: 'rgba(201,168,76,0.6)', textTransform: 'uppercase',
+        fontFamily: "'Montserrat', sans-serif", fontSize: '8px', letterSpacing: '0.18em',
+        color: 'rgba(201,164,21,0.6)', textTransform: 'uppercase',
       }}>
         100ml Eau de Parfum
       </p>
@@ -229,8 +229,8 @@ const CartItem = ({ item, onUpdate, onRemove }) => (
     <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
       <QtyBtn onClick={() => onUpdate(item.id, item.qty - 1)}>−</QtyBtn>
       <span style={{
-        fontFamily: 'Raleway', fontSize: '14px', fontWeight: 300,
-        color: '#FAF6EF', minWidth: '24px', textAlign: 'center',
+        fontFamily: "'Jost', sans-serif", fontSize: '14px', fontWeight: 300,
+        color: '#f5eed9', minWidth: '24px', textAlign: 'center',
       }}>
         {item.qty}
       </span>
@@ -239,11 +239,11 @@ const CartItem = ({ item, onUpdate, onRemove }) => (
         onClick={() => onRemove(item.id)}
         style={{
           background: 'none', border: 'none', cursor: 'pointer',
-          color: 'rgba(201,168,76,0.3)', marginLeft: '4px',
+          color: 'rgba(201,164,21,0.3)', marginLeft: '4px',
           transition: 'color 0.25s', padding: '4px', display: 'flex',
         }}
-        onMouseEnter={e => e.currentTarget.style.color = 'rgba(201,168,76,0.9)'}
-        onMouseLeave={e => e.currentTarget.style.color = 'rgba(201,168,76,0.3)'}
+        onMouseEnter={e => e.currentTarget.style.color = 'rgba(201,164,21,0.9)'}
+        onMouseLeave={e => e.currentTarget.style.color = 'rgba(201,164,21,0.3)'}
       >
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
           <line x1="18" y1="6" x2="6" y2="18"/>
@@ -255,7 +255,7 @@ const CartItem = ({ item, onUpdate, onRemove }) => (
     <div style={{ textAlign: 'right' }}>
       <span style={{
         fontFamily: "'Cormorant Garamond', serif",
-        fontSize: '24px', fontWeight: 300, color: '#FAF6EF',
+        fontSize: '24px', fontWeight: 300, color: '#f5eed9',
       }}>
         ${item.price * item.qty}
       </span>
@@ -272,13 +272,13 @@ const QtyBtn = ({ children, onClick }) => {
       onMouseLeave={() => setHov(false)}
       style={{
         width: '30px', height: '30px',
-        border: `1px solid ${hov ? 'rgba(201,168,76,0.7)' : 'rgba(201,168,76,0.2)'}`,
-        background: hov ? 'rgba(201,168,76,0.08)' : 'transparent',
-        cursor: 'pointer', color: '#FAF6EF',
+        border: `1px solid ${hov ? 'rgba(201,164,21,0.7)' : 'rgba(201,164,21,0.2)'}`,
+        background: hov ? 'rgba(201,164,21,0.08)' : 'transparent',
+        cursor: 'pointer', color: '#f5eed9',
         fontSize: '16px', fontWeight: 300,
         display: 'flex', alignItems: 'center', justifyContent: 'center',
         transition: 'all 0.25s ease',
-        fontFamily: 'Raleway',
+        fontFamily: "'Jost', sans-serif",
       }}
     >
       {children}
@@ -291,19 +291,19 @@ const CheckoutBtn = () => {
   return (
     <button
       type="button"
-      className="lux-checkout-btn discover-shimmer"
+      className="lux-checkout-btn"
       onMouseEnter={() => setHov(true)}
       onMouseLeave={() => setHov(false)}
       style={{
-        width: '100%', fontFamily: 'Raleway', fontSize: '9px',
-        letterSpacing: '4px', textTransform: 'uppercase', padding: '22px',
-        background: hov ? 'linear-gradient(145deg,#f0dc9a,#c4932e)' : 'linear-gradient(145deg,#d4af37,#9d7324)',
-        color: '#0a0806', fontWeight: 600,
-        border: 'none',
+        width: '100%', fontFamily: "'Montserrat', sans-serif", fontSize: '9px',
+        letterSpacing: '0.2em', textTransform: 'uppercase', padding: '22px',
+        background: hov ? '#c9a415' : 'transparent',
+        color: hov ? '#0d0a07' : '#c9a415',
+        border: '1px solid rgba(201,164,21,0.65)',
+        borderRadius: '1px',
+        fontWeight: 500,
         cursor: 'pointer',
-        transition: 'background 0.3s ease, box-shadow 0.3s ease',
-        boxShadow: 'inset 0 1px 0 rgba(255,240,200,0.35)',
-        overflow: 'hidden',
+        transition: 'all 0.35s ease',
       }}
     >
       Proceed to Checkout
@@ -317,19 +317,19 @@ const ShopNowBtn = () => {
     <Link to="/shop" style={{ display: 'inline-block' }}>
       <button
         type="button"
-        className="lux-checkout-btn discover-shimmer"
+        className="lux-checkout-btn"
         onMouseEnter={() => setHov(true)}
         onMouseLeave={() => setHov(false)}
         style={{
-          width: '220px', fontFamily: 'Raleway', fontSize: '9px',
-          letterSpacing: '4px', textTransform: 'uppercase', padding: '18px 0',
-          background: hov ? 'linear-gradient(145deg,#f0dc9a,#c4932e)' : 'linear-gradient(145deg,#d4af37,#9d7324)',
-          color: '#0a0806', fontWeight: 600,
-          border: 'none',
+          width: '220px', fontFamily: "'Montserrat', sans-serif", fontSize: '9px',
+          letterSpacing: '0.2em', textTransform: 'uppercase', padding: '18px 0',
+          background: hov ? '#c9a415' : 'transparent',
+          color: hov ? '#0d0a07' : '#c9a415',
+          border: '1px solid rgba(201,164,21,0.65)',
+          borderRadius: '1px',
+          fontWeight: 500,
           cursor: 'pointer',
-          transition: 'background 0.3s ease',
-          overflow: 'hidden',
-          boxShadow: 'inset 0 1px 0 rgba(255,240,200,0.35)',
+          transition: 'all 0.35s ease',
         }}
       >
         Shop Now
