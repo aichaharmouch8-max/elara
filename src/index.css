@@ -436,13 +436,8 @@ video.hero-bg-video {
   /* Kill looping CSS animations during scroll — framer-motion is unaffected */
   * { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; }
 
-  /* Disable mandatory snap on mobile — it kills momentum scrolling */
-  html {
-    scroll-snap-type: none !important;
-  }
   .snap-section,
   .snap-section-auto {
-    scroll-snap-align: none !important;
     overflow-y: visible !important;
     -webkit-overflow-scrolling: touch;
     min-height: auto !important;
