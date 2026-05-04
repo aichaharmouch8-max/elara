@@ -1,6 +1,38 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
+
+const CloseBtn = () => {
+  const navigate = useNavigate();
+  const [hov, setHov] = useState(false);
+  return (
+    <button
+      onClick={() => navigate('/')}
+      onMouseEnter={() => setHov(true)}
+      onMouseLeave={() => setHov(false)}
+      aria-label="Close cart"
+      style={{
+        background: hov ? 'rgba(201,168,76,0.06)' : 'transparent',
+        border: `1px solid ${hov ? 'rgba(201,168,76,0.55)' : 'rgba(201,168,76,0.22)'}`,
+        borderRadius: '50%',
+        width: '48px', height: '48px',
+        display: 'flex', alignItems: 'center', justifyContent: 'center',
+        cursor: 'pointer',
+        transition: 'border-color 0.3s ease, background 0.3s ease',
+        flexShrink: 0,
+      }}
+    >
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+        stroke={hov ? 'rgba(201,168,76,1)' : 'rgba(201,168,76,0.65)'}
+        strokeWidth="1" strokeLinecap="round"
+        style={{ transition: 'stroke 0.3s ease' }}
+      >
+        <line x1="18" y1="6" x2="6" y2="18"/>
+        <line x1="6" y1="6" x2="18" y2="18"/>
+      </svg>
+    </button>
+  );
+};
 
 const CartPage = () => {
   const { cart, removeFromCart, updateQty } = useCart();
@@ -17,16 +49,9 @@ const CartPage = () => {
       }}>
         {/* Refined bag icon */}
         <div className="cart-empty-state" style={{ maxWidth: '420px', width: '100%', padding: '56px 40px 48px', boxSizing: 'border-box' }}>
-        <svg
-          width="48" height="48" viewBox="0 0 24 24" fill="none"
-          stroke="rgba(228,208,145,0.88)" strokeWidth="0.75"
-          strokeLinecap="round" strokeLinejoin="round"
-          style={{ marginBottom: '36px' }}
-        >
-          <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
-          <line x1="3" y1="6" x2="21" y2="6"/>
-          <path d="M16 10a4 4 0 01-8 0"/>
-        </svg>
+        <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '36px' }}>
+          <CloseBtn />
+        </div>
 
         {/* Headline */}
         <h1 style={{
@@ -74,19 +99,22 @@ const CartPage = () => {
     <div style={{ background: 'transparent', minHeight: '100vh', paddingTop: '112px' }}>
       <div className="cart-wrapper" style={{ maxWidth: '860px', margin: '0 auto', padding: '60px clamp(20px, 5vw, 48px) 140px' }}>
         {/* Header */}
-        <div style={{ marginBottom: '72px' }}>
-          <p style={{
-            fontFamily: 'Raleway', fontSize: '9px', letterSpacing: '6px',
-            color: 'rgba(201,168,76,0.5)', textTransform: 'uppercase', marginBottom: '14px',
-          }}>
-            Your Selection
-          </p>
-          <h1 style={{
-            fontFamily: "'Cormorant Garamond', serif", fontWeight: 300, fontStyle: 'italic',
-            fontSize: 'clamp(40px, 6vw, 64px)', color: '#FAF6EF', lineHeight: 1,
-          }}>
-            Cart
-          </h1>
+        <div style={{ marginBottom: '72px', display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between' }}>
+          <div>
+            <p style={{
+              fontFamily: 'Raleway', fontSize: '9px', letterSpacing: '6px',
+              color: 'rgba(201,168,76,0.5)', textTransform: 'uppercase', marginBottom: '14px',
+            }}>
+              Your Selection
+            </p>
+            <h1 style={{
+              fontFamily: "'Cormorant Garamond', serif", fontWeight: 300, fontStyle: 'italic',
+              fontSize: 'clamp(40px, 6vw, 64px)', color: '#FAF6EF', lineHeight: 1,
+            }}>
+              Cart
+            </h1>
+          </div>
+          <CloseBtn />
         </div>
 
         <div>
