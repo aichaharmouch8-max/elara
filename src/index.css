@@ -204,7 +204,7 @@ body {
 }
 
 .snap-section-auto {
-  min-height: 100vh;
+  min-height: auto;
 }
 
 section, div, header, footer, nav {
@@ -773,7 +773,7 @@ video.hero-bg-video {
 
 @media (max-width: 768px) {
   .why-section {
-    padding: 80px 24px !important;
+    padding: 60px 24px !important;
   }
   .why-subtext {
     max-width: 320px !important;
@@ -833,13 +833,6 @@ video.hero-bg-video {
     border: none !important;
     padding: 0 !important;
     margin: 0 !important;
-  }
-}
-
-/* ── Connect section ── */
-@media (max-width: 768px) {
-  .connect-section {
-    padding: 80px 24px 60px !important;
   }
 }
 

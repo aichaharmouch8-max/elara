@@ -87,11 +87,88 @@ const PRODUCTS = [
 
 const REINE_PRICES = { '100ml': 49, 'signature': 69 };
 
+const NotifyForm = ({ productName }) => {
+  const [email, setEmail]   = useState('');
+  const [focused, setFocused] = useState(false);
+  const [btnHov, setBtnHov] = useState(false);
+  const [done, setDone]     = useState(false);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!email.trim()) return;
+    window.open(
+      `https://wa.me/96176510481?text=${encodeURIComponent(`Waitlist request — ${productName}: ${email} — ELARA`)}`,
+      '_blank'
+    );
+    setDone(true);
+  };
+
+  if (done) return (
+    <div style={{ textAlign: 'center', padding: '16px 0' }}>
+      <p style={{
+        fontFamily: "'Cormorant Garamond', serif", fontStyle: 'italic',
+        fontSize: '18px', color: 'rgba(201,168,76,0.9)', marginBottom: '4px',
+      }}>You're on the list.</p>
+      <p style={{
+        fontFamily: 'Raleway, sans-serif', fontSize: '9px', letterSpacing: '2px',
+        color: 'rgba(250,246,239,0.3)', textTransform: 'uppercase',
+      }}>We'll be in touch.</p>
+    </div>
+  );
+
+  return (
+    <form onSubmit={handleSubmit} style={{ width: '100%' }}>
+      <style>{`.nf-input::placeholder{color:rgba(201,168,76,0.3);font-style:italic;font-family:'Cormorant Garamond',serif;}`}</style>
+      <p style={{
+        fontFamily: 'Raleway, sans-serif', fontSize: '8px', letterSpacing: '5px',
+        color: 'rgba(201,168,76,0.5)', textTransform: 'uppercase',
+        textAlign: 'center', marginBottom: '14px',
+      }}>Launching Soon</p>
+      <input
+        type="email"
+        value={email}
+        onChange={e => setEmail(e.target.value)}
+        onFocus={() => setFocused(true)}
+        onBlur={() => setFocused(false)}
+        placeholder="your@email.com"
+        required
+        className="nf-input"
+        style={{
+          width: '100%', boxSizing: 'border-box',
+          background: 'transparent', border: 'none',
+          borderBottom: `1px solid ${focused ? 'rgba(201,168,76,0.7)' : 'rgba(201,168,76,0.22)'}`,
+          color: '#FAF6EF',
+          fontFamily: "'Cormorant Garamond', serif",
+          fontSize: '15px', fontWeight: 300,
+          padding: '10px 0', outline: 'none', textAlign: 'center',
+          marginBottom: '14px',
+          transition: 'border-color 0.3s ease',
+        }}
+      />
+      <button
+        type="submit"
+        onMouseEnter={() => setBtnHov(true)}
+        onMouseLeave={() => setBtnHov(false)}
+        style={{
+          width: '100%',
+          fontFamily: 'Raleway, sans-serif', fontSize: '8px', fontWeight: 600,
+          letterSpacing: '4px', textTransform: 'uppercase',
+          padding: '14px',
+          background: btnHov ? 'rgba(201,168,76,0.1)' : 'transparent',
+          color: 'rgba(201,168,76,0.9)',
+          border: '1px solid rgba(201,168,76,0.4)',
+          cursor: 'pointer',
+          transition: 'all 0.3s ease',
+        }}
+      >Notify Me</button>
+    </form>
+  );
+};
+
 const CollectionCard = ({ product }) => {
   const [hov, setHov] = useState(false);
   const [btnHov, setBtnHov] = useState(false);
   const [modal, setModal] = useState(false);
-  const [notifyHov, setNotifyHov] = useState(false);
   const locked = !product.available;
   const [selectedSize, setSelectedSize] = useState('100ml');
   const [displayPrice, setDisplayPrice] = useState(49);
@@ -366,34 +443,8 @@ const CollectionCard = ({ product }) => {
             </>
           )}
 
-          {/* ── LOCKED: Notify me — WhatsApp link ── */}
-          {locked && (
-            <a
-              href={`https://wa.me/96176510481?text=${encodeURIComponent(`Notify me when ${product.name} launches — ELARA`)}`}
-              target="_blank"
-              rel="noreferrer"
-              onMouseEnter={() => setNotifyHov(true)}
-              onMouseLeave={() => setNotifyHov(false)}
-              style={{
-                display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '12px',
-                width: '100%', padding: '16px 24px', boxSizing: 'border-box',
-                border: `1px solid ${notifyHov ? 'rgba(201,168,76,0.8)' : 'rgba(201,168,76,0.35)'}`,
-                boxShadow: notifyHov ? '0 0 20px rgba(201,168,76,0.15)' : 'none',
-                transition: 'all 0.3s ease',
-                background: 'transparent', textDecoration: 'none', cursor: 'pointer',
-              }}
-            >
-              <svg width="14" height="16" viewBox="0 0 14 16" fill="none" style={{ flexShrink: 0 }}>
-                <rect x="1" y="7" width="12" height="9" rx="1" stroke="#c9a84c" strokeWidth="1"/>
-                <path d="M4 7V5a3 3 0 016 0v2" stroke="#c9a84c" strokeWidth="1" strokeLinecap="round"/>
-                <circle cx="7" cy="11.5" r="1" fill="#c9a84c"/>
-              </svg>
-              <div>
-                <p style={{ fontFamily: 'Raleway, sans-serif', fontSize: '11px', letterSpacing: '0.2em', color: '#c9a84c', textTransform: 'uppercase', margin: 0 }}>Launching Soon</p>
-                <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: '10px', color: 'rgba(255,255,255,0.4)', marginTop: '2px', fontStyle: 'italic', margin: '2px 0 0' }}>Notify me of the reveal</p>
-              </div>
-            </a>
-          )}
+          {/* ── LOCKED: email notify form ── */}
+          {locked && <NotifyForm productName={product.name} />}
         </div>
       </motion.div>
 
@@ -419,7 +470,6 @@ const CollectionCarousel = () => {
   const [nameFocused, setNameFocused] = useState(false);
   const [modal, setModal] = useState(false);
   const [modalProduct, setModalProduct] = useState(null);
-  const [notifyHov, setNotifyHov] = useState(null);
   const priceTimer = useRef(null);
 
   const goTo = (index) => setCurrent(index);
@@ -653,34 +703,11 @@ const CollectionCarousel = () => {
                 </>
               )}
 
-              {/* LOCKED: Notify via WhatsApp */}
+              {/* LOCKED: email notify form */}
               {product.locked && (
-                <a
-                  href={`https://wa.me/96176510481?text=${encodeURIComponent(`Notify me when ${product.name} launches — ELARA`)}`}
-                  target="_blank"
-                  rel="noreferrer"
-                  onMouseEnter={() => setNotifyHov(product.id)}
-                  onMouseLeave={() => setNotifyHov(null)}
-                  style={{
-                    marginTop: 'auto',
-                    display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '12px',
-                    width: '100%', padding: '16px 24px', boxSizing: 'border-box',
-                    border: `1px solid ${notifyHov === product.id ? 'rgba(201,168,76,0.8)' : 'rgba(201,168,76,0.35)'}`,
-                    boxShadow: notifyHov === product.id ? '0 0 20px rgba(201,168,76,0.15)' : 'none',
-                    transition: 'all 0.3s ease',
-                    background: 'transparent', textDecoration: 'none', cursor: 'pointer',
-                  }}
-                >
-                  <svg width="14" height="16" viewBox="0 0 14 16" fill="none" style={{ flexShrink: 0 }}>
-                    <rect x="1" y="7" width="12" height="9" rx="1" stroke="#c9a84c" strokeWidth="1"/>
-                    <path d="M4 7V5a3 3 0 016 0v2" stroke="#c9a84c" strokeWidth="1" strokeLinecap="round"/>
-                    <circle cx="7" cy="11.5" r="1" fill="#c9a84c"/>
-                  </svg>
-                  <div>
-                    <p style={{ fontFamily: 'Raleway, sans-serif', fontSize: '11px', letterSpacing: '0.2em', color: '#c9a84c', textTransform: 'uppercase', margin: 0 }}>Launching Soon</p>
-                    <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: '10px', color: 'rgba(255,255,255,0.4)', fontStyle: 'italic', margin: '2px 0 0' }}>Notify me of the reveal</p>
-                  </div>
-                </a>
+                <div style={{ marginTop: 'auto', width: '100%' }}>
+                  <NotifyForm productName={product.name} />
+                </div>
               )}
             </div>
           </div>
@@ -733,93 +760,6 @@ const useReveal = (threshold = 0.15) => {
 /* ─────────────────────────────────────────
    CONTACT SECTION
 ───────────────────────────────────────── */
-const CombinedConnectSection = () => {
-  const [waHov, setWaHov] = useState(false);
-  const [secRef, secIn]   = useReveal(0.05);
-
-  const fadeUp = (d = 0) => ({
-    opacity: secIn ? 1 : 0,
-    transform: secIn ? 'translateY(0)' : 'translateY(24px)',
-    transition: `opacity 0.9s ease ${d}s, transform 0.9s cubic-bezier(0.16,1,0.3,1) ${d}s`,
-  });
-
-  return (
-    <section
-      id="connect"
-      className="snap-section-auto connect-section"
-      ref={secRef}
-      style={{
-        background: 'transparent',
-        padding: '120px 60px',
-        textAlign: 'center',
-      }}
-    >
-      <div id="contact" style={{ maxWidth: '520px', margin: '0 auto', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-
-        {/* Label */}
-        <p style={{
-          fontFamily: 'Raleway, sans-serif', fontSize: '10px', letterSpacing: '6px',
-          color: 'rgba(201,168,76,0.6)', textTransform: 'uppercase',
-          marginBottom: '20px',
-          ...fadeUp(0.05),
-        }}>Get in Touch</p>
-
-        {/* Headline */}
-        <h2 style={{
-          fontFamily: "'Cormorant Garamond', serif", fontWeight: 300,
-          fontSize: 'clamp(2rem, 4.5vw, 3.2rem)', lineHeight: 1.1,
-          marginBottom: '16px', letterSpacing: '-0.5px',
-          ...fadeUp(0.1),
-        }}>
-          <span style={{ color: '#FAF6EF' }}>We'd Love to </span>
-          <span style={{ fontStyle: 'italic', color: '#c9a84c' }}>Hear From You</span>
-        </h2>
-
-        {/* Subtext */}
-        <p style={{
-          fontFamily: 'Raleway, sans-serif', fontSize: '13px', fontWeight: 300,
-          color: 'rgba(232,224,216,0.45)',
-          marginBottom: '40px', letterSpacing: '0.3px', lineHeight: 1.7,
-          maxWidth: '340px',
-          ...fadeUp(0.15),
-        }}>
-          The fastest way to reach us is WhatsApp. We reply within minutes.
-        </p>
-
-        {/* WhatsApp CTA */}
-        <div style={{ ...fadeUp(0.2) }}>
-          <a
-            href="https://wa.me/96176510481"
-            target="_blank"
-            rel="noreferrer"
-            onMouseEnter={() => setWaHov(true)}
-            onMouseLeave={() => setWaHov(false)}
-            style={{
-              display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px',
-              width: '280px', height: '54px', margin: '0 auto',
-              background: waHov ? '#b8973d' : '#c9a84c',
-              color: '#060606',
-              fontFamily: 'Raleway, sans-serif', fontSize: '13px',
-              fontWeight: 600, letterSpacing: '0.15em', textTransform: 'uppercase',
-              textDecoration: 'none', borderRadius: '2px',
-              transition: 'background 0.3s ease',
-              boxSizing: 'border-box', cursor: 'pointer',
-            }}
-          >
-            <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-            </svg>
-            Chat on WhatsApp
-          </a>
-
-
-        </div>
-
-      </div>
-    </section>
-  );
-};
-
 /* ─────────────────────────────────────────
    WHY ELARA
 ───────────────────────────────────────── */
@@ -872,7 +812,7 @@ const WhyELARA = () => {
   return (
     <section ref={ref} className="why-section" style={{
       background: 'transparent',
-      padding: 'clamp(80px, 8vw, 100px) clamp(24px, 8vw, 80px)',
+      padding: '60px clamp(24px, 6vw, 60px)',
       textAlign: 'center',
     }}>
       <p style={{
@@ -939,7 +879,7 @@ const ExclusiveAccess = () => {
       className="exclusive-access-section"
       style={{
         background: '#060606',
-        padding: '100px 40px',
+        padding: '60px 40px 80px',
         borderTop: '1px solid rgba(201,168,76,0.12)',
         textAlign: 'center',
       }}
@@ -1034,7 +974,6 @@ const ExclusiveAccess = () => {
 const SECTIONS = [
   { id: 'hero',       label: 'Hero' },
   { id: 'collection', label: 'Collection' },
-  { id: 'connect',    label: 'Connect' },
 ];
 
 const SideNavDots = () => {
@@ -1255,7 +1194,7 @@ const Home = () => {
       {/* ══════════════════ COLLECTION ══════════════════ */}
       <section id="collection" className="collection-section snap-section-auto" style={{
         background: 'transparent',
-        padding: 'clamp(60px, 8vw, 100px) clamp(20px, 4vw, 40px)',
+        padding: '60px clamp(20px, 4vw, 40px) 80px',
         width: '100%',
         maxWidth: '100%',
       }}>
@@ -1328,9 +1267,6 @@ const Home = () => {
 
       {/* ══════════════════ EXCLUSIVE ACCESS ══════════════════ */}
       <ExclusiveAccess />
-
-      {/* ══════════════════ CONTACT ══════════════════ */}
-      <CombinedConnectSection />
 
     </div>
   );
