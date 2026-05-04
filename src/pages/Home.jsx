@@ -400,10 +400,7 @@ const CollectionCard = ({ product }) => {
 ───────────────────────────────────────── */
 const CollectionCarousel = () => {
   const [current, setCurrent] = useState(0);
-  const carouselRef = useRef(null);
-  const touchStartX = useRef(0);
-  const touchStartY = useRef(0);
-  const swipeDir = useRef(null); // null = undecided, true = horizontal, false = vertical
+  const trackRef = useRef(null);
 
   // Edition selector state (for unlocked card)
   const [selectedSize, setSelectedSize] = useState('100ml');
@@ -414,7 +411,22 @@ const CollectionCarousel = () => {
   const [modalProduct, setModalProduct] = useState(null);
   const priceTimer = useRef(null);
 
-  const goTo = (index) => setCurrent(index);
+  const goTo = (index) => {
+    const el = trackRef.current;
+    if (!el) return;
+    el.scrollTo({ left: index * el.offsetWidth, behavior: 'smooth' });
+  };
+
+  useEffect(() => {
+    const el = trackRef.current;
+    if (!el) return;
+    const onScroll = () => {
+      const idx = Math.round(el.scrollLeft / el.offsetWidth);
+      setCurrent(idx);
+    };
+    el.addEventListener('scroll', onScroll, { passive: true });
+    return () => el.removeEventListener('scroll', onScroll);
+  }, []);
 
   const animatePrice = useCallback((from, to) => {
     clearInterval(priceTimer.current);
@@ -433,56 +445,25 @@ const CollectionCarousel = () => {
     setSelectedSize(size);
   };
 
-  const handleTouchStart = (e) => {
-    touchStartX.current = e.touches[0].clientX;
-    touchStartY.current = e.touches[0].clientY;
-    swipeDir.current = null;
-  };
-
-  const handleTouchEnd = (e) => {
-    if (!swipeDir.current) return;
-    const diff = touchStartX.current - e.changedTouches[0].clientX;
-    if (Math.abs(diff) > 40) {
-      if (diff > 0) setCurrent(prev => Math.min(prev + 1, PRODUCTS.length - 1));
-      if (diff < 0) setCurrent(prev => Math.max(prev - 1, 0));
-    }
-  };
-
-  useEffect(() => {
-    const el = carouselRef.current;
-    if (!el) return;
-    const onMove = (e) => {
-      if (swipeDir.current === false) return;
-      const diffX = Math.abs(e.touches[0].clientX - touchStartX.current);
-      const diffY = Math.abs(e.touches[0].clientY - touchStartY.current);
-      if (swipeDir.current === null && (diffX > 4 || diffY > 4)) {
-        swipeDir.current = diffX >= diffY;
-      }
-      if (swipeDir.current === true) {
-        e.preventDefault();
-      }
-    };
-    el.addEventListener('touchmove', onMove, { passive: false });
-    return () => el.removeEventListener('touchmove', onMove);
-  }, []);
-
   return (
-    <div style={{ width: '100%', overflow: 'hidden' }}>
+    <div style={{ width: '100%' }}>
+      <style>{`.carousel-track::-webkit-scrollbar{display:none}`}</style>
 
-      {/* TRACK */}
+      {/* TRACK — native CSS scroll-snap, zero JS friction */}
       <div
-        ref={carouselRef}
+        ref={trackRef}
+        className="carousel-track"
         style={{
           display: 'flex',
-          alignItems: 'stretch',
-          transform: `translateX(-${current * 100}vw)`,
-          transition: 'transform 0.45s cubic-bezier(0.4, 0, 0.2, 1)',
+          overflowX: 'scroll',
+          scrollSnapType: 'x mandatory',
+          WebkitOverflowScrolling: 'touch',
+          msOverflowStyle: 'none',
+          scrollbarWidth: 'none',
         }}
-        onTouchStart={handleTouchStart}
-        onTouchEnd={handleTouchEnd}
       >
         {PRODUCTS.map((product, index) => (
-          <div key={index} style={{ minWidth: '100vw', padding: '0 20px', boxSizing: 'border-box', display: 'flex', flexDirection: 'column' }}>
+          <div key={index} style={{ minWidth: '100%', scrollSnapAlign: 'start', padding: '0 20px', boxSizing: 'border-box', display: 'flex', flexDirection: 'column' }}>
 
             {/* CARD */}
             <div style={{
