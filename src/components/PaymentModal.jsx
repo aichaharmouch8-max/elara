@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
+import { supabase } from '../lib/supabase';
 
 // ── Shared styles ─────────────────────────────────────────────────────────────
 
@@ -368,6 +369,21 @@ const PaymentModal = ({ product, selectedSize = '100ml', selectedPrice, signatur
 
     const encoded = encodeURIComponent(lines.join('\n'));
     window.open(`https://wa.me/96176510481?text=${encoded}`, '_blank');
+
+    supabase.from('orders').insert({
+      customer_name: name.trim(),
+      phone: `+961 ${phone.trim()}`,
+      product: product.name,
+      edition: selectedSize === 'signature' ? 'Signature Edition (100ml)' : '100ml Eau de Parfum',
+      price,
+      payment: methodLabel,
+      address: street.trim(),
+      floor_apt: floor.trim() || null,
+      gps_lat: locData?.lat ?? null,
+      gps_lng: locData?.lng ?? null,
+      gps_location: locData ? `https://maps.google.com/?q=${locData.lat},${locData.lng}` : null,
+    });
+
     setSubmitting(false);
     setSubmitted(true);
     setTimeout(onClose, 4000);
