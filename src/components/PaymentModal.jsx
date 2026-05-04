@@ -432,16 +432,6 @@ const PaymentModal = ({ product, selectedSize = '100ml', selectedPrice, signatur
 
             <div style={{ height: '1px', background: 'linear-gradient(to right, transparent, rgba(201,169,110,0.25), transparent)', marginBottom: '24px' }}/>
 
-            {/* Delivery badges */}
-            <div style={{ display: 'flex', gap: '16px', marginBottom: '24px', padding: '14px 16px', background: 'rgba(201,169,110,0.04)', border: '1px solid rgba(201,169,110,0.12)', borderRadius: '6px' }}>
-              {[{ icon: '🚚', text: 'Free delivery across Lebanon' }, { icon: '⏱', text: '24–48 hrs delivery' }].map(({ icon, text }) => (
-                <div key={text} style={{ flex: 1, textAlign: 'center' }}>
-                  <div style={{ fontSize: '16px', marginBottom: '4px' }}>{icon}</div>
-                  <p style={{ fontFamily: 'Raleway, sans-serif', fontSize: '8px', letterSpacing: '0.5px', color: 'rgba(250,246,239,0.4)', lineHeight: 1.5 }}>{text}</p>
-                </div>
-              ))}
-            </div>
-
             {/* ── Customer details ────────────────────────────────────────── */}
             <p style={SEC_LABEL}>Your Details</p>
             <Field
