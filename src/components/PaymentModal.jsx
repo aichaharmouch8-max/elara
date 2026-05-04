@@ -126,19 +126,57 @@ const CodIcon = () => (
   </svg>
 );
 
-const MethodCard = ({ selected, onClick, icon, title, subtitle }) => (
+const MethodCard = ({ selected, onClick, icon, title, desc }) => (
   <button type="button" onClick={onClick} style={{
     flex: 1, cursor: 'pointer', textAlign: 'center',
-    background: selected ? 'rgba(201,169,110,0.1)' : 'rgba(250,246,239,0.02)',
-    border: `1px solid ${selected ? 'rgba(201,169,110,0.6)' : 'rgba(201,169,110,0.18)'}`,
-    borderRadius: '6px', padding: '20px 12px',
-    color: selected ? '#C9A96E' : 'rgba(201,169,110,0.45)',
-    transition: 'border-color 0.2s ease, background 0.2s ease',
+    background: selected
+      ? 'linear-gradient(160deg, rgba(201,169,110,0.13) 0%, rgba(201,169,110,0.06) 100%)'
+      : 'rgba(250,246,239,0.02)',
+    border: `1px solid ${selected ? 'rgba(201,169,110,0.65)' : 'rgba(201,169,110,0.16)'}`,
+    borderRadius: '10px', padding: '24px 14px 20px',
+    color: selected ? '#C9A96E' : 'rgba(201,169,110,0.42)',
+    transition: 'all 0.35s ease',
     WebkitTapHighlightColor: 'transparent',
+    position: 'relative',
+    boxShadow: selected
+      ? '0 0 0 1px rgba(201,169,110,0.12), 0 10px 36px rgba(201,169,110,0.14), inset 0 1px 0 rgba(201,169,110,0.1)'
+      : '0 2px 10px rgba(0,0,0,0.14)',
   }}>
-    <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '10px' }}>{icon}</div>
-    <p style={{ fontFamily: 'Raleway, sans-serif', fontSize: '9px', letterSpacing: '3px', textTransform: 'uppercase', marginBottom: '4px', color: selected ? '#C9A96E' : 'rgba(201,169,110,0.45)' }}>{title}</p>
-    <p style={{ fontFamily: "'Playfair Display', serif", fontStyle: 'italic', fontSize: '11px', color: selected ? 'rgba(250,246,239,0.5)' : 'rgba(250,246,239,0.2)' }}>{subtitle}</p>
+    {selected && (
+      <div style={{
+        position: 'absolute', top: '10px', right: '10px',
+        width: '18px', height: '18px', borderRadius: '50%',
+        background: '#C9A96E',
+        display: 'flex', alignItems: 'center', justifyContent: 'center',
+        boxShadow: '0 2px 8px rgba(201,169,110,0.4)',
+      }}>
+        <svg width="10" height="8" viewBox="0 0 10 8" fill="none">
+          <polyline points="1 4 3.5 6.5 9 1" stroke="#0a0600" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+        </svg>
+      </div>
+    )}
+
+    <div style={{
+      display: 'flex', justifyContent: 'center', alignItems: 'center',
+      width: '50px', height: '50px', borderRadius: '50%',
+      background: selected ? 'rgba(201,169,110,0.14)' : 'rgba(201,169,110,0.05)',
+      border: `1px solid ${selected ? 'rgba(201,169,110,0.38)' : 'rgba(201,169,110,0.1)'}`,
+      margin: '0 auto 14px',
+      transition: 'all 0.35s ease',
+    }}>{icon}</div>
+
+    <p style={{
+      fontFamily: 'Raleway, sans-serif', fontSize: '9px', letterSpacing: '3px',
+      textTransform: 'uppercase', marginBottom: '9px', fontWeight: 500,
+      color: selected ? '#C9A96E' : 'rgba(201,169,110,0.45)',
+      transition: 'color 0.35s ease',
+    }}>{title}</p>
+
+    <p style={{
+      fontFamily: "'Cormorant Garamond', serif", fontStyle: 'italic', fontSize: '12.5px',
+      color: selected ? 'rgba(250,246,239,0.6)' : 'rgba(250,246,239,0.18)',
+      lineHeight: 1.65, transition: 'color 0.35s ease',
+    }}>{desc}</p>
   </button>
 );
 
@@ -489,12 +527,16 @@ const PaymentModal = ({ product, selectedSize = '100ml', selectedPrice, signatur
               <MethodCard
                 selected={method === 'wish'}
                 onClick={() => { setMethod('wish'); setErrors(e => ({ ...e, method: undefined })); }}
-                icon={<WishMoneyIcon />} title="Wish Money" subtitle="Digital transfer"
+                icon={<WishMoneyIcon />}
+                title="Wish Money"
+                desc="Safe & instant digital transfer"
               />
               <MethodCard
                 selected={method === 'cod'}
                 onClick={() => { setMethod('cod'); setErrors(e => ({ ...e, method: undefined })); }}
-                icon={<CodIcon />} title="Cash on Delivery" subtitle="Pay on arrival"
+                icon={<CodIcon />}
+                title="Cash on Delivery"
+                desc="Pay when your order arrives at your door — no risk"
               />
             </div>
             <ErrMsg msg={errors.method} />
@@ -506,6 +548,24 @@ const PaymentModal = ({ product, selectedSize = '100ml', selectedPrice, signatur
             )}
 
             <div style={{ height: '1px', background: 'linear-gradient(to right, transparent, rgba(201,169,110,0.18), transparent)', margin: '20px 0' }}/>
+
+            {/* ── Security assurance ───────────────────────────────────────── */}
+            <div style={{
+              display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '9px',
+              padding: '13px 16px', marginBottom: '16px',
+              background: 'linear-gradient(135deg, rgba(201,169,110,0.07) 0%, rgba(201,169,110,0.03) 100%)',
+              border: '1px solid rgba(201,169,110,0.18)',
+              borderRadius: '8px',
+            }}>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="rgba(201,169,110,0.75)"/>
+                <polyline points="9 12 11 14 15 10" stroke="rgba(201,169,110,0.75)"/>
+              </svg>
+              <span style={{
+                fontFamily: 'Raleway, sans-serif', fontSize: '10px', letterSpacing: '2.5px',
+                color: 'rgba(201,169,110,0.75)', textTransform: 'uppercase', fontWeight: 400,
+              }}>Your order is 100% secure</span>
+            </div>
 
             {/* ── Submit ───────────────────────────────────────────────────── */}
             <button
@@ -531,15 +591,13 @@ const PaymentModal = ({ product, selectedSize = '100ml', selectedPrice, signatur
               {submitting ? 'Getting your location…' : 'Confirm Order'}
             </button>
 
-            {/* Trust badge */}
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px', marginTop: '12px' }}>
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="rgba(201,169,110,0.4)" strokeWidth="1.5" strokeLinecap="round">
-                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-              </svg>
-              <span style={{ fontFamily: 'Raleway, sans-serif', fontSize: '9px', letterSpacing: '2px', color: 'rgba(201,169,110,0.4)', textTransform: 'uppercase' }}>
-                Order protected · Secure checkout
-              </span>
-            </div>
+            <p style={{
+              fontFamily: "'Cormorant Garamond', serif", fontStyle: 'italic',
+              fontSize: '12px', color: 'rgba(201,169,110,0.3)',
+              textAlign: 'center', marginTop: '14px', letterSpacing: '0.3px',
+            }}>
+              We'll confirm your order personally via WhatsApp.
+            </p>
           </form>
         )}
       </div>
