@@ -202,7 +202,7 @@ const CollectionCard = ({ product }) => {
           background: '#07050200',
           border: `1px solid ${hov ? 'rgba(201,168,76,0.32)' : 'rgba(201,168,76,0.13)'}`,
           display: 'flex', flexDirection: 'column',
-          height: '100%',
+          width: '100%', minHeight: '720px',
           transition: 'border-color 0.55s ease, box-shadow 0.55s ease',
           boxShadow: hov
             ? '0 0 0 1px rgba(201,168,76,0.08), 0 40px 100px rgba(0,0,0,0.6)'
@@ -234,7 +234,7 @@ const CollectionCard = ({ product }) => {
               position: 'absolute', bottom: '14px', left: 0, right: 0,
               fontFamily: 'Raleway, sans-serif', fontSize: '7px', letterSpacing: '5px',
               color: 'rgba(201,168,76,0.45)', textTransform: 'uppercase', textAlign: 'center',
-            }}>Bientôt Disponible</p>
+            }}>Launching Soon</p>
           )}
         </div>
 
@@ -1181,7 +1181,7 @@ const Home = () => {
               }}
             >
               {PRODUCTS.map((product) => (
-                <motion.div key={product.id} variants={cardVariant} style={{ display: 'flex' }}>
+                <motion.div key={product.id} variants={cardVariant} style={{ display: 'flex', width: '100%' }}>
                   <CollectionCard product={product} />
                 </motion.div>
               ))}
