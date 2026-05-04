@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { Link } from 'react-router-dom';
-import { motion, useReducedMotion } from 'framer-motion';
+import { motion } from 'framer-motion';
 import PaymentModal from '../components/PaymentModal';
 
 const useIsMobile = () => {
@@ -959,7 +959,6 @@ const SideNavDots = () => {
    HOME PAGE
 ───────────────────────────────────────── */
 const Home = () => {
-  const prefersReducedMotion = useReducedMotion();
   const isMobile = useIsMobile();
 
   return (
@@ -979,7 +978,7 @@ const Home = () => {
         paddingTop: '76px',
         paddingBottom: '0',
       }}>
-        <motion.img
+        <img
           src="/elaraaaaa.webp"
           alt=""
           aria-hidden="true"
@@ -988,17 +987,6 @@ const Home = () => {
           width="1920"
           height="1080"
           className="hero-bg-img"
-          initial={false}
-          animate={
-            prefersReducedMotion
-              ? {}
-              : { scale: [1, 1.07] }
-          }
-          transition={
-            prefersReducedMotion
-              ? undefined
-              : { duration: 26, repeat: Infinity, repeatType: 'mirror', ease: 'linear' }
-          }
           style={{
             position: 'absolute',
             inset: 0,
@@ -1009,7 +997,6 @@ const Home = () => {
             objectPosition: 'right bottom',
             zIndex: 0,
             pointerEvents: 'none',
-            transformOrigin: 'right bottom',
           }}
         />
 

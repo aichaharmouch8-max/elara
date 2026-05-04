@@ -23,7 +23,7 @@
 }
 
 html {
-  scroll-behavior: auto;
+  scroll-behavior: smooth;
   overflow-x: hidden;
   overflow-y: auto;
   max-width: 100%;
