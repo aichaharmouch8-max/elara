@@ -194,14 +194,6 @@ body {
     0 14px 40px rgba(201,168,76, 0.2) !important;
 }
 
-/* Snap sections — snap-align removed to allow free scroll */
-.snap-section {
-  min-height: 100vh;
-}
-
-.snap-section-auto {
-  min-height: auto;
-}
 
 section, div, header, footer, nav {
   max-width: 100%;
@@ -435,14 +427,6 @@ video.hero-bg-video {
 
   /* Kill looping CSS animations during scroll — framer-motion is unaffected */
   * { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; }
-
-  .snap-section,
-  .snap-section-auto {
-    overflow-y: visible !important;
-    -webkit-overflow-scrolling: touch;
-    min-height: auto !important;
-    height: auto !important;
-  }
 
   /* Quote section — content height only */
   .immersive-quote-section {

@@ -446,21 +446,19 @@ const CollectionCarousel = () => {
     <div style={{ width: '100%' }}>
       <style>{`.carousel-track::-webkit-scrollbar{display:none}`}</style>
 
-      {/* TRACK — native CSS scroll-snap, zero JS friction */}
+      {/* TRACK */}
       <div
         ref={trackRef}
         className="carousel-track"
         style={{
           display: 'flex',
           overflowX: 'scroll',
-          scrollSnapType: 'x mandatory',
-          WebkitOverflowScrolling: 'touch',
           msOverflowStyle: 'none',
           scrollbarWidth: 'none',
         }}
       >
         {PRODUCTS.map((product, index) => (
-          <div key={index} style={{ minWidth: '100%', scrollSnapAlign: 'start', padding: '0 20px', boxSizing: 'border-box', display: 'flex', flexDirection: 'column' }}>
+          <div key={index} style={{ minWidth: '100%', padding: '0 20px', boxSizing: 'border-box', display: 'flex', flexDirection: 'column' }}>
 
             {/* CARD */}
             <div style={{
@@ -945,7 +943,7 @@ const Home = () => {
       <SideNavDots />
 
       {/* ══════════════════ HERO ══════════════════ */}
-      <section id="hero" className="hero-section snap-section" style={{
+      <section id="hero" className="hero-section" style={{
         height: '100vh',
         minHeight: '100vh',
         position: 'relative',
@@ -1100,7 +1098,7 @@ const Home = () => {
       </section>
 
       {/* ══════════════════ COLLECTION ══════════════════ */}
-      <section id="collection" className="collection-section snap-section-auto" style={{
+      <section id="collection" className="collection-section" style={{
         background: 'transparent',
         padding: '60px clamp(20px, 4vw, 40px) 80px',
         width: '100%',
