@@ -336,39 +336,6 @@ const PaymentModal = ({ product, selectedSize = '100ml', selectedPrice, signatur
     setSubmitting(true);
 
     const methodLabel = method === 'wish' ? 'Wish Money' : 'Cash on Delivery';
-    const orderTime   = new Date().toLocaleString('en-GB', { timeZone: 'Asia/Beirut' });
-
-    const lines = [
-      '🛍️ *NEW ELARA ORDER*',
-      '━━━━━━━━━━━━━━━━━━',
-      '',
-      `👤 *Customer:* ${name.trim()}`,
-      `📱 *Phone:* +961 ${phone.trim()}`,
-      '',
-      `🌸 *Product:* ${product.name}`,
-      `📦 *Edition:* ${selectedSize === 'signature' ? 'Signature Edition (100ml)' : '100ml Eau de Parfum'}`,
-    ];
-    if (selectedSize === 'signature' && signatureName.trim())
-      lines.push(`✍️ *Engraving:* ${signatureName.trim()}`);
-    lines.push(`💰 *Price:* $${price}`);
-    lines.push(`💳 *Payment:* ${methodLabel}`);
-    lines.push('');
-    lines.push('📍 *Delivery Address:*');
-    lines.push(street.trim());
-    if (floor.trim())  lines.push(`Floor/Apt: ${floor.trim()}`);
-    if (notes.trim())  lines.push(`Notes: ${notes.trim()}`);
-    if (locData) {
-      lines.push('');
-      lines.push(`🗺️ *Exact GPS Location:*`);
-      lines.push(locData.mapsLink);
-      lines.push(`📏 *Accuracy:* ±${locData.accuracy}m`);
-    }
-    lines.push('');
-    lines.push('━━━━━━━━━━━━━━━━━━');
-    lines.push(`⏰ *Order Time:* ${orderTime}`);
-
-    const encoded = encodeURIComponent(lines.join('\n'));
-    window.open(`https://wa.me/96176510481?text=${encoded}`, '_blank');
 
     supabase.from('orders').insert({
       customer_name: name.trim(),
@@ -386,7 +353,6 @@ const PaymentModal = ({ product, selectedSize = '100ml', selectedPrice, signatur
 
     setSubmitting(false);
     setSubmitted(true);
-    setTimeout(onClose, 4000);
   };
 
   // ── Render ──────────────────────────────────────────────────────────────────
@@ -459,10 +425,10 @@ const PaymentModal = ({ product, selectedSize = '100ml', selectedPrice, signatur
               </svg>
             </div>
             <h3 style={{ fontFamily: "'Cormorant Garamond', serif", fontWeight: 300, fontSize: '28px', fontStyle: 'italic', color: '#FAF6EF', marginBottom: '12px', lineHeight: 1.2 }}>
-              Your order has been sent!
+              Order placed successfully.
             </h3>
             <p style={{ fontFamily: 'Raleway, sans-serif', fontSize: '12px', fontWeight: 300, color: 'rgba(201,169,110,0.7)', lineHeight: 1.9, marginBottom: '28px', maxWidth: '260px', margin: '0 auto 28px' }}>
-              We will confirm your order within minutes on WhatsApp
+              Your order has been placed successfully. We will contact you shortly.
             </p>
             <div style={{ height: '1px', background: 'linear-gradient(to right, transparent, rgba(201,169,110,0.22), transparent)', marginBottom: '20px' }}/>
             <p style={{ fontFamily: 'Raleway, sans-serif', fontSize: '8px', letterSpacing: '5px', color: 'rgba(201,169,110,0.35)', textTransform: 'uppercase' }}>
