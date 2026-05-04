@@ -60,7 +60,7 @@ const PRODUCTS = [
     id: 'reine',
     name: 'Reine',
     image: '/ELARAREINE.webp',
-    tagline: 'She does not ask to be noticed. She insists. Saffron, Bulgarian rose, amber, the holy trinity of desire.',
+    tagline: 'Power. Seduction. Obsession. Saffron, Bulgarian rose and amber — crafted for the woman who leaves a mark.',
     price: 49,
     available: true,
     locked: false,
@@ -69,7 +69,7 @@ const PRODUCTS = [
     id: 'oro',
     name: 'Oro',
     image: '/elaraoroo.webp',
-    tagline: 'Rare golden woods. Luminous amber. A secret worn close to the skin, never told.',
+    tagline: 'A fragrance that whispers what words cannot. Golden woods, luminous amber — your most intimate secret.',
     price: 79,
     available: false,
     locked: true,
@@ -78,7 +78,7 @@ const PRODUCTS = [
     id: 'nova',
     name: 'Rawan Noir',
     image: '/ELARAREINE.webp',
-    tagline: 'Born after midnight. For the woman who lives her most interesting life after dark.',
+    tagline: 'Darkness never looked this divine. For the woman the night was made for.',
     price: 79,
     available: false,
     locked: true,
@@ -238,9 +238,6 @@ const CollectionCard = ({ product }) => {
           )}
         </div>
 
-        {/* ── Gold rule ── */}
-        <div style={{ width: '100%', height: '1px', background: 'linear-gradient(90deg, transparent 0%, rgba(201,168,76,0.22) 30%, rgba(201,168,76,0.22) 70%, transparent 100%)' }} />
-
         {/* ── Text + CTA body ── */}
         <div style={{
           padding: '32px 32px 40px', flex: 1,
@@ -264,9 +261,9 @@ const CollectionCard = ({ product }) => {
           }}>Eau de Parfum · 100ml</p>
 
           <p style={{
-            fontFamily: "'Cormorant Garamond', serif", fontSize: '15px', fontWeight: 300,
-            fontStyle: 'italic', color: 'rgba(250,246,239,0.4)',
-            lineHeight: 1.85, marginBottom: '28px', letterSpacing: '0.15px',
+            fontFamily: "'Cormorant Garamond', serif", fontSize: '17px', fontWeight: 500,
+            color: '#FFFFFF',
+            lineHeight: 1.8, marginBottom: '28px', letterSpacing: '0.15px',
             maxWidth: '260px',
           }}>{product.tagline}</p>
 
@@ -503,7 +500,7 @@ const CollectionCarousel = () => {
               <p style={{ width: '100%', fontFamily: 'Raleway, sans-serif', fontSize: '10px', letterSpacing: '0.2em', color: '#c9a84c', textAlign: 'center', marginBottom: '6px' }}>ELARA</p>
               <h3 style={{ width: '100%', fontSize: '28px', fontFamily: "'Cormorant Garamond', serif", fontStyle: 'italic', color: '#fff', textAlign: 'center', marginBottom: '6px' }}>{product.name}</h3>
               <p style={{ width: '100%', fontFamily: 'Raleway, sans-serif', fontSize: '11px', letterSpacing: '0.15em', color: 'rgba(255,255,255,0.5)', textAlign: 'center', marginBottom: '16px' }}>100ML · EAU DE PARFUM</p>
-              <p style={{ width: '100%', fontFamily: 'Raleway, sans-serif', fontSize: '13px', color: '#e8e0d8', textAlign: 'center', lineHeight: '1.7', marginBottom: '24px' }}>{product.tagline}</p>
+              <p style={{ width: '100%', fontFamily: "'Cormorant Garamond', serif", fontSize: '17px', fontWeight: 500, color: '#FFFFFF', textAlign: 'center', lineHeight: 1.8, marginBottom: '24px' }}>{product.tagline}</p>
 
               {/* UNLOCKED: SELECT EDITION + BUY */}
               {!product.locked && (
