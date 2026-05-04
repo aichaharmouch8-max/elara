@@ -263,6 +263,7 @@ button { font-family: inherit; }
 
 /* Collection carousel — hide on desktop, show on mobile */
 .collection-mobile-carousel { display: none; }
+/* Collection heading — always shown; CSS hides it on mobile so the carousel header takes over */
 .collection-desktop-pyramid { display: block; }
 
 /* Hide carousel scrollbar cross-browser */
@@ -635,9 +636,9 @@ video.hero-bg-video {
     margin: 0 !important;
   }
 
-  /* Collection — show carousel, hide pyramid */
+  /* Collection — show carousel; keep heading visible on mobile too */
   .collection-mobile-carousel { display: block !important; }
-  .collection-desktop-pyramid { display: none !important; }
+  .collection-desktop-pyramid { display: block !important; }
 
   /* Strip section side-padding so track goes edge-to-edge */
   .collection-section {

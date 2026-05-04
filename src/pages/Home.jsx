@@ -122,11 +122,16 @@ const NotifyForm = ({ productName }) => {
   return (
     <form onSubmit={handleSubmit} style={{ width: '100%' }}>
       <style>{`.nf-input::placeholder{color:rgba(201,168,76,0.3);font-style:italic;font-family:'Cormorant Garamond',serif;}`}</style>
-      <p style={{
-        fontFamily: t.sansFont, fontSize: '8px',
-        color: 'rgba(201,168,76,0.5)', textTransform: 'uppercase',
-        textAlign: 'center', marginBottom: '14px',
-      }}>{t.launchingSoon}</p>
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px', marginBottom: '14px' }}>
+        <svg width="9" height="11" viewBox="0 0 9 11" fill="none" aria-hidden="true">
+          <rect x="1" y="4.5" width="7" height="6" rx="0.8" stroke="rgba(201,168,76,0.5)" strokeWidth="0.8"/>
+          <path d="M2.5 4.5V3a2 2 0 0 1 4 0v1.5" stroke="rgba(201,168,76,0.5)" strokeWidth="0.8" strokeLinecap="round"/>
+        </svg>
+        <p style={{
+          fontFamily: t.sansFont, fontSize: '8px', margin: 0,
+          color: 'rgba(201,168,76,0.5)', textTransform: 'uppercase',
+        }}>{t.launchingSoon}</p>
+      </div>
       <input
         type="email"
         value={email}
@@ -234,11 +239,19 @@ const CollectionCard = ({ product }) => {
             }}
           />
           {locked && (
-            <p style={{
+            <div style={{
               position: 'absolute', bottom: '14px', left: 0, right: 0,
-              fontFamily: t.sansFont, fontSize: '7px',
-              color: 'rgba(201,168,76,0.45)', textTransform: 'uppercase', textAlign: 'center',
-            }}>{t.launchingSoon}</p>
+              display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px',
+            }}>
+              <svg width="9" height="11" viewBox="0 0 9 11" fill="none" aria-hidden="true">
+                <rect x="1" y="4.5" width="7" height="6" rx="0.8" stroke="rgba(201,168,76,0.55)" strokeWidth="0.8"/>
+                <path d="M2.5 4.5V3a2 2 0 0 1 4 0v1.5" stroke="rgba(201,168,76,0.55)" strokeWidth="0.8" strokeLinecap="round"/>
+              </svg>
+              <p style={{
+                fontFamily: t.sansFont, fontSize: '7px', margin: 0,
+                color: 'rgba(201,168,76,0.45)', textTransform: 'uppercase',
+              }}>{t.launchingSoon}</p>
+            </div>
           )}
         </div>
 
@@ -1117,33 +1130,26 @@ const Home = () => {
         width: '100%',
         maxWidth: '100%',
       }}>
-        <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
-          {isMobile ? (
-            <div style={{ textAlign: 'center', marginBottom: '60px' }}>
-              <p style={{ fontFamily: t.sansFont, fontSize: '11px', color: 'rgba(255,200,80,0.7)', textTransform: 'uppercase', marginBottom: '20px' }}>
-                {t.collectionEyebrow}
-              </p>
-              <h2 style={{ fontFamily: t.headingFont, fontWeight: 300, fontSize: 'clamp(40px, 5vw, 62px)', color: '#FAF6EF' }}>
-                {t.collectionPre}<span style={{ fontStyle: 'italic', color: '#C9A96E' }}>{t.collectionHighlight}</span>
-              </h2>
-            </div>
-          ) : (
-            <motion.div
-              initial={{ opacity: 0, y: -20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-60px' }}
-              transition={{ duration: 0.8, ease: [0.4, 0, 0.2, 1] }}
-              style={{ textAlign: 'center', marginBottom: '60px' }}
-            >
-              <p style={{ fontFamily: t.sansFont, fontSize: '11px', color: 'rgba(255,200,80,0.7)', textTransform: 'uppercase', marginBottom: '20px' }}>
-                {t.collectionEyebrow}
-              </p>
-              <h2 style={{ fontFamily: t.headingFont, fontWeight: 300, fontSize: 'clamp(40px, 5vw, 62px)', color: '#FAF6EF' }}>
-                {t.collectionPre}<span style={{ fontStyle: 'italic', color: '#C9A96E' }}>{t.collectionHighlight}</span>
-              </h2>
-            </motion.div>
-          )}
-        </div>
+        <motion.div
+          className="collection-desktop-pyramid"
+          initial={{ opacity: 0, y: -20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-60px' }}
+          transition={{ duration: 0.8, ease: [0.4, 0, 0.2, 1] }}
+          style={{ textAlign: 'center', marginBottom: '60px', maxWidth: '1100px', margin: '0 auto 60px' }}
+        >
+          {/* Pyramid ornament */}
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" style={{ marginBottom: '22px', display: 'block', margin: '0 auto 22px' }} aria-hidden="true">
+            <polygon points="9,1 17,17 1,17" stroke="rgba(201,168,76,0.55)" strokeWidth="0.8" fill="none"/>
+            <polygon points="9,5 14,14 4,14" fill="rgba(201,168,76,0.18)"/>
+          </svg>
+          <p style={{ fontFamily: t.sansFont, fontSize: '11px', color: 'rgba(255,200,80,0.7)', textTransform: 'uppercase', marginBottom: '20px' }}>
+            {t.collectionEyebrow}
+          </p>
+          <h2 style={{ fontFamily: t.headingFont, fontWeight: 300, fontSize: 'clamp(40px, 5vw, 62px)', color: '#FAF6EF' }}>
+            {t.collectionPre}<span style={{ fontStyle: 'italic', color: '#C9A96E' }}>{t.collectionHighlight}</span>
+          </h2>
+        </motion.div>
 
         <div className="collection-mobile-carousel">
           <CollectionCarousel />
