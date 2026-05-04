@@ -172,15 +172,13 @@ const CollectionCard = ({ product }) => {
   const locked = !product.available;
   const [selectedSize, setSelectedSize] = useState('100ml');
   const [displayPrice, setDisplayPrice] = useState(49);
-
   const [signatureName, setSignatureName] = useState('');
   const [nameFocused, setNameFocused] = useState(false);
   const priceTimer = useRef(null);
 
   const animatePrice = useCallback((from, to) => {
     clearInterval(priceTimer.current);
-    const steps = 10;
-    let step = 0;
+    const steps = 10; let step = 0;
     priceTimer.current = setInterval(() => {
       step++;
       setDisplayPrice(Math.round(from + (to - from) * (step / steps)));
@@ -196,132 +194,92 @@ const CollectionCard = ({ product }) => {
 
   return (
     <>
-      <style>{`
-        @keyframes cardShimmer {
-          0%   { transform: translateX(-120%) skewX(-12deg); }
-          100% { transform: translateX(320%)  skewX(-12deg); }
-        }
-      `}</style>
-
       <motion.div
         variants={cardVariant}
-        whileHover={{ scale: 1.025, transition: { duration: 0.4, ease: 'easeOut' } }}
         onHoverStart={() => setHov(true)}
         onHoverEnd={() => setHov(false)}
         style={{
-          background: '#0a0602',
-          border: `1px solid ${hov ? 'rgba(201,168,76,0.3)' : 'rgba(201,168,76,0.12)'}`,
+          background: '#07050200',
+          border: `1px solid ${hov ? 'rgba(201,168,76,0.32)' : 'rgba(201,168,76,0.13)'}`,
           display: 'flex', flexDirection: 'column',
-          alignItems: 'center', textAlign: 'center',
-          position: 'relative',
-          transition: 'border-color 0.4s ease, box-shadow 0.4s ease',
+          height: '100%',
+          transition: 'border-color 0.55s ease, box-shadow 0.55s ease',
           boxShadow: hov
-            ? '0 0 0 1px rgba(201,168,76,0.12), 0 32px 72px rgba(0,0,0,0.55)'
-            : '0 8px 32px rgba(0,0,0,0.28)',
+            ? '0 0 0 1px rgba(201,168,76,0.08), 0 40px 100px rgba(0,0,0,0.6)'
+            : '0 2px 20px rgba(0,0,0,0.18)',
         }}
       >
-
-        {/* ── Bottle image — identical on all 3 cards ── */}
-        <div className={`collection-card-img-wrap ${locked ? 'collection-card-img-locked' : 'collection-card-img-active'}`} style={{
-          width: '100%', height: '240px',
+        {/* ── Image area — no overlapping buttons ── */}
+        <div style={{
+          width: '100%', height: '300px',
           display: 'flex', alignItems: 'center', justifyContent: 'center',
-          position: 'relative', overflow: 'hidden',
-          background: 'rgba(255,255,255,0.01)',
+          padding: '44px 32px 28px', boxSizing: 'border-box',
+          position: 'relative',
         }}>
           <img
             src={product.image}
             alt={product.name}
             loading="lazy"
             style={{
-              height: '200px', width: 'auto',
+              height: '220px', width: 'auto',
               objectFit: 'contain',
-              transform: hov && !locked ? 'scale(1.05)' : 'scale(1)',
-              transition: 'transform 0.5s ease',
+              filter: locked ? 'brightness(0.65)' : 'none',
+              transform: hov && !locked ? 'scale(1.04) translateY(-6px)' : 'scale(1) translateY(0)',
+              transition: 'transform 0.7s cubic-bezier(0.4,0,0.2,1), filter 0.4s ease',
               display: 'block',
             }}
           />
-
-          {/* Subtle veil — bottle remains visible, mystery through darkness alone */}
           {locked && (
-            <div style={{
-              position: 'absolute', inset: 0,
-              background: 'rgba(6,6,6,0.4)',
-            }} />
-          )}
-
-          {/* Hover quick-buy — unlocked only */}
-          {!locked && (
-            <div style={{
-              position: 'absolute', bottom: 0, left: 0, right: 0,
-              opacity: hov ? 1 : 0,
-              transform: hov ? 'translateY(0)' : 'translateY(8px)',
-              transition: 'opacity 0.35s ease, transform 0.35s ease',
-              zIndex: 2,
-            }}>
-              <button
-                onClick={() => setModal(true)}
-                style={{
-                  width: '100%',
-                  fontFamily: 'Raleway, sans-serif', fontSize: '9px',
-                  letterSpacing: '3px', textTransform: 'uppercase',
-                  padding: '13px 0', background: '#c9a84c',
-                  color: '#060606', border: 'none', cursor: 'pointer', fontWeight: 600,
-                }}
-              >Buy Now</button>
-            </div>
+            <p style={{
+              position: 'absolute', bottom: '14px', left: 0, right: 0,
+              fontFamily: 'Raleway, sans-serif', fontSize: '7px', letterSpacing: '5px',
+              color: 'rgba(201,168,76,0.45)', textTransform: 'uppercase', textAlign: 'center',
+            }}>Bientôt Disponible</p>
           )}
         </div>
 
-        {/* ── Card body ── */}
-        <div className="collection-card-body" style={{ padding: '16px 20px 32px', width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', boxSizing: 'border-box' }}>
+        {/* ── Gold rule ── */}
+        <div style={{ width: '100%', height: '1px', background: 'linear-gradient(90deg, transparent 0%, rgba(201,168,76,0.22) 30%, rgba(201,168,76,0.22) 70%, transparent 100%)' }} />
 
-          {/* ELARA */}
+        {/* ── Text + CTA body ── */}
+        <div style={{
+          padding: '32px 32px 40px', flex: 1,
+          display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center',
+          boxSizing: 'border-box',
+        }}>
           <p style={{
-            fontFamily: "'Cormorant Garamond', serif", fontWeight: 300,
-            fontSize: '9px', color: 'rgba(250,246,239,0.22)',
-            letterSpacing: '5px', textTransform: 'uppercase', marginBottom: '4px',
+            fontFamily: 'Raleway, sans-serif', fontSize: '8px', letterSpacing: '6px',
+            color: 'rgba(201,168,76,0.4)', textTransform: 'uppercase', marginBottom: '14px',
           }}>ELARA</p>
 
-          {/* Product name */}
           <h3 style={{
             fontFamily: "'Cormorant Garamond', serif", fontWeight: 300,
-            fontSize: '26px', fontStyle: 'italic',
-            color: '#FAF6EF', lineHeight: 1, marginBottom: '6px',
+            fontSize: '34px', fontStyle: 'italic',
+            color: '#FAF6EF', lineHeight: 1.05, marginBottom: '10px', letterSpacing: '-0.2px',
           }}>{product.name}</h3>
 
-          {/* Concentration */}
           <p style={{
             fontFamily: 'Raleway, sans-serif', fontSize: '8px', letterSpacing: '3px',
-            color: 'rgba(200,160,60,0.55)', marginBottom: locked ? '10px' : '10px',
-            textTransform: 'uppercase',
-          }}>100ml Eau de Parfum</p>
+            color: 'rgba(201,168,76,0.38)', textTransform: 'uppercase', marginBottom: '22px',
+          }}>Eau de Parfum · 100ml</p>
 
-          {/* Bientôt Disponible — locked cards, below concentration */}
-          {locked && (
-            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '7px', marginBottom: '10px' }}>
-              <div style={{ width: '40px', height: '1px', background: 'rgba(201,168,76,0.35)' }} />
-              <p style={{
-                fontFamily: 'Raleway, sans-serif', fontSize: '7px', letterSpacing: '5px',
-                color: 'rgba(201,168,76,0.5)', textTransform: 'uppercase', margin: 0,
-              }}>Bientôt Disponible</p>
-            </div>
-          )}
-
-          {/* Description */}
           <p style={{
-            fontFamily: 'Raleway, sans-serif', fontSize: '11px', fontWeight: 300,
-            color: 'rgba(232,224,216,0.35)',
-            lineHeight: 1.75, marginBottom: '16px', letterSpacing: '0.2px',
+            fontFamily: "'Cormorant Garamond', serif", fontSize: '15px', fontWeight: 300,
+            fontStyle: 'italic', color: 'rgba(250,246,239,0.4)',
+            lineHeight: 1.85, marginBottom: '28px', letterSpacing: '0.15px',
+            maxWidth: '260px',
           }}>{product.tagline}</p>
 
-          {/* ── UNLOCKED: edition selector + price + buy ── */}
+          {/* Push CTA to bottom */}
+          <div style={{ flex: 1 }} />
+
+          {/* ── UNLOCKED: edition + price + buy ── */}
           {!locked && (
             <>
-              <div style={{ width: '100%', marginBottom: '12px' }}>
+              <div style={{ width: '100%', marginBottom: '16px' }}>
                 <p style={{
                   fontFamily: 'Raleway, sans-serif', fontSize: '7px', letterSpacing: '4px',
-                  color: 'rgba(200,160,60,0.45)', textTransform: 'uppercase',
-                  textAlign: 'center', marginBottom: '10px',
+                  color: 'rgba(200,160,60,0.4)', textTransform: 'uppercase', marginBottom: '10px',
                 }}>Select Edition</p>
                 <div style={{ display: 'flex', gap: '8px' }}>
                   {[
@@ -333,19 +291,14 @@ const CollectionCard = ({ product }) => {
                       <div key={key} style={{ flex: 1, position: 'relative' }}>
                         <button
                           onClick={() => handleSizeChange(key)}
-                          className="collection-size-btn"
                           style={{
                             width: '100%', position: 'relative',
                             fontFamily: 'Raleway, sans-serif', fontSize: '7px', letterSpacing: '1.5px',
                             textTransform: 'uppercase', padding: '10px 6px 8px', minHeight: '52px',
-                            background: active
-                              ? 'linear-gradient(135deg, rgba(200,160,60,0.13) 0%, rgba(200,160,60,0.05) 100%)'
-                              : 'transparent',
-                            border: `1px solid ${active ? 'rgba(200,160,60,0.95)' : 'rgba(200,160,60,0.25)'}`,
-                            boxShadow: active && exclusive ? '0 0 14px rgba(200,160,60,0.12)' : 'none',
-                            color: active ? 'rgba(200,160,60,1)' : 'rgba(200,160,60,0.5)',
-                            borderRadius: '2px', cursor: 'pointer',
-                            transition: 'all 0.3s ease', boxSizing: 'border-box',
+                            background: active ? 'rgba(200,160,60,0.08)' : 'transparent',
+                            border: `1px solid ${active ? 'rgba(200,160,60,0.9)' : 'rgba(200,160,60,0.22)'}`,
+                            color: active ? 'rgba(200,160,60,1)' : 'rgba(200,160,60,0.45)',
+                            cursor: 'pointer', transition: 'all 0.3s ease', boxSizing: 'border-box',
                             display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px',
                           }}
                         >
@@ -353,18 +306,17 @@ const CollectionCard = ({ product }) => {
                             <span style={{
                               position: 'absolute', top: '-8px', left: '50%', transform: 'translateX(-50%)',
                               fontFamily: 'Raleway, sans-serif', fontSize: '6px', letterSpacing: '2px',
-                              background: active ? '#C9A84C' : '#0a0602',
-                              color: active ? '#060606' : 'rgba(200,160,60,0.65)',
-                              border: `1px solid ${active ? '#C9A84C' : 'rgba(200,160,60,0.35)'}`,
-                              padding: '2px 6px', whiteSpace: 'nowrap',
-                              transition: 'all 0.3s ease',
+                              background: active ? '#C9A84C' : '#07050200',
+                              color: active ? '#060606' : 'rgba(200,160,60,0.6)',
+                              border: `1px solid ${active ? '#C9A84C' : 'rgba(200,160,60,0.3)'}`,
+                              padding: '2px 6px', whiteSpace: 'nowrap', transition: 'all 0.3s ease',
                             }}>✦ EXCL</span>
                           )}
                           <span>{topLine}</span>
                           <span style={{
                             fontFamily: "'Cormorant Garamond', serif", fontStyle: 'italic',
                             fontSize: '10px', letterSpacing: '0.3px', textTransform: 'none',
-                            color: active ? 'rgba(200,160,60,0.7)' : 'rgba(200,160,60,0.3)',
+                            color: active ? 'rgba(200,160,60,0.7)' : 'rgba(200,160,60,0.28)',
                             fontWeight: 300, transition: 'color 0.3s ease',
                           }}>{subLine}</span>
                         </button>
@@ -374,7 +326,7 @@ const CollectionCard = ({ product }) => {
                 </div>
 
                 {selectedSize === 'signature' && (
-                  <div style={{ marginTop: '10px' }}>
+                  <div style={{ marginTop: '12px' }}>
                     <div style={{ position: 'relative' }}>
                       <input
                         type="text"
@@ -388,58 +340,48 @@ const CollectionCard = ({ product }) => {
                           width: '100%', boxSizing: 'border-box',
                           fontFamily: "'Cormorant Garamond', serif", fontStyle: 'italic',
                           fontSize: '14px', fontWeight: 300,
-                          background: nameFocused ? 'rgba(201,168,76,0.06)' : 'rgba(250,246,239,0.02)',
-                          border: `1px solid ${nameFocused ? 'rgba(201,168,76,0.7)' : 'rgba(201,168,76,0.25)'}`,
+                          background: nameFocused ? 'rgba(201,168,76,0.05)' : 'transparent',
+                          border: `1px solid ${nameFocused ? 'rgba(201,168,76,0.65)' : 'rgba(201,168,76,0.22)'}`,
                           color: '#FAF6EF', padding: '10px 38px 10px 12px',
-                          outline: 'none', borderRadius: '2px',
-                          transition: 'border-color 0.2s ease, background 0.2s ease',
+                          outline: 'none', transition: 'border-color 0.2s ease, background 0.2s ease',
                           WebkitAppearance: 'none',
                         }}
                       />
                       <span style={{
                         position: 'absolute', right: '10px', top: '50%', transform: 'translateY(-50%)',
                         fontFamily: 'Raleway, sans-serif', fontSize: '7px', letterSpacing: '1px',
-                        color: signatureName.length >= 18 ? 'rgba(201,168,76,0.9)' : 'rgba(201,168,76,0.3)',
+                        color: signatureName.length >= 18 ? 'rgba(201,168,76,0.9)' : 'rgba(201,168,76,0.28)',
                         transition: 'color 0.2s ease',
                       }}>{signatureName.length}/20</span>
                     </div>
                     <p style={{
                       fontFamily: "'Cormorant Garamond', serif", fontStyle: 'italic',
-                      fontSize: '10px', color: 'rgba(201,168,76,0.4)',
-                      marginTop: '7px', lineHeight: 1.6, textAlign: 'center',
+                      fontSize: '10px', color: 'rgba(201,168,76,0.38)',
+                      marginTop: '6px', lineHeight: 1.6, textAlign: 'center',
                     }}>Each bottle is hand-personalized before dispatch.</p>
                   </div>
                 )}
-
-                <p style={{
-                  fontFamily: 'Raleway, sans-serif', fontSize: '7px', letterSpacing: '2px',
-                  color: 'rgba(201,168,76,0.25)', textTransform: 'uppercase',
-                  textAlign: 'center', marginTop: '8px',
-                }}>✦ Limited personalized slots available each week</p>
               </div>
 
               <p style={{
-                fontFamily: "'Cormorant Garamond', serif", fontSize: '22px', fontWeight: 300,
-                color: '#C9A96E', marginBottom: '10px',
-                transition: 'opacity 0.2s ease',
+                fontFamily: "'Cormorant Garamond', serif", fontSize: '26px', fontWeight: 300,
+                color: '#C9A96E', marginBottom: '14px',
               }}>${displayPrice}</p>
 
               <button
                 onClick={() => setModal(true)}
                 onMouseEnter={() => setBtnHov(true)}
                 onMouseLeave={() => setBtnHov(false)}
-                className="collection-buy-btn"
                 style={{
                   width: '100%', cursor: 'pointer',
-                  fontFamily: 'Raleway, sans-serif', fontSize: '8px', letterSpacing: '3px',
-                  textTransform: 'uppercase', padding: '14px', textAlign: 'center',
-                  background: btnHov ? 'rgba(200,160,60,1)' : 'transparent',
-                  color: btnHov ? '#000' : 'rgba(200,160,60,1)',
-                  border: '1px solid rgba(200,160,60,0.7)',
-                  transition: 'all 0.35s ease',
-                  whiteSpace: 'nowrap',
+                  fontFamily: 'Raleway, sans-serif', fontSize: '8px', letterSpacing: '5px',
+                  textTransform: 'uppercase', padding: '16px', textAlign: 'center',
+                  background: btnHov ? '#C9A84C' : 'transparent',
+                  color: btnHov ? '#060606' : 'rgba(201,168,76,0.85)',
+                  border: '1px solid rgba(201,168,76,0.5)',
+                  transition: 'all 0.4s ease',
                 }}
-              >{selectedSize === 'signature' ? 'Order — Personalized' : `Buy Now $${displayPrice}`}</button>
+              >{selectedSize === 'signature' ? 'Order — Personalized' : `Acquire · $${displayPrice}`}</button>
             </>
           )}
 
@@ -1237,26 +1179,24 @@ const Home = () => {
         </div>
 
         {!isMobile && (
-          <div className="collection-desktop-pyramid" style={{ maxWidth: '1100px', margin: '0 auto' }}>
+          <div style={{ maxWidth: '1300px', margin: '0 auto', width: '100%' }}>
             <motion.div
               variants={staggerContainer}
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, margin: '-60px' }}
-              className="collection-container"
-              style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}
+              style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(3, 1fr)',
+                gap: '24px',
+                alignItems: 'stretch',
+              }}
             >
-              <motion.div variants={cardVariant} className="collection-card-top" style={{ width: 'min(480px, 100%)', marginBottom: '24px' }}>
-                <CollectionCard product={PRODUCTS[0]} />
-              </motion.div>
-              <div className="collection-card-row-wrap" style={{ display: 'flex', gap: '24px', width: '100%', justifyContent: 'center', flexWrap: 'wrap' }}>
-                <motion.div variants={cardVariant} className="collection-card-row" style={{ width: 'min(480px, 100%)' }}>
-                  <CollectionCard product={PRODUCTS[1]} />
+              {PRODUCTS.map((product) => (
+                <motion.div key={product.id} variants={cardVariant} style={{ display: 'flex' }}>
+                  <CollectionCard product={product} />
                 </motion.div>
-                <motion.div variants={cardVariant} className="collection-card-row" style={{ width: 'min(480px, 100%)' }}>
-                  <CollectionCard product={PRODUCTS[2]} />
-                </motion.div>
-              </div>
+              ))}
             </motion.div>
           </div>
         )}
