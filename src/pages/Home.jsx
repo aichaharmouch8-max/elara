@@ -2,6 +2,7 @@ import { useState, useEffect, useRef, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import PaymentModal from '../components/PaymentModal';
+import { useLanguage } from '../context/LanguageContext';
 
 const useIsMobile = () => {
   const [isMobile, setIsMobile] = useState(
@@ -18,6 +19,7 @@ const useIsMobile = () => {
 
 const ShopNowBtn = () => {
   const [hov, setHov] = useState(false);
+  const { t } = useLanguage();
   return (
     <Link to="/shop"
       className="discover-shimmer hero-shop-cta"
@@ -25,7 +27,7 @@ const ShopNowBtn = () => {
       onMouseLeave={() => setHov(false)}
       style={{
         display: 'inline-block',
-        fontFamily: 'Raleway, sans-serif', fontSize: '9px',
+        fontFamily: t.sansFont, fontSize: '9px',
         letterSpacing: '5px', textTransform: 'uppercase',
         padding: '14px 44px',
         background: hov ? 'rgba(232,184,75,1)' : 'rgba(232,184,75,0.06)',
@@ -38,7 +40,7 @@ const ShopNowBtn = () => {
         borderRadius: '2px',
         position: 'relative',
       }}
-    >Shop Now</Link>
+    >{t.shopNow}</Link>
   );
 };
 
@@ -92,6 +94,7 @@ const NotifyForm = ({ productName }) => {
   const [focused, setFocused] = useState(false);
   const [btnHov, setBtnHov] = useState(false);
   const [done, setDone]     = useState(false);
+  const { t } = useLanguage();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -106,13 +109,13 @@ const NotifyForm = ({ productName }) => {
   if (done) return (
     <div style={{ textAlign: 'center', padding: '16px 0' }}>
       <p style={{
-        fontFamily: "'Cormorant Garamond', serif", fontStyle: 'italic',
+        fontFamily: t.serifFont, fontStyle: 'italic',
         fontSize: '18px', color: 'rgba(201,168,76,0.9)', marginBottom: '4px',
-      }}>You're on the list.</p>
+      }}>{t.onTheList}</p>
       <p style={{
-        fontFamily: 'Raleway, sans-serif', fontSize: '9px', letterSpacing: '2px',
+        fontFamily: t.sansFont, fontSize: '9px',
         color: 'rgba(250,246,239,0.3)', textTransform: 'uppercase',
-      }}>We'll be in touch.</p>
+      }}>{t.inTouch}</p>
     </div>
   );
 
@@ -120,10 +123,10 @@ const NotifyForm = ({ productName }) => {
     <form onSubmit={handleSubmit} style={{ width: '100%' }}>
       <style>{`.nf-input::placeholder{color:rgba(201,168,76,0.3);font-style:italic;font-family:'Cormorant Garamond',serif;}`}</style>
       <p style={{
-        fontFamily: 'Raleway, sans-serif', fontSize: '8px', letterSpacing: '5px',
+        fontFamily: t.sansFont, fontSize: '8px',
         color: 'rgba(201,168,76,0.5)', textTransform: 'uppercase',
         textAlign: 'center', marginBottom: '14px',
-      }}>Launching Soon</p>
+      }}>{t.launchingSoon}</p>
       <input
         type="email"
         value={email}
@@ -138,7 +141,7 @@ const NotifyForm = ({ productName }) => {
           background: 'transparent', border: 'none',
           borderBottom: `1px solid ${focused ? 'rgba(201,168,76,0.7)' : 'rgba(201,168,76,0.22)'}`,
           color: '#FAF6EF',
-          fontFamily: "'Cormorant Garamond', serif",
+          fontFamily: t.serifFont,
           fontSize: '15px', fontWeight: 300,
           padding: '10px 0', outline: 'none', textAlign: 'center',
           marginBottom: '14px',
@@ -151,8 +154,8 @@ const NotifyForm = ({ productName }) => {
         onMouseLeave={() => setBtnHov(false)}
         style={{
           width: '100%',
-          fontFamily: 'Raleway, sans-serif', fontSize: '8px', fontWeight: 600,
-          letterSpacing: '4px', textTransform: 'uppercase',
+          fontFamily: t.sansFont, fontSize: '8px', fontWeight: 600,
+          textTransform: 'uppercase',
           padding: '14px',
           background: btnHov ? 'rgba(201,168,76,0.1)' : 'transparent',
           color: 'rgba(201,168,76,0.9)',
@@ -160,7 +163,7 @@ const NotifyForm = ({ productName }) => {
           cursor: 'pointer',
           transition: 'all 0.3s ease',
         }}
-      >Notify Me</button>
+      >{t.notifyMe}</button>
     </form>
   );
 };
@@ -170,6 +173,7 @@ const CollectionCard = ({ product }) => {
   const [btnHov, setBtnHov] = useState(false);
   const [modal, setModal] = useState(false);
   const locked = !product.available;
+  const { t } = useLanguage();
   const [selectedSize, setSelectedSize] = useState('100ml');
   const [displayPrice, setDisplayPrice] = useState(49);
   const [signatureName, setSignatureName] = useState('');
@@ -232,9 +236,9 @@ const CollectionCard = ({ product }) => {
           {locked && (
             <p style={{
               position: 'absolute', bottom: '14px', left: 0, right: 0,
-              fontFamily: 'Raleway, sans-serif', fontSize: '7px', letterSpacing: '5px',
+              fontFamily: t.sansFont, fontSize: '7px',
               color: 'rgba(201,168,76,0.45)', textTransform: 'uppercase', textAlign: 'center',
-            }}>Launching Soon</p>
+            }}>{t.launchingSoon}</p>
           )}
         </div>
 
@@ -250,22 +254,22 @@ const CollectionCard = ({ product }) => {
           }}>ELARA</p>
 
           <h3 style={{
-            fontFamily: "'Cormorant Garamond', serif", fontWeight: 300,
+            fontFamily: t.serifFont, fontWeight: 300,
             fontSize: '34px', fontStyle: 'italic',
-            color: '#FAF6EF', lineHeight: 1.05, marginBottom: '10px', letterSpacing: '-0.2px',
+            color: '#FAF6EF', lineHeight: 1.05, marginBottom: '10px',
           }}>{product.name}</h3>
 
           <p style={{
-            fontFamily: 'Raleway, sans-serif', fontSize: '8px', letterSpacing: '3px',
+            fontFamily: t.sansFont, fontSize: '8px',
             color: 'rgba(201,168,76,0.38)', textTransform: 'uppercase', marginBottom: '22px',
-          }}>Eau de Parfum · 100ml</p>
+          }}>{t.eauDeParfum}</p>
 
           <p style={{
-            fontFamily: "'Cormorant Garamond', serif", fontSize: '17px', fontWeight: 500,
+            fontFamily: t.serifFont, fontSize: '17px', fontWeight: 500,
             color: '#FFFFFF',
-            lineHeight: 1.8, marginBottom: '28px', letterSpacing: '0.15px',
+            lineHeight: 1.8, marginBottom: '28px',
             maxWidth: '260px',
-          }}>{product.tagline}</p>
+          }}>{t.productTaglines[product.id] || product.tagline}</p>
 
           {/* Push CTA to bottom */}
           <div style={{ flex: 1 }} />
@@ -275,13 +279,13 @@ const CollectionCard = ({ product }) => {
             <>
               <div style={{ width: '100%', marginBottom: '16px' }}>
                 <p style={{
-                  fontFamily: 'Raleway, sans-serif', fontSize: '7px', letterSpacing: '4px',
+                  fontFamily: t.sansFont, fontSize: '7px',
                   color: 'rgba(200,160,60,0.4)', textTransform: 'uppercase', marginBottom: '10px',
-                }}>Select Edition</p>
+                }}>{t.selectEdition}</p>
                 <div style={{ display: 'flex', gap: '8px' }}>
                   {[
-                    { key: '100ml', topLine: '100ML · $49', subLine: 'Eau de Parfum', exclusive: false },
-                    { key: 'signature', topLine: 'SIGNATURE', subLine: 'Name in Gold · $69', exclusive: true },
+                    { key: '100ml',     topLine: t.edition100ml,     subLine: t.editionSub100ml, exclusive: false },
+                    { key: 'signature', topLine: t.editionSignature,  subLine: t.editionSigSub,  exclusive: true  },
                   ].map(({ key, topLine, subLine, exclusive }) => {
                     const active = selectedSize === key;
                     return (
@@ -290,7 +294,7 @@ const CollectionCard = ({ product }) => {
                           onClick={() => handleSizeChange(key)}
                           style={{
                             width: '100%', position: 'relative',
-                            fontFamily: 'Raleway, sans-serif', fontSize: '7px', letterSpacing: '1.5px',
+                            fontFamily: t.sansFont, fontSize: '7px',
                             textTransform: 'uppercase', padding: '10px 6px 8px', minHeight: '52px',
                             background: active ? 'rgba(200,160,60,0.08)' : 'transparent',
                             border: `1px solid ${active ? 'rgba(200,160,60,0.9)' : 'rgba(200,160,60,0.22)'}`,
@@ -302,17 +306,17 @@ const CollectionCard = ({ product }) => {
                           {exclusive && (
                             <span style={{
                               position: 'absolute', top: '-8px', left: '50%', transform: 'translateX(-50%)',
-                              fontFamily: 'Raleway, sans-serif', fontSize: '6px', letterSpacing: '2px',
+                              fontFamily: t.sansFont, fontSize: '6px',
                               background: active ? '#C9A84C' : '#07050200',
                               color: active ? '#060606' : 'rgba(200,160,60,0.6)',
                               border: `1px solid ${active ? '#C9A84C' : 'rgba(200,160,60,0.3)'}`,
                               padding: '2px 6px', whiteSpace: 'nowrap', transition: 'all 0.3s ease',
-                            }}>✦ EXCL</span>
+                            }}>{t.exclusiveBadge}</span>
                           )}
                           <span>{topLine}</span>
                           <span style={{
-                            fontFamily: "'Cormorant Garamond', serif", fontStyle: 'italic',
-                            fontSize: '10px', letterSpacing: '0.3px', textTransform: 'none',
+                            fontFamily: t.serifFont, fontStyle: 'italic',
+                            fontSize: '10px', textTransform: 'none',
                             color: active ? 'rgba(200,160,60,0.7)' : 'rgba(200,160,60,0.28)',
                             fontWeight: 300, transition: 'color 0.3s ease',
                           }}>{subLine}</span>
@@ -331,11 +335,11 @@ const CollectionCard = ({ product }) => {
                         onChange={e => setSignatureName(e.target.value.slice(0, 20))}
                         onFocus={() => setNameFocused(true)}
                         onBlur={() => setNameFocused(false)}
-                        placeholder="Your name to engrave…"
+                        placeholder={t.engravePlaceholder}
                         maxLength={20}
                         style={{
                           width: '100%', boxSizing: 'border-box',
-                          fontFamily: "'Cormorant Garamond', serif", fontStyle: 'italic',
+                          fontFamily: t.serifFont, fontStyle: 'italic',
                           fontSize: '14px', fontWeight: 300,
                           background: nameFocused ? 'rgba(201,168,76,0.05)' : 'transparent',
                           border: `1px solid ${nameFocused ? 'rgba(201,168,76,0.65)' : 'rgba(201,168,76,0.22)'}`,
@@ -346,22 +350,22 @@ const CollectionCard = ({ product }) => {
                       />
                       <span style={{
                         position: 'absolute', right: '10px', top: '50%', transform: 'translateY(-50%)',
-                        fontFamily: 'Raleway, sans-serif', fontSize: '7px', letterSpacing: '1px',
+                        fontFamily: t.sansFont, fontSize: '7px',
                         color: signatureName.length >= 18 ? 'rgba(201,168,76,0.9)' : 'rgba(201,168,76,0.28)',
                         transition: 'color 0.2s ease',
                       }}>{signatureName.length}/20</span>
                     </div>
                     <p style={{
-                      fontFamily: "'Cormorant Garamond', serif", fontStyle: 'italic',
+                      fontFamily: t.serifFont, fontStyle: 'italic',
                       fontSize: '10px', color: 'rgba(201,168,76,0.38)',
                       marginTop: '6px', lineHeight: 1.6, textAlign: 'center',
-                    }}>Each bottle is hand-personalized before dispatch.</p>
+                    }}>{t.engraveNote}</p>
                   </div>
                 )}
               </div>
 
               <p style={{
-                fontFamily: "'Cormorant Garamond', serif", fontSize: '26px', fontWeight: 300,
+                fontFamily: t.serifFont, fontSize: '26px', fontWeight: 300,
                 color: '#C9A96E', marginBottom: '14px',
               }}>${displayPrice}</p>
 
@@ -371,14 +375,14 @@ const CollectionCard = ({ product }) => {
                 onMouseLeave={() => setBtnHov(false)}
                 style={{
                   width: '100%', cursor: 'pointer',
-                  fontFamily: 'Raleway, sans-serif', fontSize: '8px', letterSpacing: '5px',
+                  fontFamily: t.sansFont, fontSize: '8px',
                   textTransform: 'uppercase', padding: '16px', textAlign: 'center',
                   background: btnHov ? '#C9A84C' : 'transparent',
                   color: btnHov ? '#060606' : 'rgba(201,168,76,0.85)',
                   border: '1px solid rgba(201,168,76,0.5)',
                   transition: 'all 0.4s ease',
                 }}
-              >{selectedSize === 'signature' ? 'Order — Personalized' : `Buy Now · $${displayPrice}`}</button>
+              >{selectedSize === 'signature' ? t.orderPersonalized : `${t.buyNow} · $${displayPrice}`}</button>
             </>
           )}
 
@@ -407,6 +411,7 @@ const CollectionCarousel = () => {
   const [modal, setModal] = useState(false);
   const [modalProduct, setModalProduct] = useState(null);
   const priceTimer = useRef(null);
+  const { t } = useLanguage();
 
   const goTo = (index) => {
     const el = trackRef.current;
@@ -495,24 +500,24 @@ const CollectionCarousel = () => {
               </div>
 
               {/* PRODUCT INFO */}
-              <p style={{ width: '100%', fontFamily: 'Raleway, sans-serif', fontSize: '10px', letterSpacing: '0.2em', color: '#c9a84c', textAlign: 'center', marginBottom: '6px' }}>ELARA</p>
-              <h3 style={{ width: '100%', fontSize: '28px', fontFamily: "'Cormorant Garamond', serif", fontStyle: 'italic', color: '#fff', textAlign: 'center', marginBottom: '6px' }}>{product.name}</h3>
-              <p style={{ width: '100%', fontFamily: 'Raleway, sans-serif', fontSize: '11px', letterSpacing: '0.15em', color: 'rgba(255,255,255,0.5)', textAlign: 'center', marginBottom: '16px' }}>100ML · EAU DE PARFUM</p>
-              <p style={{ width: '100%', fontFamily: "'Cormorant Garamond', serif", fontSize: '17px', fontWeight: 500, color: '#FFFFFF', textAlign: 'center', lineHeight: 1.8, marginBottom: '24px' }}>{product.tagline}</p>
+              <p style={{ width: '100%', fontFamily: 'Raleway, sans-serif', fontSize: '10px', color: '#c9a84c', textAlign: 'center', marginBottom: '6px' }}>ELARA</p>
+              <h3 style={{ width: '100%', fontSize: '28px', fontFamily: t.serifFont, fontStyle: 'italic', color: '#fff', textAlign: 'center', marginBottom: '6px' }}>{product.name}</h3>
+              <p style={{ width: '100%', fontFamily: t.sansFont, fontSize: '11px', color: 'rgba(255,255,255,0.5)', textAlign: 'center', marginBottom: '16px' }}>{t.eauDeParfum}</p>
+              <p style={{ width: '100%', fontFamily: t.serifFont, fontSize: '17px', fontWeight: 500, color: '#FFFFFF', textAlign: 'center', lineHeight: 1.8, marginBottom: '24px' }}>{t.productTaglines[product.id] || product.tagline}</p>
 
               {/* UNLOCKED: SELECT EDITION + BUY */}
               {!product.locked && (
                 <>
                   <div style={{ width: '100%', marginBottom: '12px', marginTop: 'auto' }}>
                     <p style={{
-                      fontFamily: 'Raleway, sans-serif', fontSize: '7px', letterSpacing: '4px',
+                      fontFamily: t.sansFont, fontSize: '7px',
                       color: 'rgba(200,160,60,0.45)', textTransform: 'uppercase',
                       textAlign: 'center', marginBottom: '10px',
-                    }}>Select Edition</p>
+                    }}>{t.selectEdition}</p>
                     <div style={{ display: 'flex', gap: '8px' }}>
                       {[
-                        { key: '100ml', topLine: '100ML · $49', subLine: 'Eau de Parfum', exclusive: false },
-                        { key: 'signature', topLine: 'SIGNATURE', subLine: 'Name in Gold · $69', exclusive: true },
+                        { key: '100ml',     topLine: t.edition100ml,    subLine: t.editionSub100ml, exclusive: false },
+                        { key: 'signature', topLine: t.editionSignature, subLine: t.editionSigSub,  exclusive: true  },
                       ].map(({ key, topLine, subLine, exclusive }) => {
                         const active = selectedSize === key;
                         return (
@@ -521,7 +526,7 @@ const CollectionCarousel = () => {
                               onClick={() => handleSizeChange(key)}
                               style={{
                                 width: '100%', position: 'relative',
-                                fontFamily: 'Raleway, sans-serif', fontSize: '12px', letterSpacing: '1.5px',
+                                fontFamily: t.sansFont, fontSize: '12px',
                                 textTransform: 'uppercase', padding: '10px 6px 8px', minHeight: '52px',
                                 background: active
                                   ? 'linear-gradient(135deg, rgba(200,160,60,0.13) 0%, rgba(200,160,60,0.05) 100%)'
@@ -536,18 +541,18 @@ const CollectionCarousel = () => {
                               {exclusive && (
                                 <span style={{
                                   position: 'absolute', top: '-8px', left: '50%', transform: 'translateX(-50%)',
-                                  fontFamily: 'Raleway, sans-serif', fontSize: '6px', letterSpacing: '2px',
+                                  fontFamily: t.sansFont, fontSize: '6px',
                                   background: active ? '#C9A84C' : '#0a0602',
                                   color: active ? '#060606' : 'rgba(200,160,60,0.65)',
                                   border: `1px solid ${active ? '#C9A84C' : 'rgba(200,160,60,0.35)'}`,
                                   padding: '2px 6px', whiteSpace: 'nowrap',
                                   transition: 'all 0.3s ease',
-                                }}>✦ EXCL</span>
+                                }}>{t.exclusiveBadge}</span>
                               )}
                               <span>{topLine}</span>
                               <span style={{
-                                fontFamily: "'Cormorant Garamond', serif", fontStyle: 'italic',
-                                fontSize: '10px', letterSpacing: '0.3px', textTransform: 'none',
+                                fontFamily: t.serifFont, fontStyle: 'italic',
+                                fontSize: '10px', textTransform: 'none',
                                 color: active ? 'rgba(200,160,60,0.7)' : 'rgba(200,160,60,0.3)',
                                 fontWeight: 300, transition: 'color 0.3s ease',
                               }}>{subLine}</span>
@@ -566,11 +571,11 @@ const CollectionCarousel = () => {
                             onChange={e => setSignatureName(e.target.value.slice(0, 20))}
                             onFocus={() => setNameFocused(true)}
                             onBlur={() => setNameFocused(false)}
-                            placeholder="Your name to engrave…"
+                            placeholder={t.engravePlaceholder}
                             maxLength={20}
                             style={{
                               width: '100%', boxSizing: 'border-box',
-                              fontFamily: "'Cormorant Garamond', serif", fontStyle: 'italic',
+                              fontFamily: t.serifFont, fontStyle: 'italic',
                               fontSize: '14px', fontWeight: 300,
                               background: nameFocused ? 'rgba(201,168,76,0.06)' : 'rgba(250,246,239,0.02)',
                               border: `1px solid ${nameFocused ? 'rgba(201,168,76,0.7)' : 'rgba(201,168,76,0.25)'}`,
@@ -582,28 +587,28 @@ const CollectionCarousel = () => {
                           />
                           <span style={{
                             position: 'absolute', right: '10px', top: '50%', transform: 'translateY(-50%)',
-                            fontFamily: 'Raleway, sans-serif', fontSize: '7px', letterSpacing: '1px',
+                            fontFamily: t.sansFont, fontSize: '7px',
                             color: signatureName.length >= 18 ? 'rgba(201,168,76,0.9)' : 'rgba(201,168,76,0.3)',
                             transition: 'color 0.2s ease',
                           }}>{signatureName.length}/20</span>
                         </div>
                         <p style={{
-                          fontFamily: "'Cormorant Garamond', serif", fontStyle: 'italic',
+                          fontFamily: t.serifFont, fontStyle: 'italic',
                           fontSize: '10px', color: 'rgba(201,168,76,0.4)',
                           marginTop: '7px', lineHeight: 1.6, textAlign: 'center',
-                        }}>Each bottle is hand-personalized before dispatch.</p>
+                        }}>{t.engraveNote}</p>
                       </div>
                     )}
 
                     <p style={{
-                      fontFamily: 'Raleway, sans-serif', fontSize: '7px', letterSpacing: '2px',
+                      fontFamily: t.sansFont, fontSize: '7px',
                       color: 'rgba(201,168,76,0.25)', textTransform: 'uppercase',
                       textAlign: 'center', marginTop: '8px',
-                    }}>✦ Limited personalized slots available each week</p>
+                    }}>{t.limitedSlots}</p>
                   </div>
 
                   <p style={{
-                    width: '100%', fontFamily: "'Cormorant Garamond', serif", fontSize: '22px', fontWeight: 300,
+                    width: '100%', fontFamily: t.serifFont, fontSize: '22px', fontWeight: 300,
                     color: '#C9A96E', marginBottom: '10px', textAlign: 'center',
                     transition: 'opacity 0.2s ease',
                   }}>${displayPrice}</p>
@@ -612,13 +617,13 @@ const CollectionCarousel = () => {
                     onClick={() => { setModal(true); setModalProduct(product); }}
                     style={{
                       width: '100%', cursor: 'pointer',
-                      fontFamily: 'Raleway, sans-serif', fontSize: '12px', letterSpacing: '3px',
+                      fontFamily: t.sansFont, fontSize: '12px',
                       textTransform: 'uppercase', padding: '14px', textAlign: 'center',
                       background: '#c9a84c', color: '#060606',
                       border: '1px solid rgba(200,160,60,0.7)',
                       transition: 'all 0.35s ease', whiteSpace: 'nowrap',
                     }}
-                  >{selectedSize === 'signature' ? 'Order — Personalized' : `Buy Now $${displayPrice}`}</button>
+                  >{selectedSize === 'signature' ? t.orderPersonalized : `${t.buyNow} $${displayPrice}`}</button>
                 </>
               )}
 
@@ -728,6 +733,7 @@ const WHY_ITEMS = [
 
 const WhyELARA = () => {
   const [ref, visible] = useReveal(0.1);
+  const { t } = useLanguage();
   return (
     <section ref={ref} className="why-section" style={{
       background: 'transparent',
@@ -735,36 +741,39 @@ const WhyELARA = () => {
       textAlign: 'center',
     }}>
       <p style={{
-        fontFamily: 'Raleway, sans-serif', fontSize: '9px', letterSpacing: '7px',
+        fontFamily: t.sansFont, fontSize: '9px',
         color: 'rgba(201,168,76,0.65)', textTransform: 'uppercase', marginBottom: '40px',
         opacity: visible ? 1 : 0, transition: 'opacity 0.7s ease',
-      }}>Why Elara</p>
+      }}>{t.whyEyebrow}</p>
 
       <div className="why-grid" style={{
         maxWidth: '1000px', margin: '0 auto',
         display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '40px 32px',
       }}>
-        {WHY_ITEMS.map(({ icon, title, body }, i) => (
-          <div key={title} style={{
-            display: 'flex', flexDirection: 'column', alignItems: 'center',
-            textAlign: 'center', gap: '16px',
-            opacity: visible ? 1 : 0,
-            transform: visible ? 'translateY(0)' : 'translateY(24px)',
-            transition: `opacity 0.9s ease ${0.1 + i * 0.12}s, transform 0.9s cubic-bezier(0.16,1,0.3,1) ${0.1 + i * 0.12}s`,
-          }}>
-            <div style={{ color: 'rgba(201,168,76,0.7)' }}>{icon}</div>
-            <h4 style={{
-              fontFamily: "'Cormorant Garamond', serif", fontWeight: 300,
-              fontSize: '18px', color: '#FAF6EF', letterSpacing: '0.4px', margin: 0,
-              lineHeight: 1.2,
-            }}>{title}</h4>
-            <p style={{
-              fontFamily: 'Raleway, sans-serif', fontSize: '12px', fontWeight: 300,
-              color: 'rgba(232,224,216,0.5)', lineHeight: 1.85, letterSpacing: '0.3px',
-              margin: 0, maxWidth: '210px',
-            }}>{body}</p>
-          </div>
-        ))}
+        {WHY_ITEMS.map(({ icon }, i) => {
+          const { title, body } = t.whyItems[i];
+          return (
+            <div key={i} style={{
+              display: 'flex', flexDirection: 'column', alignItems: 'center',
+              textAlign: 'center', gap: '16px',
+              opacity: visible ? 1 : 0,
+              transform: visible ? 'translateY(0)' : 'translateY(24px)',
+              transition: `opacity 0.9s ease ${0.1 + i * 0.12}s, transform 0.9s cubic-bezier(0.16,1,0.3,1) ${0.1 + i * 0.12}s`,
+            }}>
+              <div style={{ color: 'rgba(201,168,76,0.7)' }}>{icon}</div>
+              <h4 style={{
+                fontFamily: t.serifFont, fontWeight: 300,
+                fontSize: '18px', color: '#FAF6EF', margin: 0,
+                lineHeight: 1.2,
+              }}>{title}</h4>
+              <p style={{
+                fontFamily: t.sansFont, fontSize: '12px', fontWeight: 300,
+                color: 'rgba(232,224,216,0.5)', lineHeight: 1.85,
+                margin: 0, maxWidth: '210px',
+              }}>{body}</p>
+            </div>
+          );
+        })}
       </div>
     </section>
   );
@@ -779,6 +788,7 @@ const ExclusiveAccess = () => {
   const [done, setDone]       = useState(false);
   const [btnHov, setBtnHov]   = useState(false);
   const [ref, visible]        = useReveal(0.15);
+  const { t } = useLanguage();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -809,40 +819,40 @@ const ExclusiveAccess = () => {
 
       <div style={{ maxWidth: '520px', margin: '0 auto' }}>
         <p style={{
-          fontFamily: 'Raleway, sans-serif', fontSize: '9px', letterSpacing: '7px',
+          fontFamily: t.sansFont, fontSize: '9px',
           color: 'rgba(201,168,76,0.6)', textTransform: 'uppercase',
           marginBottom: '22px', ...fadeUp(0),
-        }}>Exclusive Access</p>
+        }}>{t.exclusiveEyebrow}</p>
 
         <h2 style={{
-          fontFamily: "'Cormorant Garamond', serif", fontWeight: 300,
+          fontFamily: t.serifFont, fontWeight: 300,
           fontSize: 'clamp(2rem, 4.5vw, 3.2rem)', lineHeight: 1.15,
-          marginBottom: '18px', letterSpacing: '-0.3px',
+          marginBottom: '18px',
           ...fadeUp(0.1),
         }}>
-          <span style={{ color: '#FAF6EF' }}>Be The First </span>
-          <span style={{ fontStyle: 'italic', color: '#c9a84c' }}>To Know</span>
+          <span style={{ color: '#FAF6EF' }}>{t.exclusiveHead1}</span>
+          <span style={{ fontStyle: 'italic', color: '#c9a84c' }}>{t.exclusiveHead2}</span>
         </h2>
 
         <p style={{
-          fontFamily: 'Raleway, sans-serif', fontSize: '12px', fontWeight: 300,
-          color: 'rgba(232,224,216,0.42)', letterSpacing: '0.4px', lineHeight: 2,
+          fontFamily: t.sansFont, fontSize: '12px', fontWeight: 300,
+          color: 'rgba(232,224,216,0.42)', lineHeight: 2,
           marginBottom: '48px', ...fadeUp(0.2),
         }}>
-          Early access to new fragrances, private events and exclusive offers.
+          {t.exclusiveSub}
         </p>
 
         {done ? (
           <div style={{ ...fadeUp(0) }}>
             <p style={{
-              fontFamily: "'Cormorant Garamond', serif", fontStyle: 'italic',
+              fontFamily: t.serifFont, fontStyle: 'italic',
               fontSize: '26px', color: 'rgba(201,168,76,0.9)', lineHeight: 1.8,
               marginBottom: '8px',
-            }}>You're on the list.</p>
+            }}>{t.onTheList}</p>
             <p style={{
-              fontFamily: 'Raleway, sans-serif', fontSize: '11px', fontWeight: 300,
-              letterSpacing: '2px', color: 'rgba(250,246,239,0.3)',
-            }}>We'll be in touch.</p>
+              fontFamily: t.sansFont, fontSize: '11px', fontWeight: 300,
+              color: 'rgba(250,246,239,0.3)',
+            }}>{t.inTouch}</p>
           </div>
         ) : (
           <form onSubmit={handleSubmit} style={{ ...fadeUp(0.3) }}>
@@ -858,8 +868,8 @@ const ExclusiveAccess = () => {
               style={{
                 width: '100%', background: 'transparent', border: 'none',
                 borderBottom: `1px solid ${focused ? 'rgba(201,168,76,0.8)' : 'rgba(201,168,76,0.22)'}`,
-                color: '#FAF6EF', fontFamily: "'Cormorant Garamond', serif",
-                fontSize: '17px', fontWeight: 300, letterSpacing: '0.3px',
+                color: '#FAF6EF', fontFamily: t.serifFont,
+                fontSize: '17px', fontWeight: 300,
                 padding: '14px 0', outline: 'none', textAlign: 'center',
                 transition: 'border-color 0.3s ease',
                 boxSizing: 'border-box', marginBottom: '28px',
@@ -870,14 +880,14 @@ const ExclusiveAccess = () => {
               onMouseEnter={() => setBtnHov(true)}
               onMouseLeave={() => setBtnHov(false)}
               style={{
-                width: '100%', fontFamily: 'Raleway, sans-serif',
-                fontSize: '9px', fontWeight: 600, letterSpacing: '5px',
+                width: '100%', fontFamily: t.sansFont,
+                fontSize: '9px', fontWeight: 600,
                 textTransform: 'uppercase', padding: '18px',
                 background: btnHov ? '#E8B84B' : '#c9a84c',
                 color: '#0a0600', border: 'none', cursor: 'pointer',
                 transition: 'background 0.3s ease',
               }}
-            >Join the Waitlist</button>
+            >{t.joinWaitlist}</button>
           </form>
         )}
       </div>
@@ -937,6 +947,7 @@ const SideNavDots = () => {
 ───────────────────────────────────────── */
 const Home = () => {
   const isMobile = useIsMobile();
+  const { t } = useLanguage();
 
   return (
     <div style={{ background: 'transparent', minHeight: '100vh' }}>
@@ -1004,11 +1015,11 @@ const Home = () => {
               style={{ marginBottom: '28px', display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '14px' }}
             >
               <span style={{
-                fontFamily: 'Raleway, sans-serif', fontSize: '9px',
+                fontFamily: t.sansFont, fontSize: '9px',
                 letterSpacing: '8px', color: '#EED79A', textTransform: 'uppercase',
                 whiteSpace: 'nowrap',
               }}>
-                Maison de Parfum
+                {t.heroEyebrow}
               </span>
               <motion.div
                 aria-hidden
@@ -1029,18 +1040,20 @@ const Home = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1.15, ease: [0.16, 1, 0.3, 1], delay: 0.22 }}
               style={{
-                fontFamily: "'Playfair Display', serif", fontWeight: 300,
+                fontFamily: t.headingFont, fontWeight: 300,
                 lineHeight: 1.08, color: '#FAF6EF', marginBottom: '36px',
               }}
             >
-              <motion.span
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.95, delay: 0.32, ease: [0.16, 1, 0.3, 1] }}
-                style={{ fontSize: 'clamp(2rem, 7vw, 3.5rem)', display: 'block' }}
-              >
-                Wear the
-              </motion.span>
+              {t.heroLine1 && (
+                <motion.span
+                  initial={{ opacity: 0, y: 16 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.95, delay: 0.32, ease: [0.16, 1, 0.3, 1] }}
+                  style={{ fontSize: 'clamp(2rem, 7vw, 3.5rem)', display: 'block' }}
+                >
+                  {t.heroLine1}
+                </motion.span>
+              )}
               <motion.span
                 initial={{ opacity: 0, y: 22 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -1057,7 +1070,7 @@ const Home = () => {
                   paddingRight: '0.02em',
                 }}
               >
-                Unspeakable
+                {t.heroLine2}
               </motion.span>
             </motion.h1>
 
@@ -1066,13 +1079,13 @@ const Home = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1.05, ease: [0.16, 1, 0.3, 1], delay: 0.62 }}
               style={{
-                fontFamily: 'Raleway, sans-serif', fontSize: '14px', fontWeight: 300,
-                color: 'rgba(235,226,216,0.78)', letterSpacing: '0.55px', lineHeight: 2.05,
+                fontFamily: t.sansFont, fontSize: '14px', fontWeight: 300,
+                color: 'rgba(235,226,216,0.78)', lineHeight: 2.05,
                 maxWidth: '380px', marginBottom: '40px',
                 textWrap: 'balance',
               }}
             >
-              For the woman who enters a room before she does.
+              {t.heroSub}
             </motion.p>
 
             <motion.div
@@ -1107,14 +1120,11 @@ const Home = () => {
         <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
           {isMobile ? (
             <div style={{ textAlign: 'center', marginBottom: '60px' }}>
-              <p style={{ fontFamily: 'Raleway', fontSize: '11px', letterSpacing: '4px', color: 'rgba(255,200,80,0.7)', textTransform: 'uppercase', marginBottom: '20px' }}>
-                Eau de Parfum
+              <p style={{ fontFamily: t.sansFont, fontSize: '11px', color: 'rgba(255,200,80,0.7)', textTransform: 'uppercase', marginBottom: '20px' }}>
+                {t.collectionEyebrow}
               </p>
-              <h2 style={{
-                fontFamily: "'Playfair Display', serif", fontWeight: 300,
-                fontSize: 'clamp(40px, 5vw, 62px)', color: '#FAF6EF',
-              }}>
-                The <span style={{ fontStyle: 'italic', color: '#C9A96E' }}>Collection</span>
+              <h2 style={{ fontFamily: t.headingFont, fontWeight: 300, fontSize: 'clamp(40px, 5vw, 62px)', color: '#FAF6EF' }}>
+                {t.collectionPre}<span style={{ fontStyle: 'italic', color: '#C9A96E' }}>{t.collectionHighlight}</span>
               </h2>
             </div>
           ) : (
@@ -1125,14 +1135,11 @@ const Home = () => {
               transition={{ duration: 0.8, ease: [0.4, 0, 0.2, 1] }}
               style={{ textAlign: 'center', marginBottom: '60px' }}
             >
-              <p style={{ fontFamily: 'Raleway', fontSize: '11px', letterSpacing: '4px', color: 'rgba(255,200,80,0.7)', textTransform: 'uppercase', marginBottom: '20px' }}>
-                Eau de Parfum
+              <p style={{ fontFamily: t.sansFont, fontSize: '11px', color: 'rgba(255,200,80,0.7)', textTransform: 'uppercase', marginBottom: '20px' }}>
+                {t.collectionEyebrow}
               </p>
-              <h2 style={{
-                fontFamily: "'Playfair Display', serif", fontWeight: 300,
-                fontSize: 'clamp(40px, 5vw, 62px)', color: '#FAF6EF',
-              }}>
-                The <span style={{ fontStyle: 'italic', color: '#C9A96E' }}>Collection</span>
+              <h2 style={{ fontFamily: t.headingFont, fontWeight: 300, fontSize: 'clamp(40px, 5vw, 62px)', color: '#FAF6EF' }}>
+                {t.collectionPre}<span style={{ fontStyle: 'italic', color: '#C9A96E' }}>{t.collectionHighlight}</span>
               </h2>
             </motion.div>
           )}

@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { useState, useEffect, lazy, Suspense } from 'react';
 import { CartContext } from './context/CartContext';
+import { LanguageProvider, useLanguage } from './context/LanguageContext';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Home from './pages/Home';
@@ -106,6 +107,25 @@ const LoadingScreen = ({ visible }) => (
   </div>
 );
 
+const AppShell = () => {
+  const { fading } = useLanguage();
+  return (
+    <div style={{ opacity: fading ? 0 : 1, transition: 'opacity 0.2s ease' }}>
+      <Navbar />
+      <Suspense fallback={<PageFallback />}>
+        <Routes>
+          <Route path="/"        element={<Home />} />
+          <Route path="/shop"    element={<Shop />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/cart"    element={<CartPage />} />
+        </Routes>
+      </Suspense>
+      <Footer />
+      <WhatsAppFloat />
+    </div>
+  );
+};
+
 function App() {
   const [cart, setCart] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -133,21 +153,12 @@ function App() {
 
   return (
     <CartContext.Provider value={{ cart, addToCart, removeFromCart, updateQty }}>
-      <LoadingScreen visible={loading} />
-      <BrowserRouter>
-        <Navbar />
-        <Suspense fallback={<PageFallback />}>
-          <Routes>
-            <Route path="/"       element={<Home />} />
-            <Route path="/shop"   element={<Shop />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/cart"   element={<CartPage />} />
-          </Routes>
-        </Suspense>
-        <Footer />
-
-        <WhatsAppFloat />
-      </BrowserRouter>
+      <LanguageProvider>
+        <LoadingScreen visible={loading} />
+        <BrowserRouter>
+          <AppShell />
+        </BrowserRouter>
+      </LanguageProvider>
     </CartContext.Provider>
   );
 }

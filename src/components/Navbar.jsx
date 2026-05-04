@@ -1,18 +1,43 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
+import { useLanguage } from '../context/LanguageContext';
 
-const navLinks = [
-  ['/',        'Home'   ],
-  ['/shop',    'Shop'   ],
-  ['/contact', 'Contact'],
-];
+const LangToggle = () => {
+  const { lang, toggle } = useLanguage();
+  const [hov, setHov] = useState(false);
+  return (
+    <button
+      onClick={toggle}
+      onMouseEnter={() => setHov(true)}
+      onMouseLeave={() => setHov(false)}
+      aria-label="Toggle language"
+      style={{
+        background: 'none', border: 'none', cursor: 'pointer',
+        padding: '4px 2px', display: 'flex', alignItems: 'center', gap: '2px',
+        fontFamily: 'Raleway, sans-serif', fontSize: '9px', letterSpacing: '1px',
+        opacity: hov ? 1 : 0.75, transition: 'opacity 0.3s ease',
+      }}
+    >
+      <span style={{ color: lang === 'en' ? '#C9A84C' : 'rgba(201,168,76,0.38)', transition: 'color 0.3s ease' }}>EN</span>
+      <span style={{ color: 'rgba(201,168,76,0.25)', margin: '0 1px' }}>|</span>
+      <span style={{ fontFamily: "'Noto Naskh Arabic', serif", fontSize: '11px', color: lang === 'ar' ? '#C9A84C' : 'rgba(201,168,76,0.38)', transition: 'color 0.3s ease' }}>عر</span>
+    </button>
+  );
+};
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const { cart } = useCart();
+  const { t } = useLanguage();
   const location  = useLocation();
   const cartCount = cart.reduce((sum, item) => sum + item.qty, 0);
+
+  const navLinks = [
+    ['/',        t.navHome   ],
+    ['/shop',    t.navShop   ],
+    ['/contact', t.navContact],
+  ];
 
   useEffect(() => { setMenuOpen(false); }, [location.pathname]);
 
@@ -74,8 +99,9 @@ const Navbar = () => {
           })}
         </div>
 
-        {/* Right — cart + hamburger */}
+        {/* Right — lang + cart + hamburger */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '24px' }}>
+          <LangToggle />
 
           {/* Cart icon */}
           <Link
@@ -175,8 +201,10 @@ const Navbar = () => {
           letterSpacing: '0.4em', textTransform: 'uppercase',
           color: 'rgba(201,168,76,0.4)', textDecoration: 'none',
         }}>
-          Cart{cartCount > 0 ? ` (${cartCount})` : ''}
+          {t.navCart}{cartCount > 0 ? ` (${cartCount})` : ''}
         </Link>
+
+        <LangToggle />
       </div>
     </>
   );

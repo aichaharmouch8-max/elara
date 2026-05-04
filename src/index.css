@@ -22,6 +22,9 @@
   );
 }
 
+/* Arabic RTL — reset letter-spacing (meaningless in Arabic script) */
+[dir="rtl"] * { letter-spacing: 0 !important; }
+
 html {
   scroll-behavior: smooth;
   overflow-x: hidden;
