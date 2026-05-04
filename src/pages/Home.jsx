@@ -381,7 +381,7 @@ const CollectionCard = ({ product }) => {
                   border: '1px solid rgba(201,168,76,0.5)',
                   transition: 'all 0.4s ease',
                 }}
-              >{selectedSize === 'signature' ? 'Order — Personalized' : `Acquire · $${displayPrice}`}</button>
+              >{selectedSize === 'signature' ? 'Order — Personalized' : `Buy Now · $${displayPrice}`}</button>
             </>
           )}
 
