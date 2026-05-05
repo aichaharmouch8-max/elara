@@ -359,6 +359,33 @@ const PaymentModal = ({ product, selectedSize = '100ml', selectedPrice, signatur
     if (error) console.error('Supabase error:', error);
     else console.log('Saved!', data);
 
+    // WhatsApp notification to delivery agent
+    const lat = locData?.lat ?? '';
+    const lng = locData?.lng ?? '';
+    const mapsLink = lat && lng
+      ? `https://maps.google.com/?q=${lat},${lng}`
+      : 'Not provided';
+    const edition = selectedSize === 'signature' ? 'Signature Edition (100ml)' : '100ml Eau de Parfum';
+    const waMsg = [
+      '🛍️ NEW ELARA ORDER',
+      '',
+      `👤 Customer: ${name.trim()}`,
+      `📱 Phone: +961 ${phone.trim()}`,
+      '',
+      `🌸 Product: ${product.name}`,
+      `📦 Edition: ${edition}`,
+      `💰 Price: $${price}`,
+      `💳 Payment: ${methodLabel}`,
+      '',
+      `📍 Address: ${street.trim()}${floor.trim() ? `, ${floor.trim()}` : ''}`,
+      `🗺️ Location: ${mapsLink}`,
+    ].join('\n');
+    window.open(
+      `https://wa.me/96176510481?text=${encodeURIComponent(waMsg)}`,
+      '_blank',
+      'noopener,noreferrer'
+    );
+
     setSubmitting(false);
     setSubmitted(true);
   };
