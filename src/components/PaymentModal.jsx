@@ -342,7 +342,8 @@ const PaymentModal = ({ product, selectedSize = '100ml', selectedPrice, signatur
 
     const methodLabel = method === 'wish' ? 'Wish Money' : 'Cash on Delivery';
 
-    await supabase.from('orders').insert({
+    console.log('Saving to Supabase...');
+    const { data, error } = await supabase.from('orders').insert({
       customer_name: name.trim(),
       phone: `+961 ${phone.trim()}`,
       product: product.name,
@@ -355,6 +356,8 @@ const PaymentModal = ({ product, selectedSize = '100ml', selectedPrice, signatur
       gps_lng: locData?.lng ?? null,
       gps_location: locData ? `https://maps.google.com/?q=${locData.lat},${locData.lng}` : null,
     });
+    if (error) console.error('Supabase error:', error);
+    else console.log('Saved!', data);
 
     setSubmitting(false);
     setSubmitted(true);
