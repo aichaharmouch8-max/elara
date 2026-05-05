@@ -11,6 +11,7 @@ import WhatsAppFloat from './components/WhatsAppFloat';
 const Shop     = lazy(() => import('./pages/Shop'));
 const Contact  = lazy(() => import('./pages/Contact'));
 const CartPage = lazy(() => import('./pages/CartPage'));
+const Admin    = lazy(() => import('./pages/Admin'));
 
 const PageFallback = () => <div style={{ background: 'transparent', minHeight: '100vh' }} />;
 
@@ -110,19 +111,27 @@ const LoadingScreen = ({ visible }) => (
 const AppShell = () => {
   const { fading } = useLanguage();
   return (
-    <div style={{ opacity: fading ? 0 : 1, transition: 'opacity 0.2s ease' }}>
-      <Navbar />
-      <Suspense fallback={<PageFallback />}>
-        <Routes>
-          <Route path="/"        element={<Home />} />
-          <Route path="/shop"    element={<Shop />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/cart"    element={<CartPage />} />
-        </Routes>
-      </Suspense>
-      <Footer />
-      <WhatsAppFloat />
-    </div>
+    <Suspense fallback={<PageFallback />}>
+      <Routes>
+        {/* Admin — standalone, no navbar/footer */}
+        <Route path="/admin" element={<Admin />} />
+
+        {/* Main site */}
+        <Route path="*" element={
+          <div style={{ opacity: fading ? 0 : 1, transition: 'opacity 0.2s ease' }}>
+            <Navbar />
+            <Routes>
+              <Route path="/"        element={<Home />} />
+              <Route path="/shop"    element={<Shop />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/cart"    element={<CartPage />} />
+            </Routes>
+            <Footer />
+            <WhatsAppFloat />
+          </div>
+        } />
+      </Routes>
+    </Suspense>
   );
 };
 
