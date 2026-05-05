@@ -260,7 +260,7 @@ const getLocation = () => new Promise((resolve, reject) => {
       else if (err.code === 2) reject('POSITION_UNAVAILABLE');
       else reject('TIMEOUT');
     },
-    { enableHighAccuracy: true, timeout: 15000, maximumAge: 0 }
+    { enableHighAccuracy: false, timeout: 5000, maximumAge: 60000 }
   );
 });
 
@@ -278,7 +278,7 @@ const PaymentModal = ({ product, selectedSize = '100ml', selectedPrice, signatur
   const [method, setMethod] = useState(null);
 
   // Location
-  const [locState, setLocState] = useState('idle'); // 'idle'|'loading'|'success'|'error'
+  const [locState, setLocState] = useState('loading'); // 'idle'|'loading'|'success'|'error'
   const [locData, setLocData]   = useState(null);
   const [locError, setLocError] = useState('');
 
@@ -292,6 +292,11 @@ const PaymentModal = ({ product, selectedSize = '100ml', selectedPrice, signatur
   useEffect(() => {
     document.body.style.overflow = 'hidden';
     return () => { document.body.style.overflow = ''; };
+  }, []);
+
+  // Auto-detect location in the background as soon as the modal opens
+  useEffect(() => {
+    handleDetectLocation(); // eslint-disable-line react-hooks/exhaustive-deps
   }, []);
 
   const setF = (key, val) => setFocus(f => ({ ...f, [key]: val }));
