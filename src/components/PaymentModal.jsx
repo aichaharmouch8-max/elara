@@ -343,7 +343,7 @@ const PaymentModal = ({ product, selectedSize = '100ml', selectedPrice, signatur
     const methodLabel = method === 'wish' ? 'Wish Money' : 'Cash on Delivery';
 
     console.log('Saving to Supabase...');
-    const { data, error } = await supabase.from('orders').insert({
+    const { data, error } = await supabase.from('Orders').insert({
       customer_name: name.trim(),
       phone: `+961 ${phone.trim()}`,
       product: product.name,
