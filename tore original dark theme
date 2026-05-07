@@ -1,0 +1,107 @@
+[33m2142a15[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m full dark theme restore
+[33m43f7ce4[m revert to original dark theme
+[33m46e5688[m restructure layout for luxury marketing strategy
+[33mf2c3ba9[m force apply cream theme
+[33m821fa3b[m full cream ivory luxury redesign
+[33m0aab7ee[m remove whatsapp redirect
+[33m75d1177[m add whatsapp notification to delivery agent
+[33m3462818[m add admin dashboard
+[33m79928e7[m fix orders table name capital O
+[33m84dd9f2[m fix supabase key
+[33me52e8b1[m debug supabase insert
+[33mddf586e[m add supabase insert to order submission
+[33m0f6dc39[m fix slow geolocation detection
+[33ma4ac746[m luxury redesign - warm gold theme and editorial fonts
+[33mb72adc5[m fix order flow - remove customer whatsapp redirect
+[33m45e036c[m add supabase order tracking
+[33mc1b861f[m fix collection heading and lock icon on desktop
+[33mbb95b0f[m add arabic RTL bilingual support for GCC expansion
+[33m5a8c192[m add close button to empty cart page
+[33meab51d2[m remove all scroll snapping completely
+[33md257469[m update copy, strengthen text, remove dashes
+[33mdf24a32[m fix carousel swipe smoothness
+[33mb4eefc4[m fix product cards desktop layout
+[33md71e1ff[m fix product cards equal height
+[33ma39281d[m remove scroll snapping
+[33mefa0cd6[m fix hero scroll and smooth scrolling
+[33m124b53f[m fix button text to buy now
+[33m7a7faeb[m improve payment section design
+[33m450d10e[m redesign product cards for luxury desktop layout
+[33mcb5e44d[m remove free delivery banner
+[33m4029a71[m fix desktop scroll
+[33m0ffda49[m improve product cards and spacing
+[33m8225a92[m fix product cards glitch on mobile
+[33m26f875a[m remove our philosophy section
+[33m6247a52[m restore missing sections
+[33m1b88209[m remove quote and tagline sections
+[33md08cdc5[m fix scroll behavior
+[33md25c281[m fix hero bottle position and show full spray
+[33md1677bd[m remove glitter effect from hero
+[33m8b42b66[m add hero video
+[33m25f42d3[m your message here
+[33me417b2e[m remove mobile bottom nav luxury clean
+[33m5cac36f[m fix quote spacing delete exclusive access forever
+[33m752f017[m FINAL fix identical card sizes
+[33maa237bf[m exact GPS location sent to WhatsApp order
+[33md266477[m elegant lock notify button
+[33m31b3891[m fix location detection real API
+[33mb383424[m fix mobile card match desktop stop auto scroll
+[33mb169aa2[m remove lock icon elegant coming soon
+[33me6feba3[m fix carousel touch scroll conflict
+[33m00275dd[m full carousel rewrite identical cards
+[33m43082c6[m rewrite carousel one card at a time
+[33m17b3705[m fix hero image stability no parallax
+[33mb73bc89[m luxury carousel fix identical cards elegant lock
+[33m7373d22[m unify all product cards identical structure
+[33mad31514[m remove chat widget keep whatsapp only
+[33m2a50db0[m remove chat widget
+[33m3b63639[m remove response time text fix spacing
+[33m7d72de4[m fix locked card overlay position
+[33ma22f1b3[m luxury pricing signature edition personalized bottle
+[33m193a185[m fix Oro Rawan Noir cards locked overlay
+[33m1f35cd7[m performance optimization fast load
+[33m5a4b987[m remove all burgundy replace with pure black
+[33m0103cf9[m redesign contact whatsapp only
+[33md6a7493[m redesign why elara section
+[33me6aa141[m fix Oro and Rawan Noir product images
+[33me7c5553[m redesign contact section
+[33mb9f831c[m redesign philosophy section compact
+[33mc12e139[m fix carousel card sizes
+[33ma7aacdb[m fix quote section spacing and typography
+[33m23e90b2[m fix carousel card sizes
+[33med6e0d4[m fix navbar glassmorphism
+[33mc528934[m fix hero layout and navbar glass
+[33mf944e6a[m fix page title
+[33mb1c53f0[m restore waitlist section
+[33me7c24d2[m fix hero centering and unified card sizes
+[33ma217857[m deep burgundy luxury accent
+[33m9ab5125[m removed story, trust bar, closing cta, exclusive access
+[33m38e5310[m removed sections and decorative clutter
+[33m2395946[m remove decorative clutter
+[33m3eab4ab[m remove decorative dashes
+[33mb323a9c[m unified black background, removed decorative dashes
+[33md09c9c4[m unified backgrounds, clean sections, glass navbar
+[33m7991f88[m luxury product pages and trust overhaul
+[33me7e7274[m cinematic storytelling experience
+[33m2363021[m luxury storytelling and trust sections
+[33mfabcda9[m fix mobile hero cinematic
+[33mf52a2d3[m fix hero image crop
+[33m0cb538c[m Fix CI build: remove unused scrolled state and navBg/navBorder variables from Navbar
+[33mde88bab[m luxury brand overhaul
+[33mbecf909[m fix mobile product card layout
+[33ma2f6eec[m fix mobile product card layout
+[33mb54c16c[m complete site overhaul
+[33mb2401f6[m Fix glass navbar, compact product cards, mobile scroll cleanup
+[33m022faa2[m Remove scroll-snap-type and height:100% from html to fix mobile scrolling
+[33m49f56dc[m Fix mobile layout: glass navbar, compact cards, spacing, smooth scroll
+[33m5c3fa51[m luxury splash screen and glass navbar
+[33m2351287[m description
+[33m335a982[m description
+[33mfca925f[m description
+[33m039be5c[m your change description
+[33m94a6328[m fix eslint errors
+[33m4580d39[m fix eslint production
+[33mf9109f1[m disable eslint
+[33m151fd36[m fix npmrc
+[33m645c7f6[m fix peer deps
+[33mfa5ee7b[m elara perfume website
