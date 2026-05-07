@@ -1155,11 +1155,6 @@ const Home = () => {
           transition={{ duration: 0.8, ease: [0.4, 0, 0.2, 1] }}
           style={{ textAlign: 'center', marginBottom: '60px', maxWidth: '1100px', margin: '0 auto 60px' }}
         >
-          {/* Pyramid ornament */}
-          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" style={{ marginBottom: '22px', display: 'block', margin: '0 auto 22px' }} aria-hidden="true">
-            <polygon points="9,1 17,17 1,17" stroke="rgba(201,164,21,0.55)" strokeWidth="0.8" fill="none"/>
-            <polygon points="9,5 14,14 4,14" fill="rgba(201,164,21,0.18)"/>
-          </svg>
           <p style={{ fontFamily: t.sansFont, fontSize: '11px', color: 'rgba(255,200,80,0.7)', textTransform: 'uppercase', marginBottom: '20px' }}>
             {t.collectionEyebrow}
           </p>
