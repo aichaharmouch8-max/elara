@@ -17,9 +17,8 @@ const useIsMobile = () => {
   return isMobile;
 };
 
-const ShopNowBtn = () => {
+const ReineCta = () => {
   const [hov, setHov] = useState(false);
-  const { t } = useLanguage();
   return (
     <Link to="/shop"
       className="discover-shimmer hero-shop-cta"
@@ -27,10 +26,10 @@ const ShopNowBtn = () => {
       onMouseLeave={() => setHov(false)}
       style={{
         display: 'inline-block',
-        fontFamily: t.sansFont, fontSize: '9px',
+        fontFamily: "'Jost', sans-serif", fontSize: '9px',
         letterSpacing: '5px', textTransform: 'uppercase',
         padding: '14px 44px',
-        background: hov ? 'rgba(232,184,75,1)' : 'rgba(232,184,75,0.06)',
+        background: hov ? 'rgba(232,184,75,0.9)' : 'rgba(232,184,75,0.06)',
         color: hov ? '#0a0600' : 'rgba(232,216,178,1)',
         border: '1px solid rgba(232,184,75,0.55)',
         transition: 'all 0.35s ease',
@@ -40,7 +39,7 @@ const ShopNowBtn = () => {
         borderRadius: '2px',
         position: 'relative',
       }}
-    >{t.shopNow}</Link>
+    >SHOP REINE — $49</Link>
   );
 };
 
@@ -982,6 +981,7 @@ const Home = () => {
         alignItems: 'flex-start',
         paddingTop: '76px',
         paddingBottom: '0',
+        background: '#0d0a07',
       }}>
         <img
           src="/elaraaaaa.webp"
@@ -1007,7 +1007,7 @@ const Home = () => {
 
 <div className="hero-overlay-left hero-atmosphere-overlay" style={{
           position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 2,
-          background: 'linear-gradient(to right, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.58) 40%, rgba(0,0,0,0.12) 58%, transparent 100%)',
+          background: 'linear-gradient(to right, rgba(13,10,7,0.88) 0%, rgba(13,10,7,0.55) 38%, rgba(13,10,7,0.14) 60%, transparent 100%)',
         }}/>
         <div className="hero-vignette" style={{
           position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 2,
@@ -1092,9 +1092,22 @@ const Home = () => {
             </motion.h1>
 
             <motion.p
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.56 }}
+              style={{
+                fontFamily: "'Jost', sans-serif", fontSize: '9px',
+                letterSpacing: '5px', textTransform: 'uppercase',
+                color: 'rgba(232,192,100,0.65)', marginBottom: '20px',
+              }}
+            >
+              EAU DE PARFUM · 100ML
+            </motion.p>
+
+            <motion.p
               initial={{ opacity: 0, y: 28 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1.05, ease: [0.16, 1, 0.3, 1], delay: 0.62 }}
+              transition={{ duration: 1.05, ease: [0.16, 1, 0.3, 1], delay: 0.72 }}
               style={{
                 fontFamily: t.sansFont, fontSize: '14px', fontWeight: 300,
                 color: 'rgba(235,226,216,0.78)', lineHeight: 2.05,
@@ -1108,9 +1121,9 @@ const Home = () => {
             <motion.div
               initial={{ opacity: 0, y: 22 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.82 }}
+              transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.92 }}
             >
-              <ShopNowBtn />
+              <ReineCta />
             </motion.div>
 
           </div>

@@ -10,9 +10,9 @@ export const T = {
     sansFont:    "'Jost', sans-serif",
     /* hero */
     heroEyebrow: 'Maison de Parfum',
-    heroLine1:   'Wear the',
-    heroLine2:   'Unspeakable',
-    heroSub:     'For the woman who enters a room before she does.',
+    heroLine1:   '',
+    heroLine2:   'Reine',
+    heroSub:     'Power. Seduction. Obsession.',
     shopNow:     'Shop Now',
     /* collection */
     collectionEyebrow:  'Eau de Parfum',
@@ -68,8 +68,8 @@ export const T = {
     /* hero */
     heroEyebrow: 'بيت العطور',
     heroLine1:   '',
-    heroLine2:   'ارتدِ ما لا يُقال',
-    heroSub:     'للمرأة التي تدخل الغرفة قبل أن تصل',
+    heroLine2:   'Reine',
+    heroSub:     'القوة. الإغراء. الهوس.',
     shopNow:     'تسوّقي الآن',
     /* collection */
     collectionEyebrow:  'ماء دو بارفان',
