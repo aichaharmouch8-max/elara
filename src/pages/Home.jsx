@@ -39,7 +39,7 @@ const ReineCta = () => {
         borderRadius: '2px',
         position: 'relative',
       }}
-    >DISCOVER REINE</Link>
+    >DISCOVER ELARA</Link>
   );
 };
 
@@ -1002,17 +1002,13 @@ const Home = () => {
             top: 0,
             width: '100%',
             height: '100%',
-            objectFit: 'contain',
-            objectPosition: 'right bottom',
+            objectFit: 'cover',
+            objectPosition: 'center',
             zIndex: 0,
             pointerEvents: 'none',
           }}
         />
 
-<div className="hero-overlay-left hero-atmosphere-overlay" style={{
-          position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 2,
-          background: 'transparent',
-        }}/>
         <div className="hero-vignette" style={{
           position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 2,
           background: 'linear-gradient(to bottom, rgba(0,0,0,0.4) 0%, transparent 24%, transparent 70%, rgba(0,0,0,0.58) 100%)',
