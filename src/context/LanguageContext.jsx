@@ -11,7 +11,7 @@ export const T = {
     /* hero */
     heroEyebrow: 'Maison de Parfum',
     heroLine1:   '',
-    heroLine2:   'Reine',
+    heroLine2:   'ELARA',
     heroSub:     'Power. Seduction. Obsession.',
     shopNow:     'Shop Now',
     /* collection */
@@ -68,7 +68,7 @@ export const T = {
     /* hero */
     heroEyebrow: 'بيت العطور',
     heroLine1:   '',
-    heroLine2:   'Reine',
+    heroLine2:   'ELARA',
     heroSub:     'القوة. الإغراء. الهوس.',
     shopNow:     'تسوّقي الآن',
     /* collection */
