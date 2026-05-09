@@ -86,6 +86,9 @@ const PRODUCTS = [
   },
 ];
 
+/* Desktop display order: Oro | Reine (featured) | Rawan Noir */
+const DESKTOP_ORDER = ['oro', 'reine', 'nova'].map(id => PRODUCTS.find(p => p.id === id));
+
 const REINE_PRICES = { '100ml': 49, 'signature': 69 };
 
 const NotifyForm = ({ productName }) => {
@@ -172,7 +175,7 @@ const NotifyForm = ({ productName }) => {
   );
 };
 
-const CollectionCard = ({ product }) => {
+const CollectionCard = ({ product, featured = false }) => {
   const [hov, setHov] = useState(false);
   const [btnHov, setBtnHov] = useState(false);
   const [modal, setModal] = useState(false);
@@ -207,19 +210,20 @@ const CollectionCard = ({ product }) => {
         onHoverStart={() => setHov(true)}
         onHoverEnd={() => setHov(false)}
         style={{
-          background: '#07050200',
-          border: `1px solid ${hov ? 'rgba(201,164,21,0.32)' : 'rgba(201,164,21,0.13)'}`,
+          background: featured ? 'rgba(201,164,21,0.03)' : 'transparent',
+          border: `1px solid ${featured ? 'rgba(201,164,21,0.3)' : (hov ? 'rgba(201,164,21,0.32)' : 'rgba(201,164,21,0.13)')}`,
           display: 'flex', flexDirection: 'column',
-          width: '100%', minHeight: '720px',
+          width: '100%', minHeight: featured ? '800px' : '700px',
           transition: 'border-color 0.55s ease, box-shadow 0.55s ease',
-          boxShadow: hov
-            ? '0 0 0 1px rgba(201,164,21,0.08), 0 40px 100px rgba(0,0,0,0.6)'
-            : '0 2px 20px rgba(0,0,0,0.18)',
+          boxShadow: featured
+            ? '0 20px 80px rgba(201,164,21,0.15), 0 0 40px rgba(201,164,21,0.08)'
+            : (hov ? '0 0 0 1px rgba(201,164,21,0.08), 0 40px 100px rgba(0,0,0,0.6)' : '0 2px 20px rgba(0,0,0,0.18)'),
+          ...(featured ? { scale: 1.08, transformOrigin: 'top center' } : {}),
         }}
       >
         {/* ── Image area — no overlapping buttons ── */}
         <div style={{
-          width: '100%', height: '300px',
+          width: '100%', height: featured ? '380px' : '270px',
           display: 'flex', alignItems: 'center', justifyContent: 'center',
           padding: '44px 32px 28px', boxSizing: 'border-box',
           position: 'relative',
@@ -229,7 +233,7 @@ const CollectionCard = ({ product }) => {
             alt={product.name}
             loading="lazy"
             style={{
-              height: '220px', width: 'auto',
+              height: featured ? '320px' : '200px', width: 'auto',
               objectFit: 'contain',
               filter: locked ? 'brightness(0.65)' : 'none',
               transform: hov && !locked ? 'scale(1.04) translateY(-6px)' : 'scale(1) translateY(0)',
@@ -1178,14 +1182,35 @@ const Home = () => {
                 display: 'grid',
                 gridTemplateColumns: 'repeat(3, 1fr)',
                 gap: '24px',
-                alignItems: 'stretch',
+                alignItems: 'flex-end',
               }}
             >
-              {PRODUCTS.map((product) => (
-                <motion.div key={product.id} variants={cardVariant} style={{ display: 'flex', width: '100%' }}>
-                  <CollectionCard product={product} />
-                </motion.div>
-              ))}
+              {DESKTOP_ORDER.map((product) => {
+                const isFeatured = product.id === 'reine';
+                return (
+                  <motion.div
+                    key={product.id}
+                    variants={cardVariant}
+                    style={{
+                      display: 'flex', flexDirection: 'column',
+                      width: '100%', alignItems: 'stretch',
+                      opacity: isFeatured ? 1 : 0.75,
+                      marginTop: isFeatured ? '-30px' : '0',
+                    }}
+                  >
+                    {isFeatured && (
+                      <p style={{
+                        fontFamily: "'Jost', sans-serif",
+                        fontSize: '8px', letterSpacing: '6px',
+                        textTransform: 'uppercase', fontVariant: 'small-caps',
+                        color: 'rgba(201,164,21,0.8)',
+                        textAlign: 'center', margin: '0 0 14px',
+                      }}>★ AVAILABLE NOW ★</p>
+                    )}
+                    <CollectionCard product={product} featured={isFeatured} />
+                  </motion.div>
+                );
+              })}
             </motion.div>
           </div>
         )}
