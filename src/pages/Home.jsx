@@ -39,7 +39,7 @@ const ReineCta = () => {
         borderRadius: '2px',
         position: 'relative',
       }}
-    >SHOP REINE — $49</Link>
+    >DISCOVER REINE</Link>
   );
 };
 
@@ -1007,7 +1007,7 @@ const Home = () => {
 
 <div className="hero-overlay-left hero-atmosphere-overlay" style={{
           position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 2,
-          background: 'linear-gradient(to right, rgba(13,10,7,0.88) 0%, rgba(13,10,7,0.55) 38%, rgba(13,10,7,0.14) 60%, transparent 100%)',
+          background: 'transparent',
         }}/>
         <div className="hero-vignette" style={{
           position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 2,
