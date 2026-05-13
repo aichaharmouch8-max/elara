@@ -1142,7 +1142,7 @@ const Home = () => {
             style={{ position: 'relative', zIndex: 1 }}
           >
             <img
-              src="/elaraherojpg.jpg"
+              src="/elaraherojpg.jfif"
               alt="Elara perfume bottle"
               className="hero-bottle-float"
               style={{
@@ -1156,7 +1156,7 @@ const Home = () => {
             {/* mirror reflection */}
             <div style={{ height: '80px', overflow: 'hidden', marginTop: '-2px' }}>
               <img
-                src="/elaraherojpg.jpg"
+                src="/elaraherojpg.jfif"
                 alt=""
                 aria-hidden="true"
                 style={{
