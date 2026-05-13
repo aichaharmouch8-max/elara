@@ -60,7 +60,7 @@ const PRODUCTS = [
   {
     id: 'reine',
     name: 'Reine',
-    image: '/elara-reine-pink.jpg',
+    image: '/elarapinkbottle.png',
     tagline: 'Power. Seduction. Obsession. Saffron, Bulgarian rose and amber — crafted for the woman who leaves a mark.',
     price: 49,
     available: true,
@@ -69,7 +69,7 @@ const PRODUCTS = [
   {
     id: 'oro',
     name: 'Oro',
-    image: '/elaraoroo.webp',
+    image: '/elarapinkbottle.png',
     tagline: 'A fragrance that whispers what words cannot. Golden woods, luminous amber — your most intimate secret.',
     price: 79,
     available: false,
@@ -78,7 +78,7 @@ const PRODUCTS = [
   {
     id: 'nova',
     name: 'Rawan Noir',
-    image: '/ELARAREINE.webp',
+    image: '/elarapinkbottle.png',
     tagline: 'Darkness never looked this divine. For the woman the night was made for.',
     price: 79,
     available: false,
