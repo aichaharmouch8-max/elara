@@ -986,28 +986,11 @@ const Home = () => {
         paddingTop: '76px',
         paddingBottom: '0',
         background: '#0d0a07',
+        backgroundImage: 'url(/elara-hero-pink.png)',
+        backgroundSize: 'cover',
+        backgroundPosition: isMobile ? 'center center' : 'center',
+        backgroundRepeat: 'no-repeat',
       }}>
-        <img
-          src="/elaraaaaa.webp"
-          alt=""
-          aria-hidden="true"
-          loading="eager"
-          fetchPriority="high"
-          width="1920"
-          height="1080"
-          className="hero-bg-img"
-          style={{
-            position: 'absolute',
-            inset: 0,
-            top: 0,
-            width: '100%',
-            height: '100%',
-            objectFit: 'cover',
-            objectPosition: 'center',
-            zIndex: 0,
-            pointerEvents: 'none',
-          }}
-        />
 
         <div className="hero-vignette" style={{
           position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 2,
