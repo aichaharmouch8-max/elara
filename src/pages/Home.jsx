@@ -985,7 +985,7 @@ const Home = () => {
         alignItems: 'flex-start',
         paddingTop: '76px',
         paddingBottom: '0',
-        background: '#0d0a07',
+        backgroundColor: '#0d0a07',
         backgroundImage: 'url(/elara-hero-pink.png)',
         backgroundSize: 'cover',
         backgroundPosition: isMobile ? 'center center' : 'center',
