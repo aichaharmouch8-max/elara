@@ -987,7 +987,7 @@ const Home = () => {
         paddingBottom: '0',
         backgroundColor: '#0d0a07',
         backgroundImage: "url('/elara-hero-pink.png')",
-        backgroundSize: isMobile ? 'cover' : 'contain',
+        backgroundSize: 'cover',
         backgroundPosition: isMobile ? 'center' : 'center top',
         backgroundRepeat: 'no-repeat',
       }}>
