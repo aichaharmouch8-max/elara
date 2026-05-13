@@ -60,7 +60,7 @@ const PRODUCTS = [
   {
     id: 'reine',
     name: 'Reine',
-    image: '/ELARAREINE.webp',
+    image: '/elara-reine-pink.jpg',
     tagline: 'Power. Seduction. Obsession. Saffron, Bulgarian rose and amber — crafted for the woman who leaves a mark.',
     price: 49,
     available: true,
