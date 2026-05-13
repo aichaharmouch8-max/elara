@@ -58,10 +58,10 @@ const Navbar = () => {
           left: 0,
           right: 0,
           zIndex: 9999,
-          background: scrolled ? 'rgba(13,10,7,0.97)' : 'transparent',
-          backdropFilter: scrolled ? 'blur(24px)' : 'none',
-          WebkitBackdropFilter: scrolled ? 'blur(24px)' : 'none',
-          borderBottom: scrolled ? '1px solid rgba(201,164,21,0.12)' : '1px solid transparent',
+          background: 'transparent',
+          backdropFilter: 'none',
+          WebkitBackdropFilter: 'none',
+          borderBottom: '1px solid transparent',
           transition: 'background 0.4s ease, border-color 0.4s ease, backdrop-filter 0.4s ease',
         }}
       >
