@@ -402,8 +402,12 @@ h1, h2, h3, h4, h5 {
 .hero-section {
   background-image: url('/elara-hero-pink.png');
   background-size: cover;
-  background-position: center;
+  background-position: center center;
   background-repeat: no-repeat;
+  width: 100%;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
 }
 
 /* ── Hero responsive layout ── */
