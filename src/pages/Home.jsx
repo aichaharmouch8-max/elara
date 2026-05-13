@@ -981,11 +981,11 @@ const Home = () => {
         overflow: 'hidden',
         width: '100%',
         maxWidth: '100%',
+        margin: 0,
         display: 'flex',
         alignItems: 'flex-start',
-        paddingTop: '76px',
+        paddingTop: '0',
         paddingBottom: '0',
-        backgroundColor: '#0d0a07',
       }}>
 
         <div className="hero-vignette" style={{
