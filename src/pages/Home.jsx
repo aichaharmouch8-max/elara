@@ -986,10 +986,6 @@ const Home = () => {
         paddingTop: '76px',
         paddingBottom: '0',
         backgroundColor: '#0d0a07',
-        backgroundImage: "url('/elara-hero-pink.png')",
-        backgroundSize: 'cover',
-        backgroundPosition: isMobile ? 'center' : 'center top',
-        backgroundRepeat: 'no-repeat',
       }}>
 
         <div className="hero-vignette" style={{

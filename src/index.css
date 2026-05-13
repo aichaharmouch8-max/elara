@@ -398,6 +398,14 @@ h1, h2, h3, h4, h5 {
   100% { opacity: 0;    transform: translateY(-58px) scale(1.8); }
 }
 
+/* ── Hero background images ── */
+.hero-section {
+  background-image: url('/elara-hero-pink.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
 /* ── Hero responsive layout ── */
 .hero-inner {
   max-width: 1280px;
@@ -479,6 +487,10 @@ video.hero-bg-video {
     display: block !important;
     position: relative !important;
     overflow: hidden !important;
+    background-image: url('/elaramobile.png') !important;
+    background-size: cover !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
   }
 
   /* Full-bleed bottle: covers entire screen */
