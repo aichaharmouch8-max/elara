@@ -493,7 +493,7 @@ video.hero-bg-video {
     display: block !important;
     position: relative !important;
     overflow: hidden !important;
-    background-image: url('/elaramobile.png') !important;
+    background-image: url('/elaramobile.png?v=3') !important;
     background-size: cover !important;
     background-position: center !important;
     background-repeat: no-repeat !important;
