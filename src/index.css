@@ -408,6 +408,8 @@ h1, h2, h3, h4, h5 {
   min-height: 100vh;
   margin: 0;
   padding: 0;
+  margin-top: -76px;
+  padding-top: 76px;
 }
 
 /* ── Hero responsive layout ── */
