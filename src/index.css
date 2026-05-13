@@ -400,7 +400,7 @@ h1, h2, h3, h4, h5 {
 
 /* ── Hero background images ── */
 .hero-section {
-  background-image: url('/elara-hero-pink.png');
+  background-image: url('/elarahero.png');
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
@@ -493,7 +493,7 @@ video.hero-bg-video {
     display: block !important;
     position: relative !important;
     overflow: hidden !important;
-    background-image: url('/elaramobile.png') !important;
+    background-image: url('/elarahero.png') !important;
     background-size: cover !important;
     background-position: center !important;
     background-repeat: no-repeat !important;
