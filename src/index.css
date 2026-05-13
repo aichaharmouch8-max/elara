@@ -398,18 +398,24 @@ h1, h2, h3, h4, h5 {
   100% { opacity: 0;    transform: translateY(-58px) scale(1.8); }
 }
 
-/* ── Hero background images ── */
+/* ── Hero section ── */
 .hero-section {
-  background-image: url('/elarahero.png');
-  background-size: cover;
-  background-position: center center;
-  background-repeat: no-repeat;
+  background-color: #0d0a07;
   width: 100%;
   min-height: 100vh;
   margin: 0;
   padding: 0;
   margin-top: -76px;
   padding-top: 76px;
+}
+
+@keyframes heroBottleFloat {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-12px); }
+}
+
+.hero-bottle-float {
+  animation: heroBottleFloat 4s infinite ease-in-out;
 }
 
 /* ── Hero responsive layout ── */
@@ -493,10 +499,7 @@ video.hero-bg-video {
     display: block !important;
     position: relative !important;
     overflow: hidden !important;
-    background-image: url('/elarahero.png') !important;
-    background-size: cover !important;
-    background-position: center !important;
-    background-repeat: no-repeat !important;
+    background-color: #0d0a07 !important;
   }
 
   /* Full-bleed bottle: covers entire screen */

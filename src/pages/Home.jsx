@@ -1108,6 +1108,73 @@ const Home = () => {
           </div>
         </div>
 
+        {/* ── Bottle image ── */}
+        <div style={{
+          position: 'absolute',
+          ...(isMobile ? {
+            left: '50%',
+            top: '18%',
+            transform: 'translateX(-50%)',
+          } : {
+            right: '7%',
+            top: '50%',
+            transform: 'translateY(-50%)',
+          }),
+          zIndex: 3,
+          pointerEvents: 'none',
+        }}>
+          {/* radial glow */}
+          <div style={{
+            position: 'absolute',
+            top: '50%', left: '50%',
+            transform: 'translate(-50%, -50%)',
+            width: '400px', height: '400px',
+            borderRadius: '50%',
+            background: 'rgba(200,100,120,0.18)',
+            filter: 'blur(100px)',
+            zIndex: 0,
+          }}/>
+
+          <motion.div
+            initial={{ opacity: 0, x: isMobile ? 0 : 60 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.6 }}
+            style={{ position: 'relative', zIndex: 1 }}
+          >
+            <img
+              src="/elaraherojpg.jpg"
+              alt="Elara perfume bottle"
+              className="hero-bottle-float"
+              style={{
+                height: isMobile ? '320px' : '520px',
+                width: 'auto',
+                objectFit: 'contain',
+                display: 'block',
+                mixBlendMode: 'screen',
+              }}
+            />
+            {/* mirror reflection */}
+            <div style={{ height: '80px', overflow: 'hidden', marginTop: '-2px' }}>
+              <img
+                src="/elaraherojpg.jpg"
+                alt=""
+                aria-hidden="true"
+                style={{
+                  height: isMobile ? '320px' : '520px',
+                  width: 'auto',
+                  objectFit: 'contain',
+                  display: 'block',
+                  transform: 'scaleY(-1)',
+                  opacity: 0.12,
+                  maskImage: 'linear-gradient(to bottom, black 0%, transparent 100%)',
+                  WebkitMaskImage: 'linear-gradient(to bottom, black 0%, transparent 100%)',
+                  mixBlendMode: 'screen',
+                }}
+              />
+            </div>
+          </motion.div>
+        </div>
+
         <div
           className="hero-bottom-line"
           style={{
