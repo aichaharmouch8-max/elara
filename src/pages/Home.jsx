@@ -1146,7 +1146,7 @@ const Home = () => {
               alt="Elara perfume bottle"
               className="hero-bottle-float"
               style={{
-                height: isMobile ? '300px' : '520px',
+                height: isMobile ? '55vh' : '520px',
                 width: 'auto',
                 objectFit: 'contain',
                 display: 'block',
