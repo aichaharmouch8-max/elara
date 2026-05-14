@@ -495,11 +495,9 @@ video.hero-bg-video {
     height: 100svh !important;
     min-height: 100svh !important;
     max-height: 100svh !important;
-    padding: 76px 0 0 !important;
+    padding: 0 !important;
     margin-top: 0 !important;
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important;
+    display: block !important;
     position: relative !important;
     overflow: hidden !important;
     background-color: #0d0a07 !important;
@@ -532,23 +530,24 @@ video.hero-bg-video {
     z-index: 1 !important;
   }
 
-  /* Hide the top/bottom vignette — gradient above is sufficient */
+  /* Bottom gradient so text is readable over image */
   .hero-vignette {
-    display: none !important;
+    display: block !important;
+    background: linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.55) 38%, transparent 68%) !important;
   }
 
-  /* Text block: flows below bottle in flex column */
+  /* Text block: pinned to bottom of hero, overlaid on image */
   .hero-inner {
-    position: relative !important;
+    position: absolute !important;
+    bottom: 0 !important;
     top: auto !important;
-    bottom: auto !important;
-    left: auto !important;
-    right: auto !important;
+    left: 0 !important;
+    right: 0 !important;
     width: 100% !important;
-    padding: 0 16px !important;
-    margin-top: 4px !important;
-    z-index: 2 !important;
-    order: 2 !important;
+    padding: 0 24px 36px !important;
+    margin-top: 0 !important;
+    z-index: 3 !important;
+    order: unset !important;
     display: flex !important;
     flex-direction: column !important;
     align-items: center !important;
@@ -571,28 +570,28 @@ video.hero-bg-video {
     flex-direction: column !important;
     align-items: center !important;
     text-align: center !important;
-    gap: 2px !important;
+    gap: 6px !important;
   }
 
   /* Eyebrow — MAISON DE PARFUM + gold rule */
   .hero-text-col > div:first-child {
-    margin-bottom: 2px !important;
+    margin-bottom: 4px !important;
     display: flex !important;
     flex-direction: column !important;
     align-items: center !important;
-    gap: 6px !important;
+    gap: 8px !important;
   }
   .hero-text-col > div:first-child span {
-    font-size: 7px !important;
-    letter-spacing: 0.2em !important;
+    font-size: 8px !important;
+    letter-spacing: 0.3em !important;
     color: #c9a415 !important;
   }
 
   /* Heading */
-  .hero-text-col h1 { margin-bottom: 2px !important; text-align: center !important; }
-  .hero-text-col h1 span:first-child { font-size: 26px !important; font-weight: 300 !important; color: #f5eed9 !important; }
+  .hero-text-col h1 { margin-bottom: 4px !important; text-align: center !important; }
+  .hero-text-col h1 span:first-child { font-size: 30px !important; font-weight: 300 !important; color: #f5eed9 !important; }
   .hero-text-col h1 span:last-child {
-    font-size: 32px !important;
+    font-size: 38px !important;
     color: transparent !important;
     -webkit-text-fill-color: transparent !important;
     background-image: linear-gradient(132deg, #fff2c8 6%, #e8b84b 38%, #b8892e 94%) !important;
@@ -602,7 +601,7 @@ video.hero-bg-video {
 
   /* Subtitle */
   .hero-text-col p {
-    font-size: 9px !important;
+    font-size: 10px !important;
     color: #e8e0d8 !important;
     font-weight: 300 !important;
     margin-top: 2px !important;
@@ -610,17 +609,17 @@ video.hero-bg-video {
     max-width: none !important;
     margin-left: auto !important;
     margin-right: auto !important;
-    line-height: 1.4 !important;
+    line-height: 1.5 !important;
     white-space: normal !important;
     letter-spacing: 0.3px !important;
     word-break: break-word !important;
   }
 
-  /* Shop Now button — centered block */
+  /* Discover button — centered block */
   .hero-text-col a[href="/shop"] {
     display: block !important;
-    width: 160px !important;
-    margin: 6px auto 0 !important;
+    width: 170px !important;
+    margin: 10px auto 0 !important;
     text-align: center !important;
     box-sizing: border-box !important;
   }

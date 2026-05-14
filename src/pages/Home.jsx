@@ -1111,64 +1111,67 @@ const Home = () => {
         {/* ── Bottle image ── */}
         <div style={{
           ...(isMobile ? {
-            position: 'relative',
+            position: 'absolute',
+            inset: 0,
             width: '100%',
-            order: 1,
+            height: '100%',
           } : {
             position: 'absolute',
             right: '7%',
             top: '50%',
             transform: 'translateY(-50%)',
           }),
-          zIndex: 3,
+          zIndex: 1,
           pointerEvents: 'none',
         }}>
-          {/* radial glow */}
-          <div style={{
-            position: 'absolute',
-            top: '50%', left: '50%',
-            transform: 'translate(-50%, -50%)',
-            width: '400px', height: '400px',
-            borderRadius: '50%',
-            background: 'rgba(200,100,120,0.18)',
-            filter: 'blur(100px)',
-            zIndex: 0,
-          }}/>
+          {/* radial glow — desktop only */}
+          {!isMobile && (
+            <div style={{
+              position: 'absolute',
+              top: '50%', left: '50%',
+              transform: 'translate(-50%, -50%)',
+              width: '400px', height: '400px',
+              borderRadius: '50%',
+              background: 'rgba(200,100,120,0.18)',
+              filter: 'blur(100px)',
+              zIndex: 0,
+            }}/>
+          )}
 
           <motion.div
             initial={{ opacity: 0, x: isMobile ? 0 : 60 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.6 }}
-            style={{ position: 'relative', zIndex: 1 }}
+            style={{
+              position: 'relative', zIndex: 1,
+              ...(isMobile ? { width: '100%', height: '100%' } : {}),
+            }}
           >
             <img
               src="/elaraherojpg.jfif"
               alt="Elara perfume bottle"
-              className="hero-bottle-float"
+              className={isMobile ? undefined : 'hero-bottle-float'}
               style={{
-                height: isMobile ? '55vh' : '520px',
-                width: 'auto',
-                objectFit: 'contain',
-                display: 'block',
-                margin: isMobile ? '0 auto' : undefined,
-                mixBlendMode: 'screen',
+                ...(isMobile ? {
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'cover',
+                  objectPosition: 'center top',
+                  display: 'block',
+                  mixBlendMode: 'normal',
+                } : {
+                  height: '520px',
+                  width: 'auto',
+                  objectFit: 'contain',
+                  display: 'block',
+                  mixBlendMode: 'screen',
+                }),
                 background: 'transparent',
                 border: 'none',
                 outline: 'none',
                 borderRadius: 0,
-                clipPath: isMobile ? 'inset(0 0 36px 0)' : 'none',
               }}
             />
-            {/* watermark cover — mobile only */}
-            {isMobile && (
-              <div style={{
-                position: 'absolute',
-                bottom: 0, left: 0, right: 0,
-                height: '40px',
-                background: '#0d0a07',
-                zIndex: 2,
-              }}/>
-            )}
             {/* mirror reflection — desktop only */}
             <div style={{ height: isMobile ? '0' : '80px', overflow: 'hidden', marginTop: '-2px' }}>
               <img
