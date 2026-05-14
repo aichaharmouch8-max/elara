@@ -28,17 +28,10 @@ const LangToggle = () => {
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
   const { cart } = useCart();
   const { t } = useLanguage();
   const location  = useLocation();
   const cartCount = cart.reduce((sum, item) => sum + item.qty, 0);
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 60);
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
 
   const navLinks = [
     ['/',        t.navHome   ],
