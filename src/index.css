@@ -495,7 +495,7 @@ video.hero-bg-video {
     height: auto !important;
     min-height: 100vh !important;
     max-height: none !important;
-    padding: 76px 0 48px !important;
+    padding: 76px 0 8px !important;
     margin-top: 0 !important;
     display: flex !important;
     flex-direction: column !important;
@@ -546,7 +546,7 @@ video.hero-bg-video {
     right: auto !important;
     width: 100% !important;
     padding: 0 24px !important;
-    margin-top: 24px !important;
+    margin-top: 6px !important;
     z-index: 2 !important;
     order: 2 !important;
     display: flex !important;

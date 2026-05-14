@@ -1146,19 +1146,31 @@ const Home = () => {
               alt="Elara perfume bottle"
               className="hero-bottle-float"
               style={{
-                height: isMobile ? 'auto' : '520px',
-                width: isMobile ? '100%' : 'auto',
+                height: isMobile ? '300px' : '520px',
+                width: 'auto',
                 objectFit: 'contain',
                 display: 'block',
+                margin: isMobile ? '0 auto' : undefined,
                 mixBlendMode: 'screen',
                 background: 'transparent',
                 border: 'none',
                 outline: 'none',
                 borderRadius: 0,
+                clipPath: isMobile ? 'inset(0 0 36px 0)' : 'none',
               }}
             />
-            {/* mirror reflection */}
-            <div style={{ height: '80px', overflow: 'hidden', marginTop: '-2px' }}>
+            {/* watermark cover — mobile only */}
+            {isMobile && (
+              <div style={{
+                position: 'absolute',
+                bottom: 0, left: 0, right: 0,
+                height: '40px',
+                background: '#0d0a07',
+                zIndex: 2,
+              }}/>
+            )}
+            {/* mirror reflection — desktop only */}
+            <div style={{ height: isMobile ? '0' : '80px', overflow: 'hidden', marginTop: '-2px' }}>
               <img
                 src="/elaraherojpg.jfif"
                 alt=""
