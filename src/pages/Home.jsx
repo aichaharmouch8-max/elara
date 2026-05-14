@@ -1112,9 +1112,11 @@ const Home = () => {
         <div style={{
           position: 'absolute',
           ...(isMobile ? {
-            left: '50%',
+            left: 0,
+            right: 0,
             top: '18%',
-            transform: 'translateX(-50%)',
+            width: '100%',
+            transform: 'none',
           } : {
             right: '7%',
             top: '50%',
@@ -1146,11 +1148,15 @@ const Home = () => {
               alt="Elara perfume bottle"
               className="hero-bottle-float"
               style={{
-                height: isMobile ? '320px' : '520px',
-                width: 'auto',
+                height: isMobile ? 'auto' : '520px',
+                width: isMobile ? '100%' : 'auto',
                 objectFit: 'contain',
                 display: 'block',
                 mixBlendMode: 'screen',
+                background: 'transparent',
+                border: 'none',
+                outline: 'none',
+                borderRadius: 0,
               }}
             />
             {/* mirror reflection */}
@@ -1160,8 +1166,8 @@ const Home = () => {
                 alt=""
                 aria-hidden="true"
                 style={{
-                  height: isMobile ? '320px' : '520px',
-                  width: 'auto',
+                  height: isMobile ? 'auto' : '520px',
+                  width: isMobile ? '100%' : 'auto',
                   objectFit: 'contain',
                   display: 'block',
                   transform: 'scaleY(-1)',
@@ -1169,6 +1175,9 @@ const Home = () => {
                   maskImage: 'linear-gradient(to bottom, black 0%, transparent 100%)',
                   WebkitMaskImage: 'linear-gradient(to bottom, black 0%, transparent 100%)',
                   mixBlendMode: 'screen',
+                  background: 'transparent',
+                  border: 'none',
+                  borderRadius: 0,
                 }}
               />
             </div>
