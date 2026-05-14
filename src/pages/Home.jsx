@@ -1110,14 +1110,12 @@ const Home = () => {
 
         {/* ── Bottle image ── */}
         <div style={{
-          position: 'absolute',
           ...(isMobile ? {
-            left: 0,
-            right: 0,
-            top: '18%',
+            position: 'relative',
             width: '100%',
-            transform: 'none',
+            order: 1,
           } : {
+            position: 'absolute',
             right: '7%',
             top: '50%',
             transform: 'translateY(-50%)',
