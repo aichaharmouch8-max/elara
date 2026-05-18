@@ -983,7 +983,7 @@ const Home = () => {
         maxWidth: '100%',
         margin: 0,
         display: 'flex',
-        alignItems: 'flex-start',
+        alignItems: isMobile ? 'flex-start' : 'center',
         paddingTop: '0',
         paddingBottom: '0',
       }}>
@@ -1002,7 +1002,7 @@ const Home = () => {
         }}/>
 
         <div className="hero-inner" style={{ pointerEvents: 'none', zIndex: 3 }}>
-          <div className="hero-text-col" style={{ flex: '0 0 auto', width: '42%', maxWidth: '520px', paddingLeft: '50px', paddingTop: '80px', boxSizing: 'border-box', pointerEvents: 'auto' }}>
+          <div className="hero-text-col" style={{ flex: '0 0 auto', width: '42%', maxWidth: '520px', paddingLeft: '50px', paddingTop: isMobile ? '80px' : '0', boxSizing: 'border-box', pointerEvents: 'auto' }}>
 
             <motion.div
               initial={{ opacity: 0, y: 22 }}
@@ -1055,7 +1055,7 @@ const Home = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1.05, delay: 0.48, ease: [0.16, 1, 0.3, 1] }}
                 style={{
-                  fontSize: 'clamp(2.4rem, 8vw, 5rem)',
+                  fontSize: isMobile ? 'clamp(2.4rem, 8vw, 5rem)' : 'clamp(7rem, 12vw, 11rem)',
                   fontStyle: 'italic',
                   display: 'block',
                   backgroundImage: 'linear-gradient(132deg, #fff2c8 6%, #e8b84b 38%, #b8892e 94%)',
@@ -1117,24 +1117,24 @@ const Home = () => {
             height: '100%',
           } : {
             position: 'absolute',
-            right: '7%',
-            top: '50%',
-            transform: 'translateY(-50%)',
+            right: 0,
+            top: 0,
+            bottom: 0,
+            width: '50%',
+            height: '100%',
           }),
           zIndex: 1,
           pointerEvents: 'none',
         }}>
-          {/* radial glow — desktop only */}
+          {/* left-edge gradient blend — desktop only */}
           {!isMobile && (
             <div style={{
               position: 'absolute',
-              top: '50%', left: '50%',
-              transform: 'translate(-50%, -50%)',
-              width: '400px', height: '400px',
-              borderRadius: '50%',
-              background: 'rgba(200,100,120,0.18)',
-              filter: 'blur(100px)',
-              zIndex: 0,
+              top: 0, left: 0, bottom: 0,
+              width: '220px',
+              background: 'linear-gradient(to right, #0d0a07 0%, transparent 100%)',
+              zIndex: 2,
+              pointerEvents: 'none',
             }}/>
           )}
 
@@ -1144,36 +1144,28 @@ const Home = () => {
             transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.6 }}
             style={{
               position: 'relative', zIndex: 1,
-              ...(isMobile ? { width: '100%', height: '100%' } : {}),
+              width: '100%', height: '100%',
             }}
           >
             <img
               src="/elaraherojpg.jfif"
               alt="Elara perfume bottle"
-              className={isMobile ? undefined : 'hero-bottle-float'}
+              className={undefined}
               style={{
-                ...(isMobile ? {
-                  width: '100%',
-                  height: '100%',
-                  objectFit: 'cover',
-                  objectPosition: 'center top',
-                  display: 'block',
-                  mixBlendMode: 'normal',
-                } : {
-                  height: '520px',
-                  width: 'auto',
-                  objectFit: 'contain',
-                  display: 'block',
-                  mixBlendMode: 'screen',
-                }),
+                width: '100%',
+                height: '100%',
+                objectFit: 'cover',
+                objectPosition: isMobile ? 'center top' : 'center center',
+                display: 'block',
+                mixBlendMode: 'normal',
                 background: 'transparent',
                 border: 'none',
                 outline: 'none',
                 borderRadius: 0,
               }}
             />
-            {/* mirror reflection — desktop only */}
-            <div style={{ height: isMobile ? '0' : '80px', overflow: 'hidden', marginTop: '-2px' }}>
+            {/* mirror reflection — removed for full-bleed desktop layout */}
+            <div style={{ height: '0', overflow: 'hidden' }}>
               <img
                 src="/elaraherojpg.jfif"
                 alt=""
