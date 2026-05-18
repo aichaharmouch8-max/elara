@@ -57,7 +57,7 @@ const CartPage = () => {
         <h1 style={{
           fontFamily: "'Tenor Sans', sans-serif", fontWeight: 400,
           fontSize: 'clamp(30px, 6vw, 46px)',
-          color: '#f5eed9', lineHeight: 1.2, letterSpacing: '0.1em',
+          color: '#2c1810', lineHeight: 1.2, letterSpacing: '0.1em',
           marginBottom: '20px',
         }}>Your Collection Awaits</h1>
 
@@ -72,7 +72,7 @@ const CartPage = () => {
         {/* Story line */}
         <p style={{
           fontFamily: "'Jost', sans-serif", fontSize: '11px', fontWeight: 300,
-          color: 'rgba(245,238,217,0.35)', letterSpacing: '0.5px',
+          color: 'rgba(44,24,16,0.5)', letterSpacing: '0.5px',
           lineHeight: 1.8, marginBottom: '40px',
         }}>Every great story begins with a single choice.</p>
 
@@ -109,7 +109,7 @@ const CartPage = () => {
             </p>
             <h1 style={{
               fontFamily: "'Tenor Sans', sans-serif", fontWeight: 400,
-              fontSize: 'clamp(40px, 6vw, 64px)', color: '#f5eed9', lineHeight: 1.1, letterSpacing: '0.1em',
+              fontSize: 'clamp(40px, 6vw, 64px)', color: '#2c1810', lineHeight: 1.1, letterSpacing: '0.1em',
             }}>
               Cart
             </h1>
@@ -163,7 +163,7 @@ const CartPage = () => {
                 </span>
                 <span style={{
                   fontFamily: "'Cormorant Garamond', serif",
-                  fontSize: '34px', fontWeight: 300, color: '#f5eed9',
+                  fontSize: '34px', fontWeight: 300, color: '#2c1810',
                 }}>
                   ${subtotal}
                 </span>
@@ -171,7 +171,7 @@ const CartPage = () => {
 
               <p style={{
                 fontFamily: "'Jost', sans-serif", fontSize: '11px', fontWeight: 300,
-                color: 'rgba(245,238,217,0.35)', letterSpacing: '0.3px',
+                color: 'rgba(44,24,16,0.5)', letterSpacing: '0.3px',
                 lineHeight: 1.8, marginBottom: '32px',
               }}>
                 Complimentary worldwide shipping on all orders.
@@ -214,7 +214,7 @@ const CartItem = ({ item, onUpdate, onRemove }) => (
     <div>
       <p style={{
         fontFamily: "'Cormorant Garamond', serif", fontWeight: 300, fontStyle: 'italic',
-        fontSize: '22px', color: '#f5eed9', marginBottom: '4px',
+        fontSize: '22px', color: '#2c1810', marginBottom: '4px',
       }}>
         {item.name}
       </p>
@@ -230,7 +230,7 @@ const CartItem = ({ item, onUpdate, onRemove }) => (
       <QtyBtn onClick={() => onUpdate(item.id, item.qty - 1)}>−</QtyBtn>
       <span style={{
         fontFamily: "'Jost', sans-serif", fontSize: '14px', fontWeight: 300,
-        color: '#f5eed9', minWidth: '24px', textAlign: 'center',
+        color: '#2c1810', minWidth: '24px', textAlign: 'center',
       }}>
         {item.qty}
       </span>
@@ -255,7 +255,7 @@ const CartItem = ({ item, onUpdate, onRemove }) => (
     <div style={{ textAlign: 'right' }}>
       <span style={{
         fontFamily: "'Cormorant Garamond', serif",
-        fontSize: '24px', fontWeight: 300, color: '#f5eed9',
+        fontSize: '24px', fontWeight: 300, color: '#2c1810',
       }}>
         ${item.price * item.qty}
       </span>
@@ -274,7 +274,7 @@ const QtyBtn = ({ children, onClick }) => {
         width: '30px', height: '30px',
         border: `1px solid ${hov ? 'rgba(201,164,21,0.7)' : 'rgba(201,164,21,0.2)'}`,
         background: hov ? 'rgba(201,164,21,0.08)' : 'transparent',
-        cursor: 'pointer', color: '#f5eed9',
+        cursor: 'pointer', color: '#2c1810',
         fontSize: '16px', fontWeight: 300,
         display: 'flex', alignItems: 'center', justifyContent: 'center',
         transition: 'all 0.25s ease',

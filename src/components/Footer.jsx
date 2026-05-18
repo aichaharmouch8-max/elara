@@ -95,7 +95,7 @@ const Footer = () => {
         {/* Copyright */}
         <p style={{
           fontFamily: "'Jost', sans-serif", fontSize: '9px', fontWeight: 300,
-          letterSpacing: '2px', color: 'rgba(245,238,217,0.16)',
+          letterSpacing: '2px', color: 'rgba(44,24,16,0.38)',
         }}>
           © 2026 ELARA. All rights reserved.
         </p>

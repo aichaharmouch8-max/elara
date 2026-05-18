@@ -30,7 +30,7 @@ const ReineCta = () => {
         letterSpacing: '5px', textTransform: 'uppercase',
         padding: '14px 44px',
         background: hov ? 'rgba(232,184,75,0.9)' : 'rgba(232,184,75,0.06)',
-        color: hov ? '#0a0600' : 'rgba(232,216,178,1)',
+        color: hov ? '#0a0600' : '#2c1810',
         border: '1px solid rgba(232,184,75,0.55)',
         transition: 'all 0.35s ease',
         textDecoration: 'none',
@@ -116,7 +116,7 @@ const NotifyForm = ({ productName }) => {
       }}>{t.onTheList}</p>
       <p style={{
         fontFamily: t.sansFont, fontSize: '9px',
-        color: 'rgba(245,238,217,0.3)', textTransform: 'uppercase',
+        color: 'rgba(44,24,16,0.4)', textTransform: 'uppercase',
       }}>{t.inTouch}</p>
     </div>
   );
@@ -147,7 +147,7 @@ const NotifyForm = ({ productName }) => {
           width: '100%', boxSizing: 'border-box',
           background: 'transparent', border: 'none',
           borderBottom: `1px solid ${focused ? 'rgba(201,164,21,0.7)' : 'rgba(201,164,21,0.22)'}`,
-          color: '#f5eed9',
+          color: '#2c1810',
           fontFamily: t.serifFont,
           fontSize: '15px', fontWeight: 300,
           padding: '10px 0', outline: 'none', textAlign: 'center',
@@ -272,7 +272,7 @@ const CollectionCard = ({ product, featured = false }) => {
           <h3 style={{
             fontFamily: t.serifFont, fontWeight: 300,
             fontSize: '34px', fontStyle: 'italic',
-            color: '#f5eed9', lineHeight: 1.05, marginBottom: '10px',
+            color: '#2c1810', lineHeight: 1.05, marginBottom: '10px',
           }}>{product.name}</h3>
 
           <p style={{
@@ -282,7 +282,7 @@ const CollectionCard = ({ product, featured = false }) => {
 
           <p style={{
             fontFamily: t.serifFont, fontSize: '17px', fontWeight: 500,
-            color: '#FFFFFF',
+            color: 'rgba(44,24,16,0.75)',
             lineHeight: 1.8, marginBottom: '28px',
             maxWidth: '260px',
           }}>{t.productTaglines[product.id] || product.tagline}</p>
@@ -359,7 +359,7 @@ const CollectionCard = ({ product, featured = false }) => {
                           fontSize: '14px', fontWeight: 300,
                           background: nameFocused ? 'rgba(201,164,21,0.05)' : 'transparent',
                           border: `1px solid ${nameFocused ? 'rgba(201,164,21,0.65)' : 'rgba(201,164,21,0.22)'}`,
-                          color: '#f5eed9', padding: '10px 38px 10px 12px',
+                          color: '#2c1810', padding: '10px 38px 10px 12px',
                           outline: 'none', transition: 'border-color 0.2s ease, background 0.2s ease',
                           WebkitAppearance: 'none',
                         }}
@@ -382,7 +382,7 @@ const CollectionCard = ({ product, featured = false }) => {
 
               <p style={{
                 fontFamily: t.serifFont, fontSize: '26px', fontWeight: 300,
-                color: '#e8d5a3', marginBottom: '14px',
+                color: '#c9a415', marginBottom: '14px',
               }}>${displayPrice}</p>
 
               <button
@@ -485,8 +485,8 @@ const CollectionCarousel = () => {
             <div style={{
               width: '100%',
               height: '100%',
-              background: '#080603',
-              border: '1px solid rgba(201,164,21,0.12)',
+              background: '#ede8df',
+              border: '1px solid rgba(201,164,21,0.18)',
               borderRadius: '2px',
               padding: '28px 20px 32px',
               boxSizing: 'border-box',
@@ -511,15 +511,15 @@ const CollectionCarousel = () => {
                   style={{ height: '190px', width: 'auto', objectFit: 'contain' }}
                 />
                 {product.locked && (
-                  <div style={{ position: 'absolute', inset: 0, background: 'rgba(6,6,6,0.4)' }} />
+                  <div style={{ position: 'absolute', inset: 0, background: 'rgba(237,232,223,0.5)' }} />
                 )}
               </div>
 
               {/* PRODUCT INFO */}
               <p style={{ width: '100%', fontFamily: "'Jost', sans-serif", fontSize: '10px', color: '#c9a415', textAlign: 'center', marginBottom: '6px' }}>ELARA</p>
-              <h3 style={{ width: '100%', fontSize: '28px', fontFamily: t.serifFont, fontStyle: 'italic', color: '#fff', textAlign: 'center', marginBottom: '6px' }}>{product.name}</h3>
-              <p style={{ width: '100%', fontFamily: t.sansFont, fontSize: '11px', color: 'rgba(255,255,255,0.5)', textAlign: 'center', marginBottom: '16px' }}>{t.eauDeParfum}</p>
-              <p style={{ width: '100%', fontFamily: t.serifFont, fontSize: '17px', fontWeight: 500, color: '#FFFFFF', textAlign: 'center', lineHeight: 1.8, marginBottom: '24px' }}>{t.productTaglines[product.id] || product.tagline}</p>
+              <h3 style={{ width: '100%', fontSize: '28px', fontFamily: t.serifFont, fontStyle: 'italic', color: '#2c1810', textAlign: 'center', marginBottom: '6px' }}>{product.name}</h3>
+              <p style={{ width: '100%', fontFamily: t.sansFont, fontSize: '11px', color: 'rgba(44,24,16,0.5)', textAlign: 'center', marginBottom: '16px' }}>{t.eauDeParfum}</p>
+              <p style={{ width: '100%', fontFamily: t.serifFont, fontSize: '17px', fontWeight: 500, color: 'rgba(44,24,16,0.75)', textAlign: 'center', lineHeight: 1.8, marginBottom: '24px' }}>{t.productTaglines[product.id] || product.tagline}</p>
 
               {/* UNLOCKED: SELECT EDITION + BUY */}
               {!product.locked && (
@@ -558,7 +558,7 @@ const CollectionCarousel = () => {
                                 <span style={{
                                   position: 'absolute', top: '-8px', left: '50%', transform: 'translateX(-50%)',
                                   fontFamily: t.sansFont, fontSize: '6px',
-                                  background: active ? '#c9a415' : '#0a0602',
+                                  background: active ? '#c9a415' : 'transparent',
                                   color: active ? '#060606' : 'rgba(200,160,60,0.65)',
                                   border: `1px solid ${active ? '#c9a415' : 'rgba(200,160,60,0.35)'}`,
                                   padding: '2px 6px', whiteSpace: 'nowrap',
@@ -593,9 +593,9 @@ const CollectionCarousel = () => {
                               width: '100%', boxSizing: 'border-box',
                               fontFamily: t.serifFont, fontStyle: 'italic',
                               fontSize: '14px', fontWeight: 300,
-                              background: nameFocused ? 'rgba(201,164,21,0.06)' : 'rgba(245,238,217,0.02)',
+                              background: nameFocused ? 'rgba(201,164,21,0.06)' : 'transparent',
                               border: `1px solid ${nameFocused ? 'rgba(201,164,21,0.7)' : 'rgba(201,164,21,0.25)'}`,
-                              color: '#f5eed9', padding: '10px 38px 10px 12px',
+                              color: '#2c1810', padding: '10px 38px 10px 12px',
                               outline: 'none', borderRadius: '2px',
                               transition: 'border-color 0.2s ease, background 0.2s ease',
                               WebkitAppearance: 'none',
@@ -625,7 +625,7 @@ const CollectionCarousel = () => {
 
                   <p style={{
                     width: '100%', fontFamily: t.serifFont, fontSize: '22px', fontWeight: 300,
-                    color: '#e8d5a3', marginBottom: '10px', textAlign: 'center',
+                    color: '#c9a415', marginBottom: '10px', textAlign: 'center',
                     transition: 'opacity 0.2s ease',
                   }}>${displayPrice}</p>
 
@@ -779,12 +779,12 @@ const WhyELARA = () => {
               <div style={{ color: 'rgba(201,164,21,0.7)' }}>{icon}</div>
               <h4 style={{
                 fontFamily: t.serifFont, fontWeight: 300,
-                fontSize: '18px', color: '#f5eed9', margin: 0,
+                fontSize: '18px', color: '#2c1810', margin: 0,
                 lineHeight: 1.2,
               }}>{title}</h4>
               <p style={{
                 fontFamily: t.sansFont, fontSize: '12px', fontWeight: 300,
-                color: 'rgba(232,224,216,0.5)', lineHeight: 1.85,
+                color: 'rgba(44,24,16,0.6)', lineHeight: 1.85,
                 margin: 0, maxWidth: '210px',
               }}>{body}</p>
             </div>
@@ -823,9 +823,9 @@ const ExclusiveAccess = () => {
       ref={ref}
       className="exclusive-access-section"
       style={{
-        background: '#060606',
+        background: '#ede8df',
         padding: '60px 40px 80px',
-        borderTop: '1px solid rgba(201,164,21,0.12)',
+        borderTop: '1px solid rgba(201,164,21,0.15)',
         textAlign: 'center',
       }}
     >
@@ -846,13 +846,13 @@ const ExclusiveAccess = () => {
           marginBottom: '18px',
           ...fadeUp(0.1),
         }}>
-          <span style={{ color: '#f5eed9' }}>{t.exclusiveHead1}</span>
+          <span style={{ color: '#2c1810' }}>{t.exclusiveHead1}</span>
           <span style={{ fontStyle: 'italic', color: '#c9a415' }}>{t.exclusiveHead2}</span>
         </h2>
 
         <p style={{
           fontFamily: t.sansFont, fontSize: '12px', fontWeight: 300,
-          color: 'rgba(232,224,216,0.42)', lineHeight: 2,
+          color: 'rgba(44,24,16,0.55)', lineHeight: 2,
           marginBottom: '48px', ...fadeUp(0.2),
         }}>
           {t.exclusiveSub}
@@ -867,7 +867,7 @@ const ExclusiveAccess = () => {
             }}>{t.onTheList}</p>
             <p style={{
               fontFamily: t.sansFont, fontSize: '11px', fontWeight: 300,
-              color: 'rgba(245,238,217,0.3)',
+              color: 'rgba(44,24,16,0.4)',
             }}>{t.inTouch}</p>
           </div>
         ) : (
@@ -884,7 +884,7 @@ const ExclusiveAccess = () => {
               style={{
                 width: '100%', background: 'transparent', border: 'none',
                 borderBottom: `1px solid ${focused ? 'rgba(201,164,21,0.8)' : 'rgba(201,164,21,0.22)'}`,
-                color: '#f5eed9', fontFamily: t.serifFont,
+                color: '#2c1810', fontFamily: t.serifFont,
                 fontSize: '17px', fontWeight: 300,
                 padding: '14px 0', outline: 'none', textAlign: 'center',
                 transition: 'border-color 0.3s ease',
@@ -990,7 +990,7 @@ const Home = () => {
 
         <div className="hero-vignette" style={{
           position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 2,
-          background: 'linear-gradient(to bottom, rgba(0,0,0,0.4) 0%, transparent 24%, transparent 70%, rgba(0,0,0,0.58) 100%)',
+          background: 'linear-gradient(to bottom, rgba(245,240,232,0.15) 0%, transparent 20%, transparent 75%, rgba(245,240,232,0.2) 100%)',
         }}/>
         <div style={{
           position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 2,
@@ -998,7 +998,7 @@ const Home = () => {
         }}/>
         <div style={{
           position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 2,
-          background: 'linear-gradient(to top, rgba(0,0,0,0.48) 0%, transparent 38%)',
+          background: 'transparent',
         }}/>
 
         <div className="hero-inner" style={{ pointerEvents: 'none', zIndex: 3 }}>
@@ -1037,7 +1037,7 @@ const Home = () => {
               transition={{ duration: 1.15, ease: [0.16, 1, 0.3, 1], delay: 0.22 }}
               style={{
                 fontFamily: t.headingFont, fontWeight: 300,
-                lineHeight: 1.08, color: '#f5eed9', marginBottom: '36px',
+                lineHeight: 1.08, color: '#2c1810', marginBottom: '36px',
               }}
             >
               {t.heroLine1 && (
@@ -1089,7 +1089,7 @@ const Home = () => {
               transition={{ duration: 1.05, ease: [0.16, 1, 0.3, 1], delay: 0.72 }}
               style={{
                 fontFamily: t.sansFont, fontSize: '14px', fontWeight: 300,
-                color: 'rgba(235,226,216,0.78)', lineHeight: 2.05,
+                color: 'rgba(44,24,16,0.68)', lineHeight: 2.05,
                 maxWidth: '380px', marginBottom: '40px',
                 textWrap: 'balance',
               }}
@@ -1132,7 +1132,7 @@ const Home = () => {
               position: 'absolute',
               top: 0, left: 0, bottom: 0,
               width: '220px',
-              background: 'linear-gradient(to right, #0d0a07 0%, transparent 100%)',
+              background: 'linear-gradient(to right, #f5f0e8 0%, transparent 100%)',
               zIndex: 2,
               pointerEvents: 'none',
             }}/>
@@ -1218,8 +1218,8 @@ const Home = () => {
           <p style={{ fontFamily: t.sansFont, fontSize: '11px', color: 'rgba(255,200,80,0.7)', textTransform: 'uppercase', marginBottom: '20px' }}>
             {t.collectionEyebrow}
           </p>
-          <h2 style={{ fontFamily: t.headingFont, fontWeight: 300, fontSize: 'clamp(40px, 5vw, 62px)', color: '#f5eed9' }}>
-            {t.collectionPre}<span style={{ fontStyle: 'italic', color: '#e8d5a3' }}>{t.collectionHighlight}</span>
+          <h2 style={{ fontFamily: t.headingFont, fontWeight: 300, fontSize: 'clamp(40px, 5vw, 62px)', color: '#2c1810' }}>
+            {t.collectionPre}<span style={{ fontStyle: 'italic', color: '#c9a415' }}>{t.collectionHighlight}</span>
           </h2>
         </motion.div>
 

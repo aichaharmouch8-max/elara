@@ -6,29 +6,29 @@
    ELARA · Maison — luxury palette & atmospheric depth
    ════════════════════════════════════════════════════ */
 :root {
-  --bg-primary: #0d0a07;
-  --bg-secondary: #151008;
-  --bg-card: #1c1509;
+  --bg-primary: #f5f0e8;
+  --bg-secondary: #ede8df;
+  --bg-card: #ede8df;
   --gold-primary: #c9a415;
   --gold-light: #e8d5a3;
   --gold-dim: #8a6e2f;
-  --text-primary: #f5eed9;
-  --text-secondary: #9e8860;
-  --border: #2e2210;
+  --text-primary: #2c1810;
+  --text-secondary: #7a5c38;
+  --border: rgba(44, 24, 16, 0.12);
   /* Legacy aliases */
-  --lux-void: #0d0a07;
-  --lux-elevate: #151008;
-  --lux-cream: #f5eed9;
-  --lux-cream-mute: rgba(245, 238, 217, 0.55);
+  --lux-void: #f5f0e8;
+  --lux-elevate: #ede8df;
+  --lux-cream: #2c1810;
+  --lux-cream-mute: rgba(44, 24, 16, 0.55);
   --lux-gold: #c9a415;
   --lux-gold-bright: #e8d5a3;
-  --lux-border: rgba(201, 164, 21, 0.11);
-  --lux-border-strong: rgba(201, 164, 21, 0.28);
+  --lux-border: rgba(201, 164, 21, 0.18);
+  --lux-border-strong: rgba(201, 164, 21, 0.38);
   --lux-panel: linear-gradient(
     154deg,
-    rgba(255, 252, 246, 0.042) 0%,
-    rgba(21, 16, 8, 0.88) 46%,
-    rgba(13, 10, 7, 0.97) 100%
+    rgba(255, 252, 246, 0.95) 0%,
+    rgba(237, 232, 223, 0.95) 46%,
+    rgba(245, 240, 232, 0.98) 100%
   );
 }
 
@@ -48,9 +48,9 @@ body {
   color: var(--text-primary);
   background-color: var(--bg-primary);
   background-image:
-    radial-gradient(ellipse 130% 82% at 50% -14%, rgba(201, 164, 21, 0.10) 0%, transparent 56%),
-    radial-gradient(ellipse 75% 48% at 98% 0%, rgba(48, 32, 20, 0.42) 0%, transparent 46%),
-    radial-gradient(ellipse 65% 50% at 0% 100%, rgba(14, 10, 6, 0.78) 0%, transparent 54%);
+    radial-gradient(ellipse 130% 82% at 50% -14%, rgba(201, 164, 21, 0.07) 0%, transparent 56%),
+    radial-gradient(ellipse 75% 48% at 98% 0%, rgba(201, 164, 21, 0.04) 0%, transparent 46%),
+    radial-gradient(ellipse 65% 50% at 0% 100%, rgba(201, 164, 21, 0.03) 0%, transparent 54%);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   line-height: 1.8;
@@ -71,12 +71,12 @@ body {
 /* Product cards · vitrine glass */
 .shop-card {
   border-radius: 3px !important;
-  backdrop-filter: blur(24px) saturate(120%);
-  -webkit-backdrop-filter: blur(24px) saturate(120%);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
   background: var(--lux-panel) !important;
   box-shadow:
-    inset 0 1px 0 rgba(255, 245, 220, 0.045),
-    0 2px 0 rgba(0, 0, 0, 0.5) !important;
+    inset 0 1px 0 rgba(255, 255, 255, 0.85),
+    0 2px 16px rgba(44, 24, 16, 0.08) !important;
 }
 
 .shop-header {
@@ -93,11 +93,11 @@ body {
 
 .lux-review-card {
   border-radius: 3px !important;
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
-  background: linear-gradient(158deg, rgba(255,250,242,0.038) 0%, rgba(8,7,5,0.55) 100%) !important;
-  border: 1px solid rgba(201,164,21,0.13) !important;
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.02);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  background: rgba(237, 232, 223, 0.85) !important;
+  border: 1px solid rgba(201,164,21,0.2) !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.7), 0 4px 20px rgba(44,24,16,0.06);
 }
 
 /* Navigation · private salon */
@@ -121,12 +121,12 @@ body {
 }
 
 .footer-lux-brand {
-  color: #f8f0e4;
+  color: #2c1810;
 }
 
 @supports ((-webkit-background-clip: text) or (background-clip: text)) {
   .footer-lux-brand {
-    background: linear-gradient(135deg, #f5eed9 10%, var(--gold-primary) 55%, #8a6e2f 95%);
+    background: linear-gradient(135deg, #2c1810 10%, var(--gold-primary) 55%, #8a6e2f 95%);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
@@ -137,13 +137,13 @@ body {
 /* Contact · correspondence desk */
 .lux-contact-panel {
   border-radius: 4px !important;
-  border: 1px solid rgba(201,164,21,0.13) !important;
-  background: linear-gradient(182deg, rgba(255,252,246,0.03) 0%, rgba(5, 4, 3, 0.72) 100%) !important;
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(201,164,21,0.22) !important;
+  background: rgba(237, 232, 223, 0.85) !important;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
   box-shadow:
-    inset 0 1px 0 rgba(255,248,228,0.05),
-    0 28px 96px rgba(0, 0, 0, 0.42);
+    inset 0 1px 0 rgba(255,255,255,0.8),
+    0 28px 96px rgba(44, 24, 16, 0.08);
 }
 
 /* Floating WhatsApp · jewel button */
@@ -176,13 +176,13 @@ body {
   border-radius: 4px !important;
   padding: 32px 36px !important;
   margin-top: 8px !important;
-  border: 1px solid rgba(201,164,21,0.12) !important;
-  background: linear-gradient(160deg, rgba(255,250,242,0.035) 0%, rgba(6, 5, 4, 0.92) 100%) !important;
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(201,164,21,0.22) !important;
+  background: rgba(237, 232, 223, 0.85) !important;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
   box-shadow:
-    inset 0 1px 0 rgba(255,250,236,0.035),
-    0 20px 64px rgba(0, 0, 0, 0.35);
+    inset 0 1px 0 rgba(255,255,255,0.8),
+    0 20px 64px rgba(44, 24, 16, 0.08);
 }
 
 .app-loading-screen {
@@ -193,11 +193,11 @@ body {
 .cart-empty-state {
   position: relative;
   border-radius: 4px;
-  border: 1px solid rgba(201,164,21,0.1);
-  background: linear-gradient(165deg, rgba(255,250,242,0.02) 0%, rgba(5,4,3,0.6) 100%);
+  border: 1px solid rgba(201,164,21,0.22);
+  background: rgba(237, 232, 223, 0.85);
   box-shadow:
-    inset 0 1px 0 rgba(255,248,228,0.03),
-    0 32px 100px rgba(0, 0, 0, 0.38);
+    inset 0 1px 0 rgba(255,255,255,0.8),
+    0 32px 100px rgba(44, 24, 16, 0.08);
 }
 
 .lux-checkout-btn {
@@ -287,11 +287,11 @@ h1, h2, h3, h4, h5 {
 ::selection { background: rgba(200, 150, 42, 0.22); }
 
 ::-webkit-scrollbar { width: 5px; }
-::-webkit-scrollbar-track { background: rgba(4, 3, 2, 0.85); border-left: 1px solid rgba(201,164,21,0.06); }
+::-webkit-scrollbar-track { background: rgba(237,232,223,0.9); border-left: 1px solid rgba(201,164,21,0.12); }
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, rgba(232,213,163,0.95) 0%, rgba(138,110,47,0.9) 100%);
+  background: linear-gradient(180deg, rgba(201,164,21,0.7) 0%, rgba(138,110,47,0.85) 100%);
   border-radius: 99px;
-  border: 1px solid rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(245,240,232,0.5);
 }
 
 /* ── Keyframes ── */
@@ -400,7 +400,7 @@ h1, h2, h3, h4, h5 {
 
 /* ── Hero section ── */
 .hero-section {
-  background-color: #0d0a07;
+  background-color: #f5f0e8;
   width: 100%;
   min-height: 100vh;
   margin: 0;
@@ -500,7 +500,7 @@ video.hero-bg-video {
     display: block !important;
     position: relative !important;
     overflow: hidden !important;
-    background-color: #0d0a07 !important;
+    background-color: #f5f0e8 !important;
   }
 
   /* Full-bleed bottle: covers entire screen */
@@ -516,15 +516,15 @@ video.hero-bg-video {
     top: 0 !important;
   }
 
-  /* Dark gradient at the bottom — text readable, bottle clear at top */
+  /* Ivory gradient at the bottom — text readable on cream, bottle visible at top */
   .hero-overlay-left {
     position: absolute !important;
     inset: 0 !important;
     background: linear-gradient(
       to top,
-      rgba(13,10,7,0.97) 0%,
-      rgba(13,10,7,0.6)  42%,
-      rgba(13,10,7,0.15) 68%,
+      rgba(245,240,232,0.97) 0%,
+      rgba(245,240,232,0.6)  42%,
+      rgba(245,240,232,0.1) 68%,
       transparent        85%
     ) !important;
     z-index: 1 !important;
@@ -533,7 +533,7 @@ video.hero-bg-video {
   /* Bottom gradient so text is readable over image */
   .hero-vignette {
     display: block !important;
-    background: linear-gradient(to top, rgba(0,0,0,0.96) 0%, rgba(0,0,0,0.68) 20%, rgba(0,0,0,0.06) 42%, transparent 50%) !important;
+    background: linear-gradient(to top, rgba(245,240,232,0.97) 0%, rgba(245,240,232,0.72) 20%, rgba(245,240,232,0.06) 42%, transparent 50%) !important;
   }
 
   /* Text block: pinned to bottom of hero, overlaid on image */
@@ -584,17 +584,17 @@ video.hero-bg-video {
   .hero-text-col > div:first-child span {
     font-size: 8px !important;
     letter-spacing: 0.3em !important;
-    color: #c9a415 !important;
+    color: #b8892e !important;
   }
 
   /* Heading */
   .hero-text-col h1 { margin-bottom: 4px !important; text-align: center !important; }
-  .hero-text-col h1 span:first-child { font-size: 30px !important; font-weight: 300 !important; color: #f5eed9 !important; }
+  .hero-text-col h1 span:first-child { font-size: 30px !important; font-weight: 300 !important; color: #2c1810 !important; }
   .hero-text-col h1 span:last-child {
     font-size: 38px !important;
     color: transparent !important;
     -webkit-text-fill-color: transparent !important;
-    background-image: linear-gradient(132deg, #fff2c8 6%, #e8b84b 38%, #b8892e 94%) !important;
+    background-image: linear-gradient(132deg, #c9a415 6%, #e8b84b 38%, #b8892e 94%) !important;
     -webkit-background-clip: text !important;
     background-clip: text !important;
   }
@@ -602,7 +602,7 @@ video.hero-bg-video {
   /* Subtitle */
   .hero-text-col p {
     font-size: 10px !important;
-    color: #e8e0d8 !important;
+    color: rgba(44,24,16,0.72) !important;
     font-weight: 300 !important;
     margin-top: 2px !important;
     margin-bottom: 0 !important;
@@ -655,7 +655,7 @@ video.hero-bg-video {
     position: sticky !important;
     bottom: 16px !important;
     z-index: 10 !important;
-    background: linear-gradient(to top, #060606 80%, transparent) !important;
+    background: linear-gradient(to top, #f5f0e8 80%, transparent) !important;
     padding: 16px 0 0 !important;
     margin: 0 !important;
   }

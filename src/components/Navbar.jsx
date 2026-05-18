@@ -90,7 +90,7 @@ const Navbar = () => {
                   fontWeight: 500,
                   letterSpacing: '0.2em',
                   textTransform: 'uppercase',
-                  color: '#f5eed9',
+                  color: '#2c1810',
                 }}
               >
                 {label}
@@ -107,7 +107,7 @@ const Navbar = () => {
           <Link
             to="/cart"
             className="nav-link-lux"
-            style={{ color: '#f5eed9', position: 'relative', display: 'flex' }}
+            style={{ color: '#2c1810', position: 'relative', display: 'flex' }}
           >
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round">
               <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
@@ -161,8 +161,8 @@ const Navbar = () => {
       {/* Mobile drawer */}
       <div style={{
         position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
-        background: 'linear-gradient(165deg, rgba(10,6,3,0.97) 0%, rgba(3,2,1,0.96) 50%, rgba(5,4,2,0.94) 100%)',
-        backdropFilter: 'blur(32px)', WebkitBackdropFilter: 'blur(32px)',
+        background: 'rgba(245,240,232,0.98)',
+        backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)',
         display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
         gap: '48px', zIndex: 999,
         opacity: menuOpen ? 1 : 0,
@@ -182,7 +182,7 @@ const Navbar = () => {
                 fontFamily: "'Montserrat', sans-serif",
                 fontSize: '10px', fontWeight: 300,
                 letterSpacing: '0.45em', textTransform: 'uppercase',
-                color: active ? '#c9a415' : 'rgba(245,238,217,0.55)',
+                color: active ? '#c9a415' : 'rgba(44,24,16,0.65)',
                 borderBottom: active ? '1px solid rgba(201,164,21,0.45)' : '1px solid transparent',
                 paddingBottom: '4px',
                 transition: 'color 0.3s',

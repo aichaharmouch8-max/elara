@@ -111,7 +111,7 @@ const MetaItem = ({ icon, label, value }) => (
     </div>
     <p style={{
       fontFamily: "'Jost', sans-serif", fontSize: '10px', fontWeight: 300,
-      color: 'rgba(245,238,217,0.45)', lineHeight: 1.8, margin: 0,
+      color: 'rgba(44,24,16,0.55)', lineHeight: 1.8, margin: 0,
       letterSpacing: '0.2px',
     }}>{value}</p>
   </div>
@@ -187,8 +187,8 @@ const ProductCard = ({ product, inView, delay }) => {
           border: `1px solid ${hov ? 'rgba(138,110,47,0.35)' : 'rgba(138,110,47,0.1)'}`,
           transform: hov ? 'translateY(-10px)' : 'translateY(0)',
           boxShadow: hov
-            ? '0 36px 88px rgba(0,0,0,0.55), 0 0 36px rgba(138,110,47,0.08)'
-            : '0 4px 32px rgba(0,0,0,0.3)',
+            ? '0 20px 60px rgba(44,24,16,0.12), 0 0 36px rgba(138,110,47,0.08)'
+            : '0 4px 24px rgba(44,24,16,0.08)',
           transition: 'transform 0.5s cubic-bezier(0.16,1,0.3,1), box-shadow 0.5s ease, border-color 0.4s ease',
           position: 'relative',
         }}>
@@ -227,7 +227,7 @@ const ProductCard = ({ product, inView, delay }) => {
             {product.locked && (
               <div style={{
                 position: 'absolute', inset: 0, zIndex: 4,
-                background: 'rgba(6,6,6,0.6)',
+                background: 'rgba(237,232,223,0.75)',
                 display: 'flex', flexDirection: 'column',
                 alignItems: 'center', justifyContent: 'center', gap: '10px',
               }}>
@@ -259,7 +259,7 @@ const ProductCard = ({ product, inView, delay }) => {
               <span style={{
                 display: 'block', fontFamily: "'Montserrat', sans-serif", fontSize: '8px', letterSpacing: '0.3em',
                 fontWeight: 500, textTransform: 'uppercase',
-                color: 'rgba(245,238,217,0.32)', marginBottom: '6px',
+                color: 'rgba(44,24,16,0.35)', marginBottom: '6px',
               }}>ELARA</span>
               <span style={{
                 display: 'block', fontFamily: "'Cormorant Garamond', serif",
@@ -271,7 +271,7 @@ const ProductCard = ({ product, inView, delay }) => {
             {/* Emotional hook */}
             <p style={{
               fontFamily: "'Cormorant Garamond', serif", fontStyle: 'italic', fontWeight: 300,
-              fontSize: '16px', color: 'rgba(245,238,217,0.7)',
+              fontSize: '16px', color: 'rgba(44,24,16,0.7)',
               lineHeight: 1.8, marginBottom: '18px', letterSpacing: '0.2px',
             }}>{product.emotionalHook}</p>
 
@@ -298,7 +298,7 @@ const ProductCard = ({ product, inView, delay }) => {
             {/* Scent journey */}
             <p style={{
               fontFamily: "'Jost', sans-serif", fontSize: '11px', fontWeight: 300,
-              color: 'rgba(245,238,217,0.35)',
+              color: 'rgba(44,24,16,0.5)',
               lineHeight: 1.8, marginBottom: '22px', letterSpacing: '0.3px',
             }}>{product.scentJourney}</p>
 
@@ -391,7 +391,7 @@ const ProductCard = ({ product, inView, delay }) => {
                             <span style={{
                               position: 'absolute', top: '-9px', left: '50%', transform: 'translateX(-50%)',
                               fontFamily: "'Jost', sans-serif", fontSize: '6px', letterSpacing: '3px',
-                              background: active ? '#c9a415' : 'rgba(6,6,6,1)',
+                              background: active ? '#c9a415' : 'transparent',
                               color: active ? '#060606' : 'rgba(201,164,21,0.7)',
                               border: `1px solid ${active ? '#c9a415' : 'rgba(201,164,21,0.4)'}`,
                               padding: '2px 8px', whiteSpace: 'nowrap',
@@ -427,9 +427,9 @@ const ProductCard = ({ product, inView, delay }) => {
                           width: '100%', boxSizing: 'border-box',
                           fontFamily: "'Cormorant Garamond', serif", fontStyle: 'italic',
                           fontSize: '15px', fontWeight: 300,
-                          background: nameFocused ? 'rgba(201,164,21,0.06)' : 'rgba(245,238,217,0.02)',
+                          background: nameFocused ? 'rgba(201,164,21,0.06)' : 'transparent',
                           border: `1px solid ${nameFocused ? 'rgba(201,164,21,0.7)' : 'rgba(201,164,21,0.3)'}`,
-                          color: '#f5eed9', padding: '12px 40px 12px 14px',
+                          color: '#2c1810', padding: '12px 40px 12px 14px',
                           outline: 'none', borderRadius: '1px',
                           transition: 'border-color 0.2s ease, background 0.2s ease',
                           WebkitAppearance: 'none',
@@ -469,7 +469,7 @@ const ProductCard = ({ product, inView, delay }) => {
                 <span style={{
                   fontFamily: "'Cormorant Garamond', serif",
                   fontSize: '32px', fontWeight: 300,
-                  color: '#e8d5a3', letterSpacing: '1px',
+                  color: '#c9a415', letterSpacing: '1px',
                   transition: 'opacity 0.2s ease',
                 }}>${displayPrice}</span>
                 <BuyNowBtn
@@ -492,7 +492,7 @@ const ProductCard = ({ product, inView, delay }) => {
               >
                 <span style={{
                   fontFamily: "'Cormorant Garamond', serif", fontStyle: 'italic', fontWeight: 300,
-                  fontSize: '15px', color: 'rgba(232,224,216,0.8)', letterSpacing: '0.5px',
+                  fontSize: '15px', color: 'rgba(44,24,16,0.7)', letterSpacing: '0.5px',
                 }}>Available Soon</span>
                 <span style={{
                   fontFamily: "'Jost', sans-serif", fontSize: '7px', letterSpacing: '4px',
@@ -533,7 +533,7 @@ const ReviewsSection = () => {
       }}>What They Say</p>
       <h2 style={{
         fontFamily: "'Tenor Sans', sans-serif", fontWeight: 400,
-        fontSize: 'clamp(1.8rem, 3.5vw, 2.8rem)', color: '#f5eed9',
+        fontSize: 'clamp(1.8rem, 3.5vw, 2.8rem)', color: '#2c1810',
         textAlign: 'center', marginBottom: '56px', lineHeight: 1.3, letterSpacing: '0.1em',
       }}>
         Customer <span style={{ fontStyle: 'italic', fontFamily: "'Cormorant Garamond', serif", color: '#c9a415' }}>Reviews</span>
@@ -550,13 +550,13 @@ const ReviewsSection = () => {
             <StarRating rating={r.rating} />
             <p style={{
               fontFamily: "'Cormorant Garamond', serif", fontStyle: 'italic',
-              fontSize: '15px', fontWeight: 300, color: 'rgba(245,238,217,0.7)',
+              fontSize: '15px', fontWeight: 300, color: 'rgba(44,24,16,0.7)',
               lineHeight: 1.8, margin: '14px 0 18px',
             }}>"{r.text}"</p>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
               <span style={{
                 fontFamily: "'Jost', sans-serif", fontSize: '9px', letterSpacing: '2px',
-                color: 'rgba(245,238,217,0.45)', textTransform: 'uppercase',
+                color: 'rgba(44,24,16,0.5)', textTransform: 'uppercase',
               }}>{r.name}</span>
               <span style={{
                 fontFamily: "'Jost', sans-serif", fontSize: '8px', letterSpacing: '2px',
@@ -592,13 +592,13 @@ const Shop = () => {
           <h1 style={{
             fontFamily: "'Tenor Sans', sans-serif", fontWeight: 400,
             fontSize: 'clamp(52px, 7vw, 88px)', lineHeight: 1.1, letterSpacing: '0.1em',
-            color: '#f5eed9',
+            color: '#2c1810',
           }}>
-            Our <span style={{ fontStyle: 'italic', fontFamily: "'Cormorant Garamond', serif", color: '#e8d5a3' }}>Fragrances</span>
+            Our <span style={{ fontStyle: 'italic', fontFamily: "'Cormorant Garamond', serif", color: '#c9a415' }}>Fragrances</span>
           </h1>
           <p style={{
             fontFamily: "'Jost', sans-serif", fontSize: '13px', fontWeight: 300,
-            color: 'rgba(245,238,217,0.42)', marginTop: '20px',
+            color: 'rgba(44,24,16,0.5)', marginTop: '20px',
             letterSpacing: '0.5px', lineHeight: 1.8,
           }}>
             Three compositions. One obsession.

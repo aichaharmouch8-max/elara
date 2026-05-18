@@ -27,7 +27,7 @@ const Field = ({
   const base = {
     width: '100%', background: 'transparent', border: 'none',
     borderBottom: `1px solid ${focused ? 'rgba(201,164,21,0.9)' : 'rgba(201,164,21,0.3)'}`,
-    color: '#f5eed9',
+    color: '#2c1810',
     fontFamily: "'Jost', sans-serif", fontSize: '14px', fontWeight: 300,
     letterSpacing: '0.4px',
     padding: '16px 0',
@@ -125,7 +125,7 @@ const FaqItem = ({ q, a }) => {
       >
         <span style={{
           fontFamily: "'Jost', sans-serif", fontWeight: 300,
-          fontSize: '16px', color: open ? '#c9a415' : '#f5eed9',
+          fontSize: '16px', color: open ? '#c9a415' : '#2c1810',
           lineHeight: 1.5, letterSpacing: '0.02em',
           transition: 'color 0.3s ease',
         }}>{q}</span>
@@ -143,7 +143,7 @@ const FaqItem = ({ q, a }) => {
       }}>
         <p style={{
           fontFamily: "'Jost', sans-serif", fontSize: '13px', fontWeight: 300,
-          color: 'rgba(245,238,217,0.5)', lineHeight: 1.8, letterSpacing: '0.3px',
+          color: 'rgba(44,24,16,0.6)', lineHeight: 1.8, letterSpacing: '0.3px',
           paddingBottom: '20px', margin: 0,
         }}>{a}</p>
       </div>
@@ -168,7 +168,7 @@ const FaqSection = () => {
         }}>Common Questions</p>
         <h2 style={{
           fontFamily: "'Tenor Sans', sans-serif", fontWeight: 400,
-          fontSize: 'clamp(1.8rem, 3.5vw, 2.6rem)', color: '#f5eed9',
+          fontSize: 'clamp(1.8rem, 3.5vw, 2.6rem)', color: '#2c1810',
           textAlign: 'center', marginBottom: '52px', lineHeight: 1.3, letterSpacing: '0.08em',
           opacity: visible ? 1 : 0, transition: 'opacity 0.9s ease 0.1s',
         }}>
@@ -288,7 +288,7 @@ const Contact = () => {
           transform: heroIn ? 'translateY(0)' : 'translateY(24px)',
           transition: 'opacity 1s ease 0.15s, transform 1s ease 0.15s',
         }}>
-          <span style={{ color: '#f5eed9' }}>We'd Love to</span><br/>
+          <span style={{ color: '#2c1810' }}>We'd Love to</span><br/>
           <span style={{ fontStyle: 'italic', fontFamily: "'Cormorant Garamond', serif", color: '#c9a415' }}>Hear From You</span>
         </h1>
 
@@ -315,7 +315,7 @@ const Contact = () => {
           {/* WhatsApp direct line */}
           <p style={{
             fontFamily: "'Jost', sans-serif", fontSize: '13px', fontWeight: 300,
-            color: 'rgba(255,255,255,0.5)', textAlign: 'center',
+            color: 'rgba(44,24,16,0.55)', textAlign: 'center',
             marginBottom: '30px', letterSpacing: '0.3px',
           }}>
             Or reach us directly on{' '}
@@ -348,7 +348,7 @@ const Contact = () => {
               </p>
               <p style={{
                 fontFamily: "'Jost', sans-serif", fontSize: '13px', fontWeight: 300,
-                color: 'rgba(245,238,217,0.4)', letterSpacing: '0.3px',
+                color: 'rgba(44,24,16,0.5)', letterSpacing: '0.3px',
               }}>
                 We will get back to you shortly.
               </p>
