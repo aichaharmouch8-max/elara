@@ -41,7 +41,7 @@ const CartPage = () => {
   if (cart.length === 0) {
     return (
       <div style={{
-        background: 'transparent', minHeight: '100vh', boxSizing: 'border-box',
+        background: '#f5f0e8', minHeight: '100vh', boxSizing: 'border-box',
         display: 'flex', flexDirection: 'column',
         alignItems: 'center', justifyContent: 'center',
         padding: '120px 24px 60px',
@@ -96,7 +96,7 @@ const CartPage = () => {
   }
 
   return (
-    <div style={{ background: 'transparent', minHeight: '100vh', paddingTop: '112px' }}>
+    <div style={{ background: '#f5f0e8', minHeight: '100vh', paddingTop: '112px' }}>
       <div className="cart-wrapper" style={{ maxWidth: '860px', margin: '0 auto', padding: '60px clamp(20px, 5vw, 48px) 140px' }}>
         {/* Header */}
         <div style={{ marginBottom: '72px', display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between' }}>

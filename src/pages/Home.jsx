@@ -970,7 +970,7 @@ const Home = () => {
   const { t } = useLanguage();
 
   return (
-    <div style={{ background: 'transparent', minHeight: '100vh' }}>
+    <div style={{ background: '#f5f0e8', minHeight: '100vh' }}>
       <SideNavDots />
 
       {/* ══════════════════ HERO ══════════════════ */}
@@ -986,6 +986,7 @@ const Home = () => {
         alignItems: isMobile ? 'flex-start' : 'center',
         paddingTop: '0',
         paddingBottom: '0',
+        background: '#f5f0e8',
       }}>
 
         <div className="hero-vignette" style={{
@@ -1055,15 +1056,16 @@ const Home = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1.05, delay: 0.48, ease: [0.16, 1, 0.3, 1] }}
                 style={{
-                  fontSize: isMobile ? 'clamp(2.4rem, 8vw, 5rem)' : 'clamp(7rem, 12vw, 11rem)',
+                  fontSize: isMobile ? 'clamp(2.4rem, 8vw, 5rem)' : 'clamp(5.5rem, 9.5vw, 9rem)',
                   fontStyle: 'italic',
                   display: 'inline-block',
+                  letterSpacing: '0.02em',
                   backgroundImage: 'linear-gradient(132deg, #fff2c8 6%, #e8b84b 38%, #b8892e 94%)',
                   WebkitBackgroundClip: 'text',
                   backgroundClip: 'text',
                   color: '#E8B84B',
                   WebkitTextFillColor: 'transparent',
-                  paddingRight: '0.08em',
+                  paddingRight: '0.1em',
                 }}
               >
                 {t.heroLine2}

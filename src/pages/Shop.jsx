@@ -574,7 +574,7 @@ const Shop = () => {
   const [gridRef, gridIn] = useInView(0.05);
 
   return (
-    <div style={{ background: 'transparent', minHeight: '100vh' }}>
+    <div style={{ background: '#f5f0e8', minHeight: '100vh' }}>
       {/* ── Page header ── */}
       <div className="shop-header" style={{
         background: 'transparent',

@@ -237,7 +237,7 @@ const Contact = () => {
   };
 
   return (
-    <div style={{ background: 'transparent', minHeight: '100vh' }}>
+    <div style={{ background: '#f5f0e8', minHeight: '100vh' }}>
 
       <style>{`
         input::placeholder, textarea::placeholder { color: rgba(201,164,21,0.35); }
