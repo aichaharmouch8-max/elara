@@ -1155,7 +1155,7 @@ const Home = () => {
                 width: '100%',
                 height: '100%',
                 objectFit: 'cover',
-                objectPosition: isMobile ? 'center top' : 'center center',
+                objectPosition: isMobile ? '50% 15%' : 'center center',
                 display: 'block',
                 mixBlendMode: 'normal',
                 background: 'transparent',

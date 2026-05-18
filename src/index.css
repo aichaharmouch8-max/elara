@@ -533,7 +533,7 @@ video.hero-bg-video {
   /* Bottom gradient so text is readable over image */
   .hero-vignette {
     display: block !important;
-    background: linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.55) 38%, transparent 68%) !important;
+    background: linear-gradient(to top, rgba(0,0,0,0.96) 0%, rgba(0,0,0,0.68) 20%, rgba(0,0,0,0.06) 42%, transparent 50%) !important;
   }
 
   /* Text block: pinned to bottom of hero, overlaid on image */
@@ -544,7 +544,7 @@ video.hero-bg-video {
     left: 0 !important;
     right: 0 !important;
     width: 100% !important;
-    padding: 0 24px 36px !important;
+    padding: 0 24px 52px !important;
     margin-top: 0 !important;
     z-index: 3 !important;
     order: unset !important;
