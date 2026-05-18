@@ -1057,13 +1057,13 @@ const Home = () => {
                 style={{
                   fontSize: isMobile ? 'clamp(2.4rem, 8vw, 5rem)' : 'clamp(7rem, 12vw, 11rem)',
                   fontStyle: 'italic',
-                  display: 'block',
+                  display: 'inline-block',
                   backgroundImage: 'linear-gradient(132deg, #fff2c8 6%, #e8b84b 38%, #b8892e 94%)',
                   WebkitBackgroundClip: 'text',
                   backgroundClip: 'text',
                   color: '#E8B84B',
                   WebkitTextFillColor: 'transparent',
-                  paddingRight: '0.02em',
+                  paddingRight: '0.08em',
                 }}
               >
                 {t.heroLine2}
