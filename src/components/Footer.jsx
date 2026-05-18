@@ -1,4 +1,4 @@
-import { useState } from 'react';
+﻿import { useState } from 'react';
 
 const SocialBtn = ({ href, label, children }) => {
   const [hov, setHov] = useState(false);
@@ -13,10 +13,10 @@ const SocialBtn = ({ href, label, children }) => {
       style={{
         display: 'flex', alignItems: 'center', justifyContent: 'center',
         width: '38px', height: '38px', borderRadius: '1px',
-        border: `1px solid ${hov ? 'rgba(201,164,21,0.9)' : 'rgba(201,164,21,0.3)'}`,
-        color: hov ? '#c9a415' : 'rgba(201,164,21,0.65)',
-        background: hov ? 'rgba(201,164,21,0.08)' : 'transparent',
-        boxShadow: hov ? '0 0 12px rgba(201,164,21,0.3)' : 'none',
+        border: `1px solid ${hov ? 'rgba(183,110,121,0.9)' : 'rgba(183,110,121,0.3)'}`,
+        color: hov ? '#b76e79' : 'rgba(183,110,121,0.65)',
+        background: hov ? 'rgba(183,110,121,0.08)' : 'transparent',
+        boxShadow: hov ? '0 0 12px rgba(183,110,121,0.3)' : 'none',
         transition: 'all 0.3s ease',
       }}
     >
@@ -58,7 +58,7 @@ const Footer = () => {
         <p style={{
           fontFamily: "'Cormorant Garamond', serif",
           fontStyle: 'italic', fontSize: '13px',
-          color: 'rgba(201,164,21,0.7)', letterSpacing: '3px',
+          color: 'rgba(183,110,121,0.7)', letterSpacing: '3px',
           marginBottom: '20px',
         }}>The Art of Scent</p>
 
@@ -88,7 +88,7 @@ const Footer = () => {
         {/* Gold separator */}
         <div style={{
           width: '100%', height: '1px',
-          background: 'linear-gradient(90deg, transparent, rgba(201,164,21,0.28), transparent)',
+          background: 'linear-gradient(90deg, transparent, rgba(183,110,121,0.28), transparent)',
           marginBottom: '16px',
         }}/>
 

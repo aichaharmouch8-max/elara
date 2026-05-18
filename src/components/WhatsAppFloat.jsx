@@ -18,14 +18,14 @@ const WhatsAppFloat = () => {
         width: '54px',
         height: '54px',
         borderRadius: '50%',
-        background: hov ? 'linear-gradient(145deg,#e4c56a,#b8892e)' : 'linear-gradient(145deg,#d4af37,#a67c29)',
+        background: hov ? 'linear-gradient(145deg,#c9929b,#9d5a63)' : 'linear-gradient(145deg,#b76e79,#8f4a54)',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
         zIndex: 999,
         boxShadow: hov
-          ? '0 6px 28px rgba(201,164,21,0.5)'
-          : '0 4px 20px rgba(201,164,21,0.3)',
+          ? '0 6px 28px rgba(183,110,121,0.5)'
+          : '0 4px 20px rgba(183,110,121,0.3)',
         transform: hov ? 'scale(1.05)' : 'scale(1)',
         transition: 'background 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease',
         WebkitTapHighlightColor: 'transparent',

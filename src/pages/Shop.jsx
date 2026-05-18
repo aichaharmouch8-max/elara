@@ -1,4 +1,4 @@
-import { useState, useCallback, useRef } from 'react';
+﻿import { useState, useCallback, useRef } from 'react';
 import PaymentModal from '../components/PaymentModal';
 import useInView from '../hooks/useInView';
 
@@ -102,11 +102,11 @@ const LeafIcon = () => (
 
 const MetaItem = ({ icon, label, value }) => (
   <div style={{ display: 'flex', flexDirection: 'column', gap: '5px' }}>
-    <div style={{ display: 'flex', alignItems: 'center', gap: '5px', color: 'rgba(201,164,21,0.5)' }}>
+    <div style={{ display: 'flex', alignItems: 'center', gap: '5px', color: 'rgba(183,110,121,0.5)' }}>
       {icon}
       <span style={{
         fontFamily: "'Montserrat', sans-serif", fontSize: '7px', letterSpacing: '0.18em',
-        textTransform: 'uppercase', color: 'rgba(201,164,21,0.5)',
+        textTransform: 'uppercase', color: 'rgba(183,110,121,0.5)',
       }}>{label}</span>
     </div>
     <p style={{
@@ -129,9 +129,9 @@ const BuyNowBtn = ({ onClick, label = 'Buy Now' }) => {
       style={{
         fontFamily: "'Montserrat', sans-serif", fontSize: '8px', letterSpacing: '0.2em',
         textTransform: 'uppercase', padding: '14px 30px',
-        background: hov ? '#c9a415' : 'transparent',
-        color: hov ? '#0d0a07' : '#c9a415',
-        border: '1px solid rgba(201,164,21,0.65)',
+        background: hov ? '#b76e79' : 'transparent',
+        color: hov ? '#0d0a07' : '#b76e79',
+        border: '1px solid rgba(183,110,121,0.65)',
         borderRadius: '1px',
         cursor: 'pointer',
         transition: 'all 0.35s ease',
@@ -184,10 +184,10 @@ const ProductCard = ({ product, inView, delay }) => {
       >
         <div className="shop-card" style={{
           background: 'rgba(255,255,255,0.03)',
-          border: `1px solid ${hov ? 'rgba(138,110,47,0.35)' : 'rgba(138,110,47,0.1)'}`,
+          border: `1px solid ${hov ? 'rgba(157,90,99,0.35)' : 'rgba(157,90,99,0.1)'}`,
           transform: hov ? 'translateY(-10px)' : 'translateY(0)',
           boxShadow: hov
-            ? '0 20px 60px rgba(44,24,16,0.12), 0 0 36px rgba(138,110,47,0.08)'
+            ? '0 20px 60px rgba(44,24,16,0.12), 0 0 36px rgba(157,90,99,0.08)'
             : '0 4px 24px rgba(44,24,16,0.08)',
           transition: 'transform 0.5s cubic-bezier(0.16,1,0.3,1), box-shadow 0.5s ease, border-color 0.4s ease',
           position: 'relative',
@@ -198,14 +198,14 @@ const ProductCard = ({ product, inView, delay }) => {
             height: '280px',
             display: 'flex', alignItems: 'center', justifyContent: 'center',
             position: 'relative', overflow: 'hidden',
-            background: 'rgba(255,255,255,0.02)',
+            background: '#f5f0e8',
           }}>
             {product.bestseller && (
               <div style={{
                 position: 'absolute', top: '14px', left: '14px', zIndex: 2,
                 fontFamily: "'Jost', sans-serif", fontSize: '7px', letterSpacing: '3px',
                 textTransform: 'uppercase', padding: '5px 10px',
-                background: 'rgba(138,110,47,1)', color: '#0a0600',
+                background: 'rgba(157,90,99,1)', color: '#0a0600',
               }}>Fan Favourite</div>
             )}
 
@@ -217,6 +217,7 @@ const ProductCard = ({ product, inView, delay }) => {
               style={{
                 width: '100%', height: '100%',
                 objectFit: 'contain', objectPosition: 'center',
+                mixBlendMode: 'multiply',
                 transform: hov ? 'scale(1.05)' : 'scale(1)',
                 transition: 'transform 0.6s cubic-bezier(0.16,1,0.3,1)',
                 padding: '20px', boxSizing: 'border-box',
@@ -232,13 +233,13 @@ const ProductCard = ({ product, inView, delay }) => {
                 alignItems: 'center', justifyContent: 'center', gap: '10px',
               }}>
                 <svg width="28" height="28" viewBox="0 0 24 24" fill="none"
-                  stroke="rgba(201,164,21,0.85)" strokeWidth="1" strokeLinecap="round">
+                  stroke="rgba(183,110,121,0.85)" strokeWidth="1" strokeLinecap="round">
                   <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
                   <path d="M7 11V7a5 5 0 0110 0v4"/>
                 </svg>
                 <p style={{
                   fontFamily: "'Jost', sans-serif", fontSize: '7px', letterSpacing: '5px',
-                  color: 'rgba(201,164,21,0.7)', textTransform: 'uppercase', margin: 0,
+                  color: 'rgba(183,110,121,0.7)', textTransform: 'uppercase', margin: 0,
                 }}>Coming Soon</p>
               </div>
             )}
@@ -250,7 +251,7 @@ const ProductCard = ({ product, inView, delay }) => {
             {/* Concentration */}
             <p style={{
               fontFamily: "'Montserrat', sans-serif", fontSize: '7px', letterSpacing: '0.2em',
-              color: 'rgba(201,164,21,0.6)',
+              color: 'rgba(183,110,121,0.6)',
               textTransform: 'uppercase', marginBottom: '14px',
             }}>{product.concentration}</p>
 
@@ -264,7 +265,7 @@ const ProductCard = ({ product, inView, delay }) => {
               <span style={{
                 display: 'block', fontFamily: "'Cormorant Garamond', serif",
                 fontStyle: 'italic', fontWeight: 300, fontSize: '34px', lineHeight: 1,
-                color: '#c9a415',
+                color: '#b76e79',
               }}>{product.name}</span>
             </h3>
 
@@ -278,19 +279,19 @@ const ProductCard = ({ product, inView, delay }) => {
             {/* Gold hairline */}
             <div style={{
               height: '1px', marginBottom: '18px',
-              background: 'linear-gradient(to right, rgba(138,110,47,0.3), transparent)',
+              background: 'linear-gradient(to right, rgba(157,90,99,0.3), transparent)',
             }}/>
 
             {/* Smells like */}
             <div style={{ marginBottom: '14px' }}>
               <span style={{
                 fontFamily: "'Montserrat', sans-serif", fontSize: '7px', letterSpacing: '0.2em',
-                textTransform: 'uppercase', color: 'rgba(201,164,21,0.5)',
+                textTransform: 'uppercase', color: 'rgba(183,110,121,0.5)',
                 display: 'block', marginBottom: '6px',
               }}>Smells like</span>
               <p style={{
                 fontFamily: "'Cormorant Garamond', serif", fontStyle: 'italic', fontWeight: 300,
-                fontSize: '15px', color: 'rgba(201,164,21,0.9)',
+                fontSize: '15px', color: 'rgba(183,110,121,0.9)',
                 lineHeight: 1.8, letterSpacing: '0.2px', margin: 0,
               }}>{product.smellsLike}</p>
             </div>
@@ -312,7 +313,7 @@ const ProductCard = ({ product, inView, delay }) => {
                 <div key={tier} style={{ display: 'flex', alignItems: 'baseline', gap: '10px', marginBottom: '8px', flexWrap: 'wrap' }}>
                   <span style={{
                     fontFamily: "'Montserrat', sans-serif", fontSize: '7px', letterSpacing: '0.15em',
-                    color: 'rgba(201,164,21,0.45)', textTransform: 'uppercase',
+                    color: 'rgba(183,110,121,0.45)', textTransform: 'uppercase',
                     minWidth: '40px', flexShrink: 0,
                   }}>{tier}</span>
                   <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' }}>
@@ -320,9 +321,9 @@ const ProductCard = ({ product, inView, delay }) => {
                       <span key={i} style={{
                         fontFamily: "'Jost', sans-serif", fontSize: '9px', letterSpacing: '0.5px',
                         padding: '3px 8px',
-                        color: 'rgba(201,164,21,0.85)',
-                        border: '1px solid rgba(201,164,21,0.18)',
-                        background: 'rgba(201,164,21,0.04)',
+                        color: 'rgba(183,110,121,0.85)',
+                        border: '1px solid rgba(183,110,121,0.18)',
+                        background: 'rgba(183,110,121,0.04)',
                       }}>{n}</span>
                     ))}
                   </div>
@@ -335,7 +336,7 @@ const ProductCard = ({ product, inView, delay }) => {
               display: 'grid', gridTemplateColumns: '1fr 1fr',
               gap: '16px 12px', marginBottom: '24px',
               paddingTop: '16px',
-              borderTop: '1px solid rgba(138,110,47,0.08)',
+              borderTop: '1px solid rgba(157,90,99,0.08)',
             }}>
               <MetaItem icon={<ClockIcon />} label="Longevity" value={product.longevity} />
               <MetaItem icon={<WindIcon />}  label="Projection" value={product.projection} />
@@ -348,7 +349,7 @@ const ProductCard = ({ product, inView, delay }) => {
               <div style={{ marginBottom: '20px' }}>
                 <p style={{
                   fontFamily: "'Jost', sans-serif", fontSize: '7px', letterSpacing: '6px',
-                  color: 'rgba(201,164,21,0.4)', textTransform: 'uppercase',
+                  color: 'rgba(183,110,121,0.4)', textTransform: 'uppercase',
                   textAlign: 'center', marginBottom: '16px', fontWeight: 300,
                 }}>Select Edition</p>
                 <div style={{ display: 'flex', gap: '14px' }}>
@@ -371,17 +372,17 @@ const ProductCard = ({ product, inView, delay }) => {
                             textTransform: 'uppercase', padding: '16px 10px 14px',
                             minHeight: '64px',
                             background: active
-                              ? 'linear-gradient(135deg, rgba(201,164,21,0.13) 0%, rgba(201,164,21,0.05) 100%)'
+                              ? 'linear-gradient(135deg, rgba(183,110,121,0.13) 0%, rgba(183,110,121,0.05) 100%)'
                               : 'transparent',
                             border: `1px solid ${
-                              active  ? 'rgba(201,164,21,0.95)' :
-                              hovered ? 'rgba(201,164,21,0.55)' :
-                                        'rgba(201,164,21,0.2)'
+                              active  ? 'rgba(183,110,121,0.95)' :
+                              hovered ? 'rgba(183,110,121,0.55)' :
+                                        'rgba(183,110,121,0.2)'
                             }`,
-                            boxShadow: active && exclusive ? '0 0 18px rgba(201,164,21,0.18)' : 'none',
-                            color: active  ? 'rgba(201,164,21,1)'  :
-                                   hovered ? 'rgba(201,164,21,0.8)' :
-                                             'rgba(201,164,21,0.45)',
+                            boxShadow: active && exclusive ? '0 0 18px rgba(183,110,121,0.18)' : 'none',
+                            color: active  ? 'rgba(183,110,121,1)'  :
+                                   hovered ? 'rgba(183,110,121,0.8)' :
+                                             'rgba(183,110,121,0.45)',
                             borderRadius: '1px', cursor: 'pointer',
                             transition: 'border-color 0.3s ease, color 0.3s ease, background 0.3s ease, box-shadow 0.3s ease',
                             display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '5px',
@@ -391,9 +392,9 @@ const ProductCard = ({ product, inView, delay }) => {
                             <span style={{
                               position: 'absolute', top: '-9px', left: '50%', transform: 'translateX(-50%)',
                               fontFamily: "'Jost', sans-serif", fontSize: '6px', letterSpacing: '3px',
-                              background: active ? '#c9a415' : 'transparent',
-                              color: active ? '#060606' : 'rgba(201,164,21,0.7)',
-                              border: `1px solid ${active ? '#c9a415' : 'rgba(201,164,21,0.4)'}`,
+                              background: active ? '#b76e79' : 'transparent',
+                              color: active ? '#060606' : 'rgba(183,110,121,0.7)',
+                              border: `1px solid ${active ? '#b76e79' : 'rgba(183,110,121,0.4)'}`,
                               padding: '2px 8px', whiteSpace: 'nowrap',
                               transition: 'all 0.3s ease',
                             }}>✦ EXCLUSIVE</span>
@@ -402,7 +403,7 @@ const ProductCard = ({ product, inView, delay }) => {
                           <span style={{
                             fontFamily: "'Cormorant Garamond', serif", fontStyle: 'italic',
                             fontSize: '11px', letterSpacing: '0.5px', textTransform: 'none',
-                            color: active ? 'rgba(201,164,21,0.75)' : 'rgba(201,164,21,0.3)',
+                            color: active ? 'rgba(183,110,121,0.75)' : 'rgba(183,110,121,0.3)',
                             fontWeight: 300, transition: 'color 0.3s ease',
                           }}>{subLine}</span>
                         </button>
@@ -427,8 +428,8 @@ const ProductCard = ({ product, inView, delay }) => {
                           width: '100%', boxSizing: 'border-box',
                           fontFamily: "'Cormorant Garamond', serif", fontStyle: 'italic',
                           fontSize: '15px', fontWeight: 300,
-                          background: nameFocused ? 'rgba(201,164,21,0.06)' : 'transparent',
-                          border: `1px solid ${nameFocused ? 'rgba(201,164,21,0.7)' : 'rgba(201,164,21,0.3)'}`,
+                          background: nameFocused ? 'rgba(183,110,121,0.06)' : 'transparent',
+                          border: `1px solid ${nameFocused ? 'rgba(183,110,121,0.7)' : 'rgba(183,110,121,0.3)'}`,
                           color: '#2c1810', padding: '12px 40px 12px 14px',
                           outline: 'none', borderRadius: '1px',
                           transition: 'border-color 0.2s ease, background 0.2s ease',
@@ -438,13 +439,13 @@ const ProductCard = ({ product, inView, delay }) => {
                       <span style={{
                         position: 'absolute', right: '12px', top: '50%', transform: 'translateY(-50%)',
                         fontFamily: "'Jost', sans-serif", fontSize: '8px', letterSpacing: '1px',
-                        color: signatureName.length >= 18 ? 'rgba(201,164,21,0.9)' : 'rgba(201,164,21,0.3)',
+                        color: signatureName.length >= 18 ? 'rgba(183,110,121,0.9)' : 'rgba(183,110,121,0.3)',
                         transition: 'color 0.2s ease',
                       }}>{signatureName.length}/20</span>
                     </div>
                     <p style={{
                       fontFamily: "'Cormorant Garamond', serif", fontStyle: 'italic',
-                      fontSize: '11px', color: 'rgba(201,164,21,0.45)',
+                      fontSize: '11px', color: 'rgba(183,110,121,0.45)',
                       marginTop: '10px', lineHeight: 1.6, textAlign: 'center',
                     }}>Each bottle is hand-personalized and quality checked before dispatch.</p>
                   </div>
@@ -453,7 +454,7 @@ const ProductCard = ({ product, inView, delay }) => {
                 {/* Urgency signal */}
                 <p style={{
                   fontFamily: "'Jost', sans-serif", fontSize: '7px', letterSpacing: '2.5px',
-                  color: 'rgba(201,164,21,0.35)', textTransform: 'uppercase',
+                  color: 'rgba(183,110,121,0.35)', textTransform: 'uppercase',
                   textAlign: 'center', marginTop: '14px',
                 }}>✦ Limited personalized slots available each week</p>
               </div>
@@ -464,12 +465,12 @@ const ProductCard = ({ product, inView, delay }) => {
               <div className="shop-buy-area" style={{
                 display: 'flex', alignItems: 'center', justifyContent: 'space-between',
                 paddingTop: '16px',
-                borderTop: '1px solid rgba(138,110,47,0.1)',
+                borderTop: '1px solid rgba(157,90,99,0.1)',
               }}>
                 <span style={{
                   fontFamily: "'Cormorant Garamond', serif",
                   fontSize: '32px', fontWeight: 300,
-                  color: '#c9a415', letterSpacing: '1px',
+                  color: '#b76e79', letterSpacing: '1px',
                   transition: 'opacity 0.2s ease',
                 }}>${displayPrice}</span>
                 <BuyNowBtn
@@ -483,8 +484,8 @@ const ProductCard = ({ product, inView, delay }) => {
                 onMouseLeave={() => setNotifyHov(false)}
                 style={{
                   width: '100%', padding: '16px 0', textAlign: 'center',
-                  borderTop: '1px solid rgba(201,164,21,0.12)',
-                  border: `1px solid ${notifyHov ? 'rgba(201,164,21,0.55)' : 'rgba(201,164,21,0.2)'}`,
+                  borderTop: '1px solid rgba(183,110,121,0.12)',
+                  border: `1px solid ${notifyHov ? 'rgba(183,110,121,0.55)' : 'rgba(183,110,121,0.2)'}`,
                   transition: 'border-color 0.3s ease',
                   display: 'flex', flexDirection: 'column', gap: '5px',
                   cursor: 'default', background: 'transparent',
@@ -496,7 +497,7 @@ const ProductCard = ({ product, inView, delay }) => {
                 }}>Available Soon</span>
                 <span style={{
                   fontFamily: "'Jost', sans-serif", fontSize: '7px', letterSpacing: '4px',
-                  color: 'rgba(201,164,21,0.6)', textTransform: 'uppercase',
+                  color: 'rgba(183,110,121,0.6)', textTransform: 'uppercase',
                 }}>Notify Me</span>
               </div>
             )}
@@ -510,7 +511,7 @@ const ProductCard = ({ product, inView, delay }) => {
 const StarRating = ({ rating }) => (
   <div style={{ display: 'flex', gap: '2px' }}>
     {[1, 2, 3, 4, 5].map(n => (
-      <span key={n} style={{ color: n <= rating ? 'rgba(138,110,47,1)' : 'rgba(138,110,47,0.2)', fontSize: '12px' }}>★</span>
+      <span key={n} style={{ color: n <= rating ? 'rgba(157,90,99,1)' : 'rgba(157,90,99,0.2)', fontSize: '12px' }}>★</span>
     ))}
   </div>
 );
@@ -523,20 +524,20 @@ const ReviewsSection = () => {
 
   return (
     <div style={{
-      borderTop: '1px solid rgba(138,110,47,0.1)',
+      borderTop: '1px solid rgba(157,90,99,0.1)',
       padding: '80px clamp(20px, 6vw, 80px) 100px',
       maxWidth: '1100px', margin: '0 auto',
     }}>
       <p style={{
         fontFamily: "'Montserrat', sans-serif", fontSize: '9px', letterSpacing: '0.2em',
-        color: 'rgba(201,164,21,0.65)', textTransform: 'uppercase', marginBottom: '16px', textAlign: 'center',
+        color: 'rgba(183,110,121,0.65)', textTransform: 'uppercase', marginBottom: '16px', textAlign: 'center',
       }}>What They Say</p>
       <h2 style={{
         fontFamily: "'Tenor Sans', sans-serif", fontWeight: 400,
         fontSize: 'clamp(1.8rem, 3.5vw, 2.8rem)', color: '#2c1810',
         textAlign: 'center', marginBottom: '56px', lineHeight: 1.3, letterSpacing: '0.1em',
       }}>
-        Customer <span style={{ fontStyle: 'italic', fontFamily: "'Cormorant Garamond', serif", color: '#c9a415' }}>Reviews</span>
+        Customer <span style={{ fontStyle: 'italic', fontFamily: "'Cormorant Garamond', serif", color: '#b76e79' }}>Reviews</span>
       </h2>
       <div style={{
         display: 'grid',
@@ -560,7 +561,7 @@ const ReviewsSection = () => {
               }}>{r.name}</span>
               <span style={{
                 fontFamily: "'Jost', sans-serif", fontSize: '8px', letterSpacing: '2px',
-                color: 'rgba(201,164,21,0.5)', textTransform: 'uppercase',
+                color: 'rgba(183,110,121,0.5)', textTransform: 'uppercase',
               }}>{r.product}</span>
             </div>
           </div>
@@ -580,12 +581,12 @@ const Shop = () => {
         background: 'transparent',
         padding: '120px clamp(20px, 6vw, 80px) 60px',
         position: 'relative', overflow: 'hidden',
-        borderBottom: '1px solid rgba(138,110,47,0.1)',
+        borderBottom: '1px solid rgba(157,90,99,0.1)',
       }}>
         <div style={{ maxWidth: '1100px', margin: '0 auto', position: 'relative' }}>
           <p style={{
             fontFamily: "'Montserrat', sans-serif", fontSize: '9px', letterSpacing: '0.2em',
-            color: '#c9a415', textTransform: 'uppercase', marginBottom: '20px',
+            color: '#b76e79', textTransform: 'uppercase', marginBottom: '20px',
           }}>
             The Collection
           </p>
@@ -594,7 +595,7 @@ const Shop = () => {
             fontSize: 'clamp(52px, 7vw, 88px)', lineHeight: 1.1, letterSpacing: '0.1em',
             color: '#2c1810',
           }}>
-            Our <span style={{ fontStyle: 'italic', fontFamily: "'Cormorant Garamond', serif", color: '#c9a415' }}>Fragrances</span>
+            Our <span style={{ fontStyle: 'italic', fontFamily: "'Cormorant Garamond', serif", color: '#b76e79' }}>Fragrances</span>
           </h1>
           <p style={{
             fontFamily: "'Jost', sans-serif", fontSize: '13px', fontWeight: 300,

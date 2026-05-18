@@ -1,4 +1,4 @@
-/* Fonts loaded via <link> in index.html for faster discovery */
+﻿/* Fonts loaded via <link> in index.html for faster discovery */
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -9,9 +9,9 @@
   --bg-primary: #f5f0e8;
   --bg-secondary: #ede8df;
   --bg-card: #ede8df;
-  --gold-primary: #c9a415;
-  --gold-light: #e8d5a3;
-  --gold-dim: #8a6e2f;
+  --gold-primary: #b76e79;
+  --gold-light: #d4a5aa;
+  --gold-dim: #9d5a63;
   --text-primary: #2c1810;
   --text-secondary: #7a5c38;
   --border: rgba(44, 24, 16, 0.12);
@@ -20,10 +20,10 @@
   --lux-elevate: #ede8df;
   --lux-cream: #2c1810;
   --lux-cream-mute: rgba(44, 24, 16, 0.55);
-  --lux-gold: #c9a415;
-  --lux-gold-bright: #e8d5a3;
-  --lux-border: rgba(201, 164, 21, 0.18);
-  --lux-border-strong: rgba(201, 164, 21, 0.38);
+  --lux-gold: #b76e79;
+  --lux-gold-bright: #d4a5aa;
+  --lux-border: rgba(183, 110, 121, 0.18);
+  --lux-border-strong: rgba(183, 110, 121, 0.38);
   --lux-panel: linear-gradient(
     154deg,
     rgba(255, 252, 246, 0.95) 0%,
@@ -49,9 +49,9 @@ body {
   color: var(--text-primary);
   background-color: #f5f0e8 !important;
   background-image:
-    radial-gradient(ellipse 130% 82% at 50% -14%, rgba(201, 164, 21, 0.07) 0%, transparent 56%),
-    radial-gradient(ellipse 75% 48% at 98% 0%, rgba(201, 164, 21, 0.04) 0%, transparent 46%),
-    radial-gradient(ellipse 65% 50% at 0% 100%, rgba(201, 164, 21, 0.03) 0%, transparent 54%);
+    radial-gradient(ellipse 130% 82% at 50% -14%, rgba(183, 110, 121, 0.07) 0%, transparent 56%),
+    radial-gradient(ellipse 75% 48% at 98% 0%, rgba(183, 110, 121, 0.04) 0%, transparent 46%),
+    radial-gradient(ellipse 65% 50% at 0% 100%, rgba(183, 110, 121, 0.03) 0%, transparent 54%);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   line-height: 1.8;
@@ -89,7 +89,7 @@ body {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background: radial-gradient(ellipse 72% 58% at 18% 18%, rgba(201,164,21,0.08) 0%, transparent 58%);
+  background: radial-gradient(ellipse 72% 58% at 18% 18%, rgba(183,110,121,0.08) 0%, transparent 58%);
 }
 
 .lux-review-card {
@@ -97,7 +97,7 @@ body {
   backdrop-filter: none;
   -webkit-backdrop-filter: none;
   background: rgba(237, 232, 223, 0.85) !important;
-  border: 1px solid rgba(201,164,21,0.2) !important;
+  border: 1px solid rgba(183,110,121,0.2) !important;
   box-shadow: inset 0 1px 0 rgba(255,255,255,0.7), 0 4px 20px rgba(44,24,16,0.06);
 }
 
@@ -117,7 +117,7 @@ body {
   width: 56px;
   height: 1px;
   margin: 0 auto 24px;
-  background: linear-gradient(90deg, transparent, rgba(201,164,21,0.95) 50%, transparent);
+  background: linear-gradient(90deg, transparent, rgba(183,110,121,0.95) 50%, transparent);
   opacity: 0.9;
 }
 
@@ -127,7 +127,7 @@ body {
 
 @supports ((-webkit-background-clip: text) or (background-clip: text)) {
   .footer-lux-brand {
-    background: linear-gradient(135deg, #2c1810 10%, var(--gold-primary) 55%, #8a6e2f 95%);
+    background: linear-gradient(135deg, #2c1810 10%, var(--gold-primary) 55%, #9d5a63 95%);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
@@ -138,7 +138,7 @@ body {
 /* Contact · correspondence desk */
 .lux-contact-panel {
   border-radius: 4px !important;
-  border: 1px solid rgba(201,164,21,0.22) !important;
+  border: 1px solid rgba(183,110,121,0.22) !important;
   background: rgba(237, 232, 223, 0.85) !important;
   backdrop-filter: none;
   -webkit-backdrop-filter: none;
@@ -150,34 +150,34 @@ body {
 /* Floating WhatsApp · jewel button */
 .lux-wa-chip {
   box-shadow:
-    0 0 0 1px rgba(255, 232, 190, 0.22),
+    0 0 0 1px rgba(230, 175, 185, 0.22),
     0 10px 40px rgba(0, 0, 0, 0.58),
-    0 0 56px rgba(201, 168, 76, 0.18) !important;
+    0 0 56px rgba(183, 110, 121, 0.18) !important;
 }
 
 /* Checkout modal · bespoke concierge */
 .lux-modal-backdrop {
   background:
-    radial-gradient(ellipse at 50% 20%, rgba(201,164,21,0.09) 0%, transparent 55%),
+    radial-gradient(ellipse at 50% 20%, rgba(183,110,121,0.09) 0%, transparent 55%),
     rgba(0, 0, 0, 0.92) !important;
 }
 
 .lux-modal-shell {
   border-radius: 14px !important;
   background: linear-gradient(168deg, #12100d 0%, #070605 52%, #0a0908 100%) !important;
-  border: 1px solid rgba(212,185,115,0.38) !important;
+  border: 1px solid rgba(183,110,121,0.38) !important;
   box-shadow:
     inset 0 1px 0 rgba(255,245,212,0.07),
     0 0 0 1px rgba(0,0,0,0.55),
     0 52px 140px rgba(0, 0, 0, 0.82),
-    0 0 100px rgba(201,164,21, 0.05) !important;
+    0 0 100px rgba(183,110,121, 0.05) !important;
 }
 
 .cart-summary-lux {
   border-radius: 4px !important;
   padding: 32px 36px !important;
   margin-top: 8px !important;
-  border: 1px solid rgba(201,164,21,0.22) !important;
+  border: 1px solid rgba(183,110,121,0.22) !important;
   background: rgba(237, 232, 223, 0.85) !important;
   backdrop-filter: none;
   -webkit-backdrop-filter: none;
@@ -188,13 +188,13 @@ body {
 
 .app-loading-screen {
   background-color: var(--bg-primary) !important;
-  background-image: radial-gradient(ellipse at 50% 42%, rgba(201,164,21,0.1) 0%, transparent 58%) !important;
+  background-image: radial-gradient(ellipse at 50% 42%, rgba(183,110,121,0.1) 0%, transparent 58%) !important;
 }
 
 .cart-empty-state {
   position: relative;
   border-radius: 4px;
-  border: 1px solid rgba(201,164,21,0.22);
+  border: 1px solid rgba(183,110,121,0.22);
   background: rgba(237, 232, 223, 0.85);
   box-shadow:
     inset 0 1px 0 rgba(255,255,255,0.8),
@@ -256,7 +256,7 @@ h1, h2, h3, h4, h5 {
   left: 0;
   width: 0;
   height: 1px;
-  background: rgba(201,164,21,0.65);
+  background: rgba(183,110,121,0.65);
   transition: width 0.35s ease;
 }
 .nav-link-lux:hover {
@@ -270,7 +270,7 @@ h1, h2, h3, h4, h5 {
 }
 .nav-link-lux.lux-active::after {
   width: 100%;
-  background: #c9a415;
+  background: #b76e79;
   transition: none;
 }
 
@@ -285,12 +285,12 @@ h1, h2, h3, h4, h5 {
 /* Hide carousel scrollbar cross-browser */
 .carousel-track::-webkit-scrollbar { display: none; }
 
-::selection { background: rgba(200, 150, 42, 0.22); }
+::selection { background: rgba(183, 110, 121, 0.22); }
 
 ::-webkit-scrollbar { width: 5px; }
-::-webkit-scrollbar-track { background: rgba(237,232,223,0.9); border-left: 1px solid rgba(201,164,21,0.12); }
+::-webkit-scrollbar-track { background: rgba(237,232,223,0.9); border-left: 1px solid rgba(183,110,121,0.12); }
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, rgba(201,164,21,0.7) 0%, rgba(138,110,47,0.85) 100%);
+  background: linear-gradient(180deg, rgba(183,110,121,0.7) 0%, rgba(157,90,99,0.85) 100%);
   border-radius: 99px;
   border: 1px solid rgba(245,240,232,0.5);
 }
@@ -585,7 +585,7 @@ video.hero-bg-video {
   .hero-text-col > div:first-child span {
     font-size: 8px !important;
     letter-spacing: 0.3em !important;
-    color: #b8892e !important;
+    color: #9d5a63 !important;
   }
 
   /* Heading */
@@ -595,7 +595,7 @@ video.hero-bg-video {
     font-size: 38px !important;
     color: transparent !important;
     -webkit-text-fill-color: transparent !important;
-    background-image: linear-gradient(132deg, #c9a415 6%, #e8b84b 38%, #b8892e 94%) !important;
+    background-image: linear-gradient(132deg, #b76e79 6%, #c9929b 38%, #9d5a63 94%) !important;
     -webkit-background-clip: text !important;
     background-clip: text !important;
   }
@@ -866,7 +866,7 @@ video.hero-bg-video {
   .craft-stats > div {
     border-left: none !important;
     padding-left: 0 !important;
-    border-top: 1px solid rgba(201,164,21,0.1) !important;
+    border-top: 1px solid rgba(183,110,121,0.1) !important;
   }
   .craft-stats > div:first-child {
     border-top: none !important;
@@ -917,7 +917,7 @@ video.hero-bg-video {
   background: linear-gradient(
     105deg,
     transparent 5%,
-    rgba(255, 228, 120, 0.38) 50%,
+    rgba(220, 160, 165, 0.38) 50%,
     transparent 95%
   );
   transform: translateX(-200%) skewX(-18deg);
@@ -946,8 +946,8 @@ video.hero-bg-video {
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: rgba(201, 164, 21, 0.28);
-  border: 1px solid rgba(201, 164, 21, 0.35);
+  background: rgba(183, 110, 121, 0.28);
+  border: 1px solid rgba(183, 110, 121, 0.35);
   cursor: pointer;
   transition: all 0.4s ease;
   padding: 0;
@@ -955,9 +955,9 @@ video.hero-bg-video {
 }
 
 .side-nav-dot.active {
-  background: #c9a415;
-  border-color: #c9a415;
-  box-shadow: 0 0 6px rgba(201, 164, 21, 0.45);
+  background: #b76e79;
+  border-color: #b76e79;
+  box-shadow: 0 0 6px rgba(183, 110, 121, 0.45);
   transform: scale(1.3);
 }
 

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+﻿import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import { useLanguage } from '../context/LanguageContext';
@@ -19,9 +19,9 @@ const LangToggle = () => {
         opacity: hov ? 1 : 0.75, transition: 'opacity 0.3s ease',
       }}
     >
-      <span style={{ color: lang === 'en' ? '#c9a415' : 'rgba(201,164,21,0.38)', transition: 'color 0.3s ease' }}>EN</span>
-      <span style={{ color: 'rgba(201,164,21,0.25)', margin: '0 1px' }}>|</span>
-      <span style={{ fontFamily: "'Noto Naskh Arabic', serif", fontSize: '11px', color: lang === 'ar' ? '#c9a415' : 'rgba(201,164,21,0.38)', transition: 'color 0.3s ease' }}>عر</span>
+      <span style={{ color: lang === 'en' ? '#b76e79' : 'rgba(183,110,121,0.38)', transition: 'color 0.3s ease' }}>EN</span>
+      <span style={{ color: 'rgba(183,110,121,0.25)', margin: '0 1px' }}>|</span>
+      <span style={{ fontFamily: "'Noto Naskh Arabic', serif", fontSize: '11px', color: lang === 'ar' ? '#b76e79' : 'rgba(183,110,121,0.38)', transition: 'color 0.3s ease' }}>عر</span>
     </button>
   );
 };
@@ -65,7 +65,7 @@ const Navbar = () => {
             fontWeight: 300,
             fontSize: '1.25rem',
             letterSpacing: '0.38em',
-            color: '#c9a415',
+            color: '#b76e79',
             textTransform: 'uppercase',
           }}>
             Elara
@@ -118,7 +118,7 @@ const Navbar = () => {
               <span style={{
                 position: 'absolute', top: '-6px', right: '-8px',
                 width: '16px', height: '16px', borderRadius: '50%',
-                background: '#c9a415', color: '#0d0a07',
+                background: '#b76e79', color: '#0d0a07',
                 fontSize: '8px', fontWeight: 700,
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
                 fontFamily: "'Montserrat', sans-serif",
@@ -140,17 +140,17 @@ const Navbar = () => {
             }}
           >
             <span style={{
-              width: '22px', height: '1px', background: '#c9a415', display: 'block',
+              width: '22px', height: '1px', background: '#b76e79', display: 'block',
               transition: 'transform 0.3s ease',
               transform: menuOpen ? 'rotate(45deg) translate(4px, 5px)' : 'none',
             }}/>
             <span style={{
-              width: '14px', height: '1px', background: 'rgba(201,164,21,0.6)', display: 'block',
+              width: '14px', height: '1px', background: 'rgba(183,110,121,0.6)', display: 'block',
               transition: 'opacity 0.3s ease, width 0.3s ease',
               opacity: menuOpen ? 0 : 1,
             }}/>
             <span style={{
-              width: '22px', height: '1px', background: '#c9a415', display: 'block',
+              width: '22px', height: '1px', background: '#b76e79', display: 'block',
               transition: 'transform 0.3s ease',
               transform: menuOpen ? 'rotate(-45deg) translate(4px, -5px)' : 'none',
             }}/>
@@ -170,7 +170,7 @@ const Navbar = () => {
         transition: 'opacity 0.4s ease',
       }}>
         {/* Decorative top line */}
-        <div style={{ width: '32px', height: '1px', background: 'rgba(201,164,21,0.35)' }}/>
+        <div style={{ width: '32px', height: '1px', background: 'rgba(183,110,121,0.35)' }}/>
 
         {navLinks.map(([path, label]) => {
           const active = location.pathname === path;
@@ -182,8 +182,8 @@ const Navbar = () => {
                 fontFamily: "'Montserrat', sans-serif",
                 fontSize: '10px', fontWeight: 300,
                 letterSpacing: '0.45em', textTransform: 'uppercase',
-                color: active ? '#c9a415' : 'rgba(44,24,16,0.65)',
-                borderBottom: active ? '1px solid rgba(201,164,21,0.45)' : '1px solid transparent',
+                color: active ? '#b76e79' : 'rgba(44,24,16,0.65)',
+                borderBottom: active ? '1px solid rgba(183,110,121,0.45)' : '1px solid transparent',
                 paddingBottom: '4px',
                 transition: 'color 0.3s',
                 textDecoration: 'none',
@@ -194,12 +194,12 @@ const Navbar = () => {
           );
         })}
 
-        <div style={{ width: '32px', height: '1px', background: 'rgba(201,164,21,0.2)' }}/>
+        <div style={{ width: '32px', height: '1px', background: 'rgba(183,110,121,0.2)' }}/>
 
         <Link to="/cart" onClick={() => setMenuOpen(false)} style={{
           fontFamily: "'Montserrat', sans-serif", fontSize: '8px',
           letterSpacing: '0.2em', textTransform: 'uppercase',
-          color: 'rgba(201,164,21,0.4)', textDecoration: 'none',
+          color: 'rgba(183,110,121,0.4)', textDecoration: 'none',
         }}>
           {t.navCart}{cartCount > 0 ? ` (${cartCount})` : ''}
         </Link>
