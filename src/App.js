@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+﻿import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { useState, useEffect, lazy, Suspense } from 'react';
 import { CartContext } from './context/CartContext';
 import { LanguageProvider, useLanguage } from './context/LanguageContext';
@@ -41,7 +41,7 @@ const LoadingScreen = ({ visible }) => (
           key={p.id}
           cx={`${p.x}%`} cy={`${p.y}%`}
           r={p.size}
-          fill="#c9a415"
+          fill="#b76e79"
           style={{
             animation: `particleDrift ${p.dur}s ${p.delay}s ease-in-out infinite alternate`,
             opacity: 0,
@@ -56,7 +56,7 @@ const LoadingScreen = ({ visible }) => (
       {/* Animated line — draws from center outward */}
       <div style={{
         width: '64px', height: '1px', marginBottom: '32px',
-        background: 'linear-gradient(to right, transparent, #c9a415, transparent)',
+        background: 'linear-gradient(to right, transparent, #b76e79, transparent)',
         animation: 'lineGrow 0.7s cubic-bezier(0.4,0,0.2,1) 0.2s both',
         transformOrigin: 'center',
       }} />
@@ -66,7 +66,7 @@ const LoadingScreen = ({ visible }) => (
         fontFamily: "'Cormorant Garamond', serif",
         fontWeight: 300,
         fontSize: 'clamp(44px, 10vw, 72px)',
-        color: '#c9a415',
+        color: '#b76e79',
         letterSpacing: '0.35em',
         margin: 0,
         lineHeight: 1,
@@ -80,7 +80,7 @@ const LoadingScreen = ({ visible }) => (
         fontWeight: 300,
         fontSize: '8px',
         letterSpacing: '0.42em',
-        color: 'rgba(201,164,21,0.55)',
+        color: 'rgba(183,110,121,0.55)',
         textTransform: 'uppercase',
         margin: '22px 0 0',
         animation: 'taglineIn 0.8s ease 1s both',
@@ -173,3 +173,4 @@ function App() {
 }
 
 export default App;
+

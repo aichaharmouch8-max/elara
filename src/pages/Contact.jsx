@@ -332,7 +332,7 @@ const Contact = () => {
                 paddingBottom: '1px',
                 transition: 'color 0.3s, border-color 0.3s',
               }}
-              onMouseEnter={e => { e.currentTarget.style.color = '#E8B84B'; e.currentTarget.style.borderColor = '#E8B84B'; }}
+              onMouseEnter={e => { e.currentTarget.style.color = '#b76e79'; e.currentTarget.style.borderColor = '#b76e79'; }}
               onMouseLeave={e => { e.currentTarget.style.color = 'rgba(183,110,121,1)'; e.currentTarget.style.borderColor = 'rgba(183,110,121,0.35)'; }}
             >WhatsApp</a>
           </p>
@@ -438,3 +438,4 @@ const Contact = () => {
 };
 
 export default Contact;
+
