@@ -226,7 +226,7 @@ const CollectionCard = ({ product, featured = false }) => {
           width: '100%', height: featured ? '380px' : '270px',
           display: 'flex', alignItems: 'center', justifyContent: 'center',
           padding: '44px 32px 28px', boxSizing: 'border-box',
-          position: 'relative', background: '#f5f0e8',
+          position: 'relative', background: '#ede8df',
         }}>
           <img
             src={product.image}
@@ -235,7 +235,6 @@ const CollectionCard = ({ product, featured = false }) => {
             style={{
               height: featured ? '320px' : '200px', width: 'auto',
               objectFit: 'contain',
-              mixBlendMode: 'multiply',
               filter: locked ? 'brightness(0.65)' : 'none',
               transform: hov && !locked ? 'scale(1.04) translateY(-6px)' : 'scale(1) translateY(0)',
               transition: 'transform 0.7s cubic-bezier(0.4,0,0.2,1), filter 0.4s ease',
@@ -320,16 +319,6 @@ const CollectionCard = ({ product, featured = false }) => {
                             display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px',
                           }}
                         >
-                          {exclusive && (
-                            <span style={{
-                              position: 'absolute', top: '-8px', left: '50%', transform: 'translateX(-50%)',
-                              fontFamily: t.sansFont, fontSize: '6px',
-                              background: active ? '#b76e79' : '#07050200',
-                              color: active ? '#060606' : 'rgba(183,110,121,0.6)',
-                              border: `1px solid ${active ? '#b76e79' : 'rgba(183,110,121,0.3)'}`,
-                              padding: '2px 6px', whiteSpace: 'nowrap', transition: 'all 0.3s ease',
-                            }}>{t.exclusiveBadge}</span>
-                          )}
                           <span>{topLine}</span>
                           <span style={{
                             fontFamily: t.serifFont, fontStyle: 'italic',
@@ -505,12 +494,12 @@ const CollectionCarousel = () => {
                 justifyContent: 'center',
                 marginBottom: '20px',
                 position: 'relative',
-                background: '#f5f0e8',
+                background: '#ede8df',
               }}>
                 <img
                   src={product.image}
                   alt={product.name}
-                  style={{ height: '190px', width: 'auto', objectFit: 'contain', mixBlendMode: 'multiply' }}
+                  style={{ height: '190px', width: 'auto', objectFit: 'contain' }}
                 />
                 {product.locked && (
                   <div style={{ position: 'absolute', inset: 0, background: 'rgba(237,232,223,0.5)' }} />
@@ -556,17 +545,6 @@ const CollectionCarousel = () => {
                                 display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px',
                               }}
                             >
-                              {exclusive && (
-                                <span style={{
-                                  position: 'absolute', top: '-8px', left: '50%', transform: 'translateX(-50%)',
-                                  fontFamily: t.sansFont, fontSize: '6px',
-                                  background: active ? '#b76e79' : 'transparent',
-                                  color: active ? '#060606' : 'rgba(183,110,121,0.65)',
-                                  border: `1px solid ${active ? '#b76e79' : 'rgba(183,110,121,0.35)'}`,
-                                  padding: '2px 6px', whiteSpace: 'nowrap',
-                                  transition: 'all 0.3s ease',
-                                }}>{t.exclusiveBadge}</span>
-                              )}
                               <span>{topLine}</span>
                               <span style={{
                                 fontFamily: t.serifFont, fontStyle: 'italic',

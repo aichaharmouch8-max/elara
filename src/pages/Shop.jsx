@@ -198,7 +198,7 @@ const ProductCard = ({ product, inView, delay }) => {
             height: '280px',
             display: 'flex', alignItems: 'center', justifyContent: 'center',
             position: 'relative', overflow: 'hidden',
-            background: '#f5f0e8',
+            background: '#ede8df',
           }}>
             {product.bestseller && (
               <div style={{
@@ -217,7 +217,6 @@ const ProductCard = ({ product, inView, delay }) => {
               style={{
                 width: '100%', height: '100%',
                 objectFit: 'contain', objectPosition: 'center',
-                mixBlendMode: 'multiply',
                 transform: hov ? 'scale(1.05)' : 'scale(1)',
                 transition: 'transform 0.6s cubic-bezier(0.16,1,0.3,1)',
                 padding: '20px', boxSizing: 'border-box',
@@ -388,17 +387,6 @@ const ProductCard = ({ product, inView, delay }) => {
                             display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '5px',
                           }}
                         >
-                          {exclusive && (
-                            <span style={{
-                              position: 'absolute', top: '-9px', left: '50%', transform: 'translateX(-50%)',
-                              fontFamily: "'Jost', sans-serif", fontSize: '6px', letterSpacing: '3px',
-                              background: active ? '#b76e79' : 'transparent',
-                              color: active ? '#060606' : 'rgba(183,110,121,0.7)',
-                              border: `1px solid ${active ? '#b76e79' : 'rgba(183,110,121,0.4)'}`,
-                              padding: '2px 8px', whiteSpace: 'nowrap',
-                              transition: 'all 0.3s ease',
-                            }}>✦ EXCLUSIVE</span>
-                          )}
                           <span style={{ fontSize: '8px', letterSpacing: '2.5px' }}>{topLine}</span>
                           <span style={{
                             fontFamily: "'Cormorant Garamond', serif", fontStyle: 'italic',
@@ -451,12 +439,6 @@ const ProductCard = ({ product, inView, delay }) => {
                   </div>
                 )}
 
-                {/* Urgency signal */}
-                <p style={{
-                  fontFamily: "'Jost', sans-serif", fontSize: '7px', letterSpacing: '2.5px',
-                  color: 'rgba(183,110,121,0.35)', textTransform: 'uppercase',
-                  textAlign: 'center', marginTop: '14px',
-                }}>✦ Limited personalized slots available each week</p>
               </div>
             )}
 
