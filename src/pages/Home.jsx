@@ -17,7 +17,7 @@ const useIsMobile = () => {
   return isMobile;
 };
 
-const ReineCta = () => {
+const ReineCta = ({ onDark = false }) => {
   const [hov, setHov] = useState(false);
   return (
     <Link to="/shop"
@@ -29,13 +29,13 @@ const ReineCta = () => {
         fontFamily: "'Jost', sans-serif", fontSize: '9px',
         letterSpacing: '5px', textTransform: 'uppercase',
         padding: '14px 44px',
-        background: hov ? 'rgba(183,110,121,0.9)' : 'rgba(183,110,121,0.06)',
-        color: hov ? '#0a0600' : '#2c1810',
-        border: '1px solid rgba(183,110,121,0.55)',
+        background: hov ? 'rgba(183,110,121,0.9)' : (onDark ? 'rgba(0,0,0,0.18)' : 'rgba(183,110,121,0.06)'),
+        color: hov ? '#0a0600' : (onDark ? 'rgba(255,248,235,0.92)' : '#2c1810'),
+        border: `1px solid ${onDark ? 'rgba(183,110,121,0.75)' : 'rgba(183,110,121,0.55)'}`,
         transition: 'all 0.35s ease',
         textDecoration: 'none',
         WebkitTapHighlightColor: 'transparent',
-        boxShadow: hov ? '0 8px 40px rgba(183,110,121,0.35), inset 0 1px 0 rgba(255,255,255,0.08)' : '0 18px 50px rgba(0,0,0,0.35)',
+        boxShadow: hov ? '0 8px 40px rgba(183,110,121,0.35), inset 0 1px 0 rgba(255,255,255,0.08)' : (onDark ? '0 4px 18px rgba(0,0,0,0.3)' : '0 18px 50px rgba(0,0,0,0.35)'),
         borderRadius: '2px',
         position: 'relative',
       }}
@@ -984,28 +984,66 @@ const Home = () => {
         width: '100%',
         maxWidth: '100%',
         margin: 0,
-        display: 'flex',
-        alignItems: isMobile ? 'flex-start' : 'center',
-        paddingTop: '0',
-        paddingBottom: '0',
-        background: '#f5f0e8',
+        padding: 0,
       }}>
 
-        <div className="hero-vignette" style={{
-          position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 2,
-          background: 'linear-gradient(to bottom, rgba(245,240,232,0.15) 0%, transparent 20%, transparent 75%, rgba(245,240,232,0.2) 100%)',
-        }}/>
-        <div style={{
-          position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 2,
-          background: 'linear-gradient(115deg, rgba(183,110,121,0.04) 0%, transparent 42%, transparent 100%)',
-        }}/>
-        <div style={{
-          position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 2,
-          background: 'transparent',
-        }}/>
+        {/* ── 1. Full-bleed background image ── */}
+        <motion.img
+          src="/elaraherojpg.jfif"
+          alt=""
+          aria-hidden="true"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1.2, ease: 'easeOut', delay: 0.1 }}
+          style={{
+            position: 'absolute',
+            top: 0, left: 0,
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+            objectPosition: isMobile ? '50% 15%' : 'center center',
+            display: 'block',
+            zIndex: 0,
+          }}
+        />
 
-        <div className="hero-inner" style={{ pointerEvents: 'none', zIndex: 3 }}>
-          <div className="hero-text-col" style={{ flex: '0 0 auto', width: '42%', maxWidth: '520px', paddingLeft: '50px', paddingTop: isMobile ? '80px' : '0', boxSizing: 'border-box', pointerEvents: 'auto' }}>
+        {/* ── 2. Gradient overlay: dark left → transparent right ── */}
+        <div style={{
+          position: 'absolute',
+          top: 0, left: 0, right: 0, bottom: 0,
+          zIndex: 1,
+          pointerEvents: 'none',
+          background: 'linear-gradient(to right, rgba(0,0,0,0.62) 0%, rgba(0,0,0,0.38) 42%, rgba(0,0,0,0.08) 65%, transparent 80%)',
+        }} />
+
+        {/* ── 3. Vignette (top/bottom edges; mobile CSS overrides to cream-bottom gradient) ── */}
+        <div className="hero-vignette" style={{
+          position: 'absolute',
+          top: 0, left: 0, right: 0, bottom: 0,
+          zIndex: 2,
+          pointerEvents: 'none',
+          background: 'linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, transparent 16%, transparent 80%, rgba(0,0,0,0.2) 100%)',
+        }} />
+
+        {/* ── 4. Text overlay — vertically centred, pinned left ── */}
+        <div className="hero-inner" style={{
+          position: 'absolute',
+          top: isMobile ? 'auto' : '50%',
+          bottom: isMobile ? 0 : 'auto',
+          left: 0,
+          right: 0,
+          transform: isMobile ? 'none' : 'translateY(-50%)',
+          zIndex: 3,
+          pointerEvents: 'none',
+        }}>
+          <div className="hero-text-col" style={{
+            width: isMobile ? '100%' : '50%',
+            maxWidth: isMobile ? '100%' : '580px',
+            paddingLeft: isMobile ? '0' : 'clamp(40px, 6vw, 80px)',
+            paddingBottom: isMobile ? '48px' : '0',
+            boxSizing: 'border-box',
+            pointerEvents: 'auto',
+          }}>
 
             <motion.div
               initial={{ opacity: 0, y: 22 }}
@@ -1040,7 +1078,7 @@ const Home = () => {
               transition={{ duration: 1.15, ease: [0.16, 1, 0.3, 1], delay: 0.22 }}
               style={{
                 fontFamily: t.headingFont, fontWeight: 300,
-                lineHeight: 1.08, color: '#2c1810', marginBottom: '36px',
+                lineHeight: 1.08, color: 'rgba(255,248,235,0.95)', marginBottom: '36px',
               }}
             >
               {t.heroLine1 && (
@@ -1081,7 +1119,7 @@ const Home = () => {
               style={{
                 fontFamily: "'Jost', sans-serif", fontSize: '9px',
                 letterSpacing: '5px', textTransform: 'uppercase',
-                color: 'rgba(183,110,121,0.65)', marginBottom: '20px',
+                color: 'rgba(210,170,175,0.85)', marginBottom: '20px',
               }}
             >
               EAU DE PARFUM · 100ML
@@ -1093,7 +1131,7 @@ const Home = () => {
               transition={{ duration: 1.05, ease: [0.16, 1, 0.3, 1], delay: 0.72 }}
               style={{
                 fontFamily: t.sansFont, fontSize: '14px', fontWeight: 300,
-                color: 'rgba(44,24,16,0.68)', lineHeight: 2.05,
+                color: 'rgba(255,242,225,0.72)', lineHeight: 2.05,
                 maxWidth: '380px', marginBottom: '40px',
                 textWrap: 'balance',
               }}
@@ -1106,91 +1144,10 @@ const Home = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.92 }}
             >
-              <ReineCta />
+              <ReineCta onDark={!isMobile} />
             </motion.div>
 
           </div>
-        </div>
-
-        {/* ── Bottle image ── */}
-        <div style={{
-          ...(isMobile ? {
-            position: 'absolute',
-            inset: 0,
-            width: '100%',
-            height: '100%',
-          } : {
-            position: 'absolute',
-            right: 0,
-            top: 0,
-            bottom: 0,
-            width: '50%',
-            height: '100%',
-          }),
-          zIndex: 1,
-          pointerEvents: 'none',
-        }}>
-          {/* left-edge gradient blend — desktop only */}
-          {!isMobile && (
-            <div style={{
-              position: 'absolute',
-              top: 0, left: 0, bottom: 0,
-              width: '220px',
-              background: 'linear-gradient(to right, #f5f0e8 0%, transparent 100%)',
-              zIndex: 2,
-              pointerEvents: 'none',
-            }}/>
-          )}
-
-          <motion.div
-            initial={{ opacity: 0, x: isMobile ? 0 : 60 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.6 }}
-            style={{
-              position: 'relative', zIndex: 1,
-              width: '100%', height: '100%',
-            }}
-          >
-            <img
-              src="/elaraherojpg.jfif"
-              alt="Elara perfume bottle"
-              className={undefined}
-              style={{
-                width: '100%',
-                height: '100%',
-                objectFit: 'cover',
-                objectPosition: isMobile ? '50% 15%' : 'center center',
-                display: 'block',
-                mixBlendMode: 'normal',
-                background: 'transparent',
-                border: 'none',
-                outline: 'none',
-                borderRadius: 0,
-              }}
-            />
-            {/* mirror reflection — removed for full-bleed desktop layout */}
-            <div style={{ height: '0', overflow: 'hidden' }}>
-              <img
-                src="/elaraherojpg.jfif"
-                alt=""
-                aria-hidden="true"
-                style={{
-                  height: isMobile ? 'auto' : '520px',
-                  width: isMobile ? '100%' : 'auto',
-                  objectFit: 'contain',
-                  display: 'block',
-                  transform: 'scaleY(-1)',
-                  opacity: 0.12,
-                  maskImage: 'linear-gradient(to bottom, black 0%, transparent 100%)',
-                  WebkitMaskImage: 'linear-gradient(to bottom, black 0%, transparent 100%)',
-                  mixBlendMode: 'screen',
-                  background: 'transparent',
-                  border: 'none',
-                  borderRadius: 0,
-                }}
-              />
-            </div>
-          </motion.div>
         </div>
 
         <div
@@ -1199,7 +1156,7 @@ const Home = () => {
             display: 'none',
             position: 'absolute', bottom: 0, left: 0, right: 0,
             height: '1px', background: 'rgba(183,110,121,0.2)',
-            zIndex: 2,
+            zIndex: 4,
           }}
         />
       </section>
