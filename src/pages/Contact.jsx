@@ -1,4 +1,4 @@
-﻿import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 /* ─── Scroll-in hook ─── */
 const useReveal = (threshold = 0.15) => {
