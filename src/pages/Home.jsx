@@ -967,7 +967,7 @@ const Home = () => {
 
         {/* ── 1. Full-bleed background image ── */}
         <motion.img
-          src="/hero-bottle.jfif"
+          src="/hero-bottle.jpg"
           alt=""
           aria-hidden="true"
           initial={{ opacity: 0 }}
