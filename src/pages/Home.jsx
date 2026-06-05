@@ -963,27 +963,12 @@ const Home = () => {
         maxWidth: '100%',
         margin: 0,
         padding: 0,
+        backgroundImage: 'url(/hero-bottle.jpg)',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center center',
+        backgroundAttachment: 'scroll',
+        backgroundRepeat: 'no-repeat',
       }}>
-
-        {/* ── 1. Full-bleed background image ── */}
-        <motion.img
-          src="/hero-bottle.jpg"
-          alt=""
-          aria-hidden="true"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1.2, ease: 'easeOut', delay: 0.1 }}
-          style={{
-            position: 'absolute',
-            top: 0, left: 0,
-            width: '100%',
-            height: '100%',
-            objectFit: 'cover',
-            objectPosition: 'center center',
-            display: 'block',
-            zIndex: 0,
-          }}
-        />
 
         {/* ── 2. Gradient overlay: dark left → transparent right ── */}
         <div className="hero-overlay-left" style={{

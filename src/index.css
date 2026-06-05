@@ -501,20 +501,10 @@ video.hero-bg-video {
     display: block !important;
     position: relative !important;
     overflow: hidden !important;
-    background-color: #f5f0e8 !important;
-  }
-
-  /* Full-bleed bottle: covers entire screen */
-  .hero-bg-img {
-    position: absolute !important;
-    inset: 0 !important;
-    width: 100% !important;
-    height: 100% !important;
-    object-fit: cover !important;
-    object-position: center top !important;
-    animation: none !important;
-    z-index: 0 !important;
-    top: 0 !important;
+    background-color: #1a0a0f !important;
+    background-attachment: scroll !important;
+    background-size: cover !important;
+    background-position: center center !important;
   }
 
   /* Suppress desktop left gradient on mobile */
