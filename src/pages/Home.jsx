@@ -979,14 +979,14 @@ const Home = () => {
             width: '100%',
             height: '100%',
             objectFit: 'cover',
-            objectPosition: isMobile ? '50% 15%' : 'center center',
+            objectPosition: 'center center',
             display: 'block',
             zIndex: 0,
           }}
         />
 
         {/* ── 2. Gradient overlay: dark left → transparent right ── */}
-        <div style={{
+        <div className="hero-overlay-left" style={{
           position: 'absolute',
           top: 0, left: 0, right: 0, bottom: 0,
           zIndex: 1,
@@ -1122,7 +1122,7 @@ const Home = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.92 }}
             >
-              <ReineCta onDark={!isMobile} />
+              <ReineCta onDark />
             </motion.div>
 
           </div>

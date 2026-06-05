@@ -517,24 +517,15 @@ video.hero-bg-video {
     top: 0 !important;
   }
 
-  /* Ivory gradient at the bottom — text readable on cream, bottle visible at top */
+  /* Suppress desktop left gradient on mobile */
   .hero-overlay-left {
-    position: absolute !important;
-    inset: 0 !important;
-    background: linear-gradient(
-      to top,
-      rgba(245,240,232,0.97) 0%,
-      rgba(245,240,232,0.6)  42%,
-      rgba(245,240,232,0.1) 68%,
-      transparent        85%
-    ) !important;
-    z-index: 1 !important;
+    background: transparent !important;
   }
 
-  /* Bottom gradient so text is readable over image */
+  /* Dark bottom gradient so text is readable over the image */
   .hero-vignette {
     display: block !important;
-    background: linear-gradient(to top, rgba(245,240,232,0.97) 0%, rgba(245,240,232,0.72) 20%, rgba(245,240,232,0.06) 42%, transparent 50%) !important;
+    background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 60%) !important;
   }
 
   /* Text block: pinned to bottom of hero, overlaid on image */
@@ -585,12 +576,12 @@ video.hero-bg-video {
   .hero-text-col > div:first-child span {
     font-size: 8px !important;
     letter-spacing: 0.3em !important;
-    color: #9d5a63 !important;
+    color: #e8b5bb !important;
   }
 
   /* Heading */
   .hero-text-col h1 { margin-bottom: 4px !important; text-align: center !important; }
-  .hero-text-col h1 span:first-child { font-size: 30px !important; font-weight: 300 !important; color: #2c1810 !important; }
+  .hero-text-col h1 span:first-child { font-size: 30px !important; font-weight: 300 !important; color: rgba(255,248,235,0.95) !important; }
   .hero-text-col h1 span:last-child {
     font-size: 38px !important;
     color: transparent !important;
@@ -603,7 +594,7 @@ video.hero-bg-video {
   /* Subtitle */
   .hero-text-col p {
     font-size: 10px !important;
-    color: rgba(44,24,16,0.72) !important;
+    color: rgba(255,242,225,0.72) !important;
     font-weight: 300 !important;
     margin-top: 2px !important;
     margin-bottom: 0 !important;
