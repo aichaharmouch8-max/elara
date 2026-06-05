@@ -42,6 +42,7 @@ html {
   overflow-y: auto;
   max-width: 100%;
   width: 100%;
+  -webkit-overflow-scrolling: touch;
 }
 
 body {
@@ -502,9 +503,6 @@ video.hero-bg-video {
     position: relative !important;
     overflow: hidden !important;
     background-color: #1a0a0f !important;
-    background-attachment: scroll !important;
-    background-size: cover !important;
-    background-position: center 40% !important;
   }
 
   /* Suppress desktop left gradient on mobile */
