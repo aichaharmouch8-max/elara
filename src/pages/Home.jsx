@@ -965,7 +965,7 @@ const Home = () => {
         padding: 0,
         backgroundImage: 'url(/hero-bottle.jpg)',
         backgroundSize: 'cover',
-        backgroundPosition: 'center center',
+        backgroundPosition: 'center 40%',
         backgroundAttachment: 'scroll',
         backgroundRepeat: 'no-repeat',
       }}>

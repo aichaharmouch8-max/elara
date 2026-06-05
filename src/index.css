@@ -504,7 +504,7 @@ video.hero-bg-video {
     background-color: #1a0a0f !important;
     background-attachment: scroll !important;
     background-size: cover !important;
-    background-position: center center !important;
+    background-position: center 40% !important;
   }
 
   /* Suppress desktop left gradient on mobile */
