@@ -966,24 +966,31 @@ const Home = () => {
       }}>
 
         {/* ── 1. Full-bleed background image ── */}
-        <img
-          src="/hero-bottle.jpg"
-          alt=""
-          aria-hidden="true"
-          style={{
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            width: '100%',
-            height: '100%',
-            objectFit: 'cover',
-            objectPosition: 'center 40%',
-            display: 'block',
-            zIndex: 0,
-            transform: 'translateZ(0)',
-            WebkitTransform: 'translateZ(0)',
-          }}
-        />
+        <div className="hero-image-wrap" style={{
+          position: 'absolute',
+          top: 0, left: 0, right: 0, bottom: 0,
+          overflow: 'hidden',
+          pointerEvents: 'none',
+          zIndex: 0,
+        }}>
+          <img
+            src="/hero-bottle.jpg"
+            alt=""
+            aria-hidden="true"
+            style={{
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
+              objectPosition: 'center 40%',
+              display: 'block',
+              transform: 'translateZ(0)',
+              WebkitTransform: 'translateZ(0)',
+            }}
+          />
+        </div>
 
         {/* ── 2. Gradient overlay: dark left → transparent right ── */}
         <div className="hero-overlay-left" style={{
@@ -1122,7 +1129,7 @@ const Home = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.92 }}
             >
-              <ReineCta onDark />
+              <ReineCta onDark={!isMobile} />
             </motion.div>
 
           </div>
