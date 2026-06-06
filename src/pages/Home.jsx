@@ -974,7 +974,7 @@ const Home = () => {
           zIndex: 0,
         }}>
           <img
-            src="/hero-bottle.jpg"
+            src="/reine-bottle.png"
             alt=""
             aria-hidden="true"
             style={{
@@ -984,7 +984,7 @@ const Home = () => {
               width: '100%',
               height: '100%',
               objectFit: 'cover',
-              objectPosition: isMobile ? 'center 20%' : 'center 15%',
+              objectPosition: 'center center',
               display: 'block',
               transform: 'translateZ(0)',
               WebkitTransform: 'translateZ(0)',
