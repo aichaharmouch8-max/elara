@@ -984,7 +984,7 @@ const Home = () => {
               width: '100%',
               height: '100%',
               objectFit: 'cover',
-              objectPosition: 'center 40%',
+              objectPosition: 'center center',
               display: 'block',
               transform: 'translateZ(0)',
               WebkitTransform: 'translateZ(0)',
