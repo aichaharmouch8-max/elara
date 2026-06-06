@@ -974,7 +974,7 @@ const Home = () => {
           zIndex: 0,
         }}>
           <img
-            src="/hero-bottle.jpg"
+            src="/reine-bottle.png"
             alt=""
             aria-hidden="true"
             style={{
@@ -998,7 +998,7 @@ const Home = () => {
           top: 0, left: 0, right: 0, bottom: 0,
           zIndex: 1,
           pointerEvents: 'none',
-          background: 'linear-gradient(to right, rgba(0,0,0,0.62) 0%, rgba(0,0,0,0.38) 42%, rgba(0,0,0,0.08) 65%, transparent 80%)',
+          background: 'linear-gradient(to right, rgba(10,2,5,0.75) 0%, rgba(10,2,5,0.4) 50%, transparent 100%)',
         }} />
 
         {/* ── 3. Vignette (top/bottom edges; mobile CSS overrides to cream-bottom gradient) ── */}
@@ -1022,8 +1022,8 @@ const Home = () => {
           pointerEvents: 'none',
         }}>
           <div className="hero-text-col" style={{
-            width: isMobile ? '100%' : '50%',
-            maxWidth: isMobile ? '100%' : '580px',
+            width: isMobile ? '100%' : '45%',
+            maxWidth: isMobile ? '100%' : '540px',
             paddingLeft: isMobile ? '0' : 'clamp(40px, 6vw, 80px)',
             paddingBottom: isMobile ? '48px' : '0',
             boxSizing: 'border-box',
