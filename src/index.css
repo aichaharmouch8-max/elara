@@ -491,7 +491,7 @@ video.hero-bg-video {
     display: none !important;
   }
 
-  /* ── Hero mobile — split layout: image top 60%, text bottom 40% ── */
+  /* ── Hero mobile — cinematic full-screen luxury ── */
 
   .hero-section {
     height: 100svh !important;
@@ -499,21 +499,20 @@ video.hero-bg-video {
     max-height: 100svh !important;
     padding: 0 !important;
     margin-top: 0 !important;
-    display: flex !important;
-    flex-direction: column !important;
+    display: block !important;
     position: relative !important;
     overflow: hidden !important;
-    background-color: #f5f0e8 !important;
+    background-color: #0d0305 !important;
   }
 
-  /* Top 60%: image fills this area, no text on top */
+  /* Bottle fills entire screen */
   .hero-image-wrap {
-    position: relative !important;
-    flex: 0 0 60% !important;
-    top: auto !important; left: auto !important;
-    right: auto !important; bottom: auto !important;
-    width: 100% !important;
+    position: absolute !important;
+    top: 0 !important; left: 0 !important;
+    right: 0 !important; bottom: 0 !important;
+    width: 100% !important; height: 100% !important;
     overflow: hidden !important;
+    pointer-events: none !important;
   }
 
   .hero-image-wrap > img {
@@ -521,34 +520,48 @@ video.hero-bg-video {
     top: 0 !important; left: 0 !important;
     width: 100% !important; height: 100% !important;
     object-fit: cover !important;
-    object-position: center 40% !important;
+    object-position: center 20% !important;
     transform: translateZ(0) !important;
     -webkit-transform: translateZ(0) !important;
   }
 
-  /* Hide desktop gradient overlays — not needed in split layout */
-  .hero-overlay-left,
-  .hero-vignette {
+  /* Suppress desktop left-to-right gradient */
+  .hero-overlay-left {
     display: none !important;
   }
 
-  /* Bottom 40%: cream background, centered text */
+  /* Dark fade: transparent top → #0d0305 bottom */
+  .hero-vignette {
+    display: block !important;
+    position: absolute !important;
+    inset: 0 !important;
+    background: linear-gradient(
+      to bottom,
+      transparent 38%,
+      rgba(13,3,5,0.55) 58%,
+      rgba(13,3,5,0.85) 76%,
+      #0d0305 100%
+    ) !important;
+    z-index: 2 !important;
+  }
+
+  /* Text pinned to bottom, overlaid on the dark fade */
   .hero-inner {
-    position: relative !important;
-    flex: 1 !important;
-    top: auto !important; bottom: auto !important;
-    left: auto !important; right: auto !important;
+    position: absolute !important;
+    bottom: 0 !important;
+    top: auto !important;
+    left: 0 !important; right: 0 !important;
     transform: none !important;
     width: 100% !important;
-    background: #f5f0e8 !important;
+    background: transparent !important;
     display: flex !important;
     flex-direction: column !important;
     align-items: center !important;
-    justify-content: center !important;
+    justify-content: flex-end !important;
     text-align: center !important;
-    padding: 24px 28px !important;
+    padding: 0 28px 48px !important;
     margin-top: 0 !important;
-    z-index: 3 !important;
+    z-index: 4 !important;
     gap: 0 !important;
     box-sizing: border-box !important;
     overflow: visible !important;
@@ -567,9 +580,9 @@ video.hero-bg-video {
     gap: 6px !important;
   }
 
-  /* Eyebrow — MAISON DE PARFUM */
+  /* MAISON DE PARFUM — small wide tracked caps */
   .hero-text-col > div:first-child {
-    margin-bottom: 4px !important;
+    margin-bottom: 2px !important;
     display: flex !important;
     flex-direction: column !important;
     align-items: center !important;
@@ -577,49 +590,76 @@ video.hero-bg-video {
   }
   .hero-text-col > div:first-child span {
     font-size: 8px !important;
-    letter-spacing: 0.3em !important;
-    color: #b76e79 !important;
+    letter-spacing: 0.45em !important;
+    color: rgba(255,255,255,0.7) !important;
+    text-transform: uppercase !important;
   }
 
-  /* Heading */
-  .hero-text-col h1 { margin-bottom: 4px !important; text-align: center !important; }
-  .hero-text-col h1 span:first-child { font-size: 28px !important; font-weight: 300 !important; color: #b76e79 !important; }
-  .hero-text-col h1 span:last-child {
-    font-size: 52px !important;
-    color: transparent !important;
-    -webkit-text-fill-color: transparent !important;
-    background-image: linear-gradient(132deg, #f5d5d8 6%, #c9929b 38%, #9d5a63 94%) !important;
-    -webkit-background-clip: text !important;
-    background-clip: text !important;
-  }
-
-  /* EAU DE PARFUM · 100ML and tagline */
-  .hero-text-col p {
-    font-size: 10px !important;
-    color: rgba(44,24,16,0.65) !important;
-    font-weight: 300 !important;
-    margin-top: 2px !important;
+  /* ELARA — large elegant italic */
+  .hero-text-col h1 {
     margin-bottom: 0 !important;
-    max-width: none !important;
-    margin-left: auto !important;
-    margin-right: auto !important;
-    line-height: 1.6 !important;
-    white-space: normal !important;
-    letter-spacing: 0.3px !important;
-    word-break: break-word !important;
+    text-align: center !important;
+    line-height: 1 !important;
+  }
+  .hero-text-col h1 span:first-child {
+    display: none !important;
+  }
+  .hero-text-col h1 span:last-child {
+    font-size: 64px !important;
+    font-style: italic !important;
+    color: #f2c4ce !important;
+    -webkit-text-fill-color: #f2c4ce !important;
+    background-image: none !important;
+    -webkit-background-clip: unset !important;
+    background-clip: unset !important;
+    display: block !important;
+    letter-spacing: 0.02em !important;
   }
 
-  /* Discover button — centered */
+  /* Thin rose gold divider after ELARA */
+  .hero-text-col h1::after {
+    content: '' !important;
+    display: block !important;
+    width: 56px !important;
+    height: 1px !important;
+    background: rgba(183,110,121,0.75) !important;
+    margin: 10px auto 8px !important;
+  }
+
+  /* EAU DE PARFUM · 100ML — tiny wide caps */
+  .hero-text-col p:first-of-type {
+    font-size: 9px !important;
+    color: rgba(255,255,255,0.7) !important;
+    font-weight: 300 !important;
+    letter-spacing: 0.3em !important;
+    text-transform: uppercase !important;
+    margin: 0 !important;
+    line-height: 1.5 !important;
+  }
+
+  /* Power. Seduction. Obsession. — small italic */
+  .hero-text-col p:last-of-type {
+    font-size: 11px !important;
+    font-style: italic !important;
+    color: rgba(255,255,255,0.8) !important;
+    font-weight: 300 !important;
+    letter-spacing: 0.04em !important;
+    margin-top: 5px !important;
+    margin-bottom: 0 !important;
+    line-height: 1.5 !important;
+  }
+
+  /* DISCOVER ELARA — transparent bg, white border + text */
   .hero-text-col a[href="/shop"] {
     display: block !important;
-    width: 170px !important;
-    margin: 10px auto 0 !important;
+    width: 180px !important;
+    margin: 16px auto 0 !important;
     text-align: center !important;
     box-sizing: border-box !important;
   }
 
-  /* Hero bottom separator */
-  .hero-bottom-line { display: block !important; }
+  /* Hide bottom separator — dark bg handles the transition */
+  .hero-bottom-line { display: none !important; }
 
   /* Shop grid — single column */
   .shop-grid {
